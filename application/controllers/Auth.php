@@ -6,11 +6,11 @@ class Auth extends CI_Controller
 {
     public function index()
     {
-        $this->load->view('login');
+        $this->load->view('template/login');
     }
 
     public function login()
     {
-        redirect('dashboard1');
+        redirect('admin/profile');
     }
 }
