@@ -185,9 +185,9 @@
           </li>
           <li class="nav-header">SETTING</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="<?=base_url('admin/profile')?>" class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
-              <p>Profile</p>
+              <p>Profile Website</p>
             </a>
           </li>
         </ul>
