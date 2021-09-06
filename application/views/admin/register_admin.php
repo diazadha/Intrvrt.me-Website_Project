@@ -27,7 +27,7 @@
             <div class="card card-outline card-primary">
                 <div class="card-header">
                 <h3 class="card-title">
-                    Form Regist
+                    Form Register
                 </h3>
                 </div>
                 <form class="form-horizontal">
@@ -75,7 +75,7 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-info">Regist</button>
+                        <button type="submit" class="btn btn-info">Register</button>
                     </div>
                     <!-- /.card-footer -->
                 </form>
