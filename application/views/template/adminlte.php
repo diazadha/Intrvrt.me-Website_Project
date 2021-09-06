@@ -176,7 +176,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?=base_url('admin/dashboard/register_admin')?>" class="nav-link">
+                <a href="<?=base_url('admin/user/register_admin')?>" class="nav-link">
                   <i class="far fa-user"></i>
                   <p>Register Admin</p>
                 </a>
