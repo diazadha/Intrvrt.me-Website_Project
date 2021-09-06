@@ -168,6 +168,29 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
+              <i class="nav-icon fab fa-blogger"></i>
+              <p>
+                Blog
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?=base_url('admin/blog/index')?>" class="nav-link">
+                  <i class="fas fa-pen-square"></i>
+                  <p>Konten Blog</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=base_url('admin/blog/kategori')?>" class="nav-link">
+                  <i class=" fas fa-tag"></i>
+                  <p>Kategori Blog</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Users
@@ -185,9 +208,9 @@
           </li>
           <li class="nav-header">SETTING</li>
           <li class="nav-item">
-            <a href="<?=base_url('admin/profile')?>" class="nav-link">
-              <i class="fas fa-circle nav-icon"></i>
-              <p>Profile Website</p>
+            <a href="<?=base_url('admin/profil/perusahaan')?>" class="nav-link">
+              <i class="fas fa-building nav-icon"></i>
+              <p>Profil Perusahaan</p>
             </a>
           </li>
         </ul>
