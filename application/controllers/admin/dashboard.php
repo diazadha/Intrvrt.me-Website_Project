@@ -10,9 +10,4 @@ class Dashboard extends CI_Controller
 		$this->load->view("template/adminlte", $data);
     }
 
-    public function register_admin()
-    {
-        $data['content'] = "admin/register_admin";
-		$this->load->view("template/adminlte", $data);
-    }
 }
