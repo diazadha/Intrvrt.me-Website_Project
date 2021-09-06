@@ -6,15 +6,13 @@ class Dashboard extends CI_Controller
 {
     public function index()
     {
-        $this->load->view('template/header');
-        $this->load->view('admin/dashboard');
-        $this->load->view('template/footer');
+        $data['content'] = "admin/dashboard";
+		$this->load->view("template/adminlte", $data);
     }
 
     public function register_admin()
     {
-        $this->load->view('template/header');
-        $this->load->view('admin/register_admin');
-        $this->load->view('template/footer');
+        $data['content'] = "admin/register_admin";
+		$this->load->view("template/adminlte", $data);
     }
 }
