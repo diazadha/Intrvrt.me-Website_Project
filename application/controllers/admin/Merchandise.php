@@ -12,14 +12,15 @@ class Merchandise extends CI_Controller
     public function index()
     {
         $data['content'] = "admin/merchandise";
-		$this->load->view("template/adminlte", $data);
+	$data['js'] = array("merchandise.js?r=".rand());
+	$this->load->view("template/adminlte", $data);
     }
 
     public function kategori()
     {
         $data['content'] = "admin/merchandise_kategori";
         $data['js'] = array("merchandise_kategori.js?r=".rand());
-		$this->load->view("template/adminlte", $data);
+	$this->load->view("template/adminlte", $data);
     }
 
     public function kategori_(){
