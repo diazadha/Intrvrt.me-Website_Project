@@ -12,6 +12,9 @@
   <link rel="stylesheet" href="<?=base_url('assets');?>/vendor/AdminLTE-3.0.5/plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="<?=base_url('assets');?>/vendor/AdminLTE-3.0.5/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?=base_url('assets');?>/vendor/AdminLTE-3.0.5/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <!-- Tempusdominus Bbootstrap 4 -->
   <link rel="stylesheet" href="<?=base_url('assets');?>/vendor/AdminLTE-3.0.5/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <!-- iCheck -->
@@ -251,8 +254,6 @@
 <script src="<?=base_url('assets');?>/vendor/AdminLTE-3.0.5/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
 <script src="<?=base_url('assets');?>/vendor/AdminLTE-3.0.5/plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="<?=base_url('assets');?>/vendor/AdminLTE-3.0.5/plugins/sparklines/sparkline.js"></script>
 <!-- JQVMap -->
 <script src="<?=base_url('assets');?>/vendor/AdminLTE-3.0.5/plugins/jqvmap/jquery.vmap.min.js"></script>
 <script src="<?=base_url('assets');?>/vendor/AdminLTE-3.0.5/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
@@ -267,13 +268,19 @@
 <script src="<?=base_url('assets');?>/vendor/AdminLTE-3.0.5/plugins/summernote/summernote-bs4.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="<?=base_url('assets');?>/vendor/AdminLTE-3.0.5/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- DataTables -->
+<script src="<?=base_url('assets');?>/vendor/AdminLTE-3.0.5/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?=base_url('assets');?>/vendor/AdminLTE-3.0.5/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="<?=base_url('assets');?>/vendor/AdminLTE-3.0.5/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<?=base_url('assets');?>/vendor/AdminLTE-3.0.5/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- jquery-validation -->
+<script src="<?=base_url('assets');?>/vendor/AdminLTE-3.0.5/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="<?=base_url('assets');?>/vendor/AdminLTE-3.0.5/plugins/jquery-validation/additional-methods.min.js"></script>
 <!-- AdminLTE App -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="<?=base_url('assets');?>/vendor/AdminLTE-3.0.5/dist/js/adminlte.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?=base_url('assets');?>/vendor/AdminLTE-3.0.5/dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?=base_url('assets');?>/vendor/AdminLTE-3.0.5/dist/js/demo.js"></script>
 <script>
+  let base_url = '<?php echo base_url();?>';
   $(function () {
     // Summernote
     $('.textarea').summernote({
@@ -281,5 +288,8 @@
     })
   })
 </script>
+<?php if (isset($js)) : foreach ($js as $j) : ?>
+<script src="<?= base_url('assets/js/'.$j)?>"></script>
+<?php endforeach; endif;?>
 </body>
 </html>

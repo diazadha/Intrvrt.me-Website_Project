@@ -3,15 +3,79 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Blog extends CI_Controller
 {
+    public function __construct()
+    {
+      parent::__construct();
+      $this->load->model('BlogModel');
+    }
+
     public function index()
     {
-        $data['content'] = "admin/profil_perusahaan";
+        $data['content'] = "admin/blog_konten";
 		$this->load->view("template/adminlte", $data);
     }
 
     public function kategori()
     {
-        $data['content'] = "admin/profil_perusahaan";
+        $data['content'] = "admin/blog_kategori";
+        $data['js'] = array("blog_kategori.js?r=".rand());
 		$this->load->view("template/adminlte", $data);
+    }
+
+    public function kategori_(){
+        $list = $this->BlogModel->kategori_data();
+        $data = array();
+        foreach ($list as $field) {
+            $row = array();
+            $row[] = $field->nama_kategori;
+            $row[] = ($field->status == 1) ? '<span class="badge badge-success">On</span>' : '<span class="badge badge-danger">Off</span>';
+            $row[] = '<button type="button" class="btn btn-info btn-sm edit" data-id="'.$field->id_kategori.'" data-kategori="'.$field->nama_kategori.'" data-status="'.$field->status.'">Edit</button>
+                      <button type="button" class="ml-1 btn btn-danger delete btn-sm" data-id="'.$field->id_kategori.'" data-kategori="'.$field->nama_kategori.'">Hapus</button>';
+            $data[] = $row;
+        }
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->BlogModel->count_all_kategori(),
+            "recordsFiltered" => $this->BlogModel->count_kategori_filtered(),
+            "data" => $data,
+        );
+        echo json_encode($output);
+    }
+
+    public function kategori_add(){
+        if($this->BlogModel->kategori_add()){
+            $d['status'] = true;
+        }else{
+            $d['status'] = false;
+        }
+        echo json_encode($d);
+    }
+
+    public function kategori_update(){
+        if($this->BlogModel->kategori_update()){
+            $d['status'] = true;
+        }else{
+            $d['status'] = false;
+        }
+        echo json_encode($d);
+    }
+
+    public function kategori_delete($id){
+        $cekid = $this->db->get_where('blog_kategori', ['id_kategori' => $id])->num_rows();
+        if($cekid == 0){
+            echo 'Error';
+            die;
+        }else{
+            if($this->BlogModel->kategori_delete($id)){
+                $r['title'] = 'Sukses!';
+                $r['icon'] = 'success';
+                $r['status'] = 'Berhasil di Hapus!';
+            }else{
+                $r['title'] = 'Maaf!';
+                $r['icon'] = 'error';
+                $r['status'] = '<br><b>Tidak dapat di Hapus! <br> Silakan hubungi Administrator.</b>';
+            }
+            echo json_encode($r);
+        }
     }
 }
