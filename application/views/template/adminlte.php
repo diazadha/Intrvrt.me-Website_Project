@@ -153,18 +153,25 @@
         <img src="<?= base_url('assets'); ?>/vendor/AdminLTE-3.0.5/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">AdminLTE 3</span>
       </a>
-
+      <?php $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+      ?>
       <!-- Sidebar -->
       <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image">
-            <img src="<?= base_url('assets'); ?>/vendor/AdminLTE-3.0.5/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-          </div>
+          <?php if ($data['user']['foto_user'] == 'default.jpg') : ?>
+            <div class="image">
+              <img src="<?= base_url('assets/uploads/user/user_1.png') ?>" class="img-circle elevation-2" alt="User Image">
+            </div>
+          <?php else : ?>
+            <div class="image">
+              <img src="<?= base_url('assets/uploads/user/') . $data['user']['foto_user']; ?>" class="img-circle elevation-2" alt="User Image">
+            </div>
+          <?php endif; ?>
+
           <div class="info">
-            <?php $data['nama_user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-            ?>
-            <a href=" <?= base_url('admin/account') ?> " class="d-block"> <?= $data['nama_user']['nama_user']; ?> </a>
+
+            <a href=" <?= base_url('admin/account') ?> " class="d-block"> <?= $data['user']['nama_user']; ?> </a>
           </div>
         </div>
 

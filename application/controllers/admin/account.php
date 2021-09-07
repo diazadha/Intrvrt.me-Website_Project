@@ -26,7 +26,6 @@ class Account extends CI_Controller
                 $data = [
                     'nama_user' => htmlspecialchars($this->input->post('nama', true)),
                     'email' => htmlspecialchars($this->input->post('email', true)),
-                    'foto_user' => 'default.jpg',
                     'jenis_kelamin' => $this->input->post('jenis-kelamin', true),
                     'tanggal_lahir' => $this->input->post('tanggal', true),
                 ];
@@ -55,7 +54,6 @@ class Account extends CI_Controller
                         $this->input->post('password'),
                         PASSWORD_DEFAULT
                     ),
-                    'foto_user' => 'default.jpg',
                     'jenis_kelamin' => $this->input->post('jenis-kelamin', true),
                     'tanggal_lahir' => $this->input->post('tanggal', true),
                 ];
@@ -64,6 +62,32 @@ class Account extends CI_Controller
                 $this->session->set_flashdata('message1', 'Update Berhasil!');
                 redirect('admin/account');
             }
+        }
+    }
+
+    public function update_foto_profile()
+    {
+        $foto_user        = $_FILES['foto']['name'];
+        $id_user           = $this->input->post('id_user');
+        if ($foto_user) {
+            $config['upload_path']       = './assets/uploads/user';
+            $config['allowed_types']     = 'jpg|jpeg|png|gif';
+            $config['maintain_ratio']    = TRUE;
+
+            $this->load->library('image_lib', $config);
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('foto')) {
+                $this->session->set_flashdata('message4', 'Update Foto Gagal!');
+                redirect('admin/account');
+            } else {
+                $this->session->set_flashdata('message3', 'Update Foto Berhasil!');
+                $foto_user = $this->upload->data('file_name');
+            }
+
+            $this->db->set('foto_user', $foto_user);
+            $this->db->where('id_user', $id_user);
+            $this->db->update('user');
+            redirect('admin/account');
         }
     }
 }
