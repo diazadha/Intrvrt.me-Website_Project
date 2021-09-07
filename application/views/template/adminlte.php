@@ -194,6 +194,29 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-store"></i>
+              <p>
+                Merchandise
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="fas fa-pen-square"></i>
+                  <p>Marchandise</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?=base_url('admin/merchandise/kategori')?>" class="nav-link">
+                  <i class=" fas fa-tag"></i>
+                  <p>Kategori Merchandise</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Users
