@@ -202,7 +202,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="<?=base_url('admin/merchandise')?>" class="nav-link">
                   <i class="fas fa-pen-square ml-3"></i>
                   <p>Marchandise</p>
                 </a>
