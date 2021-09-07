@@ -39,7 +39,7 @@ class BlogModel extends CI_Model {
     public function kategori_delete($id)
     {
         $this->db->where('id_kategori', $id);
-        $result=$this->db->delete('blog_kategori');
+        $result=$this->db->delete($this->table);
         return $result;
     }
 
