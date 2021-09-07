@@ -72,6 +72,12 @@
                                 <input type="date" class="form-control" id="date" placeholder="Tanggal Lahir" value=>
                             </div>
                         </div>
+						<div class="form-group row">
+                              <label for="inputPassword3" class="col-sm-2 col-form-label">Foto Profil</label>
+                              <div class="col-sm-10">
+                                  <input type="file" name="foto">
+                              </div>
+                        </div>
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
