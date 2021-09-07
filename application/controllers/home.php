@@ -15,9 +15,10 @@ class Home extends CI_Controller
 
     public function index()
     {
-        $this->load->view('template_introvert/header');
-        $this->load->view('home');
-        $this->load->view('template_introvert/footer');
+        $data['title'] = 'Intrvrt.me';
+        $this->load->view('template_introvert/header', $data);
+        $this->load->view('home', $data);
+        $this->load->view('template_introvert/footer', $data);
     }
 
     public function registrasi()
@@ -36,9 +37,10 @@ class Home extends CI_Controller
         $this->form_validation->set_rules('tanggal', 'Tanggal', 'required|trim');
 
         if ($this->form_validation->run() == false) {
-            $this->load->view('template_introvert/header');
-            $this->load->view('registrasi');
-            $this->load->view('template_introvert/footer');
+            $data['title'] = 'Registrasi';
+            $this->load->view('template_introvert/header', $data);
+            $this->load->view('registrasi', $data);
+            $this->load->view('template_introvert/footer', $data);
         } else {
             date_default_timezone_set('Asia/Jakarta');
             $data = [
@@ -142,9 +144,11 @@ class Home extends CI_Controller
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'required|trim');
         if ($this->form_validation->run() == false) {
-            $this->load->view('template_introvert/header');
-            $this->load->view('login');
-            $this->load->view('template_introvert/footer');
+            $data['title'] = 'Login';
+            $this->load->view('template_introvert/header', $data);
+            $this->load->view('login', $data);
+            // $this->load->view('template/adminlte', $data);
+            $this->load->view('template_introvert/footer', $data);
         } else {
             $this->_gologin();
         }
