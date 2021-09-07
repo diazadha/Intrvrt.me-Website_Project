@@ -78,4 +78,63 @@ class Merchandise extends CI_Controller
             echo json_encode($r);
         }
     }
+
+    public function merchandise_(){
+        $list = $this->MerchandiseModel->merchandise_data();
+        $data = array();
+        foreach ($list as $field) {
+            $row = array();
+            $row[] = $field->nama_merch;
+            $row[] = $field->kategori;
+            $row[] = $field->harga;
+            $row[] = $field->diskon;
+            $row[] = '<button type="button" class="btn btn-info btn-sm edit" data-id="'.$field->id_merch.'" data-merchandise="'.$field->nama_merch.'" data-kategori="'.$field->kategori.'" data-harga="'.$field->harga.'" data-diskon="'.$field->diskon.'" data-deskripsi="'.$field->deskripsi.'">Edit</button>
+                      <button type="button" class="ml-1 btn btn-danger delete btn-sm" data-id="'.$field->id_merch.'" data-merchandise="'.$field->nama_merch.'">Hapus</button>';
+            $data[] = $row;
+        }
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->MerchandiseModel->count_all_merchandise(),
+            "recordsFiltered" => $this->MerchandiseModel->count_merchandise_filtered(),
+            "data" => $data,
+        );
+        echo json_encode($output);
+    }
+
+    public function merchandise_add(){
+        if($this->MerchandiseModel->merchandise_add()){
+            $d['status'] = true;
+        }else{
+            $d['status'] = false;
+        }
+        echo json_encode($d);
+    }
+
+    public function merchandise_update(){
+        if($this->MerchandiseModel->merchandise_update()){
+            $d['status'] = true;
+        }else{
+            $d['status'] = false;
+        }
+        echo json_encode($d);
+    }
+
+    public function merchandise_delete($id){
+        $cekid = $this->db->get_where('merchandise', ['id_merch' => $id])->num_rows();
+        if($cekid == 0){
+            echo 'Error';
+            die;
+        }else{
+            if($this->MerchandiseModel->merchandise_delete($id)){
+                $r['title'] = 'Sukses!';
+                $r['icon'] = 'success';
+                $r['status'] = 'Berhasil di Hapus!';
+            }else{
+                $r['title'] = 'Maaf!';
+                $r['icon'] = 'error';
+                $r['status'] = '<br><b>Tidak dapat di Hapus! <br> Silakan hubungi Administrator.</b>';
+            }
+            echo json_encode($r);
+        }
+    }
 }
