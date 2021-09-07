@@ -180,13 +180,13 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="<?=base_url('admin/blog/index')?>" class="nav-link">
-                  <i class="fas fa-pen-square"></i>
+                  <i class="fas fa-pen-square ml-3"></i>
                   <p>Konten Blog</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?=base_url('admin/blog/kategori')?>" class="nav-link">
-                  <i class=" fas fa-tag"></i>
+                  <i class=" fas fa-tag ml-3"></i>
                   <p>Kategori Blog</p>
                 </a>
               </li>
@@ -203,13 +203,13 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="" class="nav-link">
-                  <i class="fas fa-pen-square"></i>
+                  <i class="fas fa-pen-square ml-3"></i>
                   <p>Marchandise</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?=base_url('admin/merchandise/kategori')?>" class="nav-link">
-                  <i class=" fas fa-tag"></i>
+                  <i class=" fas fa-tag ml-3"></i>
                   <p>Kategori Merchandise</p>
                 </a>
               </li>
@@ -226,7 +226,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="<?=base_url('admin/user/register_admin')?>" class="nav-link">
-                  <i class="far fa-user"></i>
+                  <i class="far fa-user ml-3"></i>
                   <p>Register Admin</p>
                 </a>
               </li>
