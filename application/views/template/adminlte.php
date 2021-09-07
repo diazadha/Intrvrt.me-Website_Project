@@ -284,7 +284,7 @@
   $(function () {
     // Summernote
     $('.textarea').summernote({
-        height: 650  //set editable area's height
+        height: 250  //set editable area's height
     })
   })
 </script>
