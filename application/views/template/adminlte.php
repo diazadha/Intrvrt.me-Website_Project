@@ -159,19 +159,11 @@
       <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <?php if ($data['user']['foto_user'] == 'default.jpg') : ?>
-            <div class="image">
-              <img src="<?= base_url('assets/uploads/user/user_1.png') ?>" class="img-circle elevation-2" alt="User Image">
-            </div>
-          <?php else : ?>
-            <div class="image">
-              <img src="<?= base_url('assets/uploads/user/') . $data['user']['foto_user']; ?>" class="img-circle elevation-2" alt="User Image">
-            </div>
-          <?php endif; ?>
-
+          <div class="image">
+            <img src="<?= base_url('assets/uploads/user/') . $this->UserModel->profil('foto'); ?>" class="img-circle elevation-2" alt="User Image">
+          </div>
           <div class="info">
-
-            <a href=" <?= base_url('admin/account') ?> " class="d-block"> <?= $data['user']['nama_user']; ?> </a>
+            <a href=" <?= base_url('admin/account') ?> " class="d-block"> <?= $this->UserModel->profil('nama'); ?> </a>
           </div>
         </div>
 

@@ -12,6 +12,7 @@ class Blog extends CI_Controller
     public function index()
     {
         $data['content'] = "admin/blog_konten";
+        $data['js'] = array("blog_konten.js?r=".rand());
 		$this->load->view("template/adminlte", $data);
     }
 
@@ -20,6 +21,26 @@ class Blog extends CI_Controller
         $data['content'] = "admin/blog_kategori";
         $data['js'] = array("blog_kategori.js?r=".rand());
 		$this->load->view("template/adminlte", $data);
+    }
+
+    public function konten_(){
+        $list = $this->BlogModel->konten_data();
+        $data = array();
+        foreach ($list as $field) {
+            $row = array();
+            $row[] = $field->judul;
+            $row[] = ($field->status == 1) ? '<span class="badge badge-success">Publish</span>' : '<span class="badge badge-danger">Draft</span>';
+            $row[] = '<a href="'.base_url('blog/edit/'.$field->id_blog).'" class="btn btn-info btn-sm edit" data-id="'.$field->id_blog.'">Edit</button>
+                      <button type="button" class="ml-1 btn btn-danger delete btn-sm" data-id="'.$field->id_blog.'" data-judul="'.$field->judul.'">Hapus</button>';
+            $data[] = $row;
+        }
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->BlogModel->count_all_konten(),
+            "recordsFiltered" => $this->BlogModel->count_konten_filtered(),
+            "data" => $data,
+        );
+        echo json_encode($output);
     }
 
     public function kategori_(){
