@@ -138,4 +138,42 @@ class Merchandise extends CI_Controller
             echo json_encode($r);
         }
     }
+	
+    public function tambah(){
+        $data['merch'] = $this->db->get('merchandise')->row();
+        $data['content'] = "admin/tambah_merch";
+        $data['kategori'] = $this->db->get('merchandise_kategori')->result_array();
+	    $this->load->view("template/adminlte", $data);
+    }
+
+    public function tambah_merch(){
+        $upload = $_FILES['foto']['name'];
+        if ($upload) {
+            $config['allowed_types']    = 'jpg|png|jpeg';
+            $config['max_size']         = '2024';
+            $config['upload_path']      = './assets/uploads/foto_merchandise';
+            $config['encrypt_name']     = TRUE;
+            $this->upload->initialize($config);
+            if (! $this->upload->do_upload('foto')) {
+                $error = array('error' => $this->upload->display_errors());
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">' . $error['error'] . '</div>');
+                redirect('admin/merchandise/tambah');
+            } else {
+                $fileupload = $this->upload->data();
+                $filename = pathinfo($fileupload['full_path']);
+                $foto = base_url('/assets/uploads/foto_merchandise'.$filename['basename']);
+                $result = $this->MerchandiseModel->tambah_merchandise($foto);
+            }
+        }else{
+            $foto = $this->input->post('foto_');
+            $result = $this->MerchandiseModel->tambah_merchandise($foto);
+        }
+
+        if($result){
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Merchandise Berhasil Di Tambah!</div>');
+        }else{
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Error!</div>');
+        }
+        redirect('admin/merchandise/tambah');
+    }
 }
