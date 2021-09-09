@@ -98,18 +98,6 @@ class MerchandiseModel extends CI_Model {
         return $query->result();
     }
 
-    public function merchandise_add()
-    {
-        $data = array(
-            'nama_merch' => htmlspecialchars($this->security->xss_clean($this->input->post('merchandise')),ENT_QUOTES),
-            'kategori' => htmlspecialchars($this->security->xss_clean($this->input->post('kategori')),ENT_QUOTES),
-            'harga' => htmlspecialchars($this->security->xss_clean($this->input->post('harga')),ENT_QUOTES),
-            'diskon' => htmlspecialchars($this->security->xss_clean($this->input->post('diskon')),ENT_QUOTES),
-            'deskripsi' => htmlspecialchars($this->security->xss_clean($this->input->post('deskripsi')),ENT_QUOTES),
-        );
-        return $this->db->insert($this->table2, $data);
-    }
-
     public function merchandise_update()
     {
         $id = htmlspecialchars($this->security->xss_clean($this->input->post('id')),ENT_QUOTES);
@@ -169,5 +157,17 @@ class MerchandiseModel extends CI_Model {
     {
         $this->db->from($this->table2);
         return $this->db->count_all_results();
+    }
+	
+    public function tambah_merchandise($foto = NULL){
+        $data=array(
+            'nama_merch' => htmlspecialchars($this->security->xss_clean($this->input->post('merchandise')),ENT_QUOTES),
+            'kategori' => htmlspecialchars($this->security->xss_clean($this->input->post('kategori')),ENT_QUOTES),
+            'foto' => htmlspecialchars($foto, ENT_QUOTES),
+            'harga' => htmlspecialchars($this->security->xss_clean($this->input->post('harga')),ENT_QUOTES),
+            'diskon' => htmlspecialchars($this->security->xss_clean($this->input->post('diskon')),ENT_QUOTES),
+            'deskripsi' => htmlspecialchars($this->security->xss_clean($this->input->post('deskripsi')),ENT_QUOTES),
+        );
+        return $this->db->insert('merchandise',$data);
     }
 }
