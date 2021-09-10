@@ -89,7 +89,7 @@ class Merchandise extends CI_Controller
             $row[] = $field->kategori;
             $row[] = $field->harga;
             $row[] = $field->diskon;
-            $row[] = '<button type="button" class="btn btn-info btn-sm edit" data-id="'.$field->id_merch.'" data-merchandise="'.$field->nama_merch.'" data-kategori="'.$field->kategori.'" data-harga="'.$field->harga.'" data-diskon="'.$field->diskon.'" data-deskripsi="'.$field->deskripsi.'">Edit</button>
+            $row[] = '<a class="btn btn-info btn-sm" href="'.base_url("admin/merchandise/edit/").$field->id_merch.'">Edit</a>
                       <button type="button" class="ml-1 btn btn-danger delete btn-sm" data-id="'.$field->id_merch.'" data-merchandise="'.$field->nama_merch.'">Hapus</button>';
             $data[] = $row;
         }
@@ -161,7 +161,7 @@ class Merchandise extends CI_Controller
             } else {
                 $fileupload = $this->upload->data();
                 $filename = pathinfo($fileupload['full_path']);
-                $foto = base_url('/assets/uploads/foto_merchandise'.$filename['basename']);
+                $foto = $filename['basename'];
                 $result = $this->MerchandiseModel->tambah_merchandise($foto);
             }
         }else{
@@ -175,5 +175,51 @@ class Merchandise extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Error!</div>');
         }
         redirect('admin/merchandise/tambah');
+    }
+
+    public function edit($id){
+        $data['merch'] = $this->db->get_where('merchandise', array('id_merch'=>$id))->row();
+        $data['content'] = "admin/edit_merch";
+        $data['kategori'] = $this->db->get('merchandise_kategori')->result_array();
+	    $this->load->view("template/adminlte", $data);
+    }
+
+    public function edit_merch(){
+        $id_merch = $this->input->post('id_merch');
+        $result     = $this->MerchandiseModel->update_merch();
+        if($result){
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Merchandise Berhasil Di Update!</div>');
+        }else{
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Error!</div>');
+        }
+        redirect(base_url('admin/merchandise/edit/').$id_merch );
+    }
+
+    public function update_gambar(){
+        
+        $id_merch                   = $this->input->post('id_merch');
+        $config['upload_path']   	= './assets/uploads/foto_merchandise/';
+        $config['allowed_types'] 	= 'jpg|jpeg|png|gif|ico|jfif';
+        $config['max_size']         = '2024';
+        $config['encrypt_name']     = TRUE;
+        $this->upload->initialize($config);
+        $field_name = 'foto';
+        if(!$this->upload->do_upload($field_name)){
+            echo "Gagal Update Gambar !";
+        }else{
+            $detail                     = $this->db->get_where('merchandise',array('id_merch'=>$id_merch))->row();
+            $path                       = './assets/uploads/foto_merchandise/'.$detail->foto;
+            unlink($path);
+            $fileupload = $this->upload->data();
+            $filename   = pathinfo($fileupload['full_path']);
+            $foto       = $filename['basename'];
+            $result     = $this->MerchandiseModel->update_foto($foto);   
+        }
+        if($result){
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Foto Berhasil Di Update!</div>');
+        }else{
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Error!</div>');
+        }
+        redirect(base_url('admin/merchandise/edit/').$id_merch );
     }
 }
