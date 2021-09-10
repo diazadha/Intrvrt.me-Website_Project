@@ -220,6 +220,29 @@
             </li>
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-receipt"></i>
+                <p>
+                  Tiket
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="<?= base_url('admin/Event') ?>" class="nav-link">
+                    <i class="fas fa-pen-square ml-3"></i>
+                    <p>Data Tiket</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="<?= base_url('admin/Event/kategori') ?>" class="nav-link">
+                    <i class=" fas fa-tag ml-3"></i>
+                    <p>Kategori Tiket</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                   Users
@@ -229,7 +252,7 @@
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="<?= base_url('admin/user') ?>" class="nav-link">
-                    <i class="far fa-user"></i>
+                    <i class="far fa-user ml-3"></i>
                     <p>Register Admin</p>
                   </a>
                 </li>
@@ -314,6 +337,15 @@
         height: 250 //set editable area's height
       })
     })
+  </script>
+
+  <script>
+    $(function() {
+      $("#example1").DataTable({
+        "responsive": true,
+        "autoWidth": false,
+      });
+    });
   </script>
   <?php if (isset($js)) : foreach ($js as $j) : ?>
       <script src="<?= base_url('assets/js/' . $j) ?>"></script>
