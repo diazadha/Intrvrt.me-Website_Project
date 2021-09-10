@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="<?= base_url('assets'); ?>/vendor/AdminLTE-3.0.5/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <!-- Tempusdominus Bbootstrap 4 -->
   <link rel="stylesheet" href="<?= base_url('assets'); ?>/vendor/AdminLTE-3.0.5/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="<?= base_url('assets'); ?>/vendor/AdminLTE-3.0.5//plugins/select2/css/select2.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="<?= base_url('assets'); ?>/vendor/AdminLTE-3.0.5/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- JQVMap -->
@@ -274,6 +276,8 @@
   </script>
   <!-- Bootstrap 4 -->
   <script src="<?= base_url('assets'); ?>/vendor/AdminLTE-3.0.5/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Select2 -->
+  <script src="<?= base_url('assets'); ?>/vendor/AdminLTE-3.0.5/plugins/select2/js/select2.full.min.js"></script>
   <!-- ChartJS -->
   <script src="<?= base_url('assets'); ?>/vendor/AdminLTE-3.0.5/plugins/chart.js/Chart.min.js"></script>
   <!-- JQVMap -->
@@ -304,6 +308,7 @@
   <script>
     let base_url = '<?php echo base_url(); ?>';
     $(function() {
+      $('.select2').select2()
       // Summernote
       $('.textarea').summernote({
         height: 250 //set editable area's height

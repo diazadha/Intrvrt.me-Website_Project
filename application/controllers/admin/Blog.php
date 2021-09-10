@@ -16,10 +16,17 @@ class Blog extends CI_Controller
 		$this->load->view("template/adminlte", $data);
     }
 
-    public function kategori()
+    public function create()
     {
-        $data['content'] = "admin/blog_kategori";
-        $data['js'] = array("blog_kategori.js?r=".rand());
+        $data['content'] = "admin/blog_create";
+        $data['kategori'] = $this->BlogModel->get_kategori();
+		$this->load->view("template/adminlte", $data);
+    }
+
+    public function update()
+    {
+        $data['content'] = "admin/blog_update";
+        $data['kategori'] = $this->BlogModel->get_kategori();
 		$this->load->view("template/adminlte", $data);
     }
 
@@ -41,6 +48,13 @@ class Blog extends CI_Controller
             "data" => $data,
         );
         echo json_encode($output);
+    }
+
+    public function kategori()
+    {
+        $data['content'] = "admin/blog_kategori";
+        $data['js'] = array("blog_kategori.js?r=".rand());
+		$this->load->view("template/adminlte", $data);
     }
 
     public function kategori_(){

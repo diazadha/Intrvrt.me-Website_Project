@@ -133,4 +133,8 @@ class BlogModel extends CI_Model
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }
+
+    public function get_kategori(){
+        return $this->db->get_where('blog_kategori', ['status' => 1])->result();
+    }
 }
