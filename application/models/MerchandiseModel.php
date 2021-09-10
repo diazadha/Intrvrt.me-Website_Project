@@ -170,4 +170,24 @@ class MerchandiseModel extends CI_Model {
         );
         return $this->db->insert('merchandise',$data);
     }
+	
+    public function update_foto($foto = NULL){
+        $data=array(
+        'foto' => htmlspecialchars($foto, ENT_QUOTES),
+        );
+        $this->db->where('id_merch', htmlspecialchars($this->security->xss_clean($this->input->post('id_merch')),ENT_QUOTES));
+        return $this->db->update('merchandise', $data);
+    }
+
+    public function update_merch(){
+        $data=array(
+            'nama_merch' => htmlspecialchars($this->security->xss_clean($this->input->post('merchandise')),ENT_QUOTES),
+            'kategori' => htmlspecialchars($this->security->xss_clean($this->input->post('kategori')),ENT_QUOTES),
+            'harga' => htmlspecialchars($this->security->xss_clean($this->input->post('harga')),ENT_QUOTES),
+            'diskon' => htmlspecialchars($this->security->xss_clean($this->input->post('diskon')),ENT_QUOTES),
+            'deskripsi' => htmlspecialchars($this->security->xss_clean($this->input->post('deskripsi')),ENT_QUOTES),
+        );
+        $this->db->where('id_merch', htmlspecialchars($this->security->xss_clean($this->input->post('id_merch')),ENT_QUOTES));
+        return $this->db->update('merchandise', $data);
+    }
 }
