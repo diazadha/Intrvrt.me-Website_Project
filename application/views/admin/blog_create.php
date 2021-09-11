@@ -59,8 +59,9 @@
                           </div>
                       </div>
                       <div class="card-footer">
+                          <button href="<?=base_url('admin/blog')?>" class="btn btn-default">Batal</button>
                           <button type="submit" class="btn btn-primary">Terbitkan</button>
-                          <button type="submit" class="btn btn-info">Simpan Draft</button>
+                          <button type="submit" class="btn btn-info" name="draft" value="draft">Simpan Draft</button>
                       </div>
                   </form>
               </div>

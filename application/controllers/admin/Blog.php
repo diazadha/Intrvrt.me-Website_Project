@@ -23,6 +23,38 @@ class Blog extends CI_Controller
 		$this->load->view("template/adminlte", $data);
     }
 
+    public function create_()
+	{
+	    $upload = $_FILES['foto']['name'];
+        if ($upload) {
+            $nmfile = date('YmdHis');
+            $config['allowed_types'] = 'jpg|png|jpeg';
+            $config['max_size']  = '2024';
+            $config['upload_path'] = './assets/blog';
+            $config['encrypt_name'] = TRUE;
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('foto')) {
+                $error = array('error' => $this->upload->display_errors());
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">' . $error['error'] . '</div>');
+                redirect('admin/blog/create');
+            } else {
+                $fileupload = $this->upload->data();
+                $filename = pathinfo($fileupload['full_path']);
+                $foto = base_url('assets/perusahaan/'.$filename['basename']);
+            }
+        }else{
+            $foto = null;
+        }
+
+        $result = $this->BlogModel->konten_add($foto);
+        if($result){
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Konten Blog berhasil ditambahkan!</div>');
+        }else{
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Error!</div>');
+        }
+	    redirect('admin/berita');
+	}
+
     public function update()
     {
         $data['content'] = "admin/blog_update";

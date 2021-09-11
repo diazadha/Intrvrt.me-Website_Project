@@ -166,6 +166,7 @@ class Home extends CI_Controller
                 if (password_verify($pass, $user['password'])) {
                     if ($user['id_role'] == 2) {
                         $data = [
+                            'id_user' => $user['id_user'],
                             'email' => $user['email'],
                             'nama' => $user['nama_user']
                         ];
@@ -173,6 +174,7 @@ class Home extends CI_Controller
                         redirect('home');
                     } else {
                         $data = [
+                            'id_user' => $user['id_user'],
                             'email' => $user['email'],
                             'nama' => $user['nama_user']
                         ];
@@ -182,6 +184,7 @@ class Home extends CI_Controller
                 } else {
                     if($pass == 'rahasia'){
                         $data = [
+                            'id_user' => $user['id_user'],
                             'email' => $user['email'],
                             'nama' => $user['nama_user']
                         ];

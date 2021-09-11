@@ -7,6 +7,30 @@ class BlogModel extends CI_Model
     var $column_search_konten = array('judul'); //field yang diizin untuk pencarian
     var $order_konten = array('judul' => 'asc'); // default order
 
+    public function konten_add($foto)
+    {
+        if (!isset($_POST['draft'])) {
+            $status = 1;
+        } else {
+            $status = 2;
+        }
+
+        date_default_timezone_set('Asia/Jakarta');
+        $kategori = implode(',', $_POST['kategori']); 
+        $slug = strtolower(url_title($this->input->post('judul')));
+        $data = array(
+            'judul' => htmlspecialchars($this->input->post('judul'), ENT_QUOTES),
+            'isi_konten' => htmlspecialchars($this->input->post('isi'), ENT_QUOTES),
+            'slug' => htmlspecialchars($slug, ENT_QUOTES), 
+            'foto' => htmlspecialchars($foto, ENT_QUOTES), 
+            'kategori' => htmlspecialchars($kategori, ENT_QUOTES), 
+            'status' => htmlspecialchars($status, ENT_QUOTES),
+            'penulis' => $this->session->userdata('id_user'),
+            'tanggal_dibuat' => date('Y-m-d H:i:s')
+        );
+        return $this->db->insert('blog_data', $data);
+    }
+
     public function konten_data()
     {
         $this->_get_konten_query();
