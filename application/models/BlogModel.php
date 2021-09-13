@@ -3,6 +3,7 @@ class BlogModel extends CI_Model
 {
 
     var $table_konten = 'blog_data'; //nama tabel dari database
+    var $join = 'user'; //nama tabel dari database
     var $column_order_konten = array('judul', 'status'); //field yang ada di table
     var $column_search_konten = array('judul'); //field yang diizin untuk pencarian
     var $order_konten = array('judul' => 'asc'); // default order
@@ -31,6 +32,14 @@ class BlogModel extends CI_Model
         return $this->db->insert('blog_data', $data);
     }
 
+    public function get_konten($id)
+    {
+        $this->db->from($this->table_konten);
+        $this->db->where('id_blog', $id);
+        $query = $this->db->get();
+        return $query->row();
+    }
+
     public function konten_data()
     {
         $this->_get_konten_query();
@@ -43,8 +52,9 @@ class BlogModel extends CI_Model
 
     private function _get_konten_query()
     {
-        $this->db->select('*');
+        $this->db->select('blog_data.*, user.nama_user as nama_penulis');
         $this->db->from($this->table_konten);
+        $this->db->join('user', 'user.id_user = blog_data.penulis');
         $i = 0;
         foreach ($this->column_search_konten as $item) {
             if ($_POST['search']['value']) {
@@ -78,6 +88,14 @@ class BlogModel extends CI_Model
         return $this->db->count_all_results();
     }
 
+    public function konten_delete($id)
+    {
+        // unlink();
+        $this->db->where('id_blog', $id);
+        $result = $this->db->delete($this->table_konten);
+        return $result;
+    }
+
     //KATEGORI BLOG
     var $table = 'blog_kategori'; //nama tabel dari database
     var $column_order = array('nama_kategori', 'status'); //field yang ada di table
@@ -92,6 +110,23 @@ class BlogModel extends CI_Model
         }
         $query = $this->db->get();
         return $query->result();
+    }
+
+    public function get_kategori_IN($id, $return)
+    {
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->where_in('id_kategori', explode(',', $id));
+        $query = $this->db->get();
+        if($return == 'data'){
+            return $query->result();
+        }else{
+            $kategori='';
+            foreach($query->result() as $kt){
+                $kategori.='#'.$kt->nama_kategori.', ';
+            }
+            return rtrim($kategori, ', ');
+        }
     }
 
     public function kategori_add()

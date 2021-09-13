@@ -23,6 +23,20 @@ class Blog extends CI_Controller
 		$this->load->view("template/adminlte", $data);
     }
 
+    public function edit($id)
+    {
+        $cekid = $this->db->get_where('blog_data', ['id_blog' => $id])->num_rows();
+        if($cekid > 0){
+            $data['content'] = "admin/blog_edit";
+            $data['konten'] = $this->BlogModel->get_konten($id);
+            $data['kategori'] = $this->BlogModel->get_kategori();
+            $this->load->view("template/adminlte", $data);
+        }else{
+            echo 'Error 404 Not Found';
+            die;
+        }
+    }
+
     public function create_()
 	{
 	    $upload = $_FILES['foto']['name'];
@@ -33,6 +47,7 @@ class Blog extends CI_Controller
             $config['upload_path'] = './assets/blog';
             $config['encrypt_name'] = TRUE;
             $this->load->library('upload', $config);
+            $this->upload->initialize($config);
             if (!$this->upload->do_upload('foto')) {
                 $error = array('error' => $this->upload->display_errors());
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">' . $error['error'] . '</div>');
@@ -40,7 +55,7 @@ class Blog extends CI_Controller
             } else {
                 $fileupload = $this->upload->data();
                 $filename = pathinfo($fileupload['full_path']);
-                $foto = base_url('assets/perusahaan/'.$filename['basename']);
+                $foto = base_url('assets/blog/'.$filename['basename']);
             }
         }else{
             $foto = null;
@@ -52,7 +67,7 @@ class Blog extends CI_Controller
         }else{
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Error!</div>');
         }
-	    redirect('admin/berita');
+	    redirect('admin/blog/');
 	}
 
     public function update()
@@ -67,9 +82,9 @@ class Blog extends CI_Controller
         $data = array();
         foreach ($list as $field) {
             $row = array();
-            $row[] = $field->judul;
-            $row[] = ($field->status == 1) ? '<span class="badge badge-success">Publish</span>' : '<span class="badge badge-danger">Draft</span>';
-            $row[] = '<a href="'.base_url('blog/edit/'.$field->id_blog).'" class="btn btn-info btn-sm edit" data-id="'.$field->id_blog.'">Edit</button>
+            $row[] = $field->judul.'<br>'.$this->BlogModel->get_kategori_IN($field->kategori, 'html').'<br><i class="fas fa-user-circle"></i> '.$field->nama_penulis.', '.$this->UserModel->format_tanggal($field->tanggal_dibuat);
+            $row[] = ($field->status == 1) ? '<span class="badge badge-success">Published</span>' : '<span class="badge badge-secondary">Draft</span>';
+            $row[] = '<a href="'.base_url('admin/blog/edit/'.$field->id_blog).'" class="btn btn-info btn-sm">Edit</a>
                       <button type="button" class="ml-1 btn btn-danger delete btn-sm" data-id="'.$field->id_blog.'" data-judul="'.$field->judul.'">Hapus</button>';
             $data[] = $row;
         }
@@ -80,6 +95,25 @@ class Blog extends CI_Controller
             "data" => $data,
         );
         echo json_encode($output);
+    }
+
+    public function konten_delete($id){
+        $cekid = $this->db->get_where('blog_data', ['id_blog' => $id])->num_rows();
+        if($cekid == 0){
+            echo 'Error';
+            die;
+        }else{
+            if($this->BlogModel->konten_delete($id)){
+                $r['title'] = 'Sukses!';
+                $r['icon'] = 'success';
+                $r['status'] = 'Berhasil di Hapus!';
+            }else{
+                $r['title'] = 'Maaf!';
+                $r['icon'] = 'error';
+                $r['status'] = '<br><b>Tidak dapat di Hapus! <br> Silakan hubungi Administrator.</b>';
+            }
+            echo json_encode($r);
+        }
     }
 
     public function kategori()

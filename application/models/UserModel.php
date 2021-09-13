@@ -28,7 +28,7 @@ class UserModel extends CI_Model
 		$mBul=$mdy[1];
 		
 		if($idBahasa == "id"){
-		
+	
 		    if($mBul=='01'){$isBulan='Jan';}elseif($mBul=='02'){$isBulan='Feb';}
 		    elseif($mBul=='03'){$isBulan='Mar';}elseif($mBul=='04'){$isBulan='Apr';}
 		    elseif($mBul=='05'){$isBulan='Mei';}elseif($mBul=='06'){$isBulan='Jun';}

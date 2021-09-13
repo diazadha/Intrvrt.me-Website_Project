@@ -43,7 +43,7 @@
                           <div class="form-group row">
                               <label for="inputPassword3" class="col-sm-2 col-form-label">Kategori</label>
                               <div class="col-sm-10">
-                                <select class="select2" multiple="multiple" name="kategori" data-placeholder="Select a State" style="width: 100%;">
+                                <select class="select2" multiple="multiple" name="kategori[]" data-placeholder="Select a State" style="width: 100%;">
                                     <?php foreach($kategori as $k):?>
                                         <option value="<?=$k->id_kategori?>"><?=$k->nama_kategori?></option>
                                     <?php endforeach;?>

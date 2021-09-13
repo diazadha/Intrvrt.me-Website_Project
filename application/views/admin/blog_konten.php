@@ -35,7 +35,7 @@
                         <thead>
                             <tr>
                                 <th>Judul</th>
-                                <th width="10%">Penulis</th>
+                                <th width="10%">Status</th>
                                 <th width="15%"></th>
                             </tr>
                         </thead>

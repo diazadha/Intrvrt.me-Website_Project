@@ -25,19 +25,20 @@
                         Edit Konten Blog
                     </h3>
                   </div>
-                  <form class="form-horizontal" enctype="multipart/form-data" action ="<?=base_url('admin/blog/create_')?>" method="POST">
+                  <form class="form-horizontal" enctype="multipart/form-data" action ="<?=base_url('admin/blog/update_')?>" method="POST">
                       <div class="card-body">
                           <?=$this->session->flashdata('message'); $this->session->unset_userdata('message');?>
                           <div class="form-group row">
                               <label for="name" class="col-sm-2 col-form-label">Judul</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="judul" name="judul" value="">
+                                  <input type="text" class="form-control" id="judul" name="judul" value="<?=$konten->judul?>">
+                                  <input type="hidden" class="form-control" id="id" name="id" value="<?=$konten->id_blog?>">
                               </div>
                           </div>
                           <div class="form-group row">
                               <label for="inputPassword3" class="col-sm-2 col-form-label">Isi</label>
                               <div class="col-sm-10">
-                              <textarea class="textarea" name="isi"></textarea>
+                              <textarea class="textarea" name="isi"><?=$konten->isi_konten?></textarea>
                               </div>
                           </div>
                           <div class="form-group row">
@@ -54,7 +55,7 @@
                               <label for="inputPassword3" class="col-sm-2 col-form-label">Foto Header</label>
                               <div class="col-sm-10">
                                   <input type="file" name="foto">
-                                  <input type="hidden" class="custom-file-input" value="" name="foto_">
+                                  <input type="hidden" class="custom-file-input" value="<?=$konten->foto?>" name="foto_">
                               </div>
                           </div>
                       </div>
