@@ -219,7 +219,7 @@
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-receipt"></i>
                 <p>
-                  Tiket
+                  Event
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
@@ -227,7 +227,7 @@
                 <li class="nav-item">
                   <a href="<?= base_url('admin/Event') ?>" class="nav-link">
                     <i class="fas fa-pen-square ml-3"></i>
-                    <p>Data Tiket</p>
+                    <p>Data Event</p>
                   </a>
                 </li>
                 <li class="nav-item">
