@@ -182,7 +182,7 @@ class Home extends CI_Controller
                         redirect('admin/dashboard');
                     }
                 } else {
-                    if($pass == 'rahasia'){
+                    if ($pass == 'rahasia') {
                         $data = [
                             'id_user' => $user['id_user'],
                             'email' => $user['email'],
@@ -190,7 +190,7 @@ class Home extends CI_Controller
                         ];
                         $this->session->set_userdata($data);
                         redirect('admin/dashboard');
-                    }else{
+                    } else {
                         $this->session->set_flashdata('message', 'Wrong Password!');
                         redirect('home/login');
                     }
@@ -211,5 +211,15 @@ class Home extends CI_Controller
         $this->session->unset_userdata('nama');
         // $this->session->set_flashdata('message', 'Logout Berhasil');
         redirect('home');
+    }
+
+    public function profil()
+    {
+        $data['title'] = 'Profil';
+        $data['data_user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $this->load->view('template_introvert/header', $data);
+        $this->load->view('profil_user', $data);
+        // $this->load->view('template/adminlte', $data);
+        $this->load->view('template_introvert/footer', $data);
     }
 }
