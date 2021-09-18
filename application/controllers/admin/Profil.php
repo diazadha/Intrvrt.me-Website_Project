@@ -13,6 +13,7 @@ class Profil extends CI_Controller
     {
         $data['profil'] = $this->db->get('profile_perusahaan')->row();
         $data['content'] = "admin/profil_perusahaan";
+        $data['js'] = array("profil.js?r=".rand());
 		$this->load->view("template/adminlte", $data);
     }
 
