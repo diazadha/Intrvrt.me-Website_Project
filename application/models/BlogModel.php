@@ -32,6 +32,32 @@ class BlogModel extends CI_Model
         return $this->db->insert('blog_data', $data);
     }
 
+    public function konten_update($foto)
+    {
+        if (!isset($_POST['draft'])) {
+            $status = 1;
+        } else {
+            $status = 2;
+        }
+
+        date_default_timezone_set('Asia/Jakarta');
+        $kategori = implode(',', $_POST['kategori']); 
+        $slug = strtolower(url_title($this->input->post('judul')));
+        $id = htmlspecialchars($this->input->post('id'), ENT_QUOTES);
+        $data = array(
+            'judul' => htmlspecialchars($this->input->post('judul'), ENT_QUOTES),
+            'isi_konten' => htmlspecialchars($this->input->post('isi'), ENT_QUOTES),
+            'slug' => htmlspecialchars($slug, ENT_QUOTES), 
+            'foto' => htmlspecialchars($foto, ENT_QUOTES), 
+            'kategori' => htmlspecialchars($kategori, ENT_QUOTES), 
+            'status' => htmlspecialchars($status, ENT_QUOTES),
+            'penulis' => $this->session->userdata('id_user'),
+            'tanggal_dibuat' => date('Y-m-d H:i:s')
+        );
+        $this->db->where('id_blog', $id);
+        return $this->db->update('blog_data', $data);
+    }
+
     public function get_konten($id)
     {
         $this->db->from($this->table_konten);
@@ -151,9 +177,23 @@ class BlogModel extends CI_Model
 
     public function kategori_delete($id)
     {
-        $this->db->where('id_kategori', $id);
-        $result = $this->db->delete($this->table);
-        return $result;
+        $query="SELECT kategori FROM blog_data WHERE kategori LIKE '%$id%'";
+        $result = $this->db->query($query)->result();
+        $arr = '';
+        foreach($result as $r){
+            $arr.= $r->kategori.',';
+        }
+        
+        $str = rtrim($arr,',');
+        $array = explode(',', $str);
+
+        if(array_search($id, $array) != ''){
+            return 'gagal';
+        }else{
+            $this->db->where('id_kategori', $id);
+            $this->db->delete($this->table);
+            return 'sukses';
+        }
     }
 
     private function _get_kategori_query()

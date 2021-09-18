@@ -20,6 +20,10 @@ class Profil extends CI_Controller
     {
         $upload = $_FILES['logo']['name'];
         if ($upload) {
+            $src = $this->input->post('logo_');
+            $file_name = str_replace(base_url(), '', $src);
+            unlink($file_name);
+
             $config['allowed_types']    = 'jpg|png|jpeg';
             $config['max_size']         = '2024';
             $config['upload_path']      = './assets/perusahaan';
@@ -27,7 +31,7 @@ class Profil extends CI_Controller
             $this->load->library('upload', $config);
             if (! $this->upload->do_upload('logo')) {
                 $error = array('error' => $this->upload->display_errors());
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">' . $error['error'] . '</div>');
+                $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">' . $error['error'] . '</div>');
                 redirect('admin/profil/perusahaan');
             } else {
                 $fileupload = $this->upload->data();
@@ -41,9 +45,9 @@ class Profil extends CI_Controller
         }
 
         if($result){
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Profil perusahaan berhasil di update!</div>');
+            $this->session->set_flashdata('message', '<div class="alert tutup alert-success" role="alert">Profil perusahaan berhasil di update!</div>');
         }else{
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Error!</div>');
+            $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">Error!</div>');
         }
         redirect('admin/profil/perusahaan');
     }

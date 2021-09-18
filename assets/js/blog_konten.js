@@ -3,6 +3,10 @@
 let editor; // use a global for the submit and return data rendering in the examples
 
 jQuery(document).ready(function() {
+    $('.textarea').summernote({
+        height: 350 //set editable area's height
+    });
+
     $('#table').DataTable({
         "processing": true,
         "serverSide": true,
@@ -15,7 +19,7 @@ jQuery(document).ready(function() {
             "orderable": false,
             "className": "text-center",
         }]
-    })
+    });
 
     $('#table').on('click ', '.delete ', function() {
         var id = $(this).data('id');
@@ -41,7 +45,7 @@ jQuery(document).ready(function() {
                             title: data.title,
                             html: nama + '<br>' + data.status,
                             icon: data.icon,
-                            timer: 3000,
+                            timer: 4000,
                             showCancelButton: false,
                             showConfirmButton: false,
                             buttons: false,

@@ -156,7 +156,7 @@ class Merchandise extends CI_Controller
             $this->upload->initialize($config);
             if (! $this->upload->do_upload('foto')) {
                 $error = array('error' => $this->upload->display_errors());
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">' . $error['error'] . '</div>');
+                $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">' . $error['error'] . '</div>');
                 redirect('admin/merchandise/tambah');
             } else {
                 $fileupload = $this->upload->data();
@@ -170,9 +170,9 @@ class Merchandise extends CI_Controller
         }
 
         if($result){
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Merchandise Berhasil Di Tambah!</div>');
+            $this->session->set_flashdata('message', '<div class="alert tutup alert-success" role="alert">Merchandise Berhasil Di Tambah!</div>');
         }else{
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Error!</div>');
+            $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">Error!</div>');
         }
         redirect('admin/merchandise/tambah');
     }
@@ -188,9 +188,9 @@ class Merchandise extends CI_Controller
         $id_merch = $this->input->post('id_merch');
         $result     = $this->MerchandiseModel->update_merch();
         if($result){
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Merchandise Berhasil Di Update!</div>');
+            $this->session->set_flashdata('message', '<div class="alert tutup alert-success" role="alert">Merchandise Berhasil Di Update!</div>');
         }else{
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Error!</div>');
+            $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">Error!</div>');
         }
         redirect(base_url('admin/merchandise/edit/').$id_merch );
     }
@@ -216,9 +216,9 @@ class Merchandise extends CI_Controller
             $result     = $this->MerchandiseModel->update_foto($foto);   
         }
         if($result){
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Foto Berhasil Di Update!</div>');
+            $this->session->set_flashdata('message', '<div class="alert tutup alert-success" role="alert">Foto Berhasil Di Update!</div>');
         }else{
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Error!</div>');
+            $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">Error!</div>');
         }
         redirect(base_url('admin/merchandise/edit/').$id_merch );
     }

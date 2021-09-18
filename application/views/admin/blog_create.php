@@ -53,15 +53,19 @@
                           <div class="form-group row">
                               <label for="inputPassword3" class="col-sm-2 col-form-label">Foto Header</label>
                               <div class="col-sm-10">
-                                  <input type="file" name="foto">
-                                  <input type="hidden" class="custom-file-input" name="foto_">
+                                  <input type="file" name="foto" accept="image/*" onchange="preview_image(event)">
+                                  <div style="display:none" id="row-display">
+                                      <hr>
+                                      <label for="output_image">Preview Foto</label><br>
+                                      <img id="output_image" class="img-thumbnail" width="200"/>
+                                  </div>
                               </div>
                           </div>
                       </div>
                       <div class="card-footer">
-                          <button href="<?=base_url('admin/blog')?>" class="btn btn-default">Batal</button>
-                          <button type="submit" class="btn btn-primary">Terbitkan</button>
+                          <a href="<?=base_url('admin/blog/index')?>" class="btn btn-default">Batal</a>
                           <button type="submit" class="btn btn-info" name="draft" value="draft">Simpan Draft</button>
+                          <button type="submit" class="btn btn-primary">Terbitkan</button>
                       </div>
                   </form>
               </div>

@@ -27,7 +27,7 @@ class Event extends CI_Controller
             $this->upload->initialize($config);
             if (! $this->upload->do_upload('foto')) {
                 $error = array('error' => $this->upload->display_errors());
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">' . $error['error'] . '</div>');
+                $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">' . $error['error'] . '</div>');
                 redirect('admin/Event/tambah');
             } else {
                 $fileupload = $this->upload->data();
@@ -41,9 +41,9 @@ class Event extends CI_Controller
         }
 
         if($result){
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Event Berhasil Di Tambah!</div>');
+            $this->session->set_flashdata('message', '<div class="alert tutup alert-success" role="alert">Event Berhasil Di Tambah!</div>');
         }else{
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Error!</div>');
+            $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">Error!</div>');
         }
         redirect('admin/Event/tambah');
     }
@@ -100,9 +100,9 @@ class Event extends CI_Controller
             $result     = $this->tiket_model->update_foto($foto);   
         }
         if($result){
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Foto Berhasil Di Update!</div>');
+            $this->session->set_flashdata('message', '<div class="alert tutup alert-success" role="alert">Foto Berhasil Di Update!</div>');
         }else{
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Error!</div>');
+            $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">Error!</div>');
         }
         redirect(base_url('admin/Event/edit/').$id_event );
     }
@@ -111,9 +111,9 @@ class Event extends CI_Controller
         $id_event = $this->input->post('id_event');
         $result     = $this->tiket_model->update_event();
         if($result){
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Merchandise Berhasil Di Update!</div>');
+            $this->session->set_flashdata('message', '<div class="alert tutup alert-success" role="alert">Merchandise Berhasil Di Update!</div>');
         }else{
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Error!</div>');
+            $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">Error!</div>');
         }
         redirect(base_url('admin/Event/edit/').$id_event );
     }

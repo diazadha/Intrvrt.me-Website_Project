@@ -20,6 +20,7 @@ class Blog extends CI_Controller
     {
         $data['content'] = "admin/blog_create";
         $data['kategori'] = $this->BlogModel->get_kategori();
+        $data['js'] = array("blog_create.js?r=".rand());
 		$this->load->view("template/adminlte", $data);
     }
 
@@ -28,6 +29,7 @@ class Blog extends CI_Controller
         $cekid = $this->db->get_where('blog_data', ['id_blog' => $id])->num_rows();
         if($cekid > 0){
             $data['content'] = "admin/blog_edit";
+            $data['js'] = array("blog_edit.js?r=".rand());
             $data['konten'] = $this->BlogModel->get_konten($id);
             $data['kategori'] = $this->BlogModel->get_kategori();
             $this->load->view("template/adminlte", $data);
@@ -50,7 +52,7 @@ class Blog extends CI_Controller
             $this->upload->initialize($config);
             if (!$this->upload->do_upload('foto')) {
                 $error = array('error' => $this->upload->display_errors());
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">' . $error['error'] . '</div>');
+                $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">' . $error['error'] . '</div>');
                 redirect('admin/blog/create');
             } else {
                 $fileupload = $this->upload->data();
@@ -63,11 +65,79 @@ class Blog extends CI_Controller
 
         $result = $this->BlogModel->konten_add($foto);
         if($result){
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Konten Blog berhasil ditambahkan!</div>');
+            $this->session->set_flashdata('message', '<div class="alert tutup alert-success" role="alert">Konten Blog berhasil ditambahkan!</div>');
         }else{
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Error!</div>');
+            $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">Error!</div>');
         }
 	    redirect('admin/blog/');
+	}
+
+    public function update_()
+	{
+	    $upload = $_FILES['foto']['name'];
+        if ($upload) {
+            //unlink file sebelumnya
+            $src = $this->input->post('foto_');
+            $file_name = str_replace(base_url(), '', $src);
+            unlink($file_name);
+
+            $config['allowed_types'] = 'jpg|png|jpeg';
+            $config['max_size']  = '2024';
+            $config['upload_path'] = './assets/blog';
+            $config['encrypt_name'] = TRUE;
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+            if (!$this->upload->do_upload('foto')) {
+                $error = array('error' => $this->upload->display_errors());
+                $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">' . $error['error'] . '</div>');
+                redirect('admin/blog/create');
+            } else {
+                $fileupload = $this->upload->data();
+                $filename = pathinfo($fileupload['full_path']);
+                $foto = base_url('assets/blog/'.$filename['basename']);
+            }
+        }else{
+            $foto = $this->input->post('foto_');
+        }
+
+        $result = $this->BlogModel->konten_update($foto);
+        if($result){
+            $this->session->set_flashdata('message', '<div class="alert tutup alert-success" role="alert">Konten Blog berhasil di Update!</div>');
+        }else{
+            $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">Error!</div>');
+        }
+	    redirect('admin/blog/');
+	}
+
+    function delete_image(){
+		$src = $this->input->post('src');
+		$file_name = str_replace(base_url(), '', $src);
+		if(unlink($file_name)){
+			echo 'File Delete Successfully';
+		}
+	}
+
+	function upload_image(){
+		if($_FILES["image"]["name"])  
+		{  
+			$config['allowed_types'] = 'jpg|png|jpeg';
+            $config['max_size']  = '2024';
+            $config['upload_path'] = './assets/blog/img-konten';
+            $config['encrypt_name'] = TRUE;
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+			if(!$this->upload->do_upload('image'))  
+			{   
+				$this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">' . $this->upload->display_errors() . '</div>');
+                redirect('admin/blog/create');
+			}  
+			else  
+			{  
+				$fileupload = $this->upload->data();
+                $filename = pathinfo($fileupload['full_path']);
+                echo base_url('assets/blog/img-konten/'.$filename['basename']); 
+			}  
+		} 
 	}
 
     public function update()
@@ -98,11 +168,16 @@ class Blog extends CI_Controller
     }
 
     public function konten_delete($id){
-        $cekid = $this->db->get_where('blog_data', ['id_blog' => $id])->num_rows();
-        if($cekid == 0){
+        $cekid = $this->db->get_where('blog_data', ['id_blog' => $id]);
+        if($cekid->num_rows() == 0){
             echo 'Error';
             die;
         }else{
+            //unlink file sebelumnya
+            $src = $cekid->row()->foto;
+            $file_name = str_replace(base_url(), '', $src);
+            unlink($file_name);
+                        
             if($this->BlogModel->konten_delete($id)){
                 $r['title'] = 'Sukses!';
                 $r['icon'] = 'success';
@@ -167,10 +242,15 @@ class Blog extends CI_Controller
             echo 'Error';
             die;
         }else{
-            if($this->BlogModel->kategori_delete($id)){
+            $result = $this->BlogModel->kategori_delete($id);
+            if($result == 'sukses'){
                 $r['title'] = 'Sukses!';
                 $r['icon'] = 'success';
                 $r['status'] = 'Berhasil di Hapus!';
+            }else if($result == 'gagal'){
+                $r['title'] = 'Gagal!';
+                $r['icon'] = 'error';
+                $r['status'] = 'Tidak dapat di Hapus, karena kategori ini dipakai pada konten Blog!';
             }else{
                 $r['title'] = 'Maaf!';
                 $r['icon'] = 'error';

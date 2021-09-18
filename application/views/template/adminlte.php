@@ -328,11 +328,9 @@
   <script>
     let base_url = '<?php echo base_url(); ?>';
     $(function() {
-      $('.select2').select2()
-      // Summernote
-      $('.textarea').summernote({
-        height: 250 //set editable area's height
-      })
+      $('.select2').select2();
+      var timeout = 3000; // in miliseconds (3*1000)
+      $('.tutup').delay(timeout).fadeOut(300);
     })
   </script>
 

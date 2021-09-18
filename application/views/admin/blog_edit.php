@@ -38,30 +38,41 @@
                           <div class="form-group row">
                               <label for="inputPassword3" class="col-sm-2 col-form-label">Isi</label>
                               <div class="col-sm-10">
-                              <textarea class="textarea" name="isi"><?=$konten->isi_konten?></textarea>
+                              <textarea class="textarea" name="isi"><?= htmlspecialchars_decode($konten->isi_konten)?></textarea>
                               </div>
                           </div>
                           <div class="form-group row">
                               <label for="inputPassword3" class="col-sm-2 col-form-label">Kategori</label>
                               <div class="col-sm-10">
-                                <select class="select2" multiple="multiple" name="kategori" data-placeholder="Select a State" style="width: 100%;">
-                                    <?php foreach($kategori as $k):?>
-                                        <option value="<?=$k->id_kategori?>"><?=$k->nama_kategori?></option>
-                                    <?php endforeach;?>
+                                <select class="select2" multiple="multiple" name="kategori[]" data-placeholder="Pilih kategori" style="width: 100%;">
+                                    <?php 
+                                    $id = explode(',', $konten->kategori);
+                                    foreach($kategori as $k):?>
+                                        <option value="<?=$k->id_kategori?>" <?= (array_search($k->id_kategori, $id) != '') ? 'selected' : ''?>><?=$k->nama_kategori?></option>
+                                    <?php $no++; endforeach;?>
                                 </select>
                               </div>
                           </div>
                           <div class="form-group row">
                               <label for="inputPassword3" class="col-sm-2 col-form-label">Foto Header</label>
                               <div class="col-sm-10">
-                                  <input type="file" name="foto">
+                                  <input type="file" name="foto" accept="image/*" onchange="preview_image(event)">
                                   <input type="hidden" class="custom-file-input" value="<?=$konten->foto?>" name="foto_">
+                                  <hr>
+                                  <label for="output">Preview Foto Header</label><br>
+                                  <img id="output" src="<?=$konten->foto?>" class="img-thumbnail" width="200"/>
+                                  <div style="display:none" id="row-display">
+                                    <hr>
+                                    <label for="output">Preview Update Foto Header</label><br>
+                                    <img id="output_image" class="img-thumbnail" width="200"/>
+                                  </div>
                               </div>
                           </div>
                       </div>
                       <div class="card-footer">
-                          <button type="submit" class="btn btn-primary">Terbitkan</button>
+                          <a href="<?=base_url('admin/blog/index')?>" class="btn btn-default">Kembali</a>
                           <button type="submit" class="btn btn-info">Simpan Draft</button>
+                          <button type="submit" class="btn btn-primary">Terbitkan</button>
                       </div>
                   </form>
               </div>
