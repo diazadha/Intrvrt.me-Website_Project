@@ -8,6 +8,12 @@ class BlogModel extends CI_Model
     var $column_search_konten = array('judul'); //field yang diizin untuk pencarian
     var $order_konten = array('judul' => 'asc'); // default order
 
+    public function post($slug){
+        $this->db->where('slug', $slug);
+        $query = $this->db->get($this->table_konten);
+        return $query->row();
+    }
+
     public function firstLatePost(){
         //random
         $this->db->order_by('rand()');
