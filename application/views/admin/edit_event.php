@@ -84,7 +84,7 @@
                                         <label class="ml-2">Kategori Event</label>
                                         <div class="col-sm-6">
                                         <select class="form-control" name="kategori" id="kategori">
-                                            <option value='<?php echo $event->kategori ?>'><?php echo $event->kategori ?></option>
+                                            <option value='<?php echo $event->kategori ?>'><?php echo $event->nama_kategori ?></option>
                                             <?php foreach($kategori as $ktgr){ ?>
                                             <option value="<?php echo $ktgr['nama_kategori']; ?>"><?php echo $ktgr['nama_kategori']; ?> </option>
                                             <?php } ?>

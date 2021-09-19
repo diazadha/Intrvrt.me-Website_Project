@@ -38,7 +38,7 @@ class tiket_model extends CI_Model
 
     public function getdataevent(){
         $query = "SELECT *
-        FROM event
+        FROM event, tiket_kategori WHERE kategori = id_kategori
         ";
 
         return $this->db->query($query);
@@ -76,5 +76,15 @@ class tiket_model extends CI_Model
         );
         $this->db->where('id_event', htmlspecialchars($this->security->xss_clean($this->input->post('id_event')),ENT_QUOTES));
         return $this->db->update('event', $data);
+    }
+
+    public function view_join($id){
+        $query = "SELECT * FROM event, tiket_kategori WHERE kategori = id_kategori AND id_event = $id";
+        return $this->db->query($query);
+    }
+
+    public function datakategori(){
+        $query = "SELECT * FROM tiket_kategori WHERE status = 1";
+        return $this->db->query($query);
     }
 }

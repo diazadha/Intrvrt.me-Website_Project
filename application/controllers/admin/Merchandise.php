@@ -86,7 +86,7 @@ class Merchandise extends CI_Controller
         foreach ($list as $field) {
             $row = array();
             $row[] = $field->nama_merch;
-            $row[] = $field->kategori;
+            $row[] = $field->nama_kategori_merch;
             $row[] = $field->harga;
             $row[] = $field->diskon;
             $row[] = '<a class="btn btn-info btn-sm" href="'.base_url("admin/merchandise/edit/").$field->id_merch.'">Edit</a>
@@ -143,7 +143,7 @@ class Merchandise extends CI_Controller
         $data['merch'] = $this->db->get('merchandise')->row();
         $data['content'] = "admin/tambah_merch";
         $data['js'] = array("merchandise.js?r=".rand());
-        $data['kategori'] = $this->db->get('merchandise_kategori')->result_array();
+        $data['kategori'] = $this->MerchandiseModel->datakategori()->result_array();
 	    $this->load->view("template/adminlte", $data);
     }
 
@@ -180,10 +180,10 @@ class Merchandise extends CI_Controller
     }
 
     public function edit($id){
-        $data['merch'] = $this->db->get_where('merchandise', array('id_merch'=>$id))->row();
+        $data['merch'] = $this->MerchandiseModel->view_join($id)->row();
         $data['js'] = array("merchandise.js?r=".rand());
         $data['content'] = "admin/edit_merch";
-        $data['kategori'] = $this->db->get('merchandise_kategori')->result_array();
+        $data['kategori'] = $this->MerchandiseModel->datakategori()->result_array();
 	    $this->load->view("template/adminlte", $data);
     }
 

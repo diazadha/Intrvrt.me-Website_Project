@@ -123,6 +123,7 @@ class MerchandiseModel extends CI_Model {
     {   
         $this->db->select('*');
         $this->db->from($this->table2);
+        $this->db->join('merchandise_kategori', 'merchandise.kategori = merchandise_kategori.id_kategori_merch');
         $i = 0;
         foreach ($this->column_search2 as $item) {
             if($_POST['search']['value']) {
@@ -189,5 +190,15 @@ class MerchandiseModel extends CI_Model {
         );
         $this->db->where('id_merch', htmlspecialchars($this->security->xss_clean($this->input->post('id_merch')),ENT_QUOTES));
         return $this->db->update('merchandise', $data);
+    }
+
+    public function view_join($id){
+        $query = "SELECT * FROM merchandise, merchandise_kategori WHERE kategori = id_kategori_merch AND id_merch = $id";
+        return $this->db->query($query);
+    }
+
+    public function datakategori(){
+        $query = "SELECT * FROM merchandise_kategori WHERE status = 1";
+        return $this->db->query($query);
     }
 }

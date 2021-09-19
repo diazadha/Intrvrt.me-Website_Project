@@ -14,7 +14,7 @@ class Event extends CI_Controller
         $data['event'] = $this->db->get('event')->row();
         $data['js'] = array("event.js?r=".rand());
         $data['content'] = "admin/tambah_event";
-        $data['kategori'] = $this->db->get('tiket_kategori')->result_array();
+        $data['kategori'] = $this->tiket_model->datakategori()->result_array();
 	    $this->load->view("template/adminlte", $data);
     }
 
@@ -75,10 +75,10 @@ class Event extends CI_Controller
     }
 
     public function edit($id){
-        $data['event'] = $this->db->get_where('event', array('id_event'=>$id))->row();
+        $data['event'] = $this->tiket_model->view_join($id)->row();
         $data['js'] = array("event.js?r=".rand());
         $data['content'] = "admin/edit_event";
-        $data['kategori'] = $this->db->get('tiket_kategori')->result_array();
+        $data['kategori'] = $this->tiket_model->datakategori()->result_array();
 	    $this->load->view("template/adminlte", $data);
     }
 
