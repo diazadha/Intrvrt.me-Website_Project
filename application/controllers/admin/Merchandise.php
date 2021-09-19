@@ -153,6 +153,7 @@ class Merchandise extends CI_Controller
             $config['max_size']         = '2024';
             $config['upload_path']      = './assets/uploads/foto_merchandise';
             $config['encrypt_name']     = TRUE;
+            $this->load->library('upload', $config);
             $this->upload->initialize($config);
             if (! $this->upload->do_upload('foto')) {
                 $error = array('error' => $this->upload->display_errors());
@@ -202,6 +203,7 @@ class Merchandise extends CI_Controller
         $config['allowed_types'] 	= 'jpg|jpeg|png|gif|ico|jfif';
         $config['max_size']         = '2024';
         $config['encrypt_name']     = TRUE;
+        $this->load->library('upload', $config);
         $this->upload->initialize($config);
         $field_name = 'foto';
         if(!$this->upload->do_upload($field_name)){
