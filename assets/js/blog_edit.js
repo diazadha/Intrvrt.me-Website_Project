@@ -25,7 +25,6 @@ function preview_image(event) {
 }
 
 function uploadImage(image) {
-    alert(image);
     var data = new FormData();
     data.append("image", image);
     $.ajax({
