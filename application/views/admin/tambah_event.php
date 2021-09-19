@@ -47,7 +47,7 @@
                                     <select class="form-control" name="kategori" id="kategori">
                                         <option value=''>- Pilih -</option>
                                         <?php foreach($kategori as $ktgr){ ?>
-                                        <option value="<?php echo $ktgr['nama_kategori']; ?>"><?php echo $ktgr['nama_kategori']; ?> </option>
+                                        <option value="<?php echo $ktgr['id_kategori']; ?>"><?php echo $ktgr['nama_kategori']; ?> </option>
                                         <?php } ?>
                                     </select>
                                     </div>
