@@ -6,7 +6,7 @@
             <br>
             <br>
             <h3 class="mb-30">Profil Kamu</h3>
-            <form class="form-horizontal" action="<?= base_url('home/update_foto_profile') ?>" method="POST" enctype="multipart/form-data">
+            <form class="form-horizontal" action="<?= base_url('home/update_foto_profile'); ?>" method="POST" enctype="multipart/form-data">
                 <div class="author-bio border-radius-10 bg-white p-30 mb-40 mt-5">
                     <!-- <div class="author-image mb-30">
                     <a href="author.html"><img src="assets/imgs/authors/author.png" alt="" class="avatar"></a>
@@ -49,6 +49,11 @@
             </form>
             <!--comment form-->
             <div class="comment-form">
+                <?php if ($this->session->flashdata('message1')) : ?>
+                    <?php $message = $this->session->flashdata('message1'); ?>
+                    <?= '<div class="alert alert-success">' . $message . '</div>'; ?>
+                    <?php $this->session->unset_userdata('message1'); ?>
+                <?php endif; ?>
                 <form class="form-horizontal" action="<?= base_url('home/update_profile') ?>" method="POST" enctype="multipart/form-data">
                     <?= form_error('nama', '<small class="text-danger pl-1">', '</small>'); ?>
                     <div class="input-group mb-4">
@@ -67,9 +72,9 @@
                             </div>
                         </div>
                     </div>
-                    <?= form_error('password1', '<small class="text-danger pl-1">', '</small>'); ?>
+                    <?= form_error('password', '<small class="text-danger pl-1">', '</small>'); ?>
                     <div class="input-group mb-4">
-                        <input type="password" class="form-control" placeholder="Password Baru" name="password1">
+                        <input type="password" class="form-control" placeholder="Password Baru" name="password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -110,6 +115,7 @@
                     <div class="input-group mb-4">
                         <input type="date" class="form-control" name="tanggal" value="<?= $data_user['tanggal_lahir']; ?>">
                     </div>
+                    <input type="hidden" name="id_user" value="<?= $data_user['id_user']; ?>">
                     <div class="form-group">
                         <button type="submit" class="button button-contactForm">Ubah Biodata</button>
                     </div>
@@ -118,14 +124,4 @@
             </div>
         </div>
     </div>
-    <?php if ($this->session->flashdata('message1')) : ?>
-        <?php $message = $this->session->flashdata('message1'); ?>
-        <?= '<div class="alert alert-success">' . $message . '</div>'; ?>
-        <?php $this->session->unset_userdata('message1'); ?>
-    <?php endif; ?>
-    <?php if ($this->session->flashdata('message')) : ?>
-        <?php $message = $this->session->flashdata('message'); ?>
-        <?= '<div class="alert alert-danger">' . $message . '</div>'; ?>
-        <?php $this->session->unset_userdata('message'); ?>
-    <?php endif; ?>
 </div>
