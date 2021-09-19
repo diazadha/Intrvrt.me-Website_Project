@@ -180,13 +180,13 @@
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="<?= base_url('admin/blog/index') ?>" class="nav-link">
-                    <i class="fas fa-pen-square"></i>
+                    <i class="far fa-circle nav-icon"></i>
                     <p>Konten Blog</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="<?= base_url('admin/blog/kategori') ?>" class="nav-link">
-                    <i class=" fas fa-tag"></i>
+                    <i class="far fa-circle nav-icon"></i>
                     <p>Kategori Blog</p>
                   </a>
                 </li>
@@ -203,13 +203,13 @@
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="<?= base_url('admin/merchandise') ?>" class="nav-link">
-                    <i class="fas fa-pen-square ml-3"></i>
+                    <i class="far fa-circle nav-icon"></i>
                     <p>Merchandise</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?= base_url('admin/merchandise/kategori') ?>" class="nav-link">
-                    <i class=" fas fa-tag ml-3"></i>
+                  <a href="<?= base_url('admin/merchandise/kategori') ?>" class="nav-link">                   
+                    <i class="far fa-circle nav-icon"></i>
                     <p>Kategori Merchandise</p>
                   </a>
                 </li>
@@ -226,13 +226,13 @@
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="<?= base_url('admin/Event') ?>" class="nav-link">
-                    <i class="fas fa-pen-square ml-3"></i>
+                    <i class="far fa-circle nav-icon"></i>
                     <p>Data Event</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="<?= base_url('admin/Event/kategori') ?>" class="nav-link">
-                    <i class=" fas fa-tag ml-3"></i>
+                    <i class="far fa-circle nav-icon"></i>
                     <p>Kategori Tiket</p>
                   </a>
                 </li>
@@ -249,7 +249,7 @@
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="<?= base_url('admin/user') ?>" class="nav-link">
-                    <i class="far fa-user ml-3"></i>
+                    <i class="far fa-circle nav-icon"></i>
                     <p>Register Admin</p>
                   </a>
                 </li>
