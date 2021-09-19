@@ -155,7 +155,7 @@
                 <!-- sidebar-left -->
                 <div class="col-lg-2 col-md-3 primary-sidebar sticky-sidebar sidebar-left order-2 order-md-1">
                     <!-- Widget Weather -->
-                    <div class="sidebar-widget widget-weather border-radius-10 bg-white mb-30 mt-55">
+                    <div class="sidebar-widget widget-weather border-radius-10 bg-white mb-30">
                         <div class="d-flex">
                             <div class="font-medium">
                                 <p>Monday</p>
@@ -242,7 +242,6 @@
                         <div class="col-lg-8 col-md-12">
                             <!-- Featured posts -->
                             <div class="featured-post mb-50">
-                                <h4 class="widget-title mb-30">Today <span>Highlight</span></h4>
                                 <div class="featured-slider-1 border-radius-10">
                                     <div class="featured-slider-1-items">
                                         <div class="slider-single p-10">
@@ -416,18 +415,6 @@
                         <div class="col-lg-4 col-md-12 sidebar-right">
                             <!--Post aside style 1-->
                             <div class="sidebar-widget mb-30">
-                                <div class="widget-header position-relative mb-30">
-                                    <div class="row">
-                                        <div class="col-7">
-                                            <h4 class="widget-title mb-0">Don't <span>miss</span></h4>
-                                        </div>
-                                        <div class="col-5 text-right">
-                                            <h6 class="font-medium pr-15">
-                                                <a class="text-muted font-small" href="#">View all</a>
-                                            </h6>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="post-aside-style-1 border-radius-10 p-20 bg-white">
                                     <ul class="list-post">
                                         <li class="mb-20">
@@ -644,13 +631,13 @@
                                     <article class="first-post p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
                                         <div class="img-hover-slide border-radius-15 mb-30 position-relative overflow-hidden">
                                             <span class="top-right-icon bg-dark"><i class="mdi mdi-flash-on"></i></span>
-                                            <a href="single.html">
-                                                <img src="assets/imgs/news-21.jpg" alt="post-slider">
+                                            <a href="<?=base_url('blog/p/'.$firstLatePost->slug)?>">
+                                                <img src="<?=$firstLatePost->foto?>" alt="post-slider">
                                             </a>
                                         </div>
                                         <div class="pr-10 pl-10">
                                             <div class="entry-meta mb-30">
-                                                <a class="entry-meta meta-0" href="category.html"><span class="post-in background2 text-primary font-x-small">Technology</span></a>
+                                                <a class="entry-meta meta-0" href="category.html"><span class="post-in background2 text-primary font-x-small"><?= $this->BlogModel->get_kategori_IN($firstLatePost->kategori, 'html') ?></span></a>
                                                 <div class="float-right font-small">
                                                     <span><span class="mr-10 text-muted"><i class="fa fa-eye" aria-hidden="true"></i></span>5.8k</span>
                                                     <span class="ml-30"><span class="mr-10 text-muted"><i class="fa fa-comment" aria-hidden="true"></i></span>2.5k</span>
@@ -658,121 +645,39 @@
                                                 </div>
                                             </div>
                                             <h4 class="post-title mb-20">
-                                                <span class="post-format-icon">
-                                                    <ion-icon name="headset-outline"></ion-icon>
-                                                </span>
-                                                <a href="single.html">Team Bitbose geared up to attend Blockchain World Conference ’18 in Atlantic City, New Jersey</a>
+                                                <a href="<?=base_url('blog/p/'.$firstLatePost->slug)?>"><?=$firstLatePost->judul?></a>
                                             </h4>
                                             <div class="mb-20 overflow-hidden">
                                                 <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                    <span class="post-by">By <a href="author.html">KNICKMEYER</a></span>
-                                                    <span class="post-on">18/09/2020 09:35 EST</span>
-                                                    <span class="time-reading">12 mins read</span>
-                                                    <p class="font-x-small mt-10">Updated 18/09/2020 10:28 EST</p>
-                                                </div>
-                                                <div class="float-right">
-                                                    <a href="single.html" class="read-more"><span class="mr-10"><i class="fa fa-thumbtack" aria-hidden="true"></i></span>Picked by Editor</a>
+                                                    <span class="post-by">By <a href="author.html"><?=$this->BlogModel->penulis($firstLatePost->penulis)?></a></span>
+                                                    <span class="post-on"><?= $this->UserModel->format_tanggal($firstLatePost->tanggal_dibuat)?></span>
                                                 </div>
                                             </div>
                                         </div>
                                     </article>
+                                    <?php foreach ($this->BlogModel->late_post_exclude($firstLatePost->id_blog) as $konten):?>
                                     <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
                                         <div class="d-flex">
                                             <div class="post-thumb d-flex mr-15 border-radius-15 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img class="border-radius-15" src="assets/imgs/thumbnail-15.jpg" alt="">
+                                                <a class="color-white" href="<?=base_url('blog/p/'.$konten->slug)?>">
+                                                    <img class="border-radius-15" src="<?=$konten->foto?>" alt="">
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
                                                 <div class="entry-meta mb-15 mt-10">
-                                                    <a class="entry-meta meta-2" href="category.html"><span class="post-in text-danger font-x-small">Politic</span></a>
+                                                    <a class="entry-meta meta-2" href="category.html"><span class="post-in text-danger font-x-small"><?= $this->BlogModel->get_kategori_IN($konten->kategori, 'html') ?></span></a>
                                                 </div>
                                                 <h5 class="post-title mb-15 text-limit-2-row">
-                                                    <span class="post-format-icon">
-                                                        <ion-icon name="videocam-outline"></ion-icon>
-                                                    </span>
-                                                    <a href="single.html">More than 1.5 million people sought state unemployment benefits last week even as businesses reopened.</a>
+                                                    <a href="<?=base_url('blog/p/'.$konten->slug)?>"><?=$konten->judul?></a>
                                                 </h5>
                                                 <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                    <span class="post-by">By <a href="author.html">Sean Boynton</a></span>
-                                                    <span class="post-on">15/09/2020 07:00 EST</span>
-                                                    <span class="time-reading">12 mins read</span>
+                                                    <span class="post-by">By <a href="author.html"><?=$this->BlogModel->penulis($konten->penulis)?></a></span>
+                                                    <span class="post-on"><?= $this->UserModel->format_tanggal($konten->tanggal_dibuat)?></span>
                                                 </div>
                                             </div>
                                         </div>
                                     </article>
-                                    <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
-                                        <div class="d-flex">
-                                            <div class="post-thumb d-flex mr-15 border-radius-15 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img class="border-radius-15" src="assets/imgs/thumbnail-13.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <div class="entry-meta mb-15 mt-10">
-                                                    <a class="entry-meta meta-2" href="category.html"><span class="post-in text-warning font-x-small">Religion</span></a>
-                                                </div>
-                                                <h5 class="post-title mb-15 text-limit-2-row">
-                                                    <a href="single.html">Elite B.C., Ontario crime network laundering ‘hundreds of millions’ a year, inquiry hears</a>
-                                                </h5>
-                                                <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                    <span class="post-by">By <a href="author.html">Walter Cronkite</a></span>
-                                                    <span class="post-on">16/09/2020 08:15 EST</span>
-                                                    <span class="time-reading">14 mins read</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                    <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
-                                        <div class="d-flex">
-                                            <div class="post-thumb d-flex mr-15 border-radius-15 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img class="border-radius-15" src="assets/imgs/thumbnail-16.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <div class="entry-meta mb-15 mt-10">
-                                                    <a class="entry-meta meta-2" href="category.html"><span class="post-in text-success font-x-small">Healthy</span></a>
-                                                </div>
-                                                <h5 class="post-title mb-15 text-limit-2-row">
-                                                    <span class="post-format-icon">
-                                                        <ion-icon name="image-outline"></ion-icon>
-                                                    </span>
-                                                    <a href="single.html">Daycares are opening across the country, but can they really operate safely?</a>
-                                                </h5>
-                                                <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                    <span class="post-by">By <a href="author.html">JONATHAN LEMIRE</a></span>
-                                                    <span class="post-on">17/09/2020 19:35 EST</span>
-                                                    <span class="time-reading">6 mins read</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                    <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
-                                        <div class="d-flex">
-                                            <div class="post-thumb d-flex mr-15 border-radius-15 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img class="border-radius-15" src="assets/imgs/thumbnail-8.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <div class="entry-meta mb-15 mt-10">
-                                                    <a class="entry-meta meta-2" href="category.html"><span class="post-in text-info font-x-small">Conflicts</span></a>
-                                                </div>
-                                                <h5 class="post-title mb-15 text-limit-2-row">
-                                                    <span class="post-format-icon">
-                                                        <ion-icon name="chatbox-outline"></ion-icon>
-                                                    </span>
-                                                    <a href="single.html">Dwayne ‘The Rock’ Johnson confronts Donald Trump: ‘Where are you?’</a>
-                                                </h5>
-                                                <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                    <span class="post-by">By <a href="author.html">Walter Cronkite</a></span>
-                                                    <span class="post-on">18/09/2020 09:35 EST</span>
-                                                    <span class="time-reading">13 mins read</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
+                                    <?php endforeach;?>
                                 </div>
                             </div>
                             <div class="pagination-area mb-30">

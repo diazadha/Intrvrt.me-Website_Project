@@ -10,12 +10,14 @@ class Home extends CI_Controller
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->library('session');
+        $this->load->model('BlogModel');
         $this->session->keep_flashdata('message');
     }
 
     public function index()
     {
         $data['title'] = 'Intrvrt.me';
+        $data['firstLatePost'] = $this->BlogModel->firstLatePost();
         $this->load->view('template_introvert/header', $data);
         $this->load->view('home', $data);
         $this->load->view('template_introvert/footer', $data);

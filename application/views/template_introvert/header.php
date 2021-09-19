@@ -425,12 +425,6 @@
                                 </div>
                             </nav>
                         </div>
-                        <!-- Search -->
-                        <form action="#" method="get" class="search-form d-lg-inline float-right position-relative mr-30 d-none">
-                            <input type="text" class="search_field" placeholder="Search" value="" name="s">
-                            <span class="search-icon"><i class="ti-search mr-5"></i></span>
-                        </form>
-                        <!-- Off canvas -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                             <a class="dropdown-item" href="#">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>

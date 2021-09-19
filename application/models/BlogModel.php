@@ -8,6 +8,14 @@ class BlogModel extends CI_Model
     var $column_search_konten = array('judul'); //field yang diizin untuk pencarian
     var $order_konten = array('judul' => 'asc'); // default order
 
+    public function firstLatePost(){
+        //random
+        $this->db->order_by('rand()');
+        $this->db->limit(1);
+        $query = $this->db->get($this->table_konten);
+        return $query->row();
+    }
+
     public function konten_add($foto)
     {
         if (!isset($_POST['draft'])) {
@@ -120,6 +128,19 @@ class BlogModel extends CI_Model
         $this->db->where('id_blog', $id);
         $result = $this->db->delete($this->table_konten);
         return $result;
+    }
+
+    //PENULIS BLOG
+    public function penulis($idpenulis){
+        $this->db->where('id_user', $idpenulis);
+        $result = $this->db->get('user');
+        return $result->row()->nama_user;
+    }
+
+    public function late_post_exclude($id){
+        $this->db->where_not_in('id_blog', $id);
+        $result = $this->db->get($this->table_konten);
+        return $result->result();
     }
 
     //KATEGORI BLOG
