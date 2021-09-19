@@ -12,15 +12,15 @@ class Merchandise extends CI_Controller
     public function index()
     {
         $data['content'] = "admin/merchandise";
-	$data['js'] = array("merchandise.js?r=".rand());
-	$this->load->view("template/adminlte", $data);
+	    $data['js'] = array("merchandise.js?r=".rand());
+	    $this->load->view("template/adminlte", $data);
     }
 
     public function kategori()
     {
         $data['content'] = "admin/merchandise_kategori";
         $data['js'] = array("merchandise_kategori.js?r=".rand());
-	$this->load->view("template/adminlte", $data);
+	    $this->load->view("template/adminlte", $data);
     }
 
     public function kategori_(){
@@ -142,6 +142,7 @@ class Merchandise extends CI_Controller
     public function tambah(){
         $data['merch'] = $this->db->get('merchandise')->row();
         $data['content'] = "admin/tambah_merch";
+        $data['js'] = array("merchandise.js?r=".rand());
         $data['kategori'] = $this->db->get('merchandise_kategori')->result_array();
 	    $this->load->view("template/adminlte", $data);
     }
@@ -180,6 +181,7 @@ class Merchandise extends CI_Controller
 
     public function edit($id){
         $data['merch'] = $this->db->get_where('merchandise', array('id_merch'=>$id))->row();
+        $data['js'] = array("merchandise.js?r=".rand());
         $data['content'] = "admin/edit_merch";
         $data['kategori'] = $this->db->get('merchandise_kategori')->result_array();
 	    $this->load->view("template/adminlte", $data);
