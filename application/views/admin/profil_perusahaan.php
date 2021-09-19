@@ -96,8 +96,16 @@
                           <div class="form-group row">
                               <label for="inputPassword3" class="col-sm-2 col-form-label">Logo</label>
                               <div class="col-sm-10">
-                                  <input type="file" name="logo">
+                                  <input type="file" name="logo" accept="image/*" onchange="preview_image(event)">
                                   <input type="hidden" class="custom-file-input" value="<?=$profil->logo?>" name="logo_">
+                                  <hr>
+                                  <label for="output">Preview Foto Logo</label><br>
+                                  <img id="output" src="<?=$profil->logo?>" class="img-thumbnail" width="200"/>
+                                  <div style="display:none" id="row-display">
+                                    <hr>
+                                    <label for="output">Preview Update Foto Logo</label><br>
+                                    <img id="output_image" class="img-thumbnail" width="200"/>
+                                  </div>
                               </div>
                           </div>
                       </div>
