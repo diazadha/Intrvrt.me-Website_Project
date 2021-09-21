@@ -104,12 +104,16 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-2 col-form-label">Foto</label>
                                     <div class="col-4">
-                                    <label>Foto</label>
-                                        <input type="file" name="foto" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
-                                        <input type="hidden" class="custom-file-input" value="<?=$event->foto?>" name="foto_">
+                                        <input type="file" name="foto" accept="image/*" onchange="preview_image(event)">
+                                        <div style="display:none" id="row-display">
+                                            <hr>
+                                            <label for="output_image">Preview Foto</label><br>
+                                            <img id="output_image" class="img-thumbnail" width="200"/>
+                                        </div>
                                     </div>
-                                </div>
+                                </div>  
 
                             </div>
                             <!-- /.card-body -->
