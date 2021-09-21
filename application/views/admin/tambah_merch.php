@@ -71,9 +71,9 @@
                                         <label class="col-sm-2">Diskon</label>
                                         <div class="input-group flex-nowrap">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text" id="addon-wrapping">Rp.</span>
+                                                <span class="input-group-text" id="addon-wrapping">%</span>
                                             </div>
-                                            <input type="number" name="diskon" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
+                                            <input type="number" name="diskon" max="100" min="0" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
                                         </div>
                                     </div>
                                 </div>
