@@ -67,10 +67,15 @@ class Merchandise extends CI_Controller
             echo 'Error';
             die;
         }else{
-            if($this->MerchandiseModel->kategori_delete($id)){
+            $result = $this->MerchandiseModel->kategori_delete($id);
+            if($result == 'sukses'){
                 $r['title'] = 'Sukses!';
                 $r['icon'] = 'success';
                 $r['status'] = 'Berhasil di Hapus!';
+            }else if($result == 'gagal'){
+                $r['title'] = 'Gagal!';
+                $r['icon'] = 'error';
+                $r['status'] = 'Tidak dapat di Hapus, karena kategori ini dipakai pada Merchandise!';
             }else{
                 $r['title'] = 'Maaf!';
                 $r['icon'] = 'error';
@@ -122,6 +127,7 @@ class Merchandise extends CI_Controller
 
     public function merchandise_delete($id){
         $cekid = $this->db->get_where('merchandise', ['id_merch' => $id])->num_rows();
+
         if($cekid == 0){
             echo 'Error';
             die;

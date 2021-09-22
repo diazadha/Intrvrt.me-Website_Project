@@ -38,9 +38,14 @@ class MerchandiseModel extends CI_Model {
 
     public function kategori_delete($id)
     {
-        $this->db->where('id_kategori_merch', $id);
-        $result=$this->db->delete($this->table);
-        return $result;
+        $cekrelasi = $this->db->get_where('merchandise', ['kategori' => $id])->result();
+        if(!empty($cekrelasi)){
+            return 'gagal';
+        }else{
+            $this->db->where('id_kategori_merch', $id);
+            $this->db->delete($this->table);
+            return 'sukses';
+        }
     }
 
     private function _get_kategori_query()
