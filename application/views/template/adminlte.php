@@ -257,6 +257,12 @@
             </li>
             <li class="nav-header">SETTING</li>
             <li class="nav-item">
+              <a href="<?= base_url('admin/partner') ?>" class="nav-link">
+                <i class="nav-icon fas fa-layer-group"></i>
+                <p>Partner</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="<?= base_url('admin/profil/perusahaan') ?>" class="nav-link">
                 <i class="fas fa-building nav-icon"></i>
                 <p>Profil Perusahaan</p>
