@@ -47,7 +47,7 @@ class Event extends CI_Controller
         }else{
             $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">Error!</div>');
         }
-        redirect('admin/Event/tambah');
+        redirect('admin/Event');
     }
 
     public function delete_event()

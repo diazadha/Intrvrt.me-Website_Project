@@ -182,7 +182,7 @@ class Merchandise extends CI_Controller
         }else{
             $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">Error!</div>');
         }
-        redirect('admin/merchandise/tambah');
+        redirect('admin/merchandise');
     }
 
     public function edit($id){

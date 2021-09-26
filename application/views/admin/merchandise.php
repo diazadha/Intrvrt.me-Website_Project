@@ -28,6 +28,7 @@
                     </div>
                   </div>
                   <div class="card-body">
+                    <?=$this->session->flashdata('message'); $this->session->unset_userdata('message');?>
                     <table id="table" class="table table-bordered table-striped">
                         <thead>
                             <tr>
