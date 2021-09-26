@@ -35,7 +35,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-8 mb-4">
                                 <div class="icheck-primary">
                                     <input type="checkbox" id="remember">
@@ -44,18 +44,17 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>
-
+                        </div> -->
                         <div class="mb-4">
                             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
                         </div>
                     </form>
 
                     <p class="mb-1 text-center">
-                        <a href="forgot-password.html">I forgot my password</a>
+                        <a href="forgot-password.html">Lupa Password</a>
                     </p>
                     <p class="mb-0 text-center">
-                        <a href="<?= base_url('home/registrasi') ?>" class="text-center">Register a new membership</a>
+                        <a href="<?= base_url('home/registrasi') ?>" class="text-center">Daftar Akun</a>
                     </p>
                 </div>
             </div>

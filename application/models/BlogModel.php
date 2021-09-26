@@ -16,6 +16,7 @@ class BlogModel extends CI_Model
 
     public function firstLatePost(){
         //random
+        $this->db->where('status', 1);
         $this->db->order_by('rand()');
         $this->db->limit(1);
         $query = $this->db->get($this->table_konten);
@@ -29,13 +30,14 @@ class BlogModel extends CI_Model
         } else {
             $status = 2;
         }
-
+        
         date_default_timezone_set('Asia/Jakarta');
         $kategori = implode(',', $_POST['kategori']); 
         $slug = strtolower(url_title($this->input->post('judul')));
         $data = array(
             'judul' => htmlspecialchars($this->input->post('judul'), ENT_QUOTES),
             'isi_konten' => htmlspecialchars($this->input->post('isi'), ENT_QUOTES),
+            'sumber' => htmlspecialchars($this->input->post('sumber'), ENT_QUOTES),
             'slug' => htmlspecialchars($slug, ENT_QUOTES), 
             'foto' => htmlspecialchars($foto, ENT_QUOTES), 
             'kategori' => htmlspecialchars($kategori, ENT_QUOTES), 
@@ -61,6 +63,7 @@ class BlogModel extends CI_Model
         $data = array(
             'judul' => htmlspecialchars($this->input->post('judul'), ENT_QUOTES),
             'isi_konten' => htmlspecialchars($this->input->post('isi'), ENT_QUOTES),
+            'sumber' => htmlspecialchars($this->input->post('sumber'), ENT_QUOTES),
             'slug' => htmlspecialchars($slug, ENT_QUOTES), 
             'foto' => htmlspecialchars($foto, ENT_QUOTES), 
             'kategori' => htmlspecialchars($kategori, ENT_QUOTES), 
@@ -144,6 +147,7 @@ class BlogModel extends CI_Model
     }
 
     public function late_post_exclude($id){
+        $this->db->where('status', 1);
         $this->db->where_not_in('id_blog', $id);
         $result = $this->db->get($this->table_konten);
         return $result->result();

@@ -5,16 +5,25 @@ class Profil extends CI_Controller
 {
     public function __construct()
     {
-      parent::__construct();
-      $this->load->model('SettingModel');
+        parent::__construct();
+        $this->load->model('SettingModel');
     }
 
     public function perusahaan()
     {
-        $data['profil'] = $this->db->get('profile_perusahaan')->row();
-        $data['content'] = "admin/profil_perusahaan";
-        $data['js'] = array("profil.js?r=".rand());
-		$this->load->view("template/adminlte", $data);
+        $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        if ($user) {
+            if ($user['id_role'] == 2) {
+                redirect('home');
+            } else {
+                $data['profil'] = $this->db->get('profile_perusahaan')->row();
+                $data['content'] = "admin/profil_perusahaan";
+                $data['js'] = array("profil.js?r=" . rand());
+                $this->load->view("template/adminlte", $data);
+            }
+        } else {
+            redirect('home');
+        }
     }
 
     function update_perusahaan()
@@ -30,24 +39,24 @@ class Profil extends CI_Controller
             $config['upload_path']      = './assets/perusahaan';
             $config['encrypt_name']     = TRUE;
             $this->load->library('upload', $config);
-            if (! $this->upload->do_upload('logo')) {
+            if (!$this->upload->do_upload('logo')) {
                 $error = array('error' => $this->upload->display_errors());
                 $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">' . $error['error'] . '</div>');
                 redirect('admin/profil/perusahaan');
             } else {
                 $fileupload = $this->upload->data();
                 $filename = pathinfo($fileupload['full_path']);
-                $logo = base_url('assets/perusahaan/'.$filename['basename']);
+                $logo = base_url('assets/perusahaan/' . $filename['basename']);
                 $result = $this->SettingModel->updateProfilPerusahaan($logo);
             }
-        }else{
+        } else {
             $logo = $this->input->post('logo_');
             $result = $this->SettingModel->updateProfilPerusahaan($logo);
         }
 
-        if($result){
+        if ($result) {
             $this->session->set_flashdata('message', '<div class="alert tutup alert-success" role="alert">Profil perusahaan berhasil di update!</div>');
-        }else{
+        } else {
             $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">Error!</div>');
         }
         redirect('admin/profil/perusahaan');

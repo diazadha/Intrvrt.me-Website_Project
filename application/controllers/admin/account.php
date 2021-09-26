@@ -5,9 +5,18 @@ class Account extends CI_Controller
 {
     public function index()
     {
-        $data['content'] = "admin/profile_account";
-        $data['data_user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $this->load->view("template/adminlte", $data);
+        $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        if ($user) {
+            if ($user['id_role'] == 2) {
+                redirect('home');
+            } else {
+                $data['content'] = "admin/profile_account";
+                $data['data_user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+                $this->load->view("template/adminlte", $data);
+            }
+        } else {
+            redirect('home');
+        }
     }
 
     public function update_profile()
