@@ -9,6 +9,7 @@ class Event extends CI_Controller
             if ($user['id_role'] == 2) {
                 redirect('home');
             } else {
+                $data['profil'] = $this->db->get('profile_perusahaan')->row();
                 $data['content'] = "admin/event";
                 $data['tiket'] = $this->tiket_model->getdataevent()->result_array();
                 $this->load->view("template/adminlte", $data);
@@ -20,6 +21,7 @@ class Event extends CI_Controller
 
     public function tambah()
     {
+        $data['profil'] = $this->db->get('profile_perusahaan')->row();
         $data['event'] = $this->db->get('event')->row();
         $data['js'] = array("event.js?r=" . rand());
         $data['content'] = "admin/tambah_event";
@@ -85,6 +87,7 @@ class Event extends CI_Controller
 
     public function edit($id)
     {
+        $data['profil'] = $this->db->get('profile_perusahaan')->row();
         $data['event'] = $this->tiket_model->view_join($id)->row();
         $data['js'] = array("event.js?r=" . rand());
         $data['content'] = "admin/edit_event";
@@ -135,6 +138,7 @@ class Event extends CI_Controller
 
     public function kategori()
     {
+        $data['profil'] = $this->db->get('profile_perusahaan')->row();
         $data['content'] = "admin/event_kategori";
         $data['tiket_kategori'] = $this->tiket_model->getalldata()->result_array();
         $this->load->view("template/adminlte", $data);

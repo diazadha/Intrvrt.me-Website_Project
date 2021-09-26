@@ -16,6 +16,7 @@ class Partner extends CI_Controller
             if ($user['id_role'] == 2) {
                 redirect('home');
             } else {
+                $data['profil'] = $this->db->get('profile_perusahaan')->row();
                 $data['title'] = 'Partner';
                 $data['content'] = "admin/partner";
                 $data['js'] = array("partner.js?r=" . rand());

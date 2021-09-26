@@ -16,6 +16,7 @@ class Merchandise extends CI_Controller
             if ($user['id_role'] == 2) {
                 redirect('home');
             } else {
+                $data['profil'] = $this->db->get('profile_perusahaan')->row();
                 $data['content'] = "admin/merchandise";
                 $data['js'] = array("merchandise.js?r=" . rand());
                 $this->load->view("template/adminlte", $data);
@@ -27,6 +28,7 @@ class Merchandise extends CI_Controller
 
     public function kategori()
     {
+        $data['profil'] = $this->db->get('profile_perusahaan')->row();
         $data['content'] = "admin/merchandise_kategori";
         $data['js'] = array("merchandise_kategori.js?r=" . rand());
         $this->load->view("template/adminlte", $data);
@@ -164,6 +166,7 @@ class Merchandise extends CI_Controller
 
     public function tambah()
     {
+        $data['profil'] = $this->db->get('profile_perusahaan')->row();
         $data['merch'] = $this->db->get('merchandise')->row();
         $data['content'] = "admin/tambah_merch";
         $data['js'] = array("merchandise.js?r=" . rand());
@@ -205,6 +208,7 @@ class Merchandise extends CI_Controller
 
     public function edit($id)
     {
+        $data['profil'] = $this->db->get('profile_perusahaan')->row();
         $data['merch'] = $this->MerchandiseModel->view_join($id)->row();
         $data['js'] = array("merchandise.js?r=" . rand());
         $data['content'] = "admin/edit_merch";

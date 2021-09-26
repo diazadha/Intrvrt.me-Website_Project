@@ -11,6 +11,7 @@ class User extends CI_Controller
             if ($user['id_role'] == 2) {
                 redirect('home');
             } else {
+                $data['profil'] = $this->db->get('profile_perusahaan')->row();
                 $data['content'] = "admin/register_admin";
                 $this->load->view("template/adminlte", $data);
             }

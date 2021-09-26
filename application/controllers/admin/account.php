@@ -10,6 +10,7 @@ class Account extends CI_Controller
             if ($user['id_role'] == 2) {
                 redirect('home');
             } else {
+                $data['profil'] = $this->db->get('profile_perusahaan')->row();
                 $data['content'] = "admin/profile_account";
                 $data['data_user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
                 $this->load->view("template/adminlte", $data);
