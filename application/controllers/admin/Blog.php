@@ -16,6 +16,7 @@ class Blog extends CI_Controller
             if ($user['id_role'] == 2) {
                 redirect('home');
             } else {
+                $data['profil'] = $this->db->get('profile_perusahaan')->row();
                 $data['content'] = "admin/blog_konten";
                 $data['js'] = array("blog_konten.js?r=" . rand());
                 $this->load->view("template/adminlte", $data);
@@ -27,6 +28,7 @@ class Blog extends CI_Controller
 
     public function create()
     {
+        $data['profil'] = $this->db->get('profile_perusahaan')->row();
         $data['content'] = "admin/blog_create";
         $data['kategori'] = $this->BlogModel->get_kategori();
         $data['js'] = array("blog_create.js?r=" . rand());
@@ -37,6 +39,7 @@ class Blog extends CI_Controller
     {
         $cekid = $this->db->get_where('blog_data', ['id_blog' => $id])->num_rows();
         if ($cekid > 0) {
+            $data['profil'] = $this->db->get('profile_perusahaan')->row();
             $data['content'] = "admin/blog_edit";
             $data['js'] = array("blog_edit.js?r=" . rand());
             $data['konten'] = $this->BlogModel->get_konten($id);
@@ -202,6 +205,7 @@ class Blog extends CI_Controller
 
     public function kategori()
     {
+        $data['profil'] = $this->db->get('profile_perusahaan')->row();
         $data['content'] = "admin/blog_kategori";
         $data['js'] = array("blog_kategori.js?r=" . rand());
         $this->load->view("template/adminlte", $data);

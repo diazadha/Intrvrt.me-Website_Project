@@ -11,6 +11,7 @@ class Dashboard extends CI_Controller
             if ($user['id_role'] == 2) {
                 redirect('home');
             } else {
+                $data['profil'] = $this->db->get('profile_perusahaan')->row();
                 $data['content'] = "admin/dashboard";
                 $this->load->view("template/adminlte", $data);
             }
