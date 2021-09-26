@@ -11,6 +11,7 @@ class Merchandise extends CI_Controller
 
     public function index()
     {
+<<<<<<< HEAD
         $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         if ($user) {
             if ($user['id_role'] == 2) {
@@ -23,13 +24,23 @@ class Merchandise extends CI_Controller
         } else {
             redirect('home');
         }
+=======
+        $data['content'] = "admin/merchandise";
+	    $data['js'] = array("merchandise.js?r=".rand());
+	    $this->load->view("template/adminlte", $data);
+>>>>>>> a8480875908aacbc65d53b7e3e758c885e3d7a31
     }
 
     public function kategori()
     {
         $data['content'] = "admin/merchandise_kategori";
+<<<<<<< HEAD
         $data['js'] = array("merchandise_kategori.js?r=" . rand());
         $this->load->view("template/adminlte", $data);
+=======
+        $data['js'] = array("merchandise_kategori.js?r=".rand());
+	    $this->load->view("template/adminlte", $data);
+>>>>>>> a8480875908aacbc65d53b7e3e758c885e3d7a31
     }
 
     public function kategori_()
@@ -79,12 +90,26 @@ class Merchandise extends CI_Controller
         if ($cekid == 0) {
             echo 'Error';
             die;
+<<<<<<< HEAD
         } else {
             if ($this->MerchandiseModel->kategori_delete($id)) {
                 $r['title'] = 'Sukses!';
                 $r['icon'] = 'success';
                 $r['status'] = 'Berhasil di Hapus!';
             } else {
+=======
+        }else{
+            $result = $this->MerchandiseModel->kategori_delete($id);
+            if($result == 'sukses'){
+                $r['title'] = 'Sukses!';
+                $r['icon'] = 'success';
+                $r['status'] = 'Berhasil di Hapus!';
+            }else if($result == 'gagal'){
+                $r['title'] = 'Gagal!';
+                $r['icon'] = 'error';
+                $r['status'] = 'Tidak dapat di Hapus, karena kategori ini dipakai pada Merchandise!';
+            }else{
+>>>>>>> a8480875908aacbc65d53b7e3e758c885e3d7a31
                 $r['title'] = 'Maaf!';
                 $r['icon'] = 'error';
                 $r['status'] = '<br><b>Tidak dapat di Hapus! <br> Silakan hubungi Administrator.</b>';
@@ -100,7 +125,7 @@ class Merchandise extends CI_Controller
         foreach ($list as $field) {
             $row = array();
             $row[] = $field->nama_merch;
-            $row[] = $field->kategori;
+            $row[] = $field->nama_kategori_merch;
             $row[] = $field->harga;
             $row[] = $field->diskon;
             $row[] = '<a class="btn btn-info btn-sm" href="' . base_url("admin/merchandise/edit/") . $field->id_merch . '">Edit</a>
@@ -139,7 +164,12 @@ class Merchandise extends CI_Controller
     public function merchandise_delete($id)
     {
         $cekid = $this->db->get_where('merchandise', ['id_merch' => $id])->num_rows();
+<<<<<<< HEAD
         if ($cekid == 0) {
+=======
+
+        if($cekid == 0){
+>>>>>>> a8480875908aacbc65d53b7e3e758c885e3d7a31
             echo 'Error';
             die;
         } else {
@@ -160,8 +190,14 @@ class Merchandise extends CI_Controller
     {
         $data['merch'] = $this->db->get('merchandise')->row();
         $data['content'] = "admin/tambah_merch";
+<<<<<<< HEAD
         $data['kategori'] = $this->db->get('merchandise_kategori')->result_array();
         $this->load->view("template/adminlte", $data);
+=======
+        $data['js'] = array("merchandise.js?r=".rand());
+        $data['kategori'] = $this->MerchandiseModel->datakategori()->result_array();
+	    $this->load->view("template/adminlte", $data);
+>>>>>>> a8480875908aacbc65d53b7e3e758c885e3d7a31
     }
 
     public function tambah_merch()
@@ -197,12 +233,21 @@ class Merchandise extends CI_Controller
         redirect('admin/merchandise/tambah');
     }
 
+<<<<<<< HEAD
     public function edit($id)
     {
         $data['merch'] = $this->db->get_where('merchandise', array('id_merch' => $id))->row();
         $data['content'] = "admin/edit_merch";
         $data['kategori'] = $this->db->get('merchandise_kategori')->result_array();
         $this->load->view("template/adminlte", $data);
+=======
+    public function edit($id){
+        $data['merch'] = $this->MerchandiseModel->view_join($id)->row();
+        $data['js'] = array("merchandise.js?r=".rand());
+        $data['content'] = "admin/edit_merch";
+        $data['kategori'] = $this->MerchandiseModel->datakategori()->result_array();
+	    $this->load->view("template/adminlte", $data);
+>>>>>>> a8480875908aacbc65d53b7e3e758c885e3d7a31
     }
 
     public function edit_merch()

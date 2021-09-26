@@ -84,7 +84,7 @@
                                         <label class="ml-2">Kategori Merchandise</label>
                                         <div class="col-sm-6">
                                         <select class="form-control" name="kategori" id="kategori">
-                                            <option value='<?php echo $merch->kategori ?>'></option>
+                                            <option value='<?php echo $merch->kategori ?>'><?php echo $merch->nama_kategori_merch ?></option>
                                             <?php foreach($kategori as $ktgr){ ?>
                                             <option value="<?php echo $ktgr['id_kategori_merch']; ?>"><?php echo $ktgr['nama_kategori_merch']; ?> </option>
                                             <?php } ?>

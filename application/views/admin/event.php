@@ -43,7 +43,7 @@
                                     <?php foreach ($tiket as $t) : ?>
                                         <tr>
                                             <td> <?= $t['nama_event']; ?> </td>
-                                            <td> <?= $t['kategori']; ?> </td>
+                                            <td> <?= $t['nama_kategori']; ?> </td>
                                             <td> Rp <?=number_format($t['harga_tiket'], 0,',','.'); ?> </td>
                                             <td> <?= $t['tgl_aktif']; ?> </td>
                                             <td> <?= $t['tgl_berakhir']; ?> </td>
