@@ -41,6 +41,7 @@ class Home extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Registrasi';
+            $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
             $this->load->view('template_introvert/header', $data);
             $this->load->view('registrasi', $data);
             $this->load->view('template_introvert/footer', $data);
@@ -148,6 +149,7 @@ class Home extends CI_Controller
         $this->form_validation->set_rules('password', 'Password', 'required|trim');
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Login';
+            $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
             $this->load->view('template_introvert/header', $data);
             $this->load->view('login', $data);
             // $this->load->view('template/adminlte', $data);
@@ -220,6 +222,7 @@ class Home extends CI_Controller
     {
         $data['title'] = 'Profil';
         $data['data_user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
         $this->load->view('template_introvert/header', $data);
         $this->load->view('profil_user', $data);
         // $this->load->view('template/adminlte', $data);
@@ -235,6 +238,7 @@ class Home extends CI_Controller
 
             if ($this->form_validation->run() == false) {
                 $data['title'] = 'Profil';
+                $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
                 $data['data_user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
                 $this->load->view('template_introvert/header', $data);
                 $this->load->view('profil_user', $data);
@@ -262,6 +266,7 @@ class Home extends CI_Controller
             ]);
             if ($this->form_validation->run() == false) {
                 $data['title'] = 'Profil';
+                $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
                 $data['data_user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
                 $this->load->view('template_introvert/header', $data);
                 $this->load->view('profil_user', $data);
@@ -312,5 +317,15 @@ class Home extends CI_Controller
             $this->db->update('user');
             redirect('home/profil');
         }
+    }
+
+    public function lupa_password()
+    {
+        $data['title'] = 'Lupa Password';
+        $data['data_user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $this->load->view('template_introvert/header', $data);
+        $this->load->view('lupa_password', $data);
+        $this->load->view('template_introvert/footer', $data);
     }
 }

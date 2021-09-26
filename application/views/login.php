@@ -51,7 +51,7 @@
                     </form>
 
                     <p class="mb-1 text-center">
-                        <a href="forgot-password.html">Lupa Password</a>
+                        <a href="<?= base_url('home/lupa_password'); ?>">Lupa Password</a>
                     </p>
                     <p class="mb-0 text-center">
                         <a href="<?= base_url('home/registrasi') ?>" class="text-center">Daftar Akun</a>
