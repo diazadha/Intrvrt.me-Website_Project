@@ -17,6 +17,7 @@ class Home extends CI_Controller
     public function index()
     {
         $data['title'] = 'Intrvrt.me';
+        $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
         $data['firstLatePost'] = $this->BlogModel->firstLatePost();
         $this->load->view('template_introvert/header', $data);
         $this->load->view('home', $data);
