@@ -176,7 +176,6 @@ class Merchandise extends CI_Controller
         $upload = $_FILES['foto']['name'];
         if ($upload) {
             $config['allowed_types']    = 'jpg|png|jpeg';
-            $config['max_size']         = '2024';
             $config['upload_path']      = './assets/uploads/foto_merchandise';
             $config['encrypt_name']     = TRUE;
             $this->load->library('upload', $config);
@@ -231,7 +230,6 @@ class Merchandise extends CI_Controller
         $id_merch                   = $this->input->post('id_merch');
         $config['upload_path']       = './assets/uploads/foto_merchandise/';
         $config['allowed_types']     = 'jpg|jpeg|png|gif|ico|jfif';
-        $config['max_size']         = '2024';
         $config['encrypt_name']     = TRUE;
         $this->load->library('upload', $config);
         $this->upload->initialize($config);

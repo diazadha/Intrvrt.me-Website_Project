@@ -32,7 +32,6 @@ class Event extends CI_Controller
         $upload = $_FILES['foto']['name'];
         if ($upload) {
             $config['allowed_types']    = 'jpg|png|jpeg';
-            $config['max_size']         = '2024';
             $config['upload_path']      = './assets/uploads/foto_event';
             $config['encrypt_name']     = TRUE;
             $this->load->library('upload', $config);
@@ -99,7 +98,6 @@ class Event extends CI_Controller
         $id_event                   = $this->input->post('id_event');
         $config['upload_path']       = './assets/uploads/foto_event/';
         $config['allowed_types']     = 'jpg|jpeg|png|gif|ico|jfif';
-        $config['max_size']         = '2024';
         $config['encrypt_name']     = TRUE;
         $this->load->library('upload', $config);
         $this->upload->initialize($config);

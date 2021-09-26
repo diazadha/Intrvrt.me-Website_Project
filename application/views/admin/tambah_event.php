@@ -31,6 +31,7 @@
                             </h3>
                         </div>
                         <form class="form-horizontal" enctype="multipart/form-data" action ="<?=base_url('admin/Event/tambah_event')?>" method="POST">
+                            <?=$this->session->flashdata('message'); $this->session->unset_userdata('message');?>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-6">
