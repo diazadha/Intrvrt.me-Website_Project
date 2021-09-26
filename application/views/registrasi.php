@@ -81,7 +81,7 @@
                 </form>
 
                 <p class="mb-0 text-center">
-                    <a href="<?= base_url('home/login') ?>" class="text-center">Have an account? Login</a>
+                    <a href="<?= base_url('home/login') ?>" class="text-center">Sudah punya akun? Login</a>
                 </p>
             </div>
             <!-- /.login-card-body -->

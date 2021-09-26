@@ -51,7 +51,6 @@
                                         <input type="nama" class="form-control" id="nama" placeholder="Nama Lengkap" name="nama">
                                     </div>
                                 </div>
-
                                 <div class="form-group row">
 
                                     <label for="email" class="col-sm-2 col-form-label">Email</label>
