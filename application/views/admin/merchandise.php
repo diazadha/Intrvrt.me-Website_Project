@@ -35,7 +35,7 @@
                                 <th>Nama Merchandise</th>
                                 <th>Kategori</th>
                                 <th>Harga</th>
-                                <th>Diskon</th>
+                                <th width="15%">Diskon</th>
                                 <th width="15%"></th>
                             </tr>
                         </thead>

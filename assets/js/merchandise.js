@@ -38,6 +38,7 @@ jQuery(document).ready(function() {
     $('#table').on('click ', '.delete ', function() {
         var id = $(this).data('id');
         var nama = $(this).data('merchandise');
+        var group = $(this).data('group');
         Swal.fire({
             title: 'Anda Yakin?',
             html: "Merchandise " + nama + " <br><br><b>Akan di Hapus!<b>",
@@ -50,7 +51,7 @@ jQuery(document).ready(function() {
         }).then((willDelete) => {
             if (willDelete.value) {
                 $.ajax({
-                    url: base_url + "admin/merchandise/merchandise_delete/" + id,
+                    url: base_url + "admin/merchandise/merchandise_delete/" + id + "/" + group,
                     type: "POST",
                     dataType: "JSON",
                     success: function(data) {
@@ -152,3 +153,45 @@ jQuery(document).ready(function() {
         }
     });
 })
+
+function preview_image(event) {
+    document.getElementById("row-display").style.display = "block";
+    var reader = new FileReader();
+    reader.onload = function() {
+        var output = document.getElementById('output_image');
+        output.src = reader.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+
+    document.getElementById("row-display2").style.display = "block";
+    var reader2 = new FileReader();
+    reader2.onload = function() {
+        var output = document.getElementById('output_image2');
+        output.src = reader2.result;
+    }
+    reader2.readAsDataURL(event.target.files[1]);
+
+    document.getElementById("row-display3").style.display = "block";
+    var reader3 = new FileReader();
+    reader3.onload = function() {
+        var output = document.getElementById('output_image3');
+        output.src = reader3.result;
+    }
+    reader3.readAsDataURL(event.target.files[2]);
+
+    document.getElementById("row-display4").style.display = "block";
+    var reader4 = new FileReader();
+    reader4.onload = function() {
+        var output = document.getElementById('output_image4');
+        output.src = reader4.result;
+    }
+    reader4.readAsDataURL(event.target.files[3]);
+
+    document.getElementById("row-display5").style.display = "block";
+    var reader5 = new FileReader();
+    reader5.onload = function() {
+        var output = document.getElementById('output_image5');
+        output.src = reader5.result;
+    }
+    reader5.readAsDataURL(event.target.files[4]);
+}

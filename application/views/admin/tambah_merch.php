@@ -87,10 +87,55 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="inputPassword3" class="col-sm-2 col-form-label">Foto</label>
                                 <div class="col-sm-4">
-                                <input type="file" name="foto" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
-                                <input type="hidden" class="custom-file-input" value="<?=$merch->foto?>" name="foto_">
+                                    <input type="hidden" name="id" value="">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="foto" name="foto[]" max="5" onchange="preview_image(event)" multiple>
+                                        <label class="custom-file-label" for="foto">Max Foto 5</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <div style="display:none" id="row-display">
+                                                <hr>
+                                                <label for="output_image">Preview Foto 1</label><br>
+                                                <img id="output_image" class="img-thumbnail" width="200" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-2">
+                                            <div style="display:none" id="row-display2">
+                                                <hr>
+                                                <label for="output_image2">Preview Foto 2</label><br>
+                                                <img id="output_image2" class="img-thumbnail" width="200" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-2">
+                                            <div style="display:none" id="row-display3">
+                                                <hr>
+                                                <label for="output_image3">Preview Foto 3</label><br>
+                                                <img id="output_image3" class="img-thumbnail" width="200" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-2">
+                                            <div style="display:none" id="row-display4">
+                                                <hr>
+                                                <label for="output_image4">Preview Foto 4</label><br>
+                                                <img id="output_image4" class="img-thumbnail" width="200" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-2">
+                                            <div style="display:none" id="row-display5">
+                                                <hr>
+                                                <label for="output_image5">Preview Foto 5</label><br>
+                                                <img id="output_image5" class="img-thumbnail" width="200" />
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -110,3 +155,13 @@
     </section>
     <!-- /.content -->
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+<script>
+    $('.custom-file-input').on('change', function() {
+        let fileName = $(this).val().split('\\').pop();
+        $(this).next('.custom-file-label').addClass('selected').html(fileName);
+    });
+</script>
