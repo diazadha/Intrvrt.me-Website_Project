@@ -11,6 +11,7 @@
                 <div class="container">
                     <p class="login-box-msg">Lupa Password? Tulis email kamu dibawah ini untuk melakukan reset password</p>
                     <form action="<?= base_url('home/login'); ?>" method="post">
+                        <?= form_error('email', '<small class="text-danger pl-1">', '</small>'); ?>
                         <div class="input-group mb-4">
                             <input type="email" class="form-control" placeholder="Email" name="email">
                             <div class="input-group-append">

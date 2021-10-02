@@ -321,11 +321,39 @@ class Home extends CI_Controller
 
     public function lupa_password()
     {
-        $data['title'] = 'Lupa Password';
-        $data['data_user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $this->form_validation->set_rules('email', 'Email', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Lupa Password';
+            $data['data_user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+            $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+            $this->load->view('template_introvert/header', $data);
+            $this->load->view('lupa_password', $data);
+            $this->load->view('template_introvert/footer', $data);
+        } else {
+            $email = $this->input->post('email');
+            $user = $this->db->get_where('user', ['email' => $email])->row_array();
+            if ($user) {
+            } else {
+            }
+        }
+    }
+
+    public function event()
+    {
+        $data['title'] = 'Event';
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
         $this->load->view('template_introvert/header', $data);
-        $this->load->view('lupa_password', $data);
+        $this->load->view('event', $data);
+        $this->load->view('template_introvert/footer', $data);
+    }
+
+    public function event_detail()
+    {
+        $data['title'] = 'Event';
+        $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $this->load->view('template_introvert/header', $data);
+        $this->load->view('detail_event', $data);
         $this->load->view('template_introvert/footer', $data);
     }
 }
