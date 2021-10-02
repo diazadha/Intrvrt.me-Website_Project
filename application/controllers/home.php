@@ -356,4 +356,22 @@ class Home extends CI_Controller
         $this->load->view('detail_event', $data);
         $this->load->view('template_introvert/footer', $data);
     }
+
+    public function merchandise()
+    {
+        $data['title'] = 'Merchandise';
+        $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $this->load->view('template_introvert/header', $data);
+        $this->load->view('merchandise', $data);
+        $this->load->view('template_introvert/footer', $data);
+    }
+
+    public function merchandise_detail()
+    {
+        $data['title'] = 'Merchandise';
+        $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $this->load->view('template_introvert/header', $data);
+        $this->load->view('detail_merchandise', $data);
+        $this->load->view('template_introvert/footer', $data);
+    }
 }
