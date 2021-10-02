@@ -124,6 +124,14 @@ class MerchandiseModel extends CI_Model {
         return $result;
     }
 
+    public function foto_delete($group)
+    {
+        // $detail         = $this->MerchandiseModel->getFotoGroup($group);
+        $this->db->where('group_foto',$group);
+        $result = $this->db->delete('foto_merchandise');
+        return $result;
+    }
+
     private function _get_merchandise_query()
     {   
         $this->db->select('*');
@@ -165,24 +173,59 @@ class MerchandiseModel extends CI_Model {
         return $this->db->count_all_results();
     }
 	
-    public function tambah_merchandise($foto = NULL){
+    public function tambah_merchandise($group_foto,$lastid){
         $data=array(
             'nama_merch' => htmlspecialchars($this->security->xss_clean($this->input->post('merchandise')),ENT_QUOTES),
             'kategori' => htmlspecialchars($this->security->xss_clean($this->input->post('kategori')),ENT_QUOTES),
-            'foto' => htmlspecialchars($foto, ENT_QUOTES),
             'harga' => htmlspecialchars($this->security->xss_clean($this->input->post('harga')),ENT_QUOTES),
+            'foto' => htmlspecialchars($group_foto, ENT_QUOTES),
+            'foto_utama' => $lastid,
             'diskon' => htmlspecialchars($this->security->xss_clean($this->input->post('diskon')),ENT_QUOTES),
             'deskripsi' => htmlspecialchars($this->security->xss_clean($this->input->post('deskripsi')),ENT_QUOTES),
         );
         return $this->db->insert('merchandise',$data);
     }
 	
-    public function update_foto($foto = NULL){
+    public function update_foto($foto = NULL,$id){
         $data=array(
         'foto' => htmlspecialchars($foto, ENT_QUOTES),
         );
-        $this->db->where('id_merch', htmlspecialchars($this->security->xss_clean($this->input->post('id_merch')),ENT_QUOTES));
-        return $this->db->update('merchandise', $data);
+        $this->db->where('id', $id);
+        return $this->db->update('foto_merchandise', $data);
+    }
+
+    public function cekData()
+    {
+        $this->db->limit(1);
+        $this->db->order_by('group_foto', 'DESC');
+        return $this->db->get('foto_merchandise')->row_array();
+    }
+
+    public function upload($insert, $data)
+    {
+        $this->db->insert_batch('foto_merchandise', $insert);
+        // $this->db->set('main_foto', 1);
+        // $this->db->where('foto', $data);
+        // $this->db->update('foto_merchandise');
+        return $this->db->affected_rows();
+    }
+
+    public function getDataGroup()
+    {
+        $this->db->where('main_foto =', 1);
+        $this->db->group_by('group_foto');
+        return $this->db->get('foto_merchandise')->result_array();
+    }
+
+    public function getFotoGroup($group)
+    {
+        $this->db->where('group_foto =', $group);
+        return $this->db->get('foto_merchandise')->result_array();
+    }
+
+    public function detailfoto($group)
+    {
+        return $this->db->get_where('foto_merchandise', ['group_foto' => $group])->result_array();
     }
 
     public function update_merch(){
@@ -190,11 +233,20 @@ class MerchandiseModel extends CI_Model {
             'nama_merch' => htmlspecialchars($this->security->xss_clean($this->input->post('merchandise')),ENT_QUOTES),
             'kategori' => htmlspecialchars($this->security->xss_clean($this->input->post('kategori')),ENT_QUOTES),
             'harga' => htmlspecialchars($this->security->xss_clean($this->input->post('harga')),ENT_QUOTES),
+            'foto_utama' => htmlspecialchars($this->security->xss_clean($this->input->post('main_foto')),ENT_QUOTES),
             'diskon' => htmlspecialchars($this->security->xss_clean($this->input->post('diskon')),ENT_QUOTES),
             'deskripsi' => htmlspecialchars($this->security->xss_clean($this->input->post('deskripsi')),ENT_QUOTES),
         );
         $this->db->where('id_merch', htmlspecialchars($this->security->xss_clean($this->input->post('id_merch')),ENT_QUOTES));
         return $this->db->update('merchandise', $data);
+    }
+
+    public function update_main_foto(){
+        $data=array(
+            'main_foto' => htmlspecialchars($this->security->xss_clean($this->input->post('main_foto')),ENT_QUOTES),
+        );
+        $this->db->where('id', htmlspecialchars($this->security->xss_clean($this->input->post('id_foto')),ENT_QUOTES));
+        return $this->db->update('foto_merchandise', $data);
     }
 
     public function view_join($id){

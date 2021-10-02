@@ -110,8 +110,8 @@ class Merchandise extends CI_Controller
             $row[] = $field->nama_kategori_merch;
             $row[] = $field->harga;
             $row[] = $field->diskon;
-            $row[] = '<a class="btn btn-info btn-sm" href="' . base_url("admin/merchandise/edit/") . $field->id_merch . '">Edit</a>
-                      <button type="button" class="ml-1 btn btn-danger delete btn-sm" data-id="' . $field->id_merch . '" data-merchandise="' . $field->nama_merch . '">Hapus</button>';
+            $row[] = '<a class="btn btn-info btn-sm" href="' . base_url("admin/merchandise/edit/") . $field->id_merch .'/'. $field->foto .'">Edit</a>
+                      <button type="button" class="ml-1 btn btn-danger delete btn-sm" data-id="' . $field->id_merch . '" data-merchandise="' . $field->nama_merch . '" data-group="' . $field->foto .'">Hapus</button>';
             $data[] = $row;
         }
         $output = array(
@@ -143,15 +143,22 @@ class Merchandise extends CI_Controller
         echo json_encode($d);
     }
 
-    public function merchandise_delete($id)
+    public function merchandise_delete($id,$group)
     {
-        $cekid = $this->db->get_where('merchandise', ['id_merch' => $id])->num_rows();
-
+        $cekid          = $this->db->get_where('merchandise', ['id_merch' => $id])->num_rows();
+        $detail         = $this->db->get_where('foto_merchandise', ['group_foto' => $group]);
         if ($cekid == 0) {
             echo 'Error';
             die;
         } else {
+            
             if ($this->MerchandiseModel->merchandise_delete($id)) {
+                $detail = $this->MerchandiseModel->detailfoto($group);
+                foreach ($detail as $dt) {
+                    $file_name = './assets/uploads/foto_merchandise/' . $dt['foto'];
+                    unlink($file_name);
+                }
+                $this->MerchandiseModel->foto_delete($group);
                 $r['title'] = 'Sukses!';
                 $r['icon'] = 'success';
                 $r['status'] = 'Berhasil di Hapus!';
@@ -178,62 +185,89 @@ class Merchandise extends CI_Controller
     {
         $upload = $_FILES['foto']['name'];
         if ($upload) {
-            $config['allowed_types']    = 'jpg|png|jpeg';
+            $numberOfFile = sizeof($upload);
+            $files = $_FILES['foto'];
+            $config['allowed_types']    = 'gif|jpg|png|jpeg';
             $config['upload_path']      = './assets/uploads/foto_merchandise';
             $config['encrypt_name']     = TRUE;
             $this->load->library('upload', $config);
-            $this->upload->initialize($config);
-            if (!$this->upload->do_upload('foto')) {
-                $error = array('error' => $this->upload->display_errors());
-                $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">' . $error['error'] . '</div>');
-                redirect('admin/merchandise/tambah');
-            } else {
-                $fileupload = $this->upload->data();
-                $filename = pathinfo($fileupload['full_path']);
-                $foto = $filename['basename'];
-                $result = $this->MerchandiseModel->tambah_merchandise($foto);
+            if ($numberOfFile <= 5){
+                for ($i = 0; $i < $numberOfFile; $i++) {
+                    $_FILES['foto']['name'] = $files['name'][$i];
+                    $_FILES['foto']['type'] = $files['type'][$i];
+                    $_FILES['foto']['tmp_name'] = $files['tmp_name'][$i];
+                    $_FILES['foto']['error'] = $files['error'][$i];
+                    $_FILES['foto']['size'] = $files['size'][$i];
+    
+                    $this->upload->initialize($config);
+                    if ($this->upload->do_upload('foto')) {
+                        $data = $this->upload->data();
+                        $fotoName = $data['file_name'];
+                        $cek = $this->MerchandiseModel->cekData();
+                        if (!$cek) {
+                            $group_foto = 1;
+                        } else {
+                            $group_foto = $cek['group_foto'] + 1;
+                        }
+                        $insert[$i]['foto'] = $fotoName;
+                        $insert[$i]['group_foto'] = $group_foto;
+                        $insert[$i]['date_created'] = date('d-m-Y H:i:s');
+                    }
+                }
+            } else{
+                $this->session->set_flashdata('message', '<div class="alert tutup alert-warning" role="alert">Upload Maksimal 5 foto</div>');
+                redirect('admin/merchandise');
             }
-        } else {
-            $foto = $this->input->post('foto_');
-            $result = $this->MerchandiseModel->tambah_merchandise($foto);
-        }
+            
+            if (!$insert && !$data) {
+                $this->session->set_flashdata('message', '<div class="alert tutup alert-warning" role="alert">Tidak ada data yang disimpan</div>');
+                redirect('admin/merchandise');
+            } else {
+                if ($this->MerchandiseModel->upload($insert, $data['file_name']) > 0) {
+                    $lastid = $this->MerchandiseModel->cekData();
+                    $this->MerchandiseModel->tambah_merchandise($group_foto,$lastid['id']);
+                    $this->session->set_flashdata('message', '<div class="alert tutup alert-success" role="alert">Merchandise Berhasil Di Tambah!</div>');
+                    redirect('admin/merchandise');
+                } else {
 
-        if ($result) {
-            $this->session->set_flashdata('message', '<div class="alert tutup alert-success" role="alert">Merchandise Berhasil Di Tambah!</div>');
-        } else {
-            $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">Error!</div>');
+                    $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">Error!</div>');
+                    redirect('admin/merchandise');
+                }
+            }
         }
-        redirect('admin/merchandise');
     }
 
-    public function edit($id)
+    public function edit($id,$group)
     {
         $data['profil'] = $this->db->get('profile_perusahaan')->row();
         $data['merch'] = $this->MerchandiseModel->view_join($id)->row();
         $data['js'] = array("merchandise.js?r=" . rand());
         $data['content'] = "admin/edit_merch";
+        $data['multiple_foto'] =  $this->MerchandiseModel->getFotoGroup($group);
         $data['kategori'] = $this->MerchandiseModel->datakategori()->result_array();
         $this->load->view("template/adminlte", $data);
     }
 
     public function edit_merch()
     {
-        $id_merch = $this->input->post('id_merch');
+        $id_merch   = $this->input->post('id_merch');
         $result     = $this->MerchandiseModel->update_merch();
+        $group      = $this->input->post('group');
         if ($result) {
             $this->session->set_flashdata('message', '<div class="alert tutup alert-success" role="alert">Merchandise Berhasil Di Update!</div>');
         } else {
             $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">Error!</div>');
         }
-        redirect(base_url('admin/merchandise/edit/') . $id_merch);
+        redirect(base_url('admin/merchandise/edit/') . $id_merch .'/'.$group);
     }
 
-    public function update_gambar()
+    public function update_gambar($id)
     {
 
         $id_merch                   = $this->input->post('id_merch');
-        $config['upload_path']       = './assets/uploads/foto_merchandise/';
-        $config['allowed_types']     = 'jpg|jpeg|png|gif|ico|jfif';
+        $group                      = $this->input->post('group');
+        $config['upload_path']      = './assets/uploads/foto_merchandise/';
+        $config['allowed_types']    = 'jpg|jpeg|png|gif|ico|jfif';
         $config['encrypt_name']     = TRUE;
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
@@ -241,19 +275,19 @@ class Merchandise extends CI_Controller
         if (!$this->upload->do_upload($field_name)) {
             echo "Gagal Update Gambar !";
         } else {
-            $detail                     = $this->db->get_where('merchandise', array('id_merch' => $id_merch))->row();
+            $detail                     = $this->db->get_where('foto_merchandise', array('id' => $id))->row();
             $path                       = './assets/uploads/foto_merchandise/' . $detail->foto;
             unlink($path);
             $fileupload = $this->upload->data();
             $filename   = pathinfo($fileupload['full_path']);
             $foto       = $filename['basename'];
-            $result     = $this->MerchandiseModel->update_foto($foto);
+            $result     = $this->MerchandiseModel->update_foto($foto, $id);
         }
         if ($result) {
             $this->session->set_flashdata('message', '<div class="alert tutup alert-success" role="alert">Foto Berhasil Di Update!</div>');
         } else {
             $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">Error!</div>');
         }
-        redirect(base_url('admin/merchandise/edit/') . $id_merch);
+        redirect(base_url('admin/merchandise/edit/') . $id_merch .'/'.$group);
     }
 }
