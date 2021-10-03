@@ -343,17 +343,31 @@ class Home extends CI_Controller
     {
         $data['title'] = 'Event';
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $data['event'] = $this->tiket_model->getdataevent()->result_array();
+        $data['kategori'] = $this->tiket_model->datakategori()->result_array();
         $this->load->view('template_introvert/header', $data);
         $this->load->view('event', $data);
         $this->load->view('template_introvert/footer', $data);
     }
 
-    public function event_detail()
+    public function event_detail($id)
     {
         $data['title'] = 'Event';
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $data['event'] = $this->tiket_model->view_join($id)->row();
         $this->load->view('template_introvert/header', $data);
         $this->load->view('detail_event', $data);
+        $this->load->view('template_introvert/footer', $data);
+    }
+
+    public function ekategori($id)
+    {
+        $data['title'] = 'Kategori Event';
+        $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $data['event'] = $this->tiket_model->perkategori($id)->result_array();
+        $data['kategori'] = $this->tiket_model->datakategori()->result_array();
+        $this->load->view('template_introvert/header', $data);
+        $this->load->view('event', $data);
         $this->load->view('template_introvert/footer', $data);
     }
 

@@ -83,6 +83,11 @@ class tiket_model extends CI_Model
         return $this->db->query($query);
     }
 
+    public function perkategori($id){
+        $query = "SELECT * FROM event, tiket_kategori WHERE kategori = id_kategori AND id_kategori = $id";
+        return $this->db->query($query);
+    }
+
     public function datakategori(){
         $query = "SELECT * FROM tiket_kategori WHERE status = 1";
         return $this->db->query($query);

@@ -167,9 +167,9 @@
                     <div class="sidebar-widget widget-weather border-radius-10 bg-white mb-30">
                         <div class="d-flex">
                             <div class="font-medium">
-                                <p>Monday</p>
-                                <h2>12</h2>
-                                <p><strong>August</strong></p>
+                                <p><?= date('l') ?></p>
+                                <h2><?= date('d') ?></h2>
+                                <p><strong><?= date('F') ?></strong></p>
                             </div>
                             <div class="font-medium ml-10 pt-20">
                                 <div id="datetime" class="d-inline-block">
@@ -223,183 +223,61 @@
                     <!-- Widget Categories -->
                     <div class="sidebar-widget widget_categories border-radius-10 bg-white mb-30">
                         <div class="widget-header position-relative mb-15">
-                            <h5 class="widget-title"><strong>Categories</strong></h5>
+                            <h5 class="widget-title"><strong>Kategori Event</strong></h5>
                         </div>
                         <ul class="font-small text-muted">
-                            <li class="cat-item cat-item-2"><a href="#">Global Economy</a></li>
-                            <li class="cat-item cat-item-3"><a href="#">Environment</a></li>
-                            <li class="cat-item cat-item-4"><a href="#">Religion</a></li>
-                            <li class="cat-item cat-item-5"><a href="#">Fashion</a></li>
-                            <li class="cat-item cat-item-6"><a href="#">Terrorism</a></li>
-                            <li class="cat-item cat-item-7"><a href="#">Conflicts</a></li>
-                            <li class="cat-item cat-item-2"><a href="#">Scandals</a></li>
-                            <li class="cat-item cat-item-2"><a href="#">Executive</a></li>
-                            <li class="cat-item cat-item-2"><a href="#">Foreign policy</a></li>
-                            <li class="cat-item cat-item-2"><a href="#">Healthy Living</a></li>
-                            <li class="cat-item cat-item-3"><a href="#">Medical Research</a></li>
-                            <li class="cat-item cat-item-4"><a href="#">Children’s Health</a></li>
-                            <li class="cat-item cat-item-5"><a href="#">Around the World</a></li>
-                            <li class="cat-item cat-item-6"><a href="#">Ad Choices</a></li>
-                            <li class="cat-item cat-item-7"><a href="#">Mental Health</a></li>
-                            <li class="cat-item cat-item-2"><a href="#">Media Relations</a></li>
+                            <?php foreach($kategori as $k ) : ?>
+                            <li class="cat-item cat-item-2"><a href="<?= base_url('home/ekategori/').$k['id_kategori'] ?>"><?= $k['nama_kategori'];?></a></li>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
                 </div>
                 <!-- main content -->
                 <div class="col-lg-10 col-md-9 order-1 order-md-2">
                     <div class="row mb-50">
+                        <?php foreach($event as $e) :?>
                         <div class="col-lg-6 col-md-12">
                             <div class="latest-post mb-50">
                                 <div class="loop-list-style-1">
                                     <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
                                         <div class="d-md-flex d-block">
                                             <div class="post-thumb post-thumb-big d-flex mr-15 border-radius-15 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img class="border-radius-15" src="assets/imgs/thumbnail-15.jpg" alt="">
+                                                <a class="color-white" href="<?=base_url('home/event_detail/').$e['id_event'] ?>">
+                                                    <img class="border-radius-15" src="<?=base_url('assets/uploads/foto_event/').$e['foto']; ?>" alt="">
                                                 </a>
                                             </div>
                                             <div class="post-content media-body">
                                                 <div class="entry-meta mb-15 mt-10">
-                                                    <a class="entry-meta meta-2" href="category.html"><span class="post-in text-danger font-x-small">Politic</span></a>
+                                                    <a class="entry-meta meta-2" href="<?= base_url('home/ekategori/').$k['id_kategori'] ?>"><span class="post-in text-danger font-x-small"><?=$e['nama_kategori'];?></span></a>
                                                 </div>
                                                 <h5 class="post-title mb-15 text-limit-2-row">
-                                                    <span class="post-format-icon">
+                                                    <!-- <span class="post-format-icon">
                                                         <ion-icon name="videocam-outline"></ion-icon>
-                                                    </span>
-                                                    <a href="single.html">More than 1.5 million people sought state
-                                                        unemployment benefits last week even as businesses
-                                                        reopened.</a>
+                                                    </span> -->
+                                                    <a href="<?= base_url('home/event_detail/').$e['id_event'] ?>"><?=$e['nama_event']; ?></a>
                                                 </h5>
-                                                <p class="post-exerpt font-medium text-muted mb-30 d-none d-lg-block">
-                                                    These people envy me for having a lifestyle they don’t have, but
-                                                    the truth is, sometimes I envy their lifestyle instead.
-                                                    Struggling to sell one multi-million dollar home currently.</p>
+                                                <div>
+                                                    <?php if(strlen(htmlspecialchars_decode($e['deskripsi_event'])) > 100 ){
+                                                            echo substr(htmlspecialchars_decode($e['deskripsi_event']),0,75)."<p>...</p>";
+                                                    } else{?>
+                                                        <?= htmlspecialchars_decode($e['deskripsi_event']); ?>
+                                                    <?php } ?>
+                                                    
+                                                </div>
+                                                    
+                                                    
                                                 <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                    <span class="post-by">By <a href="author.html">Sean
-                                                            Boynton</a></span>
-                                                    <span class="post-on">15/09/2020 07:00 EST</span>
-                                                    <span class="time-reading">12 mins read</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                    <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
-                                        <div class="d-md-flex d-block">
-                                            <div class="post-thumb post-thumb-big d-flex mr-15 border-radius-15 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img class="border-radius-15" src="assets/imgs/thumbnail-13.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <div class="entry-meta mb-15 mt-10">
-                                                    <a class="entry-meta meta-2" href="category.html"><span class="post-in text-warning font-x-small">Religion</span></a>
-                                                </div>
-                                                <h5 class="post-title mb-15 text-limit-2-row">
-                                                    <a href="single.html">Elite B.C., Ontario crime network
-                                                        laundering ‘hundreds of millions’ a year, inquiry hears</a>
-                                                </h5>
-                                                <p class="post-exerpt font-medium text-muted mb-30 d-none d-lg-block">
-                                                    These people envy me for having a lifestyle they don’t have, but
-                                                    the truth is, sometimes I envy their lifestyle instead.
-                                                    Struggling to sell one multi-million dollar home currently.</p>
-                                                <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                    <span class="post-by">By <a href="author.html">Walter
-                                                            Cronkite</a></span>
-                                                    <span class="post-on">16/09/2020 08:15 EST</span>
-                                                    <span class="time-reading">14 mins read</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                    <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
-                                        <div class="d-md-flex d-block">
-                                            <div class="post-thumb post-thumb-big d-flex mr-15 border-radius-15 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img class="border-radius-15" src="assets/imgs/thumbnail-16.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <div class="entry-meta mb-15 mt-10">
-                                                    <a class="entry-meta meta-2" href="category.html"><span class="post-in text-success font-x-small">Healthy</span></a>
-                                                </div>
-                                                <h5 class="post-title mb-15 text-limit-2-row">
-                                                    <span class="post-format-icon">
-                                                        <ion-icon name="image-outline"></ion-icon>
-                                                    </span>
-                                                    <a href="single.html">Daycares are opening across the country,
-                                                        but can they really operate safely?</a>
-                                                </h5>
-                                                <p class="post-exerpt font-medium text-muted mb-30 d-none d-lg-block">
-                                                    These people envy me for having a lifestyle they don’t have, but
-                                                    the truth is, sometimes I envy their lifestyle instead.
-                                                    Struggling to sell one multi-million dollar home currently.</p>
-                                                <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                    <span class="post-by">By <a href="author.html">JONATHAN
-                                                            LEMIRE</a></span>
-                                                    <span class="post-on">17/09/2020 19:35 EST</span>
-                                                    <span class="time-reading">6 mins read</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                    <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
-                                        <div class="d-md-flex d-block">
-                                            <div class="post-thumb post-thumb-big d-flex mr-15 border-radius-15 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img class="border-radius-15" src="assets/imgs/thumbnail-8.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <div class="entry-meta mb-15 mt-10">
-                                                    <a class="entry-meta meta-2" href="category.html"><span class="post-in text-info font-x-small">Conflicts</span></a>
-                                                </div>
-                                                <h5 class="post-title mb-15 text-limit-2-row">
-                                                    <span class="post-format-icon">
-                                                        <ion-icon name="chatbox-outline"></ion-icon>
-                                                    </span>
-                                                    <a href="single.html">Dwayne ‘The Rock’ Johnson confronts Donald
-                                                        Trump: ‘Where are you?’</a>
-                                                </h5>
-                                                <p class="post-exerpt font-medium text-muted mb-30 d-none d-lg-block">
-                                                    These people envy me for having a lifestyle they don’t have, but
-                                                    the truth is, sometimes I envy their lifestyle instead.
-                                                    Struggling to sell one multi-million dollar home currently.</p>
-                                                <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                    <span class="post-by">By <a href="author.html">Walter
-                                                            Cronkite</a></span>
-                                                    <span class="post-on">18/09/2020 09:35 EST</span>
-                                                    <span class="time-reading">13 mins read</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                    <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
-                                        <div class="d-md-flex d-block">
-                                            <div class="post-thumb post-thumb-big d-flex mr-15 border-radius-15 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img class="border-radius-15" src="assets/imgs/thumbnail-9.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <div class="entry-meta mb-15 mt-10">
-                                                    <a class="entry-meta meta-2" href="category.html"><span class="post-in text-success font-x-small">Politic</span></a>
-                                                </div>
-                                                <h5 class="post-title mb-15 text-limit-2-row">
-                                                    <span class="post-format-icon">
-                                                        <ion-icon name="chatbox-outline"></ion-icon>
-                                                    </span>
-                                                    <a href="single.html">The myth of society: the social contract
-                                                        and the body politic</a>
-                                                </h5>
-                                                <p class="post-exerpt font-medium text-muted mb-30 d-none d-lg-block">
-                                                    These people envy me for having a lifestyle they don’t have, but
-                                                    the truth is, sometimes I envy their lifestyle instead.
-                                                    Struggling to sell one multi-million dollar home currently.</p>
-                                                <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                    <span class="post-by">By <a href="author.html">Tomy
-                                                            Crust</a></span>
-                                                    <span class="post-on">17/09/2020 09:35 EST</span>
-                                                    <span class="time-reading">12 mins read</span>
+                                                    <?php
+                                                    if ($e['harga_tiket']==0){?>
+                                                        <a class="entry-meta meta-0"><span class="post-in background5 text-dark font-x-small">GRATIS</span></a>
+                                                    <?php } else{ ?>
+                                                        <div class="entry-meta meta-0 font-small mb-30 mt-1">
+                                                            <span class="post-cat bg-success color-white">Rp <?=number_format($e['harga_tiket'], 0,',','.') ?></span>
+                                                        </div>
+                                                    <?php } ?>
+                                                    <hr>
+                                                    <span class="post-on">Tanggal Aktif: <?= $e['tgl_aktif']; ?></span>
+                                                    <span class="post-off">Tanggal Berakhir: <?= $e['tgl_berakhir']; ?></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -407,169 +285,11 @@
                                 </div>
                             </div>
                         </div>
+                        <?php endforeach; ?>
 
-                        <div class="col-lg-6 col-md-12">
-                            <div class="latest-post mb-50">
-                                <div class="loop-list-style-1">
-                                    <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
-                                        <div class="d-md-flex d-block">
-                                            <div class="post-thumb post-thumb-big d-flex mr-15 border-radius-15 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img class="border-radius-15" src="assets/imgs/thumbnail-15.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <div class="entry-meta mb-15 mt-10">
-                                                    <a class="entry-meta meta-2" href="category.html"><span class="post-in text-danger font-x-small">Politic</span></a>
-                                                </div>
-                                                <h5 class="post-title mb-15 text-limit-2-row">
-                                                    <span class="post-format-icon">
-                                                        <ion-icon name="videocam-outline"></ion-icon>
-                                                    </span>
-                                                    <a href="single.html">More than 1.5 million people sought state
-                                                        unemployment benefits last week even as businesses
-                                                        reopened.</a>
-                                                </h5>
-                                                <p class="post-exerpt font-medium text-muted mb-30 d-none d-lg-block">
-                                                    These people envy me for having a lifestyle they don’t have, but
-                                                    the truth is, sometimes I envy their lifestyle instead.
-                                                    Struggling to sell one multi-million dollar home currently.</p>
-                                                <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                    <span class="post-by">By <a href="author.html">Sean
-                                                            Boynton</a></span>
-                                                    <span class="post-on">15/09/2020 07:00 EST</span>
-                                                    <span class="time-reading">12 mins read</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                    <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
-                                        <div class="d-md-flex d-block">
-                                            <div class="post-thumb post-thumb-big d-flex mr-15 border-radius-15 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img class="border-radius-15" src="assets/imgs/thumbnail-13.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <div class="entry-meta mb-15 mt-10">
-                                                    <a class="entry-meta meta-2" href="category.html"><span class="post-in text-warning font-x-small">Religion</span></a>
-                                                </div>
-                                                <h5 class="post-title mb-15 text-limit-2-row">
-                                                    <a href="single.html">Elite B.C., Ontario crime network
-                                                        laundering ‘hundreds of millions’ a year, inquiry hears</a>
-                                                </h5>
-                                                <p class="post-exerpt font-medium text-muted mb-30 d-none d-lg-block">
-                                                    These people envy me for having a lifestyle they don’t have, but
-                                                    the truth is, sometimes I envy their lifestyle instead.
-                                                    Struggling to sell one multi-million dollar home currently.</p>
-                                                <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                    <span class="post-by">By <a href="author.html">Walter
-                                                            Cronkite</a></span>
-                                                    <span class="post-on">16/09/2020 08:15 EST</span>
-                                                    <span class="time-reading">14 mins read</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                    <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
-                                        <div class="d-md-flex d-block">
-                                            <div class="post-thumb post-thumb-big d-flex mr-15 border-radius-15 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img class="border-radius-15" src="assets/imgs/thumbnail-16.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <div class="entry-meta mb-15 mt-10">
-                                                    <a class="entry-meta meta-2" href="category.html"><span class="post-in text-success font-x-small">Healthy</span></a>
-                                                </div>
-                                                <h5 class="post-title mb-15 text-limit-2-row">
-                                                    <span class="post-format-icon">
-                                                        <ion-icon name="image-outline"></ion-icon>
-                                                    </span>
-                                                    <a href="single.html">Daycares are opening across the country,
-                                                        but can they really operate safely?</a>
-                                                </h5>
-                                                <p class="post-exerpt font-medium text-muted mb-30 d-none d-lg-block">
-                                                    These people envy me for having a lifestyle they don’t have, but
-                                                    the truth is, sometimes I envy their lifestyle instead.
-                                                    Struggling to sell one multi-million dollar home currently.</p>
-                                                <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                    <span class="post-by">By <a href="author.html">JONATHAN
-                                                            LEMIRE</a></span>
-                                                    <span class="post-on">17/09/2020 19:35 EST</span>
-                                                    <span class="time-reading">6 mins read</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                    <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
-                                        <div class="d-md-flex d-block">
-                                            <div class="post-thumb post-thumb-big d-flex mr-15 border-radius-15 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img class="border-radius-15" src="assets/imgs/thumbnail-8.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <div class="entry-meta mb-15 mt-10">
-                                                    <a class="entry-meta meta-2" href="category.html"><span class="post-in text-info font-x-small">Conflicts</span></a>
-                                                </div>
-                                                <h5 class="post-title mb-15 text-limit-2-row">
-                                                    <span class="post-format-icon">
-                                                        <ion-icon name="chatbox-outline"></ion-icon>
-                                                    </span>
-                                                    <a href="single.html">Dwayne ‘The Rock’ Johnson confronts Donald
-                                                        Trump: ‘Where are you?’</a>
-                                                </h5>
-                                                <p class="post-exerpt font-medium text-muted mb-30 d-none d-lg-block">
-                                                    These people envy me for having a lifestyle they don’t have, but
-                                                    the truth is, sometimes I envy their lifestyle instead.
-                                                    Struggling to sell one multi-million dollar home currently.</p>
-                                                <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                    <span class="post-by">By <a href="author.html">Walter
-                                                            Cronkite</a></span>
-                                                    <span class="post-on">18/09/2020 09:35 EST</span>
-                                                    <span class="time-reading">13 mins read</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                    <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
-                                        <div class="d-md-flex d-block">
-                                            <div class="post-thumb post-thumb-big d-flex mr-15 border-radius-15 img-hover-scale">
-                                                <a class="color-white" href="single.html">
-                                                    <img class="border-radius-15" src="assets/imgs/thumbnail-9.jpg" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <div class="entry-meta mb-15 mt-10">
-                                                    <a class="entry-meta meta-2" href="category.html"><span class="post-in text-success font-x-small">Politic</span></a>
-                                                </div>
-                                                <h5 class="post-title mb-15 text-limit-2-row">
-                                                    <span class="post-format-icon">
-                                                        <ion-icon name="chatbox-outline"></ion-icon>
-                                                    </span>
-                                                    <a href="single.html">The myth of society: the social contract
-                                                        and the body politic</a>
-                                                </h5>
-                                                <p class="post-exerpt font-medium text-muted mb-30 d-none d-lg-block">
-                                                    These people envy me for having a lifestyle they don’t have, but
-                                                    the truth is, sometimes I envy their lifestyle instead.
-                                                    Struggling to sell one multi-million dollar home currently.</p>
-                                                <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                    <span class="post-by">By <a href="author.html">Tomy
-                                                            Crust</a></span>
-                                                    <span class="post-on">17/09/2020 09:35 EST</span>
-                                                    <span class="time-reading">12 mins read</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="pagination-area mb-30">
+                        
+                    </div>
+                    <div class="pagination-area mb-30">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-start">
                                     <li class="page-item"><a class="page-link" href="#"><i class="ti-angle-left"></i></a></li>
@@ -581,7 +301,6 @@
                                 </ul>
                             </nav>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
