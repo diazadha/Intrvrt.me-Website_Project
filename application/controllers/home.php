@@ -375,6 +375,7 @@ class Home extends CI_Controller
     {
         $data['title'] = 'Merchandise';
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $data['kategori'] = $this->db->get('merchandise_kategori')->result_array();
         $this->load->view('template_introvert/header', $data);
         $this->load->view('merchandise', $data);
         $this->load->view('template_introvert/footer', $data);

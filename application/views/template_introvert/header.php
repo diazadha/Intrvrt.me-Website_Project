@@ -90,7 +90,7 @@
                                                 <ion-icon name="home-outline"></ion-icon>
                                             </span>Home</a>
                                     </li>
-                                    <li><a href="category-metro.html"><span class="mr-15">
+                                    <li><a href="<?= base_url('home/merchandise') ?>"><span class="mr-15">
                                                 <i class="fas fa-gift"></i>
                                             </span>Merchandise</a></li>
                                     <li><a href="<?= base_url('home/event') ?>"><span class="mr-15">

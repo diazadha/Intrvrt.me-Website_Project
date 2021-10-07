@@ -223,198 +223,191 @@
                     <!-- Widget Categories -->
                     <div class="sidebar-widget widget_categories border-radius-10 bg-white mb-30">
                         <div class="widget-header position-relative mb-15">
-                            <h5 class="widget-title"><strong>Categories</strong></h5>
+                            <h5 class="widget-title"><strong>Kategori Merchandise</strong></h5>
                         </div>
                         <ul class="font-small text-muted">
-                            <li class="cat-item cat-item-2"><a href="#">Global Economy</a></li>
-                            <li class="cat-item cat-item-3"><a href="#">Environment</a></li>
-                            <li class="cat-item cat-item-4"><a href="#">Religion</a></li>
-                            <li class="cat-item cat-item-5"><a href="#">Fashion</a></li>
-                            <li class="cat-item cat-item-6"><a href="#">Terrorism</a></li>
-                            <li class="cat-item cat-item-7"><a href="#">Conflicts</a></li>
-                            <li class="cat-item cat-item-2"><a href="#">Scandals</a></li>
-                            <li class="cat-item cat-item-2"><a href="#">Executive</a></li>
-                            <li class="cat-item cat-item-2"><a href="#">Foreign policy</a></li>
-                            <li class="cat-item cat-item-2"><a href="#">Healthy Living</a></li>
-                            <li class="cat-item cat-item-3"><a href="#">Medical Research</a></li>
-                            <li class="cat-item cat-item-4"><a href="#">Children’s Health</a></li>
-                            <li class="cat-item cat-item-5"><a href="#">Around the World</a></li>
-                            <li class="cat-item cat-item-6"><a href="#">Ad Choices</a></li>
-                            <li class="cat-item cat-item-7"><a href="#">Mental Health</a></li>
-                            <li class="cat-item cat-item-2"><a href="#">Media Relations</a></li>
+                            <?php foreach ($kategori as $k) : ?>
+                                <li class="cat-item cat-item-2"><a href="#"><?= $k['nama_kategori_merch']; ?></a></li>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
                 </div>
                 <!-- main content -->
                 <div class="col-lg-10 col-md-9 order-1 order-md-2">
-                        <div class="row mb-50">
-                            <div class="col-lg-12 col-md-12">
-                                <div class="latest-post mb-50">
-                                    <div class="loop-grid">
-                                        <div class="row">
-                                            <article class="col-lg-4 col-md-12 wow fadeIn animated">
-                                                <div class="background-white border-radius-10 p-10 mb-30">
-                                                    <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
-                                                        <a href="single.html">
-                                                            <img class="border-radius-15" src="assets/imgs/news-2.jpg" alt="">
-                                                        </a>
+                    <div class="row mb-50">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="latest-post mb-50">
+                                <div class="loop-grid">
+                                    <div class="row">
+                                        <article class="col-lg-4 col-md-12 wow fadeIn animated">
+                                            <div class="background-white border-radius-10 p-10 mb-30">
+                                                <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
+                                                    <a href="single.html">
+                                                        <img class="border-radius-15" src="assets/imgs/news-2.jpg" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="pl-10 pr-10">
+                                                    <div class="entry-meta mb-15 mt-10">
+                                                        <a class="entry-meta meta-2" href="category.html"><span class="post-in text-primary font-x-small">Politic</span></a>
                                                     </div>
-                                                    <div class="pl-10 pr-10">
-                                                        <div class="entry-meta mb-15 mt-10">
-                                                            <a class="entry-meta meta-2" href="category.html"><span class="post-in text-primary font-x-small">Politic</span></a>
-                                                        </div>
-                                                        <h5 class="post-title mb-15">
-                                                            <span class="post-format-icon">
-                                                                <ion-icon name="image-outline"></ion-icon>
-                                                            </span>
-                                                            <a href="single.html">The litigants on the screen are not actors</a></h5>
-                                                        <p class="post-exerpt font-medium text-muted mb-30">These people envy me for having a lifestyle they don’t have, but the truth is, sometimes I envy their lifestyle instead. Struggling to sell one multi-million dollar home currently.</p>
-                                                        <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
-                                                            <span class="post-in">In <a href="category.html">US</a></span>
-                                                            <span class="post-by">By <a href="author.html">John Nathan</a></span>
-                                                            <span class="post-on">8m ago</span>
-                                                        </div>
+                                                    <h5 class="post-title mb-15">
+                                                        <span class="post-format-icon">
+                                                            <ion-icon name="image-outline"></ion-icon>
+                                                        </span>
+                                                        <a href="single.html">The litigants on the screen are not actors</a>
+                                                    </h5>
+                                                    <p class="post-exerpt font-medium text-muted mb-30">These people envy me for having a lifestyle they don’t have, but the truth is, sometimes I envy their lifestyle instead. Struggling to sell one multi-million dollar home currently.</p>
+                                                    <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
+                                                        <span class="post-in">In <a href="category.html">US</a></span>
+                                                        <span class="post-by">By <a href="author.html">John Nathan</a></span>
+                                                        <span class="post-on">8m ago</span>
                                                     </div>
                                                 </div>
-                                            </article>
-                                            <article class="col-lg-4 col-md-12 wow fadeIn animated">
-                                                <div class="background-white border-radius-10 p-10 mb-30">
-                                                    <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
-                                                        <a href="single.html">
-                                                            <img class="border-radius-15" src="assets/imgs/news-3.jpg" alt="">
-                                                        </a>
+                                            </div>
+                                        </article>
+                                        <article class="col-lg-4 col-md-12 wow fadeIn animated">
+                                            <div class="background-white border-radius-10 p-10 mb-30">
+                                                <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
+                                                    <a href="single.html">
+                                                        <img class="border-radius-15" src="assets/imgs/news-3.jpg" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="pl-10 pr-10">
+                                                    <div class="entry-meta mb-15 mt-10">
+                                                        <a class="entry-meta meta-2" href="category.html"><span class="post-in text-secondary font-x-small">Global</span></a>
                                                     </div>
-                                                    <div class="pl-10 pr-10">
-                                                        <div class="entry-meta mb-15 mt-10">
-                                                            <a class="entry-meta meta-2" href="category.html"><span class="post-in text-secondary font-x-small">Global</span></a>
-                                                        </div>
-                                                        <h5 class="post-title mb-15">
-                                                            <span class="post-format-icon">
-                                                                <ion-icon name="notifications-outline"></ion-icon>
-                                                            </span>
-                                                            <a href="single.html">Essential Qualities of Highly Successful Music</a></h5>
-                                                        <p class="post-exerpt font-medium text-muted mb-30">Graduating from a top accelerator or incubator can be as career-defining for a startup founder as an elite university diploma. The intensive programmes, which…</p>
-                                                        <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
-                                                            <span class="post-in">In <a href="category.html">Global</a></span>
-                                                            <span class="post-by">By <a href="author.html">S. Jonh</a></span>
-                                                            <span class="post-on">15m ago</span>
-                                                        </div>
+                                                    <h5 class="post-title mb-15">
+                                                        <span class="post-format-icon">
+                                                            <ion-icon name="notifications-outline"></ion-icon>
+                                                        </span>
+                                                        <a href="single.html">Essential Qualities of Highly Successful Music</a>
+                                                    </h5>
+                                                    <p class="post-exerpt font-medium text-muted mb-30">Graduating from a top accelerator or incubator can be as career-defining for a startup founder as an elite university diploma. The intensive programmes, which…</p>
+                                                    <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
+                                                        <span class="post-in">In <a href="category.html">Global</a></span>
+                                                        <span class="post-by">By <a href="author.html">S. Jonh</a></span>
+                                                        <span class="post-on">15m ago</span>
                                                     </div>
                                                 </div>
-                                            </article>
-                                            <article class="col-lg-4 col-md-12 wow fadeIn animated">
-                                                <div class="background-white border-radius-10 p-10 mb-30">
-                                                    <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
-                                                        <a href="single.html">
-                                                            <img class="border-radius-15" src="assets/imgs/news-4.jpg" alt="">
-                                                        </a>
+                                            </div>
+                                        </article>
+                                        <article class="col-lg-4 col-md-12 wow fadeIn animated">
+                                            <div class="background-white border-radius-10 p-10 mb-30">
+                                                <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
+                                                    <a href="single.html">
+                                                        <img class="border-radius-15" src="assets/imgs/news-4.jpg" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="pl-10 pr-10">
+                                                    <div class="entry-meta mb-15 mt-10">
+                                                        <a class="entry-meta meta-2" href="category.html"><span class="post-in text-success font-x-small">Sport</span></a>
                                                     </div>
-                                                    <div class="pl-10 pr-10">
-                                                        <div class="entry-meta mb-15 mt-10">
-                                                            <a class="entry-meta meta-2" href="category.html"><span class="post-in text-success font-x-small">Sport</span></a>
-                                                        </div>
-                                                        <h5 class="post-title mb-15">
-                                                            <a href="single.html">9 Things I Love About Shaving My Head</a></h5>
-                                                        <p class="post-exerpt font-medium text-muted mb-30">At the Emmys, broadcast scripted shows created by people of color gained ground relative to those pitched by White show creators, while broadcast scripted shows.</p>
-                                                        <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
-                                                            <span class="post-in">In <a href="category.html">Sport</a></span>
-                                                            <span class="post-by">By <a href="author.html">K. Donal</a></span>
-                                                            <span class="post-on">4m ago</span>
-                                                        </div>
+                                                    <h5 class="post-title mb-15">
+                                                        <a href="single.html">9 Things I Love About Shaving My Head</a>
+                                                    </h5>
+                                                    <p class="post-exerpt font-medium text-muted mb-30">At the Emmys, broadcast scripted shows created by people of color gained ground relative to those pitched by White show creators, while broadcast scripted shows.</p>
+                                                    <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
+                                                        <span class="post-in">In <a href="category.html">Sport</a></span>
+                                                        <span class="post-by">By <a href="author.html">K. Donal</a></span>
+                                                        <span class="post-on">4m ago</span>
                                                     </div>
                                                 </div>
-                                            </article>
-                                            <article class="col-lg-4 col-md-12 wow fadeIn animated">
-                                                <div class="background-white border-radius-10 p-10 mb-30">
-                                                    <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
-                                                        <a href="single.html">
-                                                            <img class="border-radius-15" src="assets/imgs/news-5.jpg" alt="">
-                                                        </a>
+                                            </div>
+                                        </article>
+                                        <article class="col-lg-4 col-md-12 wow fadeIn animated">
+                                            <div class="background-white border-radius-10 p-10 mb-30">
+                                                <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
+                                                    <a href="single.html">
+                                                        <img class="border-radius-15" src="assets/imgs/news-5.jpg" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="pl-10 pr-10">
+                                                    <div class="entry-meta mb-15 mt-10">
+                                                        <a class="entry-meta meta-2" href="category.html"><span class="post-in text-danger font-x-small">Technology</span></a>
                                                     </div>
-                                                    <div class="pl-10 pr-10">
-                                                        <div class="entry-meta mb-15 mt-10">
-                                                            <a class="entry-meta meta-2" href="category.html"><span class="post-in text-danger font-x-small">Technology</span></a>
-                                                        </div>
-                                                        <h5 class="post-title mb-15">
-                                                            <span class="post-format-icon">
-                                                                <ion-icon name="headset-outline"></ion-icon>
-                                                            </span>
-                                                            <a href="single.html">Why Teamwork Really Makes The Dream Work</a></h5>
-                                                        <p class="post-exerpt font-medium text-muted mb-30">We live in a world where disruption and dynamism reign supreme and businesses must be ready to adapt to the many unpredictable changes that come with this.</p>
-                                                        <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
-                                                            <span class="post-in">In <a href="category.html">Technology</a></span>
-                                                            <span class="post-by">By <a href="author.html">K. Steven</a></span>
-                                                            <span class="post-on">24m ago</span>
-                                                        </div>
+                                                    <h5 class="post-title mb-15">
+                                                        <span class="post-format-icon">
+                                                            <ion-icon name="headset-outline"></ion-icon>
+                                                        </span>
+                                                        <a href="single.html">Why Teamwork Really Makes The Dream Work</a>
+                                                    </h5>
+                                                    <p class="post-exerpt font-medium text-muted mb-30">We live in a world where disruption and dynamism reign supreme and businesses must be ready to adapt to the many unpredictable changes that come with this.</p>
+                                                    <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
+                                                        <span class="post-in">In <a href="category.html">Technology</a></span>
+                                                        <span class="post-by">By <a href="author.html">K. Steven</a></span>
+                                                        <span class="post-on">24m ago</span>
                                                     </div>
                                                 </div>
-                                            </article>
-                                            <article class="col-lg-4 col-md-12 wow fadeIn animated">
-                                                <div class="background-white border-radius-10 p-10">
-                                                    <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
-                                                        <a href="single.html">
-                                                            <img class="border-radius-15" src="assets/imgs/news-6.jpg" alt="">
-                                                        </a>
+                                            </div>
+                                        </article>
+                                        <article class="col-lg-4 col-md-12 wow fadeIn animated">
+                                            <div class="background-white border-radius-10 p-10">
+                                                <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
+                                                    <a href="single.html">
+                                                        <img class="border-radius-15" src="assets/imgs/news-6.jpg" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="pl-10 pr-10">
+                                                    <div class="entry-meta mb-15 mt-10">
+                                                        <a class="entry-meta meta-2" href="category.html"><span class="post-in text-warning font-x-small">Fashion</span></a>
                                                     </div>
-                                                    <div class="pl-10 pr-10">
-                                                        <div class="entry-meta mb-15 mt-10">
-                                                            <a class="entry-meta meta-2" href="category.html"><span class="post-in text-warning font-x-small">Fashion</span></a>
-                                                        </div>
-                                                        <h5 class="post-title mb-15">
-                                                            <span class="post-format-icon">
-                                                                <ion-icon name="camera-outline"></ion-icon>
-                                                            </span>
-                                                            <a href="single.html">The World Caters to Average People</a></h5>
-                                                        <p class="post-exerpt font-medium text-muted mb-30">These people envy me for having a lifestyle they don’t have, but the truth is, sometimes I envy their lifestyle instead. Struggling to sell one multi-million dollar home currently.</p>
-                                                        <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
-                                                            <span class="post-in">In <a href="category.html">Global</a></span>
-                                                            <span class="post-by">By <a href="author.html">Fashion</a></span>
-                                                            <span class="post-on">1h ago</span>
-                                                        </div>
+                                                    <h5 class="post-title mb-15">
+                                                        <span class="post-format-icon">
+                                                            <ion-icon name="camera-outline"></ion-icon>
+                                                        </span>
+                                                        <a href="single.html">The World Caters to Average People</a>
+                                                    </h5>
+                                                    <p class="post-exerpt font-medium text-muted mb-30">These people envy me for having a lifestyle they don’t have, but the truth is, sometimes I envy their lifestyle instead. Struggling to sell one multi-million dollar home currently.</p>
+                                                    <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
+                                                        <span class="post-in">In <a href="category.html">Global</a></span>
+                                                        <span class="post-by">By <a href="author.html">Fashion</a></span>
+                                                        <span class="post-on">1h ago</span>
                                                     </div>
                                                 </div>
-                                            </article>
-                                            <article class="col-lg-4 col-md-12 wow fadeIn animated">
-                                                <div class="background-white border-radius-10 p-10">
-                                                    <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
-                                                        <a href="single.html">
-                                                            <img class="border-radius-15" src="assets/imgs/news-7.jpg" alt="">
-                                                        </a>
+                                            </div>
+                                        </article>
+                                        <article class="col-lg-4 col-md-12 wow fadeIn animated">
+                                            <div class="background-white border-radius-10 p-10">
+                                                <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
+                                                    <a href="single.html">
+                                                        <img class="border-radius-15" src="assets/imgs/news-7.jpg" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="pl-10 pr-10">
+                                                    <div class="entry-meta mb-15 mt-10">
+                                                        <a class="entry-meta meta-2" href="category.html"><span class="post-in text-danger font-x-small">Global</span></a>
                                                     </div>
-                                                    <div class="pl-10 pr-10">
-                                                        <div class="entry-meta mb-15 mt-10">
-                                                            <a class="entry-meta meta-2" href="category.html"><span class="post-in text-danger font-x-small">Global</span></a>
-                                                        </div>
-                                                        <h5 class="post-title mb-15">
-                                                            <a href="single.html">Essential Qualities of Highly Successful Music</a></h5>
-                                                        <p class="post-exerpt font-medium text-muted mb-30">Graduating from a top accelerator or incubator can be as career-defining for a startup founder as an elite university diploma. The intensive programmes, which...</p>
-                                                        <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
-                                                            <span class="post-in">In <a href="category.html">Global</a></span>
-                                                            <span class="post-by">By <a href="author.html">K. Jonh</a></span>
-                                                            <span class="post-on">24m ago</span>
-                                                        </div>
+                                                    <h5 class="post-title mb-15">
+                                                        <a href="single.html">Essential Qualities of Highly Successful Music</a>
+                                                    </h5>
+                                                    <p class="post-exerpt font-medium text-muted mb-30">Graduating from a top accelerator or incubator can be as career-defining for a startup founder as an elite university diploma. The intensive programmes, which...</p>
+                                                    <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase mb-10">
+                                                        <span class="post-in">In <a href="category.html">Global</a></span>
+                                                        <span class="post-by">By <a href="author.html">K. Jonh</a></span>
+                                                        <span class="post-on">24m ago</span>
                                                     </div>
                                                 </div>
-                                            </article>
-                                        </div>
+                                            </div>
+                                        </article>
                                     </div>
                                 </div>
-                                <div class="pagination-area mb-30">
-                                    <nav aria-label="Page navigation example">
-                                        <ul class="pagination justify-content-start">
-                                            <li class="page-item"><a class="page-link" href="#"><i class="ti-angle-left"></i></a></li>
-                                            <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">03</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">04</a></li>
-                                            <li class="page-item"><a class="page-link" href="#"><i class="ti-angle-right"></i></a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
                             </div>
-                            
+                            <div class="pagination-area mb-30">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-start">
+                                        <li class="page-item"><a class="page-link" href="#"><i class="ti-angle-left"></i></a></li>
+                                        <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">02</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">03</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">04</a></li>
+                                        <li class="page-item"><a class="page-link" href="#"><i class="ti-angle-right"></i></a></li>
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
+
                     </div>
+                </div>
             </div>
         </div>
     </main>
