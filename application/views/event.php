@@ -226,8 +226,8 @@
                             <h5 class="widget-title"><strong>Kategori Event</strong></h5>
                         </div>
                         <ul class="font-small text-muted">
-                            <?php foreach($kategori as $k ) : ?>
-                            <li class="cat-item cat-item-2"><a href="<?= base_url('home/ekategori/').$k['id_kategori'] ?>"><?= $k['nama_kategori'];?></a></li>
+                            <?php foreach ($kategori as $k) : ?>
+                                <li class="cat-item cat-item-2"><a href="<?= base_url('home/ekategori/') . $k['id_kategori'] ?>"><?= $k['nama_kategori']; ?></a></li>
                             <?php endforeach; ?>
                         </ul>
                     </div>
@@ -235,72 +235,72 @@
                 <!-- main content -->
                 <div class="col-lg-10 col-md-9 order-1 order-md-2">
                     <div class="row mb-50">
-                        <?php foreach($event as $e) :?>
-                        <div class="col-lg-6 col-md-12">
-                            <div class="latest-post mb-50">
-                                <div class="loop-list-style-1">
-                                    <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
-                                        <div class="d-md-flex d-block">
-                                            <div class="post-thumb post-thumb-big d-flex mr-15 border-radius-15 img-hover-scale">
-                                                <a class="color-white" href="<?=base_url('home/event_detail/').$e['id_event'] ?>">
-                                                    <img class="border-radius-15" src="<?=base_url('assets/uploads/foto_event/').$e['foto']; ?>" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="post-content media-body">
-                                                <div class="entry-meta mb-15 mt-10">
-                                                    <a class="entry-meta meta-2" href="<?= base_url('home/ekategori/').$k['id_kategori'] ?>"><span class="post-in text-danger font-x-small"><?=$e['nama_kategori'];?></span></a>
+                        <?php foreach ($event as $e) : ?>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="latest-post mb-50">
+                                    <div class="loop-list-style-1">
+                                        <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
+                                            <div class="d-md-flex d-block">
+                                                <div class="post-thumb post-thumb-big d-flex mr-15 border-radius-15 img-hover-scale">
+                                                    <a class="color-white" href="<?= base_url('home/event_detail/') . $e['id_event'] ?>">
+                                                        <img class="border-radius-15" src="<?= base_url('assets/uploads/foto_event/') . $e['foto']; ?>" alt="">
+                                                    </a>
                                                 </div>
-                                                <h5 class="post-title mb-15 text-limit-2-row">
-                                                    <!-- <span class="post-format-icon">
+                                                <div class="post-content media-body">
+                                                    <div class="entry-meta mb-15 mt-10">
+                                                        <a class="entry-meta meta-2" href="<?= base_url('home/ekategori/') . $k['id_kategori'] ?>"><span class="post-in text-danger font-x-small"><?= $e['nama_kategori']; ?></span></a>
+                                                    </div>
+                                                    <h5 class="post-title mb-15 text-limit-2-row">
+                                                        <!-- <span class="post-format-icon">
                                                         <ion-icon name="videocam-outline"></ion-icon>
                                                     </span> -->
-                                                    <a href="<?= base_url('home/event_detail/').$e['id_event'] ?>"><?=$e['nama_event']; ?></a>
-                                                </h5>
-                                                <div>
-                                                    <?php if(strlen(htmlspecialchars_decode($e['deskripsi_event'])) > 100 ){
-                                                            echo substr(htmlspecialchars_decode($e['deskripsi_event']),0,75)."<p>...</p>";
-                                                    } else{?>
-                                                        <?= htmlspecialchars_decode($e['deskripsi_event']); ?>
-                                                    <?php } ?>
-                                                    
-                                                </div>
-                                                    
-                                                    
-                                                <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                    <?php
-                                                    if ($e['harga_tiket']==0){?>
-                                                        <a class="entry-meta meta-0"><span class="post-in background5 text-dark font-x-small">GRATIS</span></a>
-                                                    <?php } else{ ?>
-                                                        <div class="entry-meta meta-0 font-small mb-30 mt-1">
-                                                            <span class="post-cat bg-success color-white">Rp <?=number_format($e['harga_tiket'], 0,',','.') ?></span>
-                                                        </div>
-                                                    <?php } ?>
-                                                    <hr>
-                                                    <span class="post-on">Tanggal Aktif: <?= $e['tgl_aktif']; ?></span>
-                                                    <span class="post-off">Tanggal Berakhir: <?= $e['tgl_berakhir']; ?></span>
+                                                        <a href="<?= base_url('home/event_detail/') . $e['id_event'] ?>"><?= ucwords($e['nama_event']); ?></a>
+                                                    </h5>
+                                                    <div>
+                                                        <?php if (strlen(htmlspecialchars_decode($e['deskripsi_event'])) > 100) {
+                                                            echo substr(htmlspecialchars_decode($e['deskripsi_event']), 0, 75) . "<p>...</p>";
+                                                        } else { ?>
+                                                            <?= htmlspecialchars_decode($e['deskripsi_event']); ?>
+                                                        <?php } ?>
+
+                                                    </div>
+
+
+                                                    <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
+                                                        <?php
+                                                        if ($e['harga_tiket'] == 0) { ?>
+                                                            <a class="entry-meta meta-0"><span class="post-in background5 text-dark font-x-small">GRATIS</span></a>
+                                                        <?php } else { ?>
+                                                            <div class="entry-meta meta-0 font-small mb-30 mt-1">
+                                                                <span class="post-cat bg-success color-white">Rp <?= number_format($e['harga_tiket'], 0, ',', '.') ?></span>
+                                                            </div>
+                                                        <?php } ?>
+                                                        <hr>
+                                                        <span class="post-on">Tanggal Aktif: <?= $e['tgl_aktif']; ?></span>
+                                                        <span class="post-off">Tanggal Berakhir: <?= $e['tgl_berakhir']; ?></span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </article>
+                                        </article>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         <?php endforeach; ?>
 
-                        
+
                     </div>
                     <div class="pagination-area mb-30">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-start">
-                                    <li class="page-item"><a class="page-link" href="#"><i class="ti-angle-left"></i></a></li>
-                                    <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">03</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">04</a></li>
-                                    <li class="page-item"><a class="page-link" href="#"><i class="ti-angle-right"></i></a></li>
-                                </ul>
-                            </nav>
-                        </div>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-start">
+                                <li class="page-item"><a class="page-link" href="#"><i class="ti-angle-left"></i></a></li>
+                                <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                                <li class="page-item"><a class="page-link" href="#">02</a></li>
+                                <li class="page-item"><a class="page-link" href="#">03</a></li>
+                                <li class="page-item"><a class="page-link" href="#">04</a></li>
+                                <li class="page-item"><a class="page-link" href="#"><i class="ti-angle-right"></i></a></li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>
