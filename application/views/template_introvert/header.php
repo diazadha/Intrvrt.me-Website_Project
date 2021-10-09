@@ -100,6 +100,10 @@
                                                 <i class="far fa-building"></i>
                                             </span>About Us</a>
                                     </li>
+                                    <li><a href="<?= base_url('home/partner') ?>"><span class="mr-15">
+                                                <i class="far fa-handshake"></i>
+                                            </span>Partner</a>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>

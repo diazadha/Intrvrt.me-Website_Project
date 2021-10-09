@@ -155,7 +155,7 @@
                 <h2>
                     <span class="" style="color: #E64F5E;">Event</span>
                     <br>
-                    <span class="mt-1" style="font-size: x-large;">2538 articles</span>
+                    <span class="mt-1" style="font-size: x-large;"><?=count($event) ?> Events</span>
                 </h2>
             </div>
         </div>
