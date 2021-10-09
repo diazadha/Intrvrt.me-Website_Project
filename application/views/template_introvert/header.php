@@ -96,22 +96,11 @@
                                     <li><a href="<?= base_url('home/event') ?>"><span class="mr-15">
                                                 <i class="fas fa-ticket-alt"></i>
                                             </span>Event</a></li>
-                                    <li><a href="contact.html"><span class="mr-15">
+                                    <li><a href="<?=base_url('about')?>"><span class="mr-15">
                                                 <i class="far fa-building"></i>
-                                            </span>About Us</a></li>
+                                            </span>About Us</a>
+                                    </li>
                                 </ul>
-                                <!-- <div class="d-inline ml-50 tools-icon">
-                                    <a class="red-tooltip text-danger" href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Hot Topics">
-                                        <ion-icon name="flame-outline"></ion-icon>
-                                    </a>
-                                    <a class="red-tooltip text-primary" href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Trending">
-                                        <ion-icon name="flash-outline"></ion-icon>
-                                    </a>
-                                    <a class="red-tooltip text-success" href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Notifications">
-                                        <ion-icon name="notifications-outline"></ion-icon>
-                                        <span class="notification bg-success">5</span>
-                                    </a>
-                                </div> -->
                             </nav>
                         </div>
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

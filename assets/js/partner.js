@@ -85,10 +85,7 @@ jQuery(document).ready(function() {
             },
             status: {
                 required: true
-            },
-            foto: {
-                required: true
-            },
+            }
         },
         errorElement: 'span',
         errorPlacement: function(error, element) {
