@@ -99,6 +99,9 @@
                                     <li><a href="contact.html"><span class="mr-15">
                                                 <i class="far fa-building"></i>
                                             </span>About Us</a></li>
+                                    <li><a href="<?= base_url('home/partner') ?>"><span class="mr-15">
+                                                <i class="far fa-handshake"></i>
+                                            </span>Partner</a></li>
                                 </ul>
                                 <!-- <div class="d-inline ml-50 tools-icon">
                                     <a class="red-tooltip text-danger" href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="Hot Topics">
