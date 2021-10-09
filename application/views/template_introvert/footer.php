@@ -146,8 +146,18 @@
     <script src="<?=base_url('assets');?>/js/vendor/jquery.counterup.min.js"></script>
     <script src="<?=base_url('assets');?>/js/vendor/jquery.theia.sticky.js"></script>
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <!-- jquery-validation -->
+    <script src="<?= base_url('assets'); ?>/vendor/AdminLTE-3.0.5/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="<?= base_url('assets'); ?>/vendor/AdminLTE-3.0.5/plugins/jquery-validation/additional-methods.min.js"></script>
     <!-- NewsViral JS -->
     <script src="<?=base_url('assets');?>/js/main.js"></script>
+    <script>
+        var base_url = '<?=base_url()?>';
+    </script>
+    <?php if(isset($title) == 'About Us'){
+        echo '<script src="'.base_url('assets').'/js/about.js"></script>';
+    }?>
 </body>
 
 </html>

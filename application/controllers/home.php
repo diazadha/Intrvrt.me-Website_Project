@@ -394,4 +394,14 @@ class Home extends CI_Controller
         $this->load->view('detail_merchandise', $data);
         $this->load->view('template_introvert/footer', $data);
     }
+
+    public function partner()
+    {
+        $data['title'] = 'Partner';
+        $data['partner'] = $this->db->get_where('partner', ['status' => 1])->result_array();
+        $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $this->load->view('template_introvert/header', $data);
+        $this->load->view('partner', $data);
+        $this->load->view('template_introvert/footer', $data);
+    }
 }
