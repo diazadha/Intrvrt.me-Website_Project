@@ -226,6 +226,7 @@
                             <h5 class="widget-title"><strong>Kategori Event</strong></h5>
                         </div>
                         <ul class="font-small text-muted">
+                            <li class="cat-item cat-item-2"><a href="<?= base_url('home/event/')?>">Tampilkan Semua</a></li>
                             <?php foreach ($kategori as $k) : ?>
                                 <li class="cat-item cat-item-2"><a href="<?= base_url('home/ekategori/') . $k['id_kategori'] ?>"><?= $k['nama_kategori']; ?></a></li>
                             <?php endforeach; ?>
