@@ -226,6 +226,7 @@
                             <h5 class="widget-title"><strong>Kategori Event</strong></h5>
                         </div>
                         <ul class="font-small text-muted">
+                            <li class="cat-item cat-item-2"><a href="<?= base_url('home/event/')?>">Tampilkan Semua</a></li>
                             <?php foreach ($kategori as $k) : ?>
                                 <li class="cat-item cat-item-2"><a href="<?= base_url('home/ekategori/') . $k['id_kategori'] ?>"><?= $k['nama_kategori']; ?></a></li>
                             <?php endforeach; ?>
@@ -256,16 +257,6 @@
                                                     </span> -->
                                                         <a href="<?= base_url('home/event_detail/') . $e['id_event'] ?>"><?= ucwords($e['nama_event']); ?></a>
                                                     </h5>
-                                                    <div>
-                                                        <?php if (strlen(htmlspecialchars_decode($e['deskripsi_event'])) > 100) {
-                                                            echo substr(htmlspecialchars_decode($e['deskripsi_event']), 0, 75) . "<p>...</p>";
-                                                        } else { ?>
-                                                            <?= htmlspecialchars_decode($e['deskripsi_event']); ?>
-                                                        <?php } ?>
-
-                                                    </div>
-
-
                                                     <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
                                                         <?php
                                                         if ($e['harga_tiket'] == 0) { ?>

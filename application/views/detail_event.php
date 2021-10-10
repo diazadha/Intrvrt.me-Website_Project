@@ -30,7 +30,6 @@
                     </div>
                      <h5 class="mt-4">Deskripsi Event</h5>
                      <?= htmlspecialchars_decode($event->deskripsi_event) ?>
-                     <hr class="wp-block-separator is-style-dots">
                  </div>
              </div>
                  <!--comment form-->

@@ -18,6 +18,7 @@ class Home extends CI_Controller
     {
         $data['title'] = 'Intrvrt.me';
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $data['partner'] = $this->db->get_where('partner', ['status' => 1])->result_array();
         $data['firstLatePost'] = $this->BlogModel->firstLatePost();
         $this->load->view('template_introvert/header', $data);
         $this->load->view('home', $data);
@@ -403,16 +404,6 @@ class Home extends CI_Controller
 
         $this->load->view('template_introvert/header', $data);
         $this->load->view('detail_merchandise', $data);
-        $this->load->view('template_introvert/footer', $data);
-    }
-
-    public function partner()
-    {
-        $data['title'] = 'Partner';
-        $data['partner'] = $this->db->get_where('partner', ['status' => 1])->result_array();
-        $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
-        $this->load->view('template_introvert/header', $data);
-        $this->load->view('partner', $data);
         $this->load->view('template_introvert/footer', $data);
     }
 }
