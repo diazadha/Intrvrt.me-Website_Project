@@ -182,7 +182,7 @@ class MerchandiseModel extends CI_Model
         return $this->db->insert('merchandise', $data);
     }
 
-    public function update_foto($foto = NULL, $id)
+    public function update_foto($foto = NULL, $id = NULL)
     {
         $data = array(
             'foto' => htmlspecialchars($foto, ENT_QUOTES),

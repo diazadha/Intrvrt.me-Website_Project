@@ -21,7 +21,7 @@ class Blog extends CI_Controller
 
     public function p($slug)
     {
-        $data['title'] = '';
+        $data['title'] = 'BLOG | '.$slug;
         $data['post'] = $this->BlogModel->post($slug);
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
         $this->load->view('template_introvert/header', $data);
