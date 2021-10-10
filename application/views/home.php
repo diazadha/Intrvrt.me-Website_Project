@@ -158,9 +158,9 @@
                     <div class="sidebar-widget widget-weather border-radius-10 bg-white mb-30">
                         <div class="d-flex">
                             <div class="font-medium">
-                                <p>Monday</p>
-                                <h2>12</h2>
-                                <p><strong>August</strong></p>
+                                <p><?= date('l') ?></p>
+                                <h2><?= date('d') ?></h2>
+                                <p><strong><?= date('F') ?></strong></p>
                             </div>
                             <div class="font-medium ml-10 pt-20">
                                 <div id="datetime" class="d-inline-block">

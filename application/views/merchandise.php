@@ -155,21 +155,21 @@
                 <h2>
                     <span class="" style="color: #E64F5E;">Merchandise</span>
                     <br>
-                    <span class="mt-1" style="font-size: x-large;">2538 articles</span>
+                    <span class="mt-1" style="font-size: x-large;"><?= count($getalldata) ?> Merchandise</span>
                 </h2>
             </div>
         </div>
         <div class="container">
             <div class="row">
                 <!-- sidebar-left -->
-                <div class="col-lg-2 col-md-3 primary-sidebar sticky-sidebar sidebar-left order-2 order-md-1">
+                <div class="col-lg-2 col-md-3 primary-sidebar sticky-sidebar sidebar-left order-2 order-md-1 mt-2">
                     <!-- Widget Weather -->
                     <div class="sidebar-widget widget-weather border-radius-10 bg-white mb-30">
                         <div class="d-flex">
                             <div class="font-medium">
-                                <p>Monday</p>
-                                <h2>12</h2>
-                                <p><strong>August</strong></p>
+                                <p><?= date('l') ?></p>
+                                <h2><?= date('d') ?></h2>
+                                <p><strong><?= date('F') ?></strong></p>
                             </div>
                             <div class="font-medium ml-10 pt-20">
                                 <div id="datetime" class="d-inline-block">
@@ -226,8 +226,9 @@
                             <h5 class="widget-title"><strong>Kategori Merchandise</strong></h5>
                         </div>
                         <ul class="font-small text-muted">
+                            <li class="cat-item cat-item-2"><a href="<?= base_url('home/merchandise'); ?>">Tampilkan Semua</a></li>
                             <?php foreach ($kategori as $k) : ?>
-                                <li class="cat-item cat-item-2"><a href="#"><?= ucwords($k['nama_kategori_merch']); ?></a></li>
+                                <li class="cat-item cat-item-2"><a href="<?= base_url('home/merchandise_kategori/') . $k['id_kategori_merch']; ?>"><?= ucwords($k['nama_kategori_merch']); ?></a></li>
                             <?php endforeach; ?>
                         </ul>
                     </div>
@@ -249,7 +250,7 @@
                                                     </div>
                                                     <div class="pl-10 pr-10">
                                                         <div class="entry-meta mb-15 mt-10">
-                                                            <a class="entry-meta meta-2" href="category.html"><span class="post-in text-danger font-x-small"><?= $m['nama_kategori_merch']; ?></span></a>
+                                                            <a class="entry-meta meta-2" href="<?= base_url('home/merchandise_kategori/') . $m['kategori']; ?>"><span class="post-in text-danger font-x-small"><?= $m['nama_kategori_merch']; ?></span></a>
                                                         </div>
                                                         <h5 class="post-title mb-15">
                                                             <!-- <span class="post-format-icon">
@@ -279,11 +280,13 @@
                                                                 </div>
                                                             <?php } ?>
                                                             <div class="row justify-content-around">
-                                                                <div class="col-4">
-                                                                    <a href="<?= base_url('home/merchandise_detail/') . $m['id_merch'] ?>"> <i class="fas fa-info-circle fa-2x">Detail</i> </a>
+                                                                <div class="col">
+
+                                                                    <a href="<?= base_url('home/merchandise_detail/') . $m['id_merch'] ?>"><i class="fas fa-info-circle fa-2x">Detail</i></a>
+
                                                                 </div>
-                                                                <div class="col-4">
-                                                                    <a href="#"> <i class="fas fa-cart-plus fa-2x">Tambah</i></a>
+                                                                <div class="col">
+                                                                    <a href="#"><i class="fas fa-cart-plus fa-2x">Tambah</i></a>
                                                                 </div>
                                                             </div>
                                                             <!-- <div class="card text-center">

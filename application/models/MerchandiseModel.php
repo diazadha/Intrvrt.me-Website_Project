@@ -262,7 +262,7 @@ class MerchandiseModel extends CI_Model
 
     public function getallmerchandise()
     {
-        $query = "SELECT foto_merchandise.foto, merchandise_kategori.nama_kategori_merch, merchandise.nama_merch, merchandise.harga, merchandise.diskon, merchandise.deskripsi, merchandise.id_merch
+        $query = "SELECT foto_merchandise.foto, merchandise_kategori.nama_kategori_merch, merchandise.nama_merch, merchandise.harga, merchandise.diskon, merchandise.deskripsi, merchandise.id_merch, merchandise.kategori
         FROM foto_merchandise, merchandise, merchandise_kategori
         where merchandise.foto_utama = foto_merchandise.id and merchandise.kategori = merchandise_kategori.id_kategori_merch
         ";
@@ -286,6 +286,14 @@ class MerchandiseModel extends CI_Model
         $query = "SELECT merchandise_kategori.nama_kategori_merch, merchandise.nama_merch, merchandise.harga, merchandise.diskon, merchandise.deskripsi, merchandise.id_merch, foto_merchandise.foto
         FROM merchandise, merchandise_kategori, foto_merchandise
         where merchandise.kategori = merchandise_kategori.id_kategori_merch and merchandise.foto_utama = foto_merchandise.id and merchandise.id_merch = $id";
+        return $this->db->query($query);
+    }
+
+    public function getallmerchandisebykategori($id)
+    {
+        $query = "SELECT foto_merchandise.foto, merchandise_kategori.nama_kategori_merch, merchandise.nama_merch, merchandise.harga, merchandise.diskon, merchandise.deskripsi, merchandise.id_merch, merchandise.kategori
+        FROM foto_merchandise, merchandise, merchandise_kategori
+        where merchandise.foto_utama = foto_merchandise.id and merchandise.kategori = merchandise_kategori.id_kategori_merch and merchandise.kategori = $id";
         return $this->db->query($query);
     }
 }

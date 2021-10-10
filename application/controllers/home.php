@@ -382,6 +382,17 @@ class Home extends CI_Controller
         $this->load->view('template_introvert/footer', $data);
     }
 
+    public function merchandise_kategori($id)
+    {
+        $data['title'] = 'Merchandise';
+        $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $data['kategori'] = $this->MerchandiseModel->datakategori()->result_array();
+        $data['getalldata'] = $this->MerchandiseModel->getallmerchandisebykategori($id)->result_array();
+        $this->load->view('template_introvert/header', $data);
+        $this->load->view('merchandise', $data);
+        $this->load->view('template_introvert/footer', $data);
+    }
+
     public function merchandise_detail($id)
     {
         $data['title'] = 'Merchandise';
