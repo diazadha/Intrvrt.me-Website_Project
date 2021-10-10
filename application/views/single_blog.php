@@ -6,7 +6,7 @@
                 <?=$post->judul?>
             </h1>
             <div class="entry-meta meta-1 font-x-small color-grey text-uppercase">
-                <span class="post-by">By <a href="author.html"><?=$this->BlogModel->penulis($post->penulis)?></a></span>
+                <span class="post-by">By <a href="#"><?=$post->sumber?></a></span>
                 <span class="post-on"><?= $this->UserModel->format_tanggal($post->tanggal_dibuat)?></span>
             </div>
         </div>
@@ -45,6 +45,23 @@
                                 <li class="list-inline-item"><a class="social-icon linkedin-icon text-xs-center" target="_blank" href="#"><i class="ti-linkedin"></i></a></li>
                             </ul>
                         </div>
+                    </div>
+                </div>
+                <!--author box-->
+                <div class="author-bio border-radius-10 bg-white p-30 mb-40">
+                    <div class="author-image mb-30">
+                        <a href="author.html"><img src="assets/imgs/authors/author.png" alt="" class="avatar"></a></div>
+                    <div class="author-info">
+                        <h3><span class="vcard author"><span class="fn"><a href="author.html" title="Posts by Robert" rel="author"><?=$this->BlogModel->penulis($post->penulis)?></a></span></span></h3>
+                        <h5 class="text-muted">
+                            <span class="mr-15">Author Intrvrt.me</span>
+                            <i class="ti-star"></i>
+                            <i class="ti-star"></i>
+                            <i class="ti-star"></i>
+                            <i class="ti-star"></i>
+                            <i class="ti-star"></i>
+                        </h5>
+                        <a href="author.html" class="author-bio-link text-muted">View all posts</a>
                     </div>
                 </div>
             </div>
