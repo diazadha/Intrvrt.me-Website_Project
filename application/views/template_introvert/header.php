@@ -96,13 +96,9 @@
                                     <li><a href="<?= base_url('home/event') ?>"><span class="mr-15">
                                                 <i class="fas fa-ticket-alt"></i>
                                             </span>Event</a></li>
-                                    <li><a href="<?=base_url('about')?>"><span class="mr-15">
+                                    <li><a href="<?= base_url('about') ?>"><span class="mr-15">
                                                 <i class="far fa-building"></i>
                                             </span>About Us</a>
-                                    </li>
-                                    <li><a href="<?= base_url('home/partner') ?>"><span class="mr-15">
-                                                <i class="far fa-handshake"></i>
-                                            </span>Partner</a>
                                     </li>
                                 </ul>
                             </nav>
