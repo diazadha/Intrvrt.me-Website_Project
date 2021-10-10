@@ -330,178 +330,80 @@
                             <!--Post aside style 2-->
                             <div class="sidebar-widget">
                                 <div class="widget-header mb-30">
-                                    <h5 class="widget-title">Merchandise</h5>
+                                    <h5 class="widget-title">Merchandise (New)</h5>
                                 </div>
                                 <div class="post-aside-style-2">
                                     <ul class="list-post">
-                                        <li class="mb-30 wow fadeIn animated">
-                                            <div class="d-flex">
-                                                <div class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
-                                                    <a class="color-white" href="single.html">
-                                                        <img src="assets/imgs/thumbnail-2.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="post-content media-body">
-                                                    <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">Vancouver woman finds pictures and videos of herself online</a></h6>
-                                                    <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                        <span class="post-by">By <a href="author.html">K. Marry</a></span>
-                                                        <span class="post-on">4m ago</span>
+                                        <?php foreach ($getalldata as $g) : ?>
+                                            <li class="mb-30 wow fadeIn animated">
+                                                <div class="d-flex">
+                                                    <div class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
+                                                        <a class="color-white" href="<?= base_url('home/merchandise_detail/') . $g['id_merch'] ?>">
+                                                            <img src="<?= base_url('assets/uploads/foto_merchandise/') . $g['foto']; ?>" alt="">
+                                                        </a>
+                                                    </div>
+                                                    <div class="post-content media-body">
+                                                        <h6 class="post-title mb-10 text-limit-2-row">
+                                                            <a href="<?= base_url('home/merchandise_detail/') . $g['id_merch'] ?>">
+                                                                <?php if (strlen($g['nama_merch']) > 28) : ?>
+                                                                    <?= substr(ucwords($g['nama_merch']), 0, 28); ?>
+                                                                <?php else : ?>
+                                                                    <?= ucwords($g['nama_merch']); ?>
+                                                                <?php endif ?>
+                                                            </a>
+                                                        </h6>
+                                                        <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
+                                                            <?php
+                                                            if ($g['diskon'] != 0) { ?>
+                                                                <?php $h_diskon = $g['harga'] * ($g['diskon'] / 100);
+                                                                $diskon = $g['harga'] - $h_diskon;
+                                                                ?>
+                                                                <div class="entry-meta meta-0 font-small mb-30 mt-1">
+                                                                    <span class="post-cat bg-success color-white" style="text-decoration: line-through;">Rp <?= number_format($g['harga'], 0, ',', '.') ?></span>
+                                                                    <span class="post-in background5 text-dark font-x-small">Rp <?= number_format($diskon, 0, ',', '.') ?></span>
+                                                                </div>
+                                                            <?php } else { ?>
+                                                                <div class="entry-meta meta-0 font-small mb-30 mt-1">
+                                                                    <span class="post-cat bg-success color-white">Rp <?= number_format($g['harga'], 0, ',', '.') ?></span>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </li>
-                                        <li class="mb-30 wow fadeIn animated">
-                                            <div class="d-flex">
-                                                <div class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
-                                                    <a class="color-white" href="single.html">
-                                                        <img src="assets/imgs/thumbnail-3.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="post-content media-body">
-                                                    <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">4 Things Emotionally Intelligent People Don’t Do</a></h6>
-                                                    <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                        <span class="post-by">By <a href="author.html">Mr. John</a></span>
-                                                        <span class="post-on">3h ago</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="mb-30 wow fadeIn animated">
-                                            <div class="d-flex">
-                                                <div class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
-                                                    <a class="color-white" href="single.html">
-                                                        <img src="assets/imgs/thumbnail-5.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="post-content media-body">
-                                                    <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">Reflections from a Token Black Friend</a></h6>
-                                                    <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                        <span class="post-by">By <a href="author.html">Kenedy</a></span>
-                                                        <span class="post-on">4h ago</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="mb-30 wow fadeIn animated">
-                                            <div class="d-flex">
-                                                <div class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
-                                                    <a class="color-white" href="single.html">
-                                                        <img src="assets/imgs/thumbnail-7.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="post-content media-body">
-                                                    <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">How to Identify a Smart Person in 3 Minutes</a></h6>
-                                                    <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                        <span class="post-by">By <a href="author.html">Steven</a></span>
-                                                        <span class="post-on">5h ago</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="wow fadeIn animated">
-                                            <div class="d-flex">
-                                                <div class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
-                                                    <a class="color-white" href="single.html">
-                                                        <img src="assets/imgs/thumbnail-8.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="post-content media-body">
-                                                    <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">Blackface Minstrel Songs Don’t Belong in Children’s Music Class</a></h6>
-                                                    <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                        <span class="post-by">By <a href="author.html">J.Smith</a></span>
-                                                        <span class="post-on">5h30 ago</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
+                                            </li>
+                                        <?php endforeach; ?>
                                     </ul>
                                 </div>
                                 <hr>
                                 <div class="widget-header mb-30 ">
-                                    <h5 class="widget-title">Event</span></h5>
+                                    <h5 class="widget-title">Event (New)</span></h5>
                                 </div>
                                 <div class="post-aside-style-2">
                                     <ul class="list-post">
-                                        <li class="mb-30 wow fadeIn animated">
-                                            <div class="d-flex">
-                                                <div class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
-                                                    <a class="color-white" href="single.html">
-                                                        <img src="assets/imgs/thumbnail-2.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="post-content media-body">
-                                                    <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">Vancouver woman finds pictures and videos of herself online</a></h6>
-                                                    <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                        <span class="post-by">By <a href="author.html">K. Marry</a></span>
-                                                        <span class="post-on">4m ago</span>
+                                        <?php foreach ($event as $e) : ?>
+                                            <li class="mb-30 wow fadeIn animated">
+                                                <div class="d-flex">
+                                                    <div class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
+                                                        <a class="color-white" href="<?= base_url('home/event_detail/') . $e['id_event'] ?>">
+                                                            <img src="<?= base_url('assets/uploads/foto_event/') . $e['foto']; ?>" alt="">
+                                                        </a>
+                                                    </div>
+                                                    <div class="post-content media-body">
+                                                        <h6 class="post-title mb-10 text-limit-2-row"><a href="<?= base_url('home/event_detail/') . $e['id_event'] ?>"><?= ucwords($e['nama_event']); ?></a></h6>
+                                                        <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
+                                                            <?php
+                                                            if ($e['harga_tiket'] == 0) { ?>
+                                                                <a class="entry-meta meta-0"><span class="post-in background5 text-dark font-x-small">GRATIS</span></a>
+                                                            <?php } else { ?>
+                                                                <div class="entry-meta meta-0 font-small mb-30 mt-1">
+                                                                    <span class="post-cat bg-success color-white">Rp <?= number_format($e['harga_tiket'], 0, ',', '.') ?></span>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </li>
-                                        <li class="mb-30 wow fadeIn animated">
-                                            <div class="d-flex">
-                                                <div class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
-                                                    <a class="color-white" href="single.html">
-                                                        <img src="assets/imgs/thumbnail-3.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="post-content media-body">
-                                                    <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">4 Things Emotionally Intelligent People Don’t Do</a></h6>
-                                                    <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                        <span class="post-by">By <a href="author.html">Mr. John</a></span>
-                                                        <span class="post-on">3h ago</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="mb-30 wow fadeIn animated">
-                                            <div class="d-flex">
-                                                <div class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
-                                                    <a class="color-white" href="single.html">
-                                                        <img src="assets/imgs/thumbnail-5.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="post-content media-body">
-                                                    <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">Reflections from a Token Black Friend</a></h6>
-                                                    <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                        <span class="post-by">By <a href="author.html">Kenedy</a></span>
-                                                        <span class="post-on">4h ago</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="mb-30 wow fadeIn animated">
-                                            <div class="d-flex">
-                                                <div class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
-                                                    <a class="color-white" href="single.html">
-                                                        <img src="assets/imgs/thumbnail-7.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="post-content media-body">
-                                                    <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">How to Identify a Smart Person in 3 Minutes</a></h6>
-                                                    <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                        <span class="post-by">By <a href="author.html">Steven</a></span>
-                                                        <span class="post-on">5h ago</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="wow fadeIn animated">
-                                            <div class="d-flex">
-                                                <div class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
-                                                    <a class="color-white" href="single.html">
-                                                        <img src="assets/imgs/thumbnail-8.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="post-content media-body">
-                                                    <h6 class="post-title mb-10 text-limit-2-row"><a href="single.html">Blackface Minstrel Songs Don’t Belong in Children’s Music Class</a></h6>
-                                                    <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                        <span class="post-by">By <a href="author.html">J.Smith</a></span>
-                                                        <span class="post-on">5h30 ago</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
+                                            </li>
+                                        <?php endforeach; ?>
                                     </ul>
                                 </div>
                             </div>
@@ -513,22 +415,22 @@
                                 <h4 class="widget-title mb-0">Partner</h4>
                             </div>
                             <div class="post-carausel-2 post-module-2 row">
-                                <?php foreach($partner as $p): ?>
-                                <div class="col">
-                                    <div class="post-thumb position-relative">
-                                        
-                                        <div class="border-radius-15 position-relative">
-                                            <div class="post-content-overlay">
-                                                <div class="post-thumb post-thumb-small d-flex img-hover-scale">
-                                                    <img src="<?=$p['foto']; ?>" alt="" style="height: 150px;">
+                                <?php foreach ($partner as $p) : ?>
+                                    <div class="col">
+                                        <div class="post-thumb position-relative">
+
+                                            <div class="border-radius-15 position-relative">
+                                                <div class="post-content-overlay">
+                                                    <div class="post-thumb post-thumb-small d-flex img-hover-scale">
+                                                        <img src="<?= $p['foto']; ?>" alt="" style="height: 150px;">
+                                                    </div>
                                                 </div>
+
                                             </div>
-                                            
+
                                         </div>
-                                        
+
                                     </div>
-                                    
-                                </div>
                                 <?php endforeach; ?>
                             </div>
                         </div>

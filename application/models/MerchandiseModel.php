@@ -296,4 +296,16 @@ class MerchandiseModel extends CI_Model
         where merchandise.foto_utama = foto_merchandise.id and merchandise.kategori = merchandise_kategori.id_kategori_merch and merchandise.kategori = $id";
         return $this->db->query($query);
     }
+
+
+    public function getallmerchandiselimit()
+    {
+        $query = "SELECT foto_merchandise.foto, merchandise_kategori.nama_kategori_merch, merchandise.nama_merch, merchandise.harga, merchandise.diskon, merchandise.deskripsi, merchandise.id_merch, merchandise.kategori
+        FROM foto_merchandise, merchandise, merchandise_kategori
+        where merchandise.foto_utama = foto_merchandise.id and merchandise.kategori = merchandise_kategori.id_kategori_merch
+        order by merchandise.id_merch DESC
+        LIMIT 5
+        ";
+        return $this->db->query($query);
+    }
 }

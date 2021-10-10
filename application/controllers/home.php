@@ -19,6 +19,8 @@ class Home extends CI_Controller
         $data['title'] = 'Intrvrt.me';
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
         $data['partner'] = $this->db->get_where('partner', ['status' => 1])->result_array();
+        $data['getalldata'] = $this->MerchandiseModel->getallmerchandiselimit()->result_array();
+        $data['event'] = $this->tiket_model->getdataeventlimit()->result_array();
         $data['firstLatePost'] = $this->BlogModel->firstLatePost();
         $this->load->view('template_introvert/header', $data);
         $this->load->view('home', $data);
