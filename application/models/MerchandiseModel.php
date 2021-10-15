@@ -173,6 +173,7 @@ class MerchandiseModel extends CI_Model
         $data = array(
             'nama_merch' => htmlspecialchars($this->security->xss_clean($this->input->post('merchandise')), ENT_QUOTES),
             'kategori' => htmlspecialchars($this->security->xss_clean($this->input->post('kategori')), ENT_QUOTES),
+            'stock' => htmlspecialchars($this->security->xss_clean($this->input->post('stock')), ENT_QUOTES),
             'harga' => htmlspecialchars($this->security->xss_clean($this->input->post('harga')), ENT_QUOTES),
             'foto' => htmlspecialchars($group_foto, ENT_QUOTES),
             'foto_utama' => $lastid,
@@ -230,6 +231,7 @@ class MerchandiseModel extends CI_Model
         $data = array(
             'nama_merch' => htmlspecialchars($this->security->xss_clean($this->input->post('merchandise')), ENT_QUOTES),
             'kategori' => htmlspecialchars($this->security->xss_clean($this->input->post('kategori')), ENT_QUOTES),
+            'stock' => htmlspecialchars($this->security->xss_clean($this->input->post('stock')), ENT_QUOTES),
             'harga' => htmlspecialchars($this->security->xss_clean($this->input->post('harga')), ENT_QUOTES),
             'foto_utama' => htmlspecialchars($this->security->xss_clean($this->input->post('main_foto')), ENT_QUOTES),
             'diskon' => htmlspecialchars($this->security->xss_clean($this->input->post('diskon')), ENT_QUOTES),

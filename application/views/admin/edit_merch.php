@@ -131,6 +131,16 @@
                                             </select>
                                         </div>
                                     </div>
+
+                                    <div class="form-group col-12">
+                                        <label class="ml-2">Stock</label>
+                                        <div class="input-group flex-nowrap ml-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="addon-wrapping">Qty</span>
+                                            </div>
+                                            <input type="number" name="stock" value="<?= $merch->stock ?>" min="0" class="form-control" aria-label="stock" aria-describedby="addon-wrapping" required>
+                                        </div>
+                                    </div>
                             </div>
                             <div class="col-6">
                                     <div class="form-group col-12">

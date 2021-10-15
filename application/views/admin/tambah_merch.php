@@ -54,6 +54,16 @@
                                         </select>
                                         </div>
                                     </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4">Stock</label>
+                                        <div class="input-group flex-nowrap col mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="addon-wrapping">Qty</span>
+                                            </div>
+                                            <input type="number" name="stock" min="0" class="form-control" aria-label="stock" aria-describedby="addon-wrapping" required>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="col-6">
