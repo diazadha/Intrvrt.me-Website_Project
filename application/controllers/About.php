@@ -18,6 +18,7 @@ class About extends CI_Controller
     {
         $data['title'] = 'About Us';
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $data['sosmed'] = $this->db->get_where('sosmed', ['status' => 1])->result();
         $this->load->view('template_introvert/header', $data);
         $this->load->view('about', $data);
         $this->load->view('template_introvert/footer', $data);
