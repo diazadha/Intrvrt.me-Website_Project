@@ -76,24 +76,6 @@
                               </div>
                           </div>
                           <div class="form-group row">
-                              <label for="inputPassword3" class="col-sm-2 col-form-label">Instagram</label>
-                              <div class="col-sm-10">
-                                <input type="email" class="form-control" name="instagram" value="<?=$profil->instagram?>">
-                              </div>
-                          </div>
-                          <div class="form-group row">
-                              <label for="inputPassword3" class="col-sm-2 col-form-label">Facebook</label>
-                              <div class="col-sm-10">
-                                <input type="text" class="form-control" name="facebook" value="<?=$profil->facebook?>">
-                              </div>
-                          </div>
-                          <div class="form-group row">
-                              <label for="inputPassword3" class="col-sm-2 col-form-label">Twitter</label>
-                              <div class="col-sm-10">
-                                <input type="text" class="form-control" name="twitter" value="<?=$profil->twitter?>">
-                              </div>
-                          </div>
-                          <div class="form-group row">
                               <label for="inputPassword3" class="col-sm-2 col-form-label">Logo</label>
                               <div class="col-sm-10">
                                   <input type="file" name="logo" accept="image/*" onchange="preview_image(event)">

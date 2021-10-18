@@ -268,6 +268,12 @@
                 <p>Profil Perusahaan</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="<?= base_url('admin/profil/sosial_media') ?>" class="nav-link">
+                <i class="fas fa-globe nav-icon"></i>
+                <p>Sosial Media</p>
+              </a>
+            </li>
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
