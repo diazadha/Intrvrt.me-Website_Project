@@ -37,10 +37,12 @@
                                         <th width="15%">Harga Tiket</th>
                                         <th width="15%">Tanggal Aktif</th>
                                         <th width="15%">Tanggal Berakhir</th>
-                                        <th width="15%"></th>
+                                        <th width="15%">Tanggal Acara</th>
+                                        <th width></th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
                                     <?php foreach ($tiket as $t) : ?>
                                         <tr>
                                             <td> <?= $t['nama_event']; ?> </td>
@@ -48,10 +50,11 @@
                                             <td> Rp <?=number_format($t['harga_tiket'], 0,',','.'); ?> </td>
                                             <td> <?= $t['tgl_aktif']; ?> </td>
                                             <td> <?= $t['tgl_berakhir']; ?> </td>
+                                            <td> <?= $t['tgl_acara']; ?> </td>
                                             <td>
                                                 <center>
-                                                    <a class="btn btn-info btn-sm" href="<?=base_url("admin/Event/edit/").$t['id_event']; ?>">Edit</a>
-                                                    <button type="button" onclick="hapus('<?= $t['id_event'] ?>', '<?= $t['nama_event']; ?>')" class="ml-1 btn btn-danger btn-sm" style=" color: white;">Hapus</button>
+                                                    <a class="btn btn-info btn-sm" href="<?=base_url("admin/Event/edit/").$t['id_event'].'/'.$t['foto']; ?>">Edit</a>
+                                                    <button type="button" onclick="hapus('<?= $t['id_event'] ?>', '<?= $t['nama_event'] ?>', '<?= $t['foto'] ?>')" class="ml-1 btn btn-danger btn-sm" style=" color: white;">Hapus</button>
                                                 </center>
                                             </td>
                                         </tr>
@@ -88,12 +91,13 @@
         })
     }
 
-    function hapus(id_event, nama_event) {
+    function hapus(id_event, nama_event, foto) {
         console.log(id_event);
         console.log(nama_event);
+        console.log(foto);
         Swal.fire({
             title: 'Anda Yakin?',
-            html: "Kategori " + nama_event + " <br><br><b>Akan di Hapus!<b>",
+            html: "Event " + nama_event + " <br><br><b>Akan di Hapus!<b>",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#9AD268',
@@ -103,7 +107,7 @@
         }).then((willDelete) => {
             if (willDelete.value) {
                 $.ajax({
-                    url: '<?= base_url('admin/Event/') ?>delete_event',
+                    url: '<?= base_url('admin/event/delete_event/')?>'+id_event+'/'+foto,
                     data: {
                         id_event: id_event
                     },

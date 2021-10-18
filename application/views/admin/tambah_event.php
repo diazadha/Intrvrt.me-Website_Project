@@ -42,6 +42,16 @@
                                                 <input type="text" class="form-control" id="nama_event" placeholder="Nama Event" name="nama_event" required>
                                             </div>
                                         </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Stock</label>
+                                            <div class="input-group flex-nowrap col-9">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="addon-wrapping">Qty</span>
+                                                </div>
+                                                <input type="number" name="stock" min="0" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
+                                            </div>
+                                        </div>
                                         
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Jenis Event</label>
@@ -59,9 +69,19 @@
                                             <label class="col-sm-3 col-form-label">Harga</label>
                                             <div class="input-group flex-nowrap col-9">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="addon-wrapping">Rp.</span>
+                                                    <span class="input-group-text" id="addon-wrapping">IDR</span>
                                                 </div>
-                                                <input type="number" name="harga" value="0" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
+                                                <input type="number" name="harga" min="0" value="0" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row" id="form3" style="display:none">
+                                            <label class="col-sm-3 col-form-label">Diskon</label>
+                                            <div class="input-group flex-nowrap col-9">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="addon-wrapping">%</span>
+                                                </div>
+                                                <input type="number" name="diskon" min="0" max="100" value="0" placeholder="max 100" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
                                             </div>
                                         </div>
                                         
@@ -92,6 +112,13 @@
                                                 <input type="datetime-local" name="tgl_berakhir" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
                                             </div>
                                         </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 ml-4 col-form-label">Tanggal Acara</label>
+                                            <div class="input-group flex-nowrap col-8">
+                                                <input type="datetime-local" name="tgl_acara" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
+                                            </div>
+                                        </div>
                                     </div>
                                     
                                 </div>
@@ -103,16 +130,41 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-2 col-form-label">Foto</label>
-                                    <div class="col-4">
-                                        <input type="file" name="foto" accept="image/*" onchange="preview_image(event)">
-                                        <div style="display:none" id="row-display">
-                                            <hr>
-                                            <label for="output_image">Preview Foto</label><br>
-                                            <img id="output_image" class="img-thumbnail" width="200"/>
+                                <div class="col-sm-4">
+                                    <input type="hidden" name="id" value="">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="foto" name="foto[]" max="3" onchange="preview_image(event)" multiple>
+                                        <label class="custom-file-label" for="foto">Max 3 Foto</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <div style="display:none" id="row-display">
+                                                <hr>
+                                                <label for="output_image">Preview Foto 1</label><br>
+                                                <img id="output_image" class="img-thumbnail" width="200" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-2">
+                                            <div style="display:none" id="row-display2">
+                                                <hr>
+                                                <label for="output_image2">Preview Foto 2</label><br>
+                                                <img id="output_image2" class="img-thumbnail" width="200" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-2">
+                                            <div style="display:none" id="row-display3">
+                                                <hr>
+                                                <label for="output_image3">Preview Foto 3</label><br>
+                                                <img id="output_image3" class="img-thumbnail" width="200" />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>  
+                                </div>
+                            </div> 
 
                             </div>
                             <!-- /.card-body -->
@@ -135,11 +187,12 @@
 <script type="text/javascript">
     $(function(){
         $(":radio.rad").click(function(){
-            $("#form1, #form2").hide()
+            $("#form1, #form2, #form3").hide()
             if($(this).val() == "1"){
                 $("#form1").show();
             }else{
                 $("#form2").show();
+                $("#form3").show();
             }
         });
     });

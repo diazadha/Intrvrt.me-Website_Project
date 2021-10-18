@@ -29,50 +29,109 @@ class Event extends CI_Controller
         $this->load->view("template/adminlte", $data);
     }
 
-    public function tambah_event()
-    {
+    // public function tambah_event()
+    // {
+    //     $upload = $_FILES['foto']['name'];
+    //     if ($upload) {
+    //         $config['allowed_types']    = 'jpg|png|jpeg';
+    //         $config['upload_path']      = './assets/uploads/foto_event';
+    //         $config['encrypt_name']     = TRUE;
+    //         $this->load->library('upload', $config);
+    //         $this->upload->initialize($config);
+    //         if (!$this->upload->do_upload('foto')) {
+    //             $error = array('error' => $this->upload->display_errors());
+    //             $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">' . $error['error'] . '</div>');
+    //             redirect('admin/Event/tambah');
+    //         } else {
+    //             $fileupload = $this->upload->data();
+    //             $filename = pathinfo($fileupload['full_path']);
+    //             $foto = $filename['basename'];
+    //             $result = $this->tiket_model->tambah_event($foto);
+    //         }
+    //     } else {
+    //         $foto = $this->input->post('foto_');
+    //         $result = $this->tiket_model->tambah_event($foto);
+    //     }
+
+    //     if ($result) {
+    //         $this->session->set_flashdata('message', '<div class="alert tutup alert-success" role="alert">Event Berhasil Di Tambah!</div>');
+    //     } else {
+    //         $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">Error!</div>');
+    //     }
+    //     redirect('admin/Event');
+    // }
+
+    public function tambah_event(){
         $upload = $_FILES['foto']['name'];
         if ($upload) {
-            $config['allowed_types']    = 'jpg|png|jpeg';
+            $numberOfFile = sizeof($upload);
+            $files = $_FILES['foto'];
+            $config['allowed_types']    = 'gif|jpg|png|jpeg';
             $config['upload_path']      = './assets/uploads/foto_event';
             $config['encrypt_name']     = TRUE;
             $this->load->library('upload', $config);
-            $this->upload->initialize($config);
-            if (!$this->upload->do_upload('foto')) {
-                $error = array('error' => $this->upload->display_errors());
-                $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">' . $error['error'] . '</div>');
-                redirect('admin/Event/tambah');
-            } else {
-                $fileupload = $this->upload->data();
-                $filename = pathinfo($fileupload['full_path']);
-                $foto = $filename['basename'];
-                $result = $this->tiket_model->tambah_event($foto);
+            if ($numberOfFile <= 3){
+                for ($i = 0; $i < $numberOfFile; $i++) {
+                    $_FILES['foto']['name'] = $files['name'][$i];
+                    $_FILES['foto']['type'] = $files['type'][$i];
+                    $_FILES['foto']['tmp_name'] = $files['tmp_name'][$i];
+                    $_FILES['foto']['error'] = $files['error'][$i];
+                    $_FILES['foto']['size'] = $files['size'][$i];
+    
+                    $this->upload->initialize($config);
+                    if ($this->upload->do_upload('foto')) {
+                        $data = $this->upload->data();
+                        $fotoName = $data['file_name'];
+                        $cek = $this->tiket_model->cekData();
+                        
+                        if (!$cek) {
+                            $group_foto = 1;
+                        } else {
+                            $group_foto = $cek['group_foto'] + 1;
+                        }
+                        $insert[$i]['foto'] = $fotoName;
+                        $insert[$i]['group_foto'] = $group_foto;
+                        $insert[$i]['date_created'] = date('d-m-Y H:i:s');
+                    }
+                }
+            } else{
+                $this->session->set_flashdata('message', '<div class="alert tutup alert-warning" role="alert">Upload Maksimal 3 foto</div>');
+                redirect('admin/event');
             }
-        } else {
-            $foto = $this->input->post('foto_');
-            $result = $this->tiket_model->tambah_event($foto);
-        }
+            
+            if (!$insert && !$data) {
+                $this->session->set_flashdata('message', '<div class="alert tutup alert-warning" role="alert">Tidak ada data yang disimpan</div>');
+                redirect('admin/event');
+            } else {
+                if ($this->tiket_model->upload($insert) > 0) {
+                    $lastid = $this->tiket_model->cekData();
+                    $this->tiket_model->tambah_event($group_foto,$lastid['id']);
+                    $this->session->set_flashdata('message', '<div class="alert tutup alert-success" role="alert">Event Berhasil Di Tambah!</div>');
+                    redirect('admin/event');
+                } else {
 
-        if ($result) {
-            $this->session->set_flashdata('message', '<div class="alert tutup alert-success" role="alert">Event Berhasil Di Tambah!</div>');
-        } else {
-            $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">Error!</div>');
+                    $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">Error!</div>');
+                    redirect('admin/event');
+                }
+            }
         }
-        redirect('admin/Event');
     }
 
-    public function delete_event()
+    public function delete_event($id,$group)
     {
-        $id = $_POST['id_event'];
-        $cekid = $this->db->get_where('event', ['id_event' => $id])->num_rows();
-        $detail  = $this->db->get_where('event', array('id_event' => $id))->row();
+        $cekid          = $this->db->get_where('event', ['id_event' => $id])->num_rows();
+        $detail         = $this->db->get_where('foto_event', ['group_foto' => $group]);
         if ($cekid == 0) {
             echo 'Error';
             die;
         } else {
             if ($this->tiket_model->delete_event($id)) {
-                $path         = './assets/uploads/foto_event/' . $detail->foto;
-                unlink($path);
+                $detail = $this->tiket_model->detailfoto($group);
+                foreach ($detail as $dt) {
+                    $file_name = './assets/uploads/foto_event/' . $dt['foto'];
+                    unlink($file_name);
+                }
+                $this->tiket_model->foto_delete($group);
                 $r['title'] = 'Sukses!';
                 $r['icon'] = 'success';
                 $r['status'] = 'Berhasil di Hapus!';
@@ -85,22 +144,23 @@ class Event extends CI_Controller
         }
     }
 
-    public function edit($id)
+    public function edit($id,$group)
     {
         $data['profil'] = $this->db->get('profile_perusahaan')->row();
         $data['event'] = $this->tiket_model->view_join($id)->row();
         $data['js'] = array("event.js?r=" . rand());
         $data['content'] = "admin/edit_event";
+        $data['multiple_foto'] =  $this->tiket_model->getFotoGroup($group);
         $data['kategori'] = $this->tiket_model->datakategori()->result_array();
         $this->load->view("template/adminlte", $data);
     }
 
-    public function update_gambar()
+    public function update_gambar($id)
     {
-
         $id_event                   = $this->input->post('id_event');
-        $config['upload_path']       = './assets/uploads/foto_event/';
-        $config['allowed_types']     = 'jpg|jpeg|png|gif|ico|jfif';
+        $group                      = $this->input->post('group');
+        $config['upload_path']      = './assets/uploads/foto_event/';
+        $config['allowed_types']    = 'jpg|jpeg|png|gif|ico|jfif';
         $config['encrypt_name']     = TRUE;
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
@@ -108,32 +168,33 @@ class Event extends CI_Controller
         if (!$this->upload->do_upload($field_name)) {
             echo "Gagal Update Gambar !";
         } else {
-            $detail                     = $this->db->get_where('event', array('id_event' => $id_event))->row();
+            $detail                     = $this->db->get_where('foto_event', array('id' => $id))->row();
             $path                       = './assets/uploads/foto_event/' . $detail->foto;
             unlink($path);
             $fileupload = $this->upload->data();
             $filename   = pathinfo($fileupload['full_path']);
             $foto       = $filename['basename'];
-            $result     = $this->tiket_model->update_foto($foto);
+            $result     = $this->tiket_model->update_foto($foto, $id);
         }
         if ($result) {
             $this->session->set_flashdata('message', '<div class="alert tutup alert-success" role="alert">Foto Berhasil Di Update!</div>');
         } else {
             $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">Error!</div>');
         }
-        redirect(base_url('admin/Event/edit/') . $id_event);
+        redirect(base_url('admin/event/edit/') . $id_event .'/'.$group);
     }
 
     public function edit_event()
     {
-        $id_event = $this->input->post('id_event');
+        $id_event   = $this->input->post('id_event');
         $result     = $this->tiket_model->update_event();
+        $group      = $this->input->post('group');
         if ($result) {
-            $this->session->set_flashdata('message', '<div class="alert tutup alert-success" role="alert">Merchandise Berhasil Di Update!</div>');
+            $this->session->set_flashdata('message', '<div class="alert tutup alert-success" role="alert">Event Berhasil Di Update!</div>');
         } else {
             $this->session->set_flashdata('message', '<div class="alert tutup alert-danger" role="alert">Error!</div>');
         }
-        redirect(base_url('admin/Event/edit/') . $id_event);
+        redirect(base_url('admin/event/edit/') . $id_event .'/'.$group);
     }
 
     public function kategori()
