@@ -56,23 +56,6 @@ class tiket_model extends CI_Model
         return $this->db->query($query);
     }
 
-    // public function tambah_event($foto = NULL)
-    // {
-    //     $data = array(
-    //         'nama_event' => htmlspecialchars($this->security->xss_clean($this->input->post('nama_event')), ENT_QUOTES),
-    //         'stock' => htmlspecialchars($this->security->xss_clean($this->input->post('stock')), ENT_QUOTES),
-    //         'kategori' => htmlspecialchars($this->security->xss_clean($this->input->post('kategori')), ENT_QUOTES),
-    //         'foto' => htmlspecialchars($foto, ENT_QUOTES),
-    //         'harga_tiket' => htmlspecialchars($this->security->xss_clean($this->input->post('harga')), ENT_QUOTES),
-    //         'diskon' => htmlspecialchars($this->security->xss_clean($this->input->post('diskon')), ENT_QUOTES),
-    //         'tgl_aktif' => htmlspecialchars($this->security->xss_clean($this->input->post('tgl_aktif')), ENT_QUOTES),
-    //         'tgl_berakhir' => htmlspecialchars($this->security->xss_clean($this->input->post('tgl_berakhir')), ENT_QUOTES),
-    //         'tgl_acara' => htmlspecialchars($this->security->xss_clean($this->input->post('tgl_acara')), ENT_QUOTES),
-    //         'deskripsi_event' => htmlspecialchars($this->security->xss_clean($this->input->post('deskripsi')), ENT_QUOTES),
-    //     );
-    //     return $this->db->insert('event', $data);
-    // }
-
     public function tambah_event($group_foto, $lastid){
         $data = array(
             'nama_event' => htmlspecialchars($this->security->xss_clean($this->input->post('nama_event')), ENT_QUOTES),
