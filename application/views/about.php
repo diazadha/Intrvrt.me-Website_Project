@@ -14,10 +14,9 @@
             <div class="col-lg-8 col-md-12">
                 <div class="single-social-share single-sidebar-share mt-30">
                     <ul>
-                        <li><a class="social-icon facebook-icon text-xs-center" target="_blank" href="<?=$profil_perusahaan['facebook']?>"><i class="ti-facebook"></i></a></li>
-                        <li><a class="social-icon twitter-icon text-xs-center" target="_blank" href="<?=$profil_perusahaan['twitter']?>"><i class="ti-twitter-alt"></i></a></li>
-                        <li><a class="social-icon instagram-icon text-xs-center" target="_blank" href="<?=$profil_perusahaan['instagram']?>"><i class="ti-instagram"></i></a></li>
-                        <li><a class="social-icon email-icon text-xs-center" target="_blank" href="mailto:<?=$profil_perusahaan['email']?>"><i class="ti-email"></i></a></li>
+                        <?php foreach($sosmed as $s):?>
+                            <li><a class="social-icon text-xs-center" target="_blank" href="<?=$s->sosmed?>"><img src="<?=$s->icon?>" alt=""></a></li>
+                        <?php endforeach;?>
                     </ul>
                 </div>
                 <div class="single-excerpt">
@@ -36,8 +35,12 @@
                     <p>
                         <span class="mr-5">
                             <ion-icon name="location-outline"></ion-icon>
-                        </span><?= htmlspecialchars_decode($profil_perusahaan['alamat'])?>
+                        </span><strong>Alamat</strong>:<?= htmlspecialchars_decode($profil_perusahaan['alamat'])?>
                     </p>
+                    <p>
+                        <span class="mr-5">
+                            <ion-icon name="planet-outline"></ion-icon>
+                        </span><strong>Support center</strong>: <?= htmlspecialchars_decode($profil_perusahaan['email'])?>
                 </div>
             </div>
         </div>

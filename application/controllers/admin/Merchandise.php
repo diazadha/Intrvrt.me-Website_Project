@@ -108,6 +108,7 @@ class Merchandise extends CI_Controller
             $row = array();
             $row[] = $field->nama_merch;
             $row[] = $field->nama_kategori_merch;
+            $row[] = $field->stock;
             $row[] = $field->harga;
             $row[] = $field->diskon;
             $row[] = '<a class="btn btn-info btn-sm" href="' . base_url("admin/merchandise/edit/") . $field->id_merch .'/'. $field->foto .'">Edit</a>
