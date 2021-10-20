@@ -66,7 +66,7 @@
                                         </div>
 
                                         <div class="form-group row" id="form2" style="display:none">
-                                            <label class="col-sm-3 col-form-label">Harga</label>
+                                            <label class="col-sm-3 col-form-label">Harga Tiket</label>
                                             <div class="input-group flex-nowrap col-9">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="addon-wrapping">IDR</span>

@@ -5,13 +5,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Tambah Event</h1>
+                    <h1 class="m-0 text-dark">Edit Event</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="<?= base_url('admin/dashboard') ?>">HOME</a></li>
-                        <li class="breadcrumb-item active"><a href="<?= base_url('admin/event') ?>">Event</a></li>
-                        <li class="breadcrumb-item active">TAMBAH EVENT</li>
+                        <li class="breadcrumb-item active"><a href="<?= base_url('admin/event') ?>">EVENT</a></li>
+                        <li class="breadcrumb-item active">EDIT EVENT</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -27,7 +27,7 @@
                     <div class="card card-outline card-primary">
                         <div class="card-header">
                             <h3 class="card-title">
-                                Form Tambah Event
+                                Form Edit Event
                             </h3>
                         </div>
                         <?= $this->session->flashdata('message');
@@ -109,43 +109,28 @@
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                
-                                    <?= $this->session->flashdata('message');
-                                    $this->session->unset_userdata('message'); ?>
-                                    <div class="form-group col-12">
-                                        <label class="ml-2">Nama event</label>
-                                        <div class="ml-1">
+                                    <?= $this->session->flashdata('message');$this->session->unset_userdata('message'); ?>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 ml-3 col-form-label">Nama Event</label>
+                                        <div class="input-group col-9">
                                             <input type="text" class="form-control" id="event" placeholder="Nama event" name="nama_event" value="<?= $event->nama_event ?>" required>
                                             <input type="hidden" name="id_event" class="form-control" value="<?= $event->id_event ?>">
                                         </div>
                                     </div>
 
-                                    <div class="form-group col-12">
-                                        <label class="ml-2">Kategori event</label>
-                                        <div class="ml-1">
-                                            <select class="form-control" name="kategori" id="kategori">
-                                                <option value='<?php echo $event->kategori ?>'><?php echo $event->nama_kategori ?></option>
-                                                <?php foreach ($kategori as $ktgr) { ?>
-                                                    <option value="<?php echo $ktgr['id_kategori']; ?>"><?php echo $ktgr['nama_kategori']; ?> </option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-12">
-                                        <label class="ml-2">Stock</label>
-                                        <div class="input-group flex-nowrap ml-1">
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 ml-3 col-form-label">Stock</label>
+                                        <div class="input-group flex-nowrap col-9">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="addon-wrapping">Qty</span>
                                             </div>
                                             <input type="number" name="stock" value="<?= $event->stock ?>" min="0" class="form-control" aria-label="stock" aria-describedby="addon-wrapping" required>
                                         </div>
                                     </div>
-                            </div>
-                            <div class="col-6">
-                                    <div class="form-group col-12">
-                                        <label class="ml-2">Harga Tiket</label>
-                                        <div class="input-group flex-nowrap">
+
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 ml-3 col-form-label">Harga Tiket</label>
+                                        <div class="input-group flex-nowrap col-9">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="addon-wrapping">Rp.</span>
                                             </div>
@@ -153,15 +138,50 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group col-12">
-                                        <label class="ml-2">Diskon</label>
-                                        <div class="input-group flex-nowrap">
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 ml-3 col-form-label">Diskon</label>
+                                        <div class="input-group flex-nowrap col-9">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="addon-wrapping">%</span>
                                             </div>
                                             <input type="number" value="<?= $event->diskon ?>" name="diskon" max="100" min="0" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
                                         </div>
                                     </div>
+                            </div>
+                            <div class="col-6"> 
+                                <div class="form-group row">
+                                    <label class="col-sm-3 ml-4 col-form-label">Kategori Event</label>
+                                    <div class="input-group col-8">
+                                        <select class="form-control" name="kategori" id="kategori">
+                                            <option value='<?php echo $event->kategori ?>'><?php echo $event->nama_kategori ?></option>
+                                            <?php foreach ($kategori as $ktgr) { ?>
+                                                <option value="<?php echo $ktgr['id_kategori']; ?>"><?php echo $ktgr['nama_kategori']; ?> </option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-3 ml-4 col-form-label">Tanggal Aktif</label>
+                                    <div class="input-group flex-nowrap col-8">
+                                        <input type="datetime-local" name="tgl_aktif" value="<?= date('Y-m-d\TH:i',strtotime($event->tgl_aktif)) ?>" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-3 ml-4 col-form-label">Tanggal Berakhir</label>
+                                    <div class="input-group flex-nowrap col-8">
+                                        <input type="datetime-local" name="tgl_berakhir" value="<?= date('Y-m-d\TH:i',strtotime($event->tgl_berakhir)) ?>" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-3 ml-4 col-form-label">Tanggal Acara</label>
+                                    <div class="input-group flex-nowrap col-8">
+                                        <input type="datetime-local" name="tgl_acara" value="<?= date('Y-m-d\TH:i',strtotime($event->tgl_acara)) ?>" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                         <div class="form-group">
