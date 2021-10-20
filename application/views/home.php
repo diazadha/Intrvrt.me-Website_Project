@@ -330,7 +330,7 @@
                             <!--Post aside style 2-->
                             <div class="sidebar-widget">
                                 <div class="widget-header mb-30">
-                                    <h5 class="widget-title">Merchandise (New)</h5>
+                                    <h5 class="widget-title">Merchandise (Terbaru)</h5>
                                 </div>
                                 <div class="post-aside-style-2">
                                     <ul class="list-post">
@@ -376,7 +376,7 @@
                                 </div>
                                 <hr>
                                 <div class="widget-header mb-30 ">
-                                    <h5 class="widget-title">Event (New)</span></h5>
+                                    <h5 class="widget-title">Event (Terbaru)</span></h5>
                                 </div>
                                 <div class="post-aside-style-2">
                                     <ul class="list-post">
