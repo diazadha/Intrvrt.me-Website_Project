@@ -135,6 +135,35 @@ class tiket_model extends CI_Model
         return $this->db->update('event', $data);
     }
 
+    public function getallevent()
+    {
+        $query = "SELECT foto_event.foto, stock, foto_utama, nama_kategori, nama_event, harga_tiket, tgl_aktif, tgl_berakhir, tgl_acara, diskon, id_event, event.kategori
+        FROM foto_event, event, tiket_kategori
+        where event.foto_utama = foto_event.id and event.kategori = tiket_kategori.id_kategori
+        ";
+        return $this->db->query($query);
+    }
+
+    public function getfotobyid($id, $foto)
+    {
+        $this->db->select('foto_event.foto');
+        $this->db->from('foto_event');
+        $this->db->join('event', 'event.foto = foto_event.group_foto');
+        $this->db->join('tiket_kategori', 'event.kategori = tiket_kategori.id_kategori');
+        $this->db->where('event.id_event', $id);
+        $this->db->where('foto_event.foto !=', $foto);
+
+        return $this->db->get();
+    }
+
+    public function getdatabyid2($id)
+    {
+        $query = "SELECT tiket_kategori.nama_kategori, nama_event, harga_tiket, diskon, deskripsi_event, id_event, foto_event.foto, tgl_acara, tgl_berakhir
+        FROM event, tiket_kategori, foto_event
+        where event.kategori = tiket_kategori.id_kategori and event.foto_utama = foto_event.id and event.id_event = $id";
+        return $this->db->query($query);
+    }
+
     public function view_join($id)
     {
         $query = "SELECT * FROM event, tiket_kategori WHERE kategori = id_kategori AND id_event = $id";

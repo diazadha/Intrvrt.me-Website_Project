@@ -242,33 +242,48 @@
                                     <div class="loop-list-style-1">
                                         <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
                                             <div class="d-md-flex d-block">
+                                                
                                                 <div class="post-thumb post-thumb-big d-flex mr-15 border-radius-15 img-hover-scale">
                                                     <a class="color-white" href="<?= base_url('home/event_detail/') . $e['id_event'] ?>">
                                                         <img class="border-radius-15" src="<?= base_url('assets/uploads/foto_event/') . $e['foto']; ?>" alt="">
-                                                    </a>
+                                                    </a>   
                                                 </div>
                                                 <div class="post-content media-body">
                                                     <div class="entry-meta mb-15 mt-10">
                                                         <a class="entry-meta meta-2" href="<?= base_url('home/ekategori/') . $k['id_kategori'] ?>"><span class="post-in text-danger font-x-small"><?= $e['nama_kategori']; ?></span></a>
                                                     </div>
-                                                    <h5 class="post-title mb-15 text-limit-2-row">
+                                                    <h5 class="post-title text-limit-2-row">
                                                         <!-- <span class="post-format-icon">
                                                         <ion-icon name="videocam-outline"></ion-icon>
                                                     </span> -->
                                                         <a href="<?= base_url('home/event_detail/') . $e['id_event'] ?>"><?= ucwords($e['nama_event']); ?></a>
                                                     </h5>
+                                                    <h7 class="post-title mb-15 text-limit-2-row">
+                                                        <!-- <span class="post-format-icon">
+                                                        <ion-icon name="videocam-outline"></ion-icon>
+                                                    </span> -->
+                                                        <a href="<?= base_url('home/event_detail/') . $e['id_event'] ?>"><?= ucwords($e['tgl_acara']); ?></a>
+                                                    </h7>
                                                     <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
                                                         <?php
                                                         if ($e['harga_tiket'] == 0) { ?>
                                                             <a class="entry-meta meta-0"><span class="post-in background5 text-dark font-x-small">GRATIS</span></a>
-                                                        <?php } else { ?>
+                                                        <?php } else if ($e['diskon'] != 0) { ?>
+                                                            <?php $h_diskon = $e['harga_tiket'] * ($e['diskon'] / 100);
+                                                                $diskon = $e['harga_tiket'] - $h_diskon;
+                                                                ?>
                                                             <div class="entry-meta meta-0 font-small mb-30 mt-1">
-                                                                <span class="post-cat bg-success color-white">Rp <?= number_format($e['harga_tiket'], 0, ',', '.') ?></span>
+                                                                <span class="post-cat bg-success color-white" style="text-decoration: line-through;">Rp <?= number_format($e['harga_tiket'], 0, ',', '.') ?></span>
+                                                                <span class="post-in background5 text-dark font-x-small">Rp <?= number_format($diskon, 0, ',', '.') ?></span>
                                                             </div>
-                                                        <?php } ?>
+                                                        <?php }else{?>
+                                                            <div class="entry-meta meta-0 font-small mb-30 mt-1">
+                                                                    <span class="post-cat bg-success color-white">Rp <?= number_format($e['harga_tiket'], 0, ',', '.') ?></span>
+                                                                </div>
+                                                            <?php } ?>
                                                         <hr>
-                                                        <span class="post-on">Tanggal Aktif: <?= $e['tgl_aktif']; ?></span>
-                                                        <span class="post-off">Tanggal Berakhir: <?= $e['tgl_berakhir']; ?></span>
+                                                        <span class="post-off" style="color: red;">Batas Pembelian: <?= $e['tgl_berakhir']; ?></span>
+                                                        <span class="post-off">Stock: <?= $e['stock']; ?></span>
                                                     </div>
                                                 </div>
                                             </div>

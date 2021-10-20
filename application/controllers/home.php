@@ -346,7 +346,7 @@ class Home extends CI_Controller
     {
         $data['title'] = 'Event';
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
-        $data['event'] = $this->tiket_model->getdataevent()->result_array();
+        $data['event'] = $this->tiket_model->getallevent()->result_array();
         $data['kategori'] = $this->tiket_model->datakategori()->result_array();
         $this->load->view('template_introvert/header', $data);
         $this->load->view('event', $data);
@@ -358,6 +358,8 @@ class Home extends CI_Controller
         $data['title'] = 'Event';
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
         $data['event'] = $this->tiket_model->view_join($id)->row();
+        $data['getdatabyid'] = $this->tiket_model->getdatabyid2($id)->row_array();
+        $data['getfotobyid'] = $this->tiket_model->getfotobyid($id, $data['getdatabyid']['foto'])->result_array();
         $this->load->view('template_introvert/header', $data);
         $this->load->view('detail_event', $data);
         $this->load->view('template_introvert/footer', $data);
