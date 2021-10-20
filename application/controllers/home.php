@@ -101,6 +101,9 @@ class Home extends CI_Controller
         if ($type == 'verify') {
             $this->email->subject('Verifikasi Akun');
             $this->email->message('Click this link to verfiy your account : <a href="' . base_url() . 'home/verivikasi?email=' . $this->input->post('email') . '&token=' . urlencode($token) . '">Activate</a>');
+        } else if ($type == 'forgot_password') {
+            $this->email->subject('Reset Password');
+            $this->email->message('Click this link to reset your password : <a href="' . base_url() . 'home/reset_password?email=' . $this->input->post('email') . '&token=' . urlencode($token) . '">Reset Password</a>');
         }
 
         if ($this->email->send()) {
@@ -108,6 +111,64 @@ class Home extends CI_Controller
         } else {
             echo $this->email->print_debugger();
             die;
+        }
+    }
+
+    public function reset_password()
+    {
+        $email = $this->input->get('email');
+        $token = $this->input->get('token');
+
+        $user = $this->db->get_where('user', ['email' => $email])->row_array();
+
+        if ($user) {
+            $user_token = $this->db->get_where('user_token', ['token' => $token])->row_array();
+            if ($user_token) {
+                if (time() - $user_token['date_created'] < (60 * 60 * 24)) {
+                    $this->db->delete('user_token', ['email' => $email]);
+                    redirect('home/reset_password_view?email=' . $email);
+                } else {
+                    $this->db->delete('user', ['email' => $email]);
+                    $this->db->delete('user_token', ['email' => $email]);
+                    $this->session->set_flashdata('message', 'Aktivasi Akun Gagal! Token Expired');
+                    redirect('home/lupa_password');
+                }
+            } else {
+                $this->session->set_flashdata('message', 'Aktivasi Akun Gagal! Token salah');
+                redirect('home/lupa_password');
+            }
+        } else {
+            $this->session->set_flashdata('message', 'Aktivasi Akun Gagal! Email yang digunakan salah');
+            redirect('home/lupa_password');
+        }
+    }
+
+    public function reset_password_view()
+    {
+        $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[6]|matches[password2]', [
+            'matches' => 'Password tidak sama!',
+            'min_length' => 'Password telalu pendek minimal 6 karakter'
+        ]);
+        $this->form_validation->set_rules('password2', 'Password', 'matches[password1]');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Reset Password';
+            $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+            $data['user'] = $this->db->get_where('user', ['email' => $this->input->get('email')])->row_array();
+            $this->load->view('template_introvert/header', $data);
+            $this->load->view('reset_password', $data);
+            $this->load->view('template_introvert/footer', $data);
+        } else {
+            $data = [
+                'password' => password_hash(
+                    $this->input->post('password1'),
+                    PASSWORD_DEFAULT
+                ),
+            ];
+            $this->db->where('id_user', $this->input->post('id_user'));
+            $this->db->update('user', $data);
+            $this->session->set_flashdata('message1', 'Password Berhasil Diubah Silahkan Login!');
+            redirect('home/login');
         }
     }
 
@@ -337,7 +398,20 @@ class Home extends CI_Controller
             $email = $this->input->post('email');
             $user = $this->db->get_where('user', ['email' => $email])->row_array();
             if ($user) {
+                //Prepare for token
+                $token = base64_encode(random_bytes(32));
+                $user_token = [
+                    'email' => $this->input->post('email', true),
+                    'token' => $token,
+                    'date_created' => time()
+                ];
+                $this->db->insert('user_token', $user_token);
+                $this->_sendEmail($token, 'forgot_password');
+                $this->session->set_flashdata('message1', 'Silahkan Periksa Email Untuk Reset Password!');
+                redirect('home/lupa_password');
             } else {
+                $this->session->set_flashdata('message', 'Email tidak terdaftar!');
+                redirect('home/lupa_password');
             }
         }
     }

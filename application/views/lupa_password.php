@@ -6,11 +6,21 @@
                 <div class="login-logo mb-4 text-center">
                     <a href="<?= base_url(); ?>"><b>INTRVRT</b>.ME</a>
                 </div>
+                <?php if ($this->session->flashdata('message1')) : ?>
+                    <?php $message = $this->session->flashdata('message1'); ?>
+                    <?= '<div class="alert alert-success">' . $message . '</div>'; ?>
+                    <?php $this->session->unset_userdata('message'); ?>
+                <?php endif; ?>
+                <?php if ($this->session->flashdata('message')) : ?>
+                    <?php $message = $this->session->flashdata('message'); ?>
+                    <?= '<div class="alert alert-danger">' . $message . '</div>'; ?>
+                    <?php $this->session->unset_userdata('message'); ?>
+                <?php endif; ?>
                 <br>
 
                 <div class="container">
                     <p class="login-box-msg">Lupa Password? Tulis email kamu dibawah ini untuk melakukan reset password</p>
-                    <form action="<?= base_url('home/login'); ?>" method="post">
+                    <form action="<?= base_url('home/lupa_password'); ?>" method="post">
                         <?= form_error('email', '<small class="text-danger pl-1">', '</small>'); ?>
                         <div class="input-group mb-4">
                             <input type="email" class="form-control" placeholder="Email" name="email">
