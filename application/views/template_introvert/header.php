@@ -50,15 +50,16 @@
                                             <ion-icon name="home-outline"></ion-icon>
                                         </span>Home</a>
                                 </li>
-                                <li><a href="category-metro.html"><span class="mr-15">
+                                <li><a href="<?= base_url('home/merchandise') ?>"><span class="mr-15">
                                             <i class="fas fa-gift"></i>
                                         </span>Merchandise</a></li>
-                                <li><a href="contact.html"><span class="mr-15">
+                                <li><a href="<?= base_url('home/event') ?>"><span class="mr-15">
                                             <i class="fas fa-ticket-alt"></i>
                                         </span>Event</a></li>
-                                <li><a href="contact.html"><span class="mr-15">
+                                <li><a href="<?= base_url('about') ?>"><span class="mr-15">
                                             <i class="far fa-building"></i>
-                                        </span>About Us</a></li>
+                                        </span>About Us</a>
+                                </li>
                                 <?php if ($this->session->userdata('nama')) : ?>
                                     <li class="menu-item-has-children">
                                         <a href="<?= base_url(); ?>"><span class="mr-15">
@@ -125,6 +126,7 @@
                         <div class="main-nav text-left float-lg-right float-md-right">
                             <nav>
                                 <ul class="main-menu d-none d-lg-inline">
+                                    <li> <a href="<?= base_url('home/cart') ?>"> <i class="fas fa-shopping-cart"></i> </a></li>
                                     <?php if ($this->session->userdata('nama')) : ?>
                                         <li class="menu-item-has-children">
                                             <a href="<?= base_url(); ?>"><span class="mr-15">
