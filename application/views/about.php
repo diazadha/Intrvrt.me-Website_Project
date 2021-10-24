@@ -15,7 +15,7 @@
                 <div class="single-social-share single-sidebar-share mt-30">
                     <ul>
                         <?php foreach ($sosmed as $s) : ?>
-                            <li><a class="social-icon text-xs-center" target="_blank" href="<?= $s->sosmed ?>"><img src="<?= $s->icon ?>" alt=""></a></li>
+                            <li><a class="social-icon text-xs-center" target="_blank" href="<?= $s->url; ?>"><img src="<?= $s->icon ?>" alt=""></a></li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
