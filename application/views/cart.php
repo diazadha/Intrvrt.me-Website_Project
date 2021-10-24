@@ -13,7 +13,7 @@
                                      <thead class="thead-primary text-center" style="background-color: #FF656A; color: white;">
                                          <tr>
                                              <th>No</th>
-                                             <th>Nama Item</th>
+                                             <th>Nama Barang</th>
                                              <th>Foto Barang</th>
                                              <th>Harga</th>
                                              <th>Jumlah</th>
