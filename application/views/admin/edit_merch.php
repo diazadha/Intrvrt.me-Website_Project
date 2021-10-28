@@ -5,13 +5,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Tambah Merchandise</h1>
+                    <h1 class="m-0 text-dark">Edit Merchandise</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="<?= base_url('admin/dashboard') ?>">HOME</a></li>
                         <li class="breadcrumb-item active"><a href="<?= base_url('admin/merchandise') ?>">MERCHANDISE</a></li>
-                        <li class="breadcrumb-item active">TAMBAH MERCHANDISE</li>
+                        <li class="breadcrumb-item active">EDIT MERCHANDISE</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -27,7 +27,7 @@
                     <div class="card card-outline card-primary">
                         <div class="card-header">
                             <h3 class="card-title">
-                                Form Tambah Merchandise
+                                Form Edit Merchandise
                             </h3>
                         </div>
                         <?= $this->session->flashdata('message');
@@ -160,6 +160,21 @@
                                                 <span class="input-group-text" id="addon-wrapping">%</span>
                                             </div>
                                             <input type="number" value="<?= $merch->diskon ?>" name="diskon" max="100" min="0" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col">Pengiriman Merchandise</label>
+                                        <div class="input-group flex-nowrap">
+                                            <select class="form-control" name="is_deliver">
+                                        <?php if ($merch->is_deliver == "0"){?>
+                                                <option value='0' selected>Tidak Menggunakan Kurir</option>
+                                                <option value="1">Menggunakan Kurir</option>
+                                        <?php }else {?>
+                                                <option value='0'>Tidak Menggunakan Kurir</option>
+                                                <option value="1"selected>Menggunakan Kurir</option>
+                                        <?php } ?>
+                                         </select>
                                         </div>
                                     </div>
                             </div>

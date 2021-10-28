@@ -86,6 +86,16 @@
                                             <input type="number" name="diskon" max="100" min="0" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
                                         </div>
                                     </div>
+
+                                    <div class="form-group">
+                                        <label class="col">Pengiriman Merchandise</label>
+                                        <div class="input-group flex-nowrap">
+                                            <select class="form-control" name="is_deliver">
+                                            <option value='0'>Tidak Menggunakan Kurir</option>
+                                            <option value="1">Menggunakan Kurir</option>
+                                        </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 

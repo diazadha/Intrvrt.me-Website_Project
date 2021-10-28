@@ -179,6 +179,7 @@ class MerchandiseModel extends CI_Model
             'foto_utama' => $lastid,
             'diskon' => htmlspecialchars($this->security->xss_clean($this->input->post('diskon')), ENT_QUOTES),
             'deskripsi' => htmlspecialchars($this->security->xss_clean($this->input->post('deskripsi')), ENT_QUOTES),
+            'is_deliver' => htmlspecialchars($this->security->xss_clean($this->input->post('is_deliver')), ENT_QUOTES),
         );
         return $this->db->insert('merchandise', $data);
     }
@@ -236,6 +237,7 @@ class MerchandiseModel extends CI_Model
             'foto_utama' => htmlspecialchars($this->security->xss_clean($this->input->post('main_foto')), ENT_QUOTES),
             'diskon' => htmlspecialchars($this->security->xss_clean($this->input->post('diskon')), ENT_QUOTES),
             'deskripsi' => htmlspecialchars($this->security->xss_clean($this->input->post('deskripsi')), ENT_QUOTES),
+            'is_deliver' => htmlspecialchars($this->security->xss_clean($this->input->post('is_deliver')), ENT_QUOTES),
         );
         $this->db->where('id_merch', htmlspecialchars($this->security->xss_clean($this->input->post('id_merch')), ENT_QUOTES));
         return $this->db->update('merchandise', $data);
