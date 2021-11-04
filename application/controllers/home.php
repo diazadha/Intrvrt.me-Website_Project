@@ -88,7 +88,7 @@ class Home extends CI_Controller
             'protocol' => 'smtp',
             'smtp_host' => 'ssl://smtp.googlemail.com',
             'smtp_user' => 'intrvrt.me1@gmail.com',
-            'smtp_pass' => 'Intrvrt123',
+            'smtp_pass' => 'Ayamgoreng123',
             'smtp_port' => 465,
             'mailtype' => 'html',
             'charset' => 'utf-8',
@@ -485,13 +485,153 @@ class Home extends CI_Controller
         $this->load->view('template_introvert/footer', $data);
     }
 
-    public function cart()
+    public function cart_merchandise()
     {
         $data['title'] = 'Cart';
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        if ($user) {
+            $data['keranjang_merchandise'] = $this->MerchandiseModel->get_keranjang($user['id_user'])->result_array();
+            $this->load->view('template_introvert/header', $data);
+            $this->load->view('cart_merchandise', $data);
+            $this->load->view('template_introvert/footer', $data);
+        } else {
+            $this->session->set_flashdata('message2', 'Login terlebih dahulu sebelum melihat keranjang');
+            redirect('home/login');
+        }
+    }
 
-        $this->load->view('template_introvert/header', $data);
-        $this->load->view('cart', $data);
-        $this->load->view('template_introvert/footer', $data);
+    public function hapus_keranjang_merchandise($id_keranjang)
+    {
+        $this->db->where('id_keranjang', $id_keranjang);
+        $this->db->delete('keranjang_merchandise');
+
+        redirect('home/cart_merchandise');
+    }
+
+
+    public function cart_event()
+    {
+        $data['title'] = 'Cart';
+        $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        if ($user) {
+            $data['keranjang_event'] = $this->tiket_model->get_keranjang($user['id_user'])->result_array();
+            $this->load->view('template_introvert/header', $data);
+            $this->load->view('cart_event', $data);
+            $this->load->view('template_introvert/footer', $data);
+        } else {
+            $this->session->set_flashdata('message2', 'Login terlebih dahulu sebelum melihat keranjang');
+            redirect('home/login');
+        }
+    }
+
+    public function hapus_keranjang_event($id_keranjang)
+    {
+        $this->db->where('id_keranjang', $id_keranjang);
+        $this->db->delete('keranjang_event');
+
+        redirect('home/cart_event');
+    }
+
+
+    public function uncheck_status_merchandise()
+    {
+        $id_keranjang = $_POST['id_keranjang'];
+        $this->MerchandiseModel->uncheck_status_merchandise($id_keranjang);
+        echo json_encode(['Success' => 1]);
+    }
+
+    public function check_status_merchandise()
+    {
+        $id_keranjang = $_POST['id_keranjang'];
+        $this->MerchandiseModel->check_status_merchandise($id_keranjang);
+        echo json_encode(['Success' => 1]);
+    }
+
+    public function uncheck_status_event()
+    {
+        $id_keranjang = $_POST['id_keranjang'];
+        $this->tiket_model->uncheck_status_event($id_keranjang);
+        echo json_encode($this->tiket_model->get_keranjang_status_event($id_keranjang)->row_array());
+    }
+
+    public function check_status_event()
+    {
+        $id_keranjang = $_POST['id_keranjang'];
+        $this->tiket_model->check_status_event($id_keranjang);
+        echo json_encode(['Success' => 1]);
+    }
+
+    public function tambah_keranjang_merch($id_merch)
+    {
+        if (!$this->session->userdata('email')) {
+            $this->session->set_flashdata('message2', 'Login terlebih dahulu sebelum melakukan tambah ke keranjang');
+            redirect('home/login');
+        } else {
+            $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+            $keranjang = $this->MerchandiseModel->cek_keranjang($id_merch, $user['id_user'])->row_array();
+            if ($keranjang) {
+                $this->db->set('qty', $keranjang['qty'] + 1);
+                $this->db->where('id_keranjang', $keranjang['id_keranjang']);
+                $this->db->update('keranjang_merchandise');
+                redirect('home/merchandise');
+            } else {
+                $data = array(
+                    'id_merchandise'      => $id_merch,
+                    'qty'     => 1,
+                    'status' => 1,
+                    'id_user' => $user['id_user'],
+                );
+                $this->db->insert('keranjang_merchandise', $data);
+                redirect('home/merchandise');
+            }
+        }
+    }
+
+    public function tambah_keranjang_event($id_event)
+    {
+        if (!$this->session->userdata('email')) {
+            $this->session->set_flashdata('message2', 'Daftar terlebih dahulu sebelum melakukan tambah ke keranjang');
+            redirect('home/login');
+        } else {
+            $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+            $keranjang = $this->tiket_model->cek_keranjang($id_event, $user['id_user'])->row_array();
+            if ($keranjang) {
+                $this->db->set('qty', $keranjang['qty'] + 1);
+                $this->db->where('id_keranjang', $keranjang['id_keranjang']);
+                $this->db->update('keranjang_event');
+                redirect('home/event');
+            } else {
+                $data = array(
+                    'id_event'      => $id_event,
+                    'qty'     => 1,
+                    'status' => 1,
+                    'id_user' => $user['id_user'],
+                );
+                $this->db->insert('keranjang_event', $data);
+                redirect('home/event');
+            }
+        }
+    }
+
+    public function updatekeranjang_event()
+    {
+        $id_keranjang = $_POST['id_keranjang'];
+        $qty = $_POST['qty'];
+
+        $query = "UPDATE keranjang_event SET qty = $qty WHERE id_keranjang = $id_keranjang";
+        $this->db->query($query);
+        echo json_encode($this->tiket_model->get_keranjang_byid($id_keranjang)->row_array());
+    }
+
+    public function updatekeranjang_merchandise()
+    {
+        $id_keranjang = $_POST['id_keranjang'];
+        $qty = $_POST['qty'];
+
+        $query = "UPDATE keranjang_merchandise SET qty = $qty WHERE id_keranjang = $id_keranjang";
+        $this->db->query($query);
+        echo json_encode($this->MerchandiseModel->get_keranjang_byid($id_keranjang)->row_array());
     }
 }

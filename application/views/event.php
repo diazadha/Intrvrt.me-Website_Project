@@ -226,7 +226,7 @@
                             <h5 class="widget-title"><strong>Kategori Event</strong></h5>
                         </div>
                         <ul class="font-small text-muted">
-                            <li class="cat-item cat-item-2"><a href="<?= base_url('home/event/')?>">Tampilkan Semua</a></li>
+                            <li class="cat-item cat-item-2"><a href="<?= base_url('home/event/') ?>">Tampilkan Semua</a></li>
                             <?php foreach ($kategori as $k) : ?>
                                 <li class="cat-item cat-item-2"><a href="<?= base_url('home/ekategori/') . $k['id_kategori'] ?>"><?= $k['nama_kategori']; ?></a></li>
                             <?php endforeach; ?>
@@ -242,11 +242,11 @@
                                     <div class="loop-list-style-1">
                                         <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
                                             <div class="d-md-flex d-block">
-                                                
+
                                                 <div class="post-thumb post-thumb-big d-flex mr-15 border-radius-15 img-hover-scale">
                                                     <a class="color-white" href="<?= base_url('home/event_detail/') . $e['id_event'] ?>">
                                                         <img class="border-radius-15" src="<?= base_url('assets/uploads/foto_event/') . $e['foto']; ?>" alt="">
-                                                    </a>   
+                                                    </a>
                                                 </div>
                                                 <div class="post-content media-body">
                                                     <div class="entry-meta mb-15 mt-10">
@@ -270,18 +270,29 @@
                                                             <a class="entry-meta meta-0"><span class="post-in background5 text-dark font-x-small">GRATIS</span></a>
                                                         <?php } else if ($e['diskon'] != 0) { ?>
                                                             <?php $h_diskon = $e['harga_tiket'] * ($e['diskon'] / 100);
-                                                                $diskon = $e['harga_tiket'] - $h_diskon;
-                                                                ?>
+                                                            $diskon = $e['harga_tiket'] - $h_diskon;
+                                                            ?>
                                                             <div class="entry-meta meta-0 font-small mb-30 mt-1">
                                                                 <span class="post-cat bg-success color-white" style="text-decoration: line-through;">Rp <?= number_format($e['harga_tiket'], 0, ',', '.') ?></span>
                                                                 <span class="post-in background5 text-dark font-x-small">Rp <?= number_format($diskon, 0, ',', '.') ?></span>
                                                             </div>
-                                                        <?php }else{?>
+                                                        <?php } else { ?>
                                                             <div class="entry-meta meta-0 font-small mb-30 mt-1">
-                                                                    <span class="post-cat bg-success color-white">Rp <?= number_format($e['harga_tiket'], 0, ',', '.') ?></span>
-                                                                </div>
-                                                            <?php } ?>
+                                                                <span class="post-cat bg-success color-white">Rp <?= number_format($e['harga_tiket'], 0, ',', '.') ?></span>
+                                                            </div>
+                                                        <?php } ?>
+                                                        <div class="row justify-content-around">
+                                                            <div class="col">
+
+                                                                <a href="<?= base_url('home/event_detail/') . $e['id_event'] ?>"><i class="fas fa-info-circle fa-2x">Detail</i></a>
+
+                                                            </div>
+                                                            <div class="col">
+                                                                <a href="<?= base_url('home/tambah_keranjang_event/') . $e['id_event']; ?>"><i class="fas fa-cart-plus fa-2x">Tambah</i></a>
+                                                            </div>
+                                                        </div>
                                                         <hr>
+
                                                         <span class="post-off" style="color: red;">Batas Pembelian: <?= $e['tgl_berakhir']; ?></span>
                                                         <span class="post-off">Stock: <?= $e['stock']; ?></span>
                                                     </div>

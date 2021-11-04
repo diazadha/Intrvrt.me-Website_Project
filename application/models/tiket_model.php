@@ -56,7 +56,8 @@ class tiket_model extends CI_Model
         return $this->db->query($query);
     }
 
-    public function tambah_event($group_foto, $lastid){
+    public function tambah_event($group_foto, $lastid)
+    {
         $data = array(
             'nama_event' => htmlspecialchars($this->security->xss_clean($this->input->post('nama_event')), ENT_QUOTES),
             'stock' => htmlspecialchars($this->security->xss_clean($this->input->post('stock')), ENT_QUOTES),
@@ -181,6 +182,50 @@ class tiket_model extends CI_Model
     public function datakategori()
     {
         $query = "SELECT * FROM tiket_kategori WHERE status = 1";
+        return $this->db->query($query);
+    }
+
+    public function cek_keranjang($id_event, $id_user)
+    {
+        $query = "SELECT *
+        FROM keranjang_event
+        WHERE id_event = $id_event AND id_user = $id_user";
+        return $this->db->query($query);
+    }
+
+    public function get_keranjang($id_user)
+    {
+        $query = "SELECT keranjang_event.*, foto_event.*, event.id_event, event.nama_event, event.stock, event.harga_tiket, event.diskon
+        FROM keranjang_event, user, event, foto_event
+        WHERE user.id_user = keranjang_event.id_user AND keranjang_event.id_user = $id_user AND event.id_event = keranjang_event.id_event AND event.foto_utama = foto_event.id";
+        return $this->db->query($query);
+    }
+
+    public function uncheck_status_event($id_keranjang)
+    {
+        $query = "UPDATE keranjang_event SET keranjang_event.status = 0 WHERE id_keranjang = $id_keranjang";
+        return $this->db->query($query);
+    }
+
+    public function check_status_event($id_keranjang)
+    {
+        $query = "UPDATE keranjang_event SET keranjang_event.status = 1 WHERE id_keranjang = $id_keranjang";
+        return $this->db->query($query);
+    }
+
+    public function get_keranjang_byid($id_keranjang)
+    {
+        $query = "SELECT *
+        FROM keranjang_event
+        WHERE id_keranjang = $id_keranjang";
+        return $this->db->query($query);
+    }
+
+    public function get_keranjang_status_event($id_keranjang)
+    {
+        $query = "SELECT keranjang_event.*, event.id_event, event.nama_event, event.stock, event.harga_tiket, event.diskon
+        FROM keranjang_event, event
+        WHERE event.id_event = keranjang_event.id_event AND keranjang_event.id_keranjang = $id_keranjang";
         return $this->db->query($query);
     }
 }

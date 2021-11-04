@@ -155,36 +155,12 @@
                 <!-- sidebar-left -->
                 <div class="col-lg-2 col-md-3 primary-sidebar sticky-sidebar sidebar-left order-2 order-md-1">
                     <!-- Widget Weather -->
-                    <div class="sidebar-widget widget-weather border-radius-10 bg-white mb-30">
+                    <div class="sidebar-widget widget-weather border-radius-10 bg-white mb-30 col-lg-6">
                         <div class="d-flex">
                             <div class="font-medium">
                                 <p><?= date('l') ?></p>
                                 <h2><?= date('d') ?></h2>
                                 <p><strong><?= date('F') ?></strong></p>
-                            </div>
-                            <div class="font-medium ml-10 pt-20">
-                                <div id="datetime" class="d-inline-block">
-                                    <ul>
-                                        <li><span class="font-small">
-                                                <a class="text-primary" href="#">London</a><br>
-                                                <i class="wi wi-day-sunny mr-5"></i>32ºc
-                                            </span>
-                                            <p>Sunny</p>
-                                        </li>
-                                        <li><span class="font-small">
-                                                <a class="text-danger" href="#">Paris</a><br>
-                                                <i class="wi wi-day-cloudy mr-5"></i>28ºc
-                                            </span>
-                                            <p>Cloudy</p>
-                                        </li>
-                                        <li><span class="font-small">
-                                                <a class="text-success" href="#">New York</a><br>
-                                                <i class="wi wi-rain-mix mr-5"></i>25ºc
-                                            </span>
-                                            <p>Rainy</p>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
                         </div>
                     </div>

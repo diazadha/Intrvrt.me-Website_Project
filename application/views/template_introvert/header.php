@@ -9,11 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
     <link rel="shortcut icon" type="image/x-icon" href="<?= $profil_perusahaan['logo']; ?>">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <!-- NewsViral CSS  -->
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/css/style.css">
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/css/widgets.css">
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/css/color.css">
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/css/responsive.css">
+
 </head>
 
 <body>
@@ -126,7 +128,17 @@
                         <div class="main-nav text-left float-lg-right float-md-right">
                             <nav>
                                 <ul class="main-menu d-none d-lg-inline">
-                                    <li> <a href="<?= base_url('home/cart') ?>"> <i class="fas fa-shopping-cart"></i> </a></li>
+                                    <li class="menu-item-has-children">
+                                        <a href="<?= base_url(); ?>"><span class="mr-15">
+                                                <!-- <ion-icon name="contact"></ion-icon> -->
+                                                <i class="fas fa-shopping-cart"></i>
+                                        </a>
+                                        <ul class="sub-menu text-muted font-small">
+                                            <li><a href="<?= base_url('home/cart_merchandise') ?>">Merchandise</a></li>
+                                            <li><a href="<?= base_url('home/cart_event') ?>">Event</a></li>
+                                        </ul>
+                                    </li>
+                                    <li> <a href="<?= base_url('home/cart') ?>"> </a></li>
                                     <?php if ($this->session->userdata('nama')) : ?>
                                         <li class="menu-item-has-children">
                                             <a href="<?= base_url(); ?>"><span class="mr-15">

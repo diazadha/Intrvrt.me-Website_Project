@@ -13,6 +13,11 @@
                     <?= '<div class="alert alert-danger">' . $message . '</div>'; ?>
                     <?php $this->session->unset_userdata('message'); ?>
                 <?php endif; ?>
+                <?php if ($this->session->flashdata('message2')) : ?>
+                    <?php $message = $this->session->flashdata('message2'); ?>
+                    <?= '<div class="alert alert-info">' . $message . '</div>'; ?>
+                    <?php $this->session->unset_userdata('message2'); ?>
+                <?php endif; ?>
                 <div class="login-logo mb-4 text-center">
                     <a href="<?= base_url(); ?>"><b>INTRVRT</b>.ME</a>
                 </div>

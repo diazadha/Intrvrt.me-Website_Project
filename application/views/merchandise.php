@@ -286,7 +286,7 @@
 
                                                                 </div>
                                                                 <div class="col">
-                                                                    <a href="#"><i class="fas fa-cart-plus fa-2x">Tambah</i></a>
+                                                                    <a href="<?= base_url('home/tambah_keranjang_merch/') . $m['id_merch']; ?>"><i class="fas fa-cart-plus fa-2x">Tambah</i></a>
                                                                 </div>
                                                             </div>
                                                             <!-- <div class="card text-center">

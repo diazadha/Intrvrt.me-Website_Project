@@ -312,4 +312,40 @@ class MerchandiseModel extends CI_Model
         ";
         return $this->db->query($query);
     }
+
+    public function cek_keranjang($id_merch, $id_user)
+    {
+        $query = "SELECT *
+        FROM keranjang_merchandise
+        WHERE id_merchandise = $id_merch AND id_user = $id_user";
+        return $this->db->query($query);
+    }
+
+    public function get_keranjang($id_user)
+    {
+        $query = "SELECT keranjang_merchandise.*, foto_merchandise.*, merchandise.id_merch, merchandise.nama_merch, merchandise.stock, merchandise.harga, merchandise.diskon, merchandise.is_deliver
+        FROM keranjang_merchandise, user, merchandise, foto_merchandise
+        WHERE user.id_user = keranjang_merchandise.id_user AND keranjang_merchandise.id_user = $id_user AND merchandise.id_merch = keranjang_merchandise.id_merchandise AND foto_merchandise.id = merchandise.foto_utama";
+        return $this->db->query($query);
+    }
+
+    public function uncheck_status_merchandise($id_keranjang)
+    {
+        $query = "UPDATE keranjang_merchandise SET keranjang_merchandise.status = 0 WHERE id_keranjang = $id_keranjang";
+        return $this->db->query($query);
+    }
+
+    public function check_status_merchandise($id_keranjang)
+    {
+        $query = "UPDATE keranjang_merchandise SET keranjang_merchandise.status = 1 WHERE id_keranjang = $id_keranjang";
+        return $this->db->query($query);
+    }
+
+    public function get_keranjang_byid($id_keranjang)
+    {
+        $query = "SELECT *
+        FROM keranjang_merchandise
+        WHERE id_keranjang = $id_keranjang";
+        return $this->db->query($query);
+    }
 }
