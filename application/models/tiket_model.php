@@ -47,8 +47,9 @@ class tiket_model extends CI_Model
     public function getdataeventlimit()
     {
         $query = "SELECT *
-        FROM event, tiket_kategori 
+        FROM event, tiket_kategori, foto_event
         WHERE kategori = id_kategori
+        AND foto_event.id = event.foto_utama
         order by event.id_event DESC
         LIMIT 5
         ";

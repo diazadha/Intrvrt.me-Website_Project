@@ -328,18 +328,18 @@
                                                                 <?php endif ?>
                                                             </a>
                                                         </h6>
-                                                        <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
+                                                        <div class="entry-meta meta-1 font-x-small color-grey float-left">
                                                             <?php
                                                             if ($g['diskon'] != 0) { ?>
                                                                 <?php $h_diskon = $g['harga'] * ($g['diskon'] / 100);
                                                                 $diskon = $g['harga'] - $h_diskon;
                                                                 ?>
-                                                                <div class="entry-meta meta-0 font-small mb-30 mt-1">
-                                                                    <span class="post-cat bg-success color-white" style="text-decoration: line-through;">Rp <?= number_format($g['harga'], 0, ',', '.') ?></span>
-                                                                    <span class="post-in background5 text-dark font-x-small">Rp <?= number_format($diskon, 0, ',', '.') ?></span>
+                                                                <div class="entry-meta meta-1" style="text-decoration: line-through; color:red;"><span style="color:black">Rp <?= number_format($g['harga'], 0, ',', '.') ?></span></div>
+                                                                <div class="entry-meta meta-0 font-small mb-30 mt-2">
+                                                                <span class="post-cat bg-success color-white">Rp <?= number_format($diskon, 0, ',', '.') ?></span>
                                                                 </div>
                                                             <?php } else { ?>
-                                                                <div class="entry-meta meta-0 font-small mb-30 mt-1">
+                                                                <div class="entry-meta meta-0 font-small mb-30">
                                                                     <span class="post-cat bg-success color-white">Rp <?= number_format($g['harga'], 0, ',', '.') ?></span>
                                                                 </div>
                                                             <?php } ?>
@@ -367,14 +367,25 @@
                                                     <div class="post-content media-body">
                                                         <h6 class="post-title mb-10 text-limit-2-row"><a href="<?= base_url('home/event_detail/') . $e['id_event'] ?>"><?= ucwords($e['nama_event']); ?></a></h6>
                                                         <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                            <?php
-                                                            if ($e['harga_tiket'] == 0) { ?>
+                                                            <?php if ($e['harga_tiket'] == 0) {?>
                                                                 <a class="entry-meta meta-0"><span class="post-in background5 text-dark font-x-small">GRATIS</span></a>
-                                                            <?php } else { ?>
-                                                                <div class="entry-meta meta-0 font-small mb-30 mt-1">
-                                                                    <span class="post-cat bg-success color-white">Rp <?= number_format($e['harga_tiket'], 0, ',', '.') ?></span>
-                                                                </div>
+                                                            <?php }else{ ?>
+                                                                <?php
+                                                                if ($e['diskon'] != 0) { ?>
+                                                                    <?php $h_diskon_event = $e['harga_tiket'] * ($e['diskon'] / 100);
+                                                                    $diskon_event = $e['harga_tiket'] - $h_diskon_event;
+                                                                    ?>
+                                                                    <div class="entry-meta meta-1" style="text-decoration: line-through; color:red;"><span style="color:black">Rp <?= number_format($e['harga_tiket'], 0, ',', '.') ?></span></div>
+                                                                    <div class="entry-meta meta-0 font-small mb-30 mt-2">
+                                                                    <span class="post-cat bg-success color-white">Rp <?= number_format($diskon_event, 0, ',', '.') ?></span>
+                                                                    </div>
+                                                                <?php }else{ ?>
+                                                                    <div class="entry-meta meta-0 font-small mb-30">
+                                                                        <span class="post-cat bg-success color-white">Rp <?= number_format($e['harga_tiket'], 0, ',', '.') ?></span>
+                                                                    </div>
+                                                                <?php } ?>
                                                             <?php } ?>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>

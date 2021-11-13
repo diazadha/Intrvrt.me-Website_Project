@@ -264,17 +264,17 @@
                                                     </span> -->
                                                         <a href="<?= base_url('home/event_detail/') . $e['id_event'] ?>"><?= ucwords($e['tgl_acara']); ?></a>
                                                     </h7>
-                                                    <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
+                                                    <div class="entry-meta meta-1 font-x-small color-grey float-left">
                                                         <?php
                                                         if ($e['harga_tiket'] == 0) { ?>
-                                                            <a class="entry-meta meta-0"><span class="post-in background5 text-dark font-x-small">GRATIS</span></a>
+                                                            <div class="entry-meta meta-0 font-small mb-60"><span class="post-in background5 text-dark font-x-small">GRATIS</span></div>
                                                         <?php } else if ($e['diskon'] != 0) { ?>
                                                             <?php $h_diskon = $e['harga_tiket'] * ($e['diskon'] / 100);
                                                             $diskon = $e['harga_tiket'] - $h_diskon;
                                                             ?>
-                                                            <div class="entry-meta meta-0 font-small mb-30 mt-1">
-                                                                <span class="post-cat bg-success color-white" style="text-decoration: line-through;">Rp <?= number_format($e['harga_tiket'], 0, ',', '.') ?></span>
-                                                                <span class="post-in background5 text-dark font-x-small">Rp <?= number_format($diskon, 0, ',', '.') ?></span>
+                                                             <div class="entry-meta meta-1" style="text-decoration: line-through; color:red;"><span style="color: black;">Rp <?= number_format($e['harga_tiket'], 0, ',', '.') ?></span></div>
+                                                            <div class="entry-meta meta-0 font-small mb-30 mt-2">
+                                                                <span class="post-cat bg-success color-white">Rp <?= number_format($diskon, 0, ',', '.') ?></span>
                                                             </div>
                                                         <?php } else { ?>
                                                             <div class="entry-meta meta-0 font-small mb-30 mt-1">
@@ -283,9 +283,7 @@
                                                         <?php } ?>
                                                         <div class="row justify-content-around">
                                                             <div class="col">
-
                                                                 <a href="<?= base_url('home/event_detail/') . $e['id_event'] ?>"><i class="fas fa-info-circle fa-2x">Detail</i></a>
-
                                                             </div>
                                                             <div class="col">
                                                                 <a href="<?= base_url('home/tambah_keranjang_event/') . $e['id_event']; ?>"><i class="fas fa-cart-plus fa-2x">Tambah</i></a>
@@ -294,6 +292,7 @@
                                                         <hr>
 
                                                         <span class="post-off" style="color: red;">Batas Pembelian: <?= $e['tgl_berakhir']; ?></span>
+                                                        <br>
                                                         <span class="post-off">Stock: <?= $e['stock']; ?></span>
                                                     </div>
                                                 </div>

@@ -264,18 +264,18 @@
                                                                 <?php endif ?>
                                                             </a>
                                                         </h5>
-                                                        <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
+                                                        <div class="entry-meta meta-1 font-x-small color-grey float-left">
                                                             <?php
                                                             if ($m['diskon'] != 0) { ?>
                                                                 <?php $h_diskon = $m['harga'] * ($m['diskon'] / 100);
                                                                 $diskon = $m['harga'] - $h_diskon;
                                                                 ?>
-                                                                <div class="entry-meta meta-0 font-small mb-30 mt-1">
-                                                                    <span class="post-cat bg-success color-white" style="text-decoration: line-through;">Rp <?= number_format($m['harga'], 0, ',', '.') ?></span>
-                                                                    <span class="post-in background5 text-dark font-x-small">Rp <?= number_format($diskon, 0, ',', '.') ?></span>
+                                                                <div class="entry-meta meta-1" style="text-decoration: line-through; color:red;"><span style="color: black;">Rp <?= number_format($m['harga'], 0, ',', '.') ?></span></div>
+                                                                <div class="entry-meta meta-0 font-small mb-30 mt-2">
+                                                                    <span class="post-cat bg-success color-white">Rp <?= number_format($diskon, 0, ',', '.') ?></span>
                                                                 </div>
                                                             <?php } else { ?>
-                                                                <div class="entry-meta meta-0 font-small mb-30 mt-1">
+                                                                <div class="entry-meta meta-0 font-small mb-30">
                                                                     <span class="post-cat bg-success color-white">Rp <?= number_format($m['harga'], 0, ',', '.') ?></span>
                                                                 </div>
                                                             <?php } ?>
