@@ -109,76 +109,96 @@
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                
-                                    <?= $this->session->flashdata('message');
-                                    $this->session->unset_userdata('message'); ?>
-                                    <div class="form-group col-12">
-                                        <label class="ml-2">Nama Merchandise</label>
-                                        <div class="ml-1">
-                                            <input type="text" class="form-control" id="merchandise" placeholder="Nama Merchandise" name="merchandise" value="<?= $merch->nama_merch ?>" required>
-                                            <input type="hidden" name="id_merch" class="form-control" value="<?= $merch->id_merch ?>">
-                                        </div>
+                                <div class="form-group">
+                                    <label class="col-4">Nama Merchandise</label>
+                                    <div class="col mb-2">
+                                        <?= form_error('nama', '<small class="text-danger pl-1">', '</small>'); ?>
+                                        <input type="text" class="form-control" id="merchandise" value="<?= $merch->nama_merch?>" placeholder="Nama Merchandise" name="merchandise" required>
+                                        <input type="hidden" name="id_merch" class="form-control" value="<?= $merch->id_merch ?>">
                                     </div>
-
-                                    <div class="form-group col-12">
-                                        <label class="ml-2">Kategori Merchandise</label>
-                                        <div class="ml-1">
-                                            <select class="form-control" name="kategori" id="kategori">
-                                                <option value='<?php echo $merch->kategori ?>'><?php echo $merch->nama_kategori_merch ?></option>
-                                                <?php foreach ($kategori as $ktgr) { ?>
-                                                    <option value="<?php echo $ktgr['id_kategori_merch']; ?>"><?php echo $ktgr['nama_kategori_merch']; ?> </option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-12">
-                                        <label class="ml-2">Stock</label>
-                                        <div class="input-group flex-nowrap ml-1">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" id="addon-wrapping">Qty</span>
-                                            </div>
-                                            <input type="number" name="stock" value="<?= $merch->stock ?>" min="0" class="form-control" aria-label="stock" aria-describedby="addon-wrapping" required>
-                                        </div>
-                                    </div>
+                                </div>
                             </div>
-                            <div class="col-6">
-                                    <div class="form-group col-12">
-                                        <label class="ml-2">Harga</label>
-                                        <div class="input-group flex-nowrap">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="col-sm-2">Kategori</label>
+
+                                    <select class="form-control" name="kategori" id="kategori">
+                                        <option value='<?= $merch->kategori ?>'>- Pilih -</option>
+                                        <?php foreach($kategori as $ktgr){ ?>
+                                        <option value="<?php echo $ktgr['id_kategori_merch']; ?>"><?php echo $ktgr['nama_kategori_merch']; ?> </option>
+                                        <?php } ?>
+                                    </select>
+
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="col-4">Harga</label>
+                                        <div class="input-group flex-nowrap col">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="addon-wrapping">Rp.</span>
                                             </div>
-                                            <input type="number" value="<?= $merch->harga ?>" name="harga" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
+                                            <input type="number" name="harga" value="<?= $merch->harga?>" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
                                         </div>
                                     </div>
-
-                                    <div class="form-group col-12">
-                                        <label class="ml-2">Diskon</label>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="col-sm-2">Diskon</label>
                                         <div class="input-group flex-nowrap">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="addon-wrapping">%</span>
                                             </div>
-                                            <input type="number" value="<?= $merch->diskon ?>" name="diskon" max="100" min="0" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
+                                            <input type="number" name="diskon"  value="<?= $merch->diskon?>" max="100" min="0" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
                                         </div>
                                     </div>
-
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label class="col-sm-4">Stock</label>
+                                        <div class="input-group flex-nowrap col mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="addon-wrapping">Qty</span>
+                                            </div>
+                                            <input type="number" name="stock" value="<?= $merch->stock?>" min="0" class="form-control" aria-label="stock" aria-describedby="addon-wrapping" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label class="col-sm-4">Berat</label>
+                                        <div class="input-group flex-nowrap col mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="addon-wrapping">Gr</span>
+                                            </div>
+                                            <input type="number" name="berat" value="<?= $merch->berat?>" min="1" class="form-control" aria-label="stock" aria-describedby="addon-wrapping" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
                                     <div class="form-group">
                                         <label class="col">Pengiriman Merchandise</label>
                                         <div class="input-group flex-nowrap">
-                                            <select class="form-control" name="is_deliver">
-                                        <?php if ($merch->is_deliver == "0"){?>
-                                                <option value='0' selected>Tidak Menggunakan Kurir</option>
-                                                <option value="1">Menggunakan Kurir</option>
-                                        <?php }else {?>
-                                                <option value='0'>Tidak Menggunakan Kurir</option>
-                                                <option value="1"selected>Menggunakan Kurir</option>
-                                        <?php } ?>
-                                         </select>
+                                                <select class="form-control" name="is_deliver">
+                                            <?php if ($merch->is_deliver == "0"){?>
+                                                    <option value='0' selected>Tidak Menggunakan Kurir</option>
+                                                    <option value="1">Menggunakan Kurir</option>
+                                            <?php }else {?>
+                                                    <option value='0'>Tidak Menggunakan Kurir</option>
+                                                    <option value="1"selected>Menggunakan Kurir</option>
+                                            <?php } ?>
+                                                </select>
                                         </div>
                                     </div>
+                                </div>
+                                
                             </div>
-                        </div>
+                         
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 ml-2">Deskripsi</label>
                             <div class="col-sm-12 ml-1">

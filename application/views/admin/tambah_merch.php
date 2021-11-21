@@ -42,19 +42,48 @@
                                             <input type="text" class="form-control" id="merchandise" placeholder="Nama Merchandise" name="merchandise" required>
                                         </div>
                                     </div>
-
+                                </div>
+                                <div class="col">
                                     <div class="form-group">
-                                        <label class="col-sm-4">Kategori</label>
-                                        <div class="col mb-2">
+                                        <label class="col-sm-2">Kategori</label>
+   
                                         <select class="form-control" name="kategori" id="kategori">
                                             <option value=''>- Pilih -</option>
                                             <?php foreach($kategori as $ktgr){ ?>
                                             <option value="<?php echo $ktgr['id_kategori_merch']; ?>"><?php echo $ktgr['nama_kategori_merch']; ?> </option>
                                             <?php } ?>
                                         </select>
+
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="col-4">Harga</label>
+                                        <div class="input-group flex-nowrap col">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="addon-wrapping">Rp.</span>
+                                            </div>
+                                            <input type="number" name="harga" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
                                         </div>
                                     </div>
-
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="col-sm-2">Diskon</label>
+                                        <div class="input-group flex-nowrap">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="addon-wrapping">%</span>
+                                            </div>
+                                            <input type="number" name="diskon" max="100" min="0" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
                                     <div class="form-group">
                                         <label class="col-sm-4">Stock</label>
                                         <div class="input-group flex-nowrap col mb-2">
@@ -65,28 +94,18 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="col-6">
+                                <div class="col-3">
                                     <div class="form-group">
-                                        <label class="col-sm-2">Harga</label>
-                                        <div class="input-group flex-nowrap">
+                                        <label class="col-sm-4">Berat</label>
+                                        <div class="input-group flex-nowrap col mb-2">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text" id="addon-wrapping">Rp.</span>
+                                                <span class="input-group-text" id="addon-wrapping">Gr</span>
                                             </div>
-                                            <input type="number" name="harga" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
+                                            <input type="number" name="berat" min="0" class="form-control" aria-label="stock" aria-describedby="addon-wrapping" required>
                                         </div>
                                     </div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-2">Diskon</label>
-                                        <div class="input-group flex-nowrap">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" id="addon-wrapping">%</span>
-                                            </div>
-                                            <input type="number" name="diskon" max="100" min="0" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
-                                        </div>
-                                    </div>
-
+                                </div>
+                                <div class="col">
                                     <div class="form-group">
                                         <label class="col">Pengiriman Merchandise</label>
                                         <div class="input-group flex-nowrap">
@@ -98,6 +117,7 @@
                                     </div>
                                 </div>
                             </div>
+                               
 
                             <div class="form-group">
                                 <label for="inputPassword3" class="col-sm-2 col-form-label">Deskripsi</label>

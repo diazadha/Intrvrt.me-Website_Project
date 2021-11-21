@@ -637,14 +637,15 @@ class Home extends CI_Controller
 
     public function checkout_m()
     {
-        $data['title'] = 'Cart';
+        $data['title'] = 'Checkout Merchandise';
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
         $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         if ($user) {
+            $data['checkout'] = $this->MerchandiseModel->getkeranjangdipilih($user['id_user'])->result_array();
             $data['keranjang_merchandise'] = $this->MerchandiseModel->get_keranjang($user['id_user'])->result_array();
             $this->load->view('template_introvert/header', $data);
             $this->load->view('checkout_m', $data);
-            $this->load->view('template_introvert/footer', $data);
+            
         } else {
             $this->session->set_flashdata('message2', 'Anda Belum Login');
             redirect('home/login');

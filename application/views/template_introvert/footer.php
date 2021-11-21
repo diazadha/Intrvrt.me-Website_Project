@@ -150,17 +150,16 @@
 <!-- jquery-validation -->
 <script src="<?= base_url('assets'); ?>/vendor/AdminLTE-3.0.5/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="<?= base_url('assets'); ?>/vendor/AdminLTE-3.0.5/plugins/jquery-validation/additional-methods.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.js" type="text/javascript"></script>
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js" type="text/javascript"></script>
 <!-- NewsViral JS -->
 <script src="<?= base_url('assets'); ?>/js/main.js"></script>
-<script>
+<script type="text/javascript">
     var base_url = '<?= base_url() ?>';
 </script>
 <?php if (isset($title) == 'About Us') {
     echo '<script src="' . base_url('assets') . '/js/about.js"></script>';
 } ?>
-<script>
+<script type="text/javascript">
     $(document).ready(function() {
         $('#table_e').DataTable();
     });

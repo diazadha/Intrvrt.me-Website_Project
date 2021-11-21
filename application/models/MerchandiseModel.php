@@ -175,6 +175,7 @@ class MerchandiseModel extends CI_Model
             'kategori' => htmlspecialchars($this->security->xss_clean($this->input->post('kategori')), ENT_QUOTES),
             'stock' => htmlspecialchars($this->security->xss_clean($this->input->post('stock')), ENT_QUOTES),
             'harga' => htmlspecialchars($this->security->xss_clean($this->input->post('harga')), ENT_QUOTES),
+            'berat' => htmlspecialchars($this->security->xss_clean($this->input->post('berat')), ENT_QUOTES),
             'foto' => htmlspecialchars($group_foto, ENT_QUOTES),
             'foto_utama' => $lastid,
             'diskon' => htmlspecialchars($this->security->xss_clean($this->input->post('diskon')), ENT_QUOTES),
@@ -234,6 +235,7 @@ class MerchandiseModel extends CI_Model
             'kategori' => htmlspecialchars($this->security->xss_clean($this->input->post('kategori')), ENT_QUOTES),
             'stock' => htmlspecialchars($this->security->xss_clean($this->input->post('stock')), ENT_QUOTES),
             'harga' => htmlspecialchars($this->security->xss_clean($this->input->post('harga')), ENT_QUOTES),
+            'berat' => htmlspecialchars($this->security->xss_clean($this->input->post('berat')), ENT_QUOTES),
             'foto_utama' => htmlspecialchars($this->security->xss_clean($this->input->post('main_foto')), ENT_QUOTES),
             'diskon' => htmlspecialchars($this->security->xss_clean($this->input->post('diskon')), ENT_QUOTES),
             'deskripsi' => htmlspecialchars($this->security->xss_clean($this->input->post('deskripsi')), ENT_QUOTES),
@@ -346,6 +348,14 @@ class MerchandiseModel extends CI_Model
         $query = "SELECT *
         FROM keranjang_merchandise
         WHERE id_keranjang = $id_keranjang";
+        return $this->db->query($query);
+    }
+
+    public function getkeranjangdipilih($id)
+    {
+        $query = "SELECT *
+        FROM keranjang_merchandise, merchandise
+        WHERE status = 1 AND id_merchandise = id_merch AND id_user = $id";
         return $this->db->query($query);
     }
 }

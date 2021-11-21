@@ -95,7 +95,7 @@ class Rajaongkir extends CI_Controller
 
     public function paket()
     {   
-        $id_kota_asal   = $this->model_toko->tampil_asal()->kota_id;
+        $id_kota_asal   = '457'; //kota tangerang selaatan
         $expedisi       = $this->input->post('expedisi');
         $id_kota        = $this->input->post('id_kota');
         $berat          = $this->input->post('berat');
