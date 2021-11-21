@@ -358,4 +358,11 @@ class MerchandiseModel extends CI_Model
         WHERE status = 1 AND id_merchandise = id_merch AND id_user = $id";
         return $this->db->query($query);
     }
+
+    public function is_deliv($id){
+        $query = "SELECT *
+        FROM keranjang_merchandise, merchandise
+        WHERE status = 1 AND id_merchandise = id_merch AND id_user = $id AND is_deliver = 0 ";
+        return $this->db->query($query);
+    }
 }

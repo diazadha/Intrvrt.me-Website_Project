@@ -642,10 +642,23 @@ class Home extends CI_Controller
         $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         if ($user) {
             $data['checkout'] = $this->MerchandiseModel->getkeranjangdipilih($user['id_user'])->result_array();
-            $data['keranjang_merchandise'] = $this->MerchandiseModel->get_keranjang($user['id_user'])->result_array();
-            $this->load->view('template_introvert/header', $data);
-            $this->load->view('checkout_m', $data);
-            
+            $data['checkout2'] = $this->MerchandiseModel->getkeranjangdipilih($user['id_user'])->result_array();
+            $data['is_deliver'] = $this->MerchandiseModel->is_deliv($user['id_user'])->result_array();
+            $data['d'] = array();
+            foreach ($data['checkout2'] as $c){
+                array_push($data['d'],$c['is_deliver']);
+            }
+            $c = in_array(0,$data['d']);
+            $e = in_array(1,$data['d']);
+           
+            if($c == TRUE && $e == FALSE){
+                $this->load->view('template_introvert/header', $data);
+                $this->load->view('checkout_m2', $data);
+                $this->load->view('template_introvert/footer', $data);
+            }else{
+                $this->load->view('template_introvert/header', $data);
+                $this->load->view('checkout_m', $data);
+            }
         } else {
             $this->session->set_flashdata('message2', 'Anda Belum Login');
             redirect('home/login');
