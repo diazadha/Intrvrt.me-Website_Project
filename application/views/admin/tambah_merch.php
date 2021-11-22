@@ -36,7 +36,7 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label class="col-4">Nama Merchandise</label>
+                                        <label class="col-4">Nama Merchandise*</label>
                                         <div class="col mb-2">
                                             <?= form_error('nama', '<small class="text-danger pl-1">', '</small>'); ?>
                                             <input type="text" class="form-control" id="merchandise" placeholder="Nama Merchandise" name="merchandise" required>
@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
-                                        <label class="col-sm-2">Kategori</label>
+                                        <label class="col-sm-2">Kategori*</label>
    
                                         <select class="form-control" name="kategori" id="kategori">
                                             <option value=''>- Pilih -</option>
@@ -61,7 +61,7 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label class="col-4">Harga</label>
+                                        <label class="col-4">Harga*</label>
                                         <div class="input-group flex-nowrap col">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="addon-wrapping">Rp.</span>
@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
-                                        <label class="col-sm-2">Diskon</label>
+                                        <label class="col-sm-2">Diskon*</label>
                                         <div class="input-group flex-nowrap">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="addon-wrapping">%</span>
@@ -85,7 +85,7 @@
                             <div class="row">
                                 <div class="col-3">
                                     <div class="form-group">
-                                        <label class="col-sm-4">Stock</label>
+                                        <label class="col-sm-4">Stock*</label>
                                         <div class="input-group flex-nowrap col mb-2">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="addon-wrapping">Qty</span>
@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="col-3">
                                     <div class="form-group">
-                                        <label class="col-sm-4">Berat</label>
+                                        <label class="col-sm-4">Berat*</label>
                                         <div class="input-group flex-nowrap col mb-2">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="addon-wrapping">Gr</span>
@@ -107,12 +107,22 @@
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
-                                        <label class="col">Pengiriman Merchandise</label>
+                                        <label class="col">Pengiriman Merchandise*</label>
                                         <div class="input-group flex-nowrap">
                                             <select class="form-control" name="is_deliver">
                                             <option value='0'>Tidak Menggunakan Kurir</option>
                                             <option value="1">Menggunakan Kurir</option>
                                         </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="col-4">Link Ebook (optional)</label>
+                                        <div class="col mb-2">
+                                            <input type="text" class="form-control" placeholder="link e-book" name="linkebook">
                                         </div>
                                     </div>
                                 </div>

@@ -118,9 +118,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-6">
                                 <div class="form-group">
-                                    <label class="col-sm-2">Kategori</label>
+                                    <label>Kategori</label>
 
                                     <select class="form-control" name="kategori" id="kategori">
                                         <option value='<?= $merch->kategori ?>'>- Pilih -</option>
@@ -176,7 +176,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="addon-wrapping">Gr</span>
                                             </div>
-                                            <input type="number" name="berat" value="<?= $merch->berat?>" min="1" class="form-control" aria-label="stock" aria-describedby="addon-wrapping" required>
+                                            <input type="number" name="berat" value="<?= $merch->berat?>" min="0" class="form-control" aria-label="stock" aria-describedby="addon-wrapping" required>
                                         </div>
                                     </div>
                                 </div>
@@ -196,7 +196,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="col-4">Link Ebook (optional)</label>
+                                        <div class="col mb-2">
+                                            <input type="text" class="form-control" value="<?= $merch->linkebook?>" placeholder="link e-book" name="linkebook">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                          
                         <div class="form-group">
