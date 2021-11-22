@@ -11,6 +11,20 @@ class tiket_model extends CI_Model
         return $this->db->query($query);
     }
 
+    public function get_checkout_event($id_user, $status){
+        $query = $this->db->query("SELECT keranjang_event.id_keranjang, keranjang_event.qty, keranjang_event.harga, 
+        event.nama_event, 
+        event.foto_utama, 
+        tiket_kategori.nama_kategori
+        FROM `keranjang_event`
+        JOIN `event` ON `event`.`id_event` = keranjang_event.id_event
+        JOIN tiket_kategori ON event.kategori = `event`.`kategori`
+        WHERE keranjang_event.status= $status
+        AND keranjang_event.id_user = $id_user
+        GROUP BY id_keranjang;");
+        return $query;
+    }
+
     public function getdatabyid($id)
     {
         $query = "SELECT *
@@ -192,7 +206,7 @@ class tiket_model extends CI_Model
     {
         $query = "SELECT *
         FROM keranjang_event
-        WHERE id_event = $id_event AND id_user = $id_user";
+        WHERE id_event = $id_event AND id_user = $id_user AND status IN('0,1')";
         return $this->db->query($query);
     }
 
@@ -200,7 +214,12 @@ class tiket_model extends CI_Model
     {
         $query = "SELECT keranjang_event.*, foto_event.*, event.id_event, event.nama_event, event.stock, event.harga_tiket, event.diskon
         FROM keranjang_event, user, event, foto_event
-        WHERE user.id_user = keranjang_event.id_user AND keranjang_event.id_user = $id_user AND event.id_event = keranjang_event.id_event AND event.foto_utama = foto_event.id";
+        WHERE user.id_user = keranjang_event.id_user 
+        AND keranjang_event.id_user = $id_user 
+        AND event.id_event = keranjang_event.id_event 
+        AND event.foto_utama = foto_event.id
+        AND keranjang_event.status IN (1,0)
+        ";
         return $this->db->query($query);
     }
 

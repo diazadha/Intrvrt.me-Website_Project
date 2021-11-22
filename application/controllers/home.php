@@ -517,6 +517,7 @@ class Home extends CI_Controller
         $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         if ($user) {
             $data['keranjang_event'] = $this->tiket_model->get_keranjang($user['id_user'])->result_array();
+            $data['checkout'] = $this->db->get_where('keranjang_event', ['id_user' => $user['id_user'], 'status' => 2])->num_rows(); 
             $this->load->view('template_introvert/header', $data);
             $this->load->view('cart_event', $data);
             $this->load->view('template_introvert/footer', $data);
@@ -530,7 +531,6 @@ class Home extends CI_Controller
     {
         $this->db->where('id_keranjang', $id_keranjang);
         $this->db->delete('keranjang_event');
-
         redirect('home/cart_event');
     }
 
@@ -597,6 +597,11 @@ class Home extends CI_Controller
         } else {
             $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
             $keranjang = $this->tiket_model->cek_keranjang($id_event, $user['id_user'])->row_array();
+            $this->session->set_flashdata('message', '
+            <div class="alert alert-success" role="alert">
+                Berhasil ditambahkan ke keranjang Event!
+            </div>');
+            
             if ($keranjang) {
                 $this->db->set('qty', $keranjang['qty'] + 1);
                 $this->db->where('id_keranjang', $keranjang['id_keranjang']);

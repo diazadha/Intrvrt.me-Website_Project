@@ -6,13 +6,13 @@
              <div class="col-lg-2 d-none d-lg-block"></div>
              <!-- main content -->
              <div class="row">
-                 <div class="col-lg-8 col-md-12">
+                 <div class="col-lg-7 col-md-7 mb-3">
                      <!-- <div class="author-bio border-radius-10 bg-white p-30 mb-50"> -->
-                     <div class="cart-page-inner">
-                         <div class="table-responsive">
+                     <div class="card">
+                         <div class="card-body table-responsive">
                              <!-- As a heading -->
                              <nav class="navbar navbar-light bg-light">
-                                 <h1>Event</h1>
+                                 <h2>Pembelian Tiket Event</h2>
                              </nav>
                              <hr class="mt-2">
                              <?php $no = 1;
@@ -82,27 +82,32 @@
                      </div>
                      <!-- </div> -->
                  </div>
-                 <div class="col-lg-4 col-md-12">
-                     <div class="author-bio border-radius-10 bg-white p-30 mb-50">
-                         <div class="cart-page-inner">
-                             <div class="row">
-                                 <div class="col-md-12">
-                                     <div class="cart-summary">
-                                         <form action=" <?= base_url('marketplace/checkout') ?> " method="POST">
-                                             <div class="cart-content">
-                                                 <h2>Total Biaya :</h2>
-                                                 <h3><span id="grand_total">Rp. <?= number_format($grand_total, 0, ',', '.'); ?> </span></h3>
-                                                 <input type="hidden" id="grand" name="grand" value="<?= $grand_total ?>">
-                                             </div>
-                                             <center>
-                                                 <div class="cart-btn">
-                                                     <button type="submit" class="btn btn-primary">Checkout</button>
-                                                 </div>
-                                             </center>
-                                         </form>
-                                     </div>
-                                 </div>
-                             </div>
+                 <div class="col-lg-5 col-md-5 mb-3">
+                     <div class="card bg-white">
+                         <div class="card-body">
+                            <?php if($checkout > 0):?>
+                                <div class="card-text">
+                                    <h4><small class="font-weight-bold">Pending Proses Checkout:</small></h4>
+                                </div>
+                                <center>
+                                    <div class="d-flex">
+                                        <div class="mr-auto">
+                                            <a href="<?=base_url('checkout/event')?>" class="btn btn-sm btn-primary">Lanjutkan Checkout</a>
+                                        </div>
+                                        <a href="<?=base_url('checkout/event_batal')?>" class="ml-2 btn btn-sm btn-primary">Batal</a>
+                                    </div>
+                                </center>
+                            <?php else:?>
+                                <div class="card-text">
+                                    <h2>Total Biaya :</h2>
+                                    <h3><span id="grand_total">Rp. <?= number_format($grand_total, 0, ',', '.'); ?> </span></h3>
+                                </div>
+                                <center>
+                                    <div class="cart-btn">
+                                        <a href="<?=base_url('checkout/event')?>" class="btn btn-sm btn-warning">Checkout</a>
+                                    </div>
+                                </center>
+                            <?php endif;?>
                          </div>
                      </div>
                  </div>
