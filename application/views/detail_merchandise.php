@@ -8,7 +8,7 @@
          </div>
          <!--end entry header-->
          <div class="row mb-50">
-             <div class="col-lg-8 col-md-12">
+             <div class="col-lg-6 col-md-12">
                  <div class="entry-main-content">
                      <h2><?= $getdatabyid['nama_merch']; ?></h2>
                      <hr class="wp-block-separator is-style-wide">
@@ -48,8 +48,8 @@
                                     $diskon = $getdatabyid['harga'] - $h_diskon;
                                     ?>
                                  <div class="entry-meta meta-0 font-small mb-30 mt-1">
-                                     <span class="post-cat bg-success color-white" style="text-decoration: line-through;">Rp <?= number_format($getdatabyid['harga'], 0, ',', '.') ?></span>
-                                     <span class="post-in background5 text-dark font-x-small">Rp <?= number_format($diskon, 0, ',', '.') ?></span>
+                                     <span class="post-cat" style="text-decoration: red line-through;">Rp <?= number_format($getdatabyid['harga'], 0, ',', '.') ?></span>
+                                     <span class="post-cat bg-success color-white">Rp <?= number_format($diskon, 0, ',', '.') ?></span>
                                  </div>
                              <?php } else { ?>
                                  <div class="entry-meta meta-0 font-small mb-30 mt-1">
@@ -73,37 +73,41 @@
                      <h5>Deskripsi</h5>
                      <p><?= htmlspecialchars_decode($getdatabyid['deskripsi']); ?></p>
                  </div>
-                 <!--comment form-->
-                 <div class="comment-form">
-                     <h3 class="mb-30">Pesan Sekarang</h3>
-                     <form class="form-contact comment_form" action="#" id="commentForm">
-                         <div class="row">
-                             <div class="col-sm-6">
-                                 <div class="form-group">
-                                     <input class="form-control" name="name" id="name" type="text" placeholder="Name">
-                                 </div>
-                             </div>
-                             <div class="col-sm-6">
-                                 <div class="form-group">
-                                     <input class="form-control" name="email" id="email" type="email" placeholder="Email">
-                                 </div>
-                             </div>
-                             <div class="col-12">
-                                 <div class="form-group">
-                                     <input class="form-control" name="website" id="website" type="text" placeholder="Website">
-                                 </div>
-                             </div>
-                             <div class="col-12">
-                                 <div class="form-group">
-                                     <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
-                                 </div>
+             </div>
+             <!--comment form-->
+             <div class="col-lg-6 col-md-12">
+                 <!-- <div class="comment-form"> -->
+                 <h3 class="mt-100 mb-30">Pesan Sekarang</h3>
+                 <form class="form-contact comment_form" action="#" id="commentForm">
+                     <div class="row">
+                         <div class="col-sm-6">
+                             <div class="form-group">
+                                 <input class="form-control" name="name" id="name" type="text" placeholder="Name">
                              </div>
                          </div>
-                         <div class="form-group">
-                             <button type="submit" class="button button-contactForm">Pesan</button>
+                         <div class="col-sm-6">
+                             <div class="form-group">
+                                 <input class="form-control" name="email" id="email" type="email" placeholder="Email">
+                             </div>
                          </div>
-                     </form>
-                 </div>
+                         <div class="col-12">
+                             <div class="form-group">
+                                 <input class="form-control" name="website" id="website" type="text" placeholder="Website">
+                             </div>
+                         </div>
+                         <div class="col-12">
+                             <div class="form-group">
+                                 <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         <button type="submit" class="button button-contactForm">Pesan</button></a>
+                         <a href="<?= base_url('home/merchandise'); ?>"><button type="button" class="btn btn-secondary">Kembali</button></a>
+                     </div>
+
+                 </form>
+                 <!-- </div> -->
              </div>
          </div>
          <!--End row-->

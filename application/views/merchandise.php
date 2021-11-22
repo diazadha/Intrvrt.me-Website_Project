@@ -264,15 +264,21 @@
                                                                 <?php endif ?>
                                                             </a>
                                                         </h5>
-                                                        <div class="entry-meta meta-1 font-x-small color-grey float-left">
+                                                        <div class="entry-meta meta-1 font-x-small color-grey">
                                                             <?php
                                                             if ($m['diskon'] != 0) { ?>
                                                                 <?php $h_diskon = $m['harga'] * ($m['diskon'] / 100);
                                                                 $diskon = $m['harga'] - $h_diskon;
                                                                 ?>
-                                                                <div class="entry-meta meta-1" style="text-decoration: line-through; color:red;"><span style="color: black;">Rp <?= number_format($m['harga'], 0, ',', '.') ?></span></div>
-                                                                <div class="entry-meta meta-0 font-small mb-30 mt-2">
-                                                                    <span class="post-cat bg-success color-white">Rp <?= number_format($diskon, 0, ',', '.') ?></span>
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <div class="entry-meta meta-1" style="text-decoration: line-through; color:red;"><span style="color: black;">Rp <?= number_format($m['harga'], 0, ',', '.') ?></span></div>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="entry-meta meta-0 font-small mb-30 mt-2">
+                                                                            <span class="post-cat bg-success color-white">Rp <?= number_format($diskon, 0, ',', '.') ?></span>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             <?php } else { ?>
                                                                 <div class="entry-meta meta-0 font-small mb-30">
@@ -281,22 +287,22 @@
                                                             <?php } ?>
                                                             <div class="row justify-content-around">
                                                                 <div class="col">
-
-                                                                    <a href="<?= base_url('home/merchandise_detail/') . $m['id_merch'] ?>"><i class="fas fa-info-circle fa-2x">Detail</i></a>
-
+                                                                    <a href="<?= base_url('home/merchandise_detail/') . $m['id_merch'] ?>">
+                                                                        <div class="entry-meta meta-1">
+                                                                            <img src="<?= base_url('assets/logo/detail.png'); ?>" alt="" style="height: 25px; width: 30px;">
+                                                                            <span>Detail</span>
+                                                                        </div>
+                                                                    </a>
                                                                 </div>
                                                                 <div class="col">
-                                                                    <a href="<?= base_url('home/tambah_keranjang_merch/') . $m['id_merch']; ?>"><i class="fas fa-cart-plus fa-2x">Tambah</i></a>
+                                                                    <a href="<?= base_url('home/tambah_keranjang_merch/') . $m['id_merch']; ?>">
+                                                                        <div class="entry-meta meta-1">
+                                                                            <img src="<?= base_url('assets/logo/cart.png'); ?>" alt="" style="height: 25px; width: 30px;">
+                                                                            <span>Tambah</span>
+                                                                        </div>
+                                                                    </a>
                                                                 </div>
                                                             </div>
-                                                            <!-- <div class="card text-center">
-                                                            
-                                                               
-                                                            </div> -->
-
-                                                            <!-- <span class="post-in"><a href="category.html">Technology</a></span>
-                                                            <span class="post-by"><a href="author.html"> K. Steven</a></span> -->
-                                                            <!-- <span class="post-on">24m ago</span> -->
                                                         </div>
                                                     </div>
                                                 </div>

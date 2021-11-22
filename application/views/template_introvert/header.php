@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/css/widgets.css">
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/css/color.css">
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/css/responsive.css">
-
 </head>
 
 <body>
@@ -29,17 +28,17 @@
                     <div class="col-lg-2 col-md-3">
                         <div class="header-logo d-none d-lg-block">
                             <a href="<?= base_url() ?>">
-                                <img class="logo-img d-inline" src="<?= $profil_perusahaan['logo']; ?>" alt="Responsive image" style="height: 45px; width: 60px;">
+                                <img class="logo-img d-inline" src="<?= $profil_perusahaan['logo']; ?>" alt="Responsive image" style="height: 40px; width: 60px;">
                             </a>
                         </div>
                         <div class="logo-tablet d-md-inline d-lg-none d-none">
                             <a href="<?= base_url() ?>">
-                                <img class="logo-img d-inline" src="<?= $profil_perusahaan['logo']; ?>" alt="Responsive image" style="height: 45px; width: 60px;">
+                                <img class="logo-img d-inline" src="<?= $profil_perusahaan['logo']; ?>" alt="Responsive image" style="height: 40px; width: 60px;">
                             </a>
                         </div>
                         <div class="logo-mobile d-block d-md-none">
                             <a href="<?= base_url() ?>">
-                                <img class="logo-img d-inline" src="<?= $profil_perusahaan['logo']; ?>" alt="Responsive image" style="height: 45px; width: 60px;">
+                                <img class="logo-img d-inline" src="<?= $profil_perusahaan['logo']; ?>" alt="Responsive image" style="height: 40px; width: 60px;">
                             </a>
                         </div>
                     </div>

@@ -155,7 +155,7 @@
                 <!-- sidebar-left -->
                 <div class="col-lg-2 col-md-3 primary-sidebar sticky-sidebar sidebar-left order-2 order-md-1">
                     <!-- Widget Weather -->
-                    <div class="sidebar-widget widget-weather border-radius-10 bg-white mb-30 col-lg-6">
+                    <div class="sidebar-widget widget-weather border-radius-10 bg-white mb-30 col-lg-12">
                         <div class="d-flex">
                             <div class="font-medium">
                                 <p><?= date('l') ?></p>
@@ -214,13 +214,6 @@
                 </div>
                 <!-- main content -->
                 <div class="col-lg-10 col-md-9 order-10 order-md-2">
-                    <div class="row">
-                        <div class="col-12 text-center mt-50 mb-50">
-                            <a href="#">
-                                <img class="border-radius-10 d-inline" src="assets/imgs/ads.jpg" alt="post-slider">
-                            </a>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-lg-8 col-md-12">
                             <div class="latest-post mb-50">
@@ -336,7 +329,7 @@
                                                                 ?>
                                                                 <div class="entry-meta meta-1" style="text-decoration: line-through; color:red;"><span style="color:black">Rp <?= number_format($g['harga'], 0, ',', '.') ?></span></div>
                                                                 <div class="entry-meta meta-0 font-small mb-30 mt-2">
-                                                                <span class="post-cat bg-success color-white">Rp <?= number_format($diskon, 0, ',', '.') ?></span>
+                                                                    <span class="post-cat bg-success color-white">Rp <?= number_format($diskon, 0, ',', '.') ?></span>
                                                                 </div>
                                                             <?php } else { ?>
                                                                 <div class="entry-meta meta-0 font-small mb-30">
@@ -367,9 +360,9 @@
                                                     <div class="post-content media-body">
                                                         <h6 class="post-title mb-10 text-limit-2-row"><a href="<?= base_url('home/event_detail/') . $e['id_event'] ?>"><?= ucwords($e['nama_event']); ?></a></h6>
                                                         <div class="entry-meta meta-1 font-x-small color-grey float-left text-uppercase">
-                                                            <?php if ($e['harga_tiket'] == 0) {?>
+                                                            <?php if ($e['harga_tiket'] == 0) { ?>
                                                                 <a class="entry-meta meta-0"><span class="post-in background5 text-dark font-x-small">GRATIS</span></a>
-                                                            <?php }else{ ?>
+                                                            <?php } else { ?>
                                                                 <?php
                                                                 if ($e['diskon'] != 0) { ?>
                                                                     <?php $h_diskon_event = $e['harga_tiket'] * ($e['diskon'] / 100);
@@ -377,15 +370,15 @@
                                                                     ?>
                                                                     <div class="entry-meta meta-1" style="text-decoration: line-through; color:red;"><span style="color:black">Rp <?= number_format($e['harga_tiket'], 0, ',', '.') ?></span></div>
                                                                     <div class="entry-meta meta-0 font-small mb-30 mt-2">
-                                                                    <span class="post-cat bg-success color-white">Rp <?= number_format($diskon_event, 0, ',', '.') ?></span>
+                                                                        <span class="post-cat bg-success color-white">Rp <?= number_format($diskon_event, 0, ',', '.') ?></span>
                                                                     </div>
-                                                                <?php }else{ ?>
+                                                                <?php } else { ?>
                                                                     <div class="entry-meta meta-0 font-small mb-30">
                                                                         <span class="post-cat bg-success color-white">Rp <?= number_format($e['harga_tiket'], 0, ',', '.') ?></span>
                                                                     </div>
                                                                 <?php } ?>
                                                             <?php } ?>
-                                                            
+
                                                         </div>
                                                     </div>
                                                 </div>
