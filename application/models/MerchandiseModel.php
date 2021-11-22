@@ -175,12 +175,14 @@ class MerchandiseModel extends CI_Model
             'kategori' => htmlspecialchars($this->security->xss_clean($this->input->post('kategori')), ENT_QUOTES),
             'stock' => htmlspecialchars($this->security->xss_clean($this->input->post('stock')), ENT_QUOTES),
             'harga' => htmlspecialchars($this->security->xss_clean($this->input->post('harga')), ENT_QUOTES),
+            'berat' => htmlspecialchars($this->security->xss_clean($this->input->post('berat')), ENT_QUOTES),
             'foto' => htmlspecialchars($group_foto, ENT_QUOTES),
             'foto_utama' => $lastid,
             'diskon' => htmlspecialchars($this->security->xss_clean($this->input->post('diskon')), ENT_QUOTES),
             'deskripsi' => htmlspecialchars($this->security->xss_clean($this->input->post('deskripsi')), ENT_QUOTES),
             'is_deliver' => htmlspecialchars($this->security->xss_clean($this->input->post('is_deliver')), ENT_QUOTES),
-        );
+            'linkebook' => htmlspecialchars($this->security->xss_clean($this->input->post('linkebook')), ENT_QUOTES),
+        );  
         return $this->db->insert('merchandise', $data);
     }
 
@@ -234,10 +236,12 @@ class MerchandiseModel extends CI_Model
             'kategori' => htmlspecialchars($this->security->xss_clean($this->input->post('kategori')), ENT_QUOTES),
             'stock' => htmlspecialchars($this->security->xss_clean($this->input->post('stock')), ENT_QUOTES),
             'harga' => htmlspecialchars($this->security->xss_clean($this->input->post('harga')), ENT_QUOTES),
+            'berat' => htmlspecialchars($this->security->xss_clean($this->input->post('berat')), ENT_QUOTES),
             'foto_utama' => htmlspecialchars($this->security->xss_clean($this->input->post('main_foto')), ENT_QUOTES),
             'diskon' => htmlspecialchars($this->security->xss_clean($this->input->post('diskon')), ENT_QUOTES),
             'deskripsi' => htmlspecialchars($this->security->xss_clean($this->input->post('deskripsi')), ENT_QUOTES),
             'is_deliver' => htmlspecialchars($this->security->xss_clean($this->input->post('is_deliver')), ENT_QUOTES),
+            'linkebook' => htmlspecialchars($this->security->xss_clean($this->input->post('linkebook')), ENT_QUOTES),
         );
         $this->db->where('id_merch', htmlspecialchars($this->security->xss_clean($this->input->post('id_merch')), ENT_QUOTES));
         return $this->db->update('merchandise', $data);
@@ -347,5 +351,58 @@ class MerchandiseModel extends CI_Model
         FROM keranjang_merchandise
         WHERE id_keranjang = $id_keranjang";
         return $this->db->query($query);
+    }
+
+    public function getkeranjangdipilih($id)
+    {
+        $query = "SELECT *
+        FROM keranjang_merchandise, merchandise
+        WHERE status = 1 AND id_merchandise = id_merch AND id_user = $id";
+        return $this->db->query($query);
+    }
+
+    public function is_deliv($id){
+        $query = "SELECT *
+        FROM keranjang_merchandise, merchandise
+        WHERE status = 1 AND id_merchandise = id_merch AND id_user = $id AND is_deliver = 0 ";
+        return $this->db->query($query);
+    }
+
+    public function checkout()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $data = array(
+            'id_user' => htmlspecialchars($this->security->xss_clean($this->input->post('id_user')), ENT_QUOTES),
+            'tgl_pesan' => date('Y-m-d H:i:s'),
+            'expedisi' => htmlspecialchars($this->security->xss_clean($this->input->post('expedisi')), ENT_QUOTES),
+            'paket' => htmlspecialchars($this->security->xss_clean($this->input->post('paket')), ENT_QUOTES),
+            'email_penerima' => htmlspecialchars($this->security->xss_clean($this->input->post('email_penerima')), ENT_QUOTES),
+            'estimasi' => htmlspecialchars($this->security->xss_clean($this->input->post('estimasi')), ENT_QUOTES),
+            'ongkir' => htmlspecialchars($this->security->xss_clean($this->input->post('ongkir')), ENT_QUOTES),
+            'berat' => htmlspecialchars($this->security->xss_clean($this->input->post('berat')), ENT_QUOTES),
+            'grand_total' => htmlspecialchars($this->security->xss_clean($this->input->post('grand_total')), ENT_QUOTES),
+            'total_bayar' => htmlspecialchars($this->security->xss_clean($this->input->post('total_bayar')), ENT_QUOTES),
+            'nama_penerima' => htmlspecialchars($this->security->xss_clean($this->input->post('nama_penerima')), ENT_QUOTES),
+            'tlpn_penerima' => htmlspecialchars($this->security->xss_clean($this->input->post('tlpn_penerima')), ENT_QUOTES),
+            'alamat' => htmlspecialchars($this->security->xss_clean($this->input->post('alamat')), ENT_QUOTES),
+            'provinsi' => htmlspecialchars($this->security->xss_clean($this->input->post('provinsi')), ENT_QUOTES),
+            'kota' => htmlspecialchars($this->security->xss_clean($this->input->post('kota')), ENT_QUOTES),
+            'kodepos' => htmlspecialchars($this->security->xss_clean($this->input->post('kodepos')), ENT_QUOTES),
+
+        );
+        return $this->db->insert('pesanan_m', $data);
+    }
+
+    public function detailpesanan(){
+        $id_pesanan = $this->db->insert_id();
+        foreach ($this->MerchandiseModel->getkeranjangdipilih($this->session->userdata('id_user'))->result_array() as $items){
+            $data = array(
+            'id_pesanan' => $id_pesanan,
+            'id_merch' => $items['id_merch'],
+            'qty' => $items['qty'],
+        );
+        $this->db->insert('detailpesanan_m', $data);
+        }
+        return 'berhasil';
     }
 }

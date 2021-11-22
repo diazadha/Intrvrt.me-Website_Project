@@ -235,7 +235,8 @@
                 </div>
                 <!-- main content -->
                 <div class="col-lg-10 col-md-9 order-1 order-md-2">
-                    <div class="row mb-50">
+                    <?=$this->session->flashdata('message'); $this->session->unset_userdata('message');?>
+                    <div class="row mb-50"> 
                         <?php foreach ($event as $e) : ?>
                             <div class="col-lg-6 col-md-12">
                                 <div class="latest-post mb-50">

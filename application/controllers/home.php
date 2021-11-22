@@ -517,6 +517,7 @@ class Home extends CI_Controller
         $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         if ($user) {
             $data['keranjang_event'] = $this->tiket_model->get_keranjang($user['id_user'])->result_array();
+            $data['checkout'] = $this->db->get_where('keranjang_event', ['id_user' => $user['id_user'], 'status' => 2])->num_rows(); 
             $this->load->view('template_introvert/header', $data);
             $this->load->view('cart_event', $data);
             $this->load->view('template_introvert/footer', $data);
@@ -530,7 +531,6 @@ class Home extends CI_Controller
     {
         $this->db->where('id_keranjang', $id_keranjang);
         $this->db->delete('keranjang_event');
-
         redirect('home/cart_event');
     }
 
@@ -597,6 +597,11 @@ class Home extends CI_Controller
         } else {
             $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
             $keranjang = $this->tiket_model->cek_keranjang($id_event, $user['id_user'])->row_array();
+            $this->session->set_flashdata('message', '
+            <div class="alert alert-success" role="alert">
+                Berhasil ditambahkan ke keranjang Event!
+            </div>');
+            
             if ($keranjang) {
                 $this->db->set('qty', $keranjang['qty'] + 1);
                 $this->db->where('id_keranjang', $keranjang['id_keranjang']);
@@ -633,5 +638,45 @@ class Home extends CI_Controller
         $query = "UPDATE keranjang_merchandise SET qty = $qty WHERE id_keranjang = $id_keranjang";
         $this->db->query($query);
         echo json_encode($this->MerchandiseModel->get_keranjang_byid($id_keranjang)->row_array());
+    }
+
+    public function checkout_m()
+    {
+        $data['title'] = 'Checkout Merchandise';
+        $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        if ($user) {
+            $data['checkout'] = $this->MerchandiseModel->getkeranjangdipilih($user['id_user'])->result_array();
+            $data['is_deliver'] = $this->MerchandiseModel->is_deliv($user['id_user'])->result_array();
+            if (!$data['checkout']){
+                $this->session->set_flashdata('message2', '<div class="alert tutup alert-warning" role="alert">Tidak ada Merchandise yang dipilih!</div>');
+                redirect(base_url('home/cart_merchandise'));
+            }
+            $data['d'] = array();
+            foreach ($data['checkout'] as $c){
+                array_push($data['d'],$c['is_deliver']);
+            }
+            $c = in_array(0,$data['d']);
+            $e = in_array(1,$data['d']);
+           
+            if($c == TRUE && $e == FALSE){
+                $this->load->view('template_introvert/header', $data);
+                $this->load->view('checkout_m2', $data);
+                $this->load->view('template_introvert/footer', $data);
+            }else{
+                $this->load->view('template_introvert/header', $data);
+                $this->load->view('checkout_m', $data);
+            }
+        } else {
+            $this->session->set_flashdata('message2', 'Anda Belum Login');
+            redirect('home/login');
+        }
+    }
+
+    public function proses_checkout_m(){
+        
+        $this->MerchandiseModel->checkout();
+        $this->MerchandiseModel->detailpesanan();
+        redirect(base_url('home'));
     }
 }

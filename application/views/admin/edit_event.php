@@ -183,6 +183,14 @@
                                 </div>
 
                             </div>
+                            <div class="col-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 ml-3 col-form-label">Link Event</label>
+                                    <div class="input-group col-9">
+                                        <input type="text" name="linkevent" value="<?= $event->linkevent ?>" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 ml-2">Deskripsi</label>

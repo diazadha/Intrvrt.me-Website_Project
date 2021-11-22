@@ -14,6 +14,7 @@
                              <nav class="navbar navbar-light bg-light">
                                  <h1>Merchandise</h1>
                              </nav>
+                            <?= $this->session->flashdata('message2'); $this->session->unset_userdata('message2');?>
                              <hr class="mt-2">
                              <?php $no = 1;
                                 $grand_total = 0; ?>
@@ -88,7 +89,7 @@
                              <div class="row">
                                  <div class="col-md-12">
                                      <div class="cart-summary">
-                                         <form action=" <?= base_url('marketplace/checkout') ?> " method="POST">
+                                         <form action=" <?= base_url('home/checkout_m/') ?> " method="POST">
                                              <div class="cart-content">
                                                  <h2>Total Biaya :</h2>
                                                  <h3><span id="grand_total">Rp. <?= number_format($grand_total, 0, ',', '.'); ?> </span></h3>

@@ -119,6 +119,12 @@
                                                 <input type="datetime-local" name="tgl_acara" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
                                             </div>
                                         </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 ml-4 col-form-label">Link Event</label>
+                                            <div class="input-group flex-nowrap col-8">
+                                                <input type="text" class="form-control" placeholder="Link Event" name="linkevent" required>
+                                            </div>
+                                        </div>
                                     </div>
                                     
                                 </div>

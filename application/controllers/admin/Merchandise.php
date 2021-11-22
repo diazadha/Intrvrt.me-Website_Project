@@ -183,7 +183,7 @@ class Merchandise extends CI_Controller
     }
 
     public function tambah_merch()
-    {
+    {   
         $upload = $_FILES['foto']['name'];
         if ($upload) {
             $numberOfFile = sizeof($upload);
