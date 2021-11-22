@@ -12,7 +12,7 @@ class tiket_model extends CI_Model
     }
 
     public function get_checkout_event($id_user, $status){
-        $query = $this->db->query("SELECT keranjang_event.id_keranjang, keranjang_event.qty, keranjang_event.harga, 
+        $query = $this->db->query("SELECT keranjang_event.id_keranjang, keranjang_event.qty, event.harga_tiket as harga, 
         event.nama_event, 
         event.foto_utama, 
         tiket_kategori.nama_kategori
