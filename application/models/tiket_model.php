@@ -71,7 +71,8 @@ class tiket_model extends CI_Model
             'tgl_berakhir' => htmlspecialchars($this->security->xss_clean($this->input->post('tgl_berakhir')), ENT_QUOTES),
             'tgl_acara' => htmlspecialchars($this->security->xss_clean($this->input->post('tgl_acara')), ENT_QUOTES),
             'deskripsi_event' => htmlspecialchars($this->security->xss_clean($this->input->post('deskripsi')), ENT_QUOTES),
-        );
+            'linkevent' => htmlspecialchars($this->security->xss_clean($this->input->post('linkevent')), ENT_QUOTES),
+        );  
         return $this->db->insert('event', $data);
     }
 
@@ -132,6 +133,7 @@ class tiket_model extends CI_Model
             'tgl_berakhir' => htmlspecialchars($this->security->xss_clean($this->input->post('tgl_berakhir')), ENT_QUOTES),
             'tgl_acara' => htmlspecialchars($this->security->xss_clean($this->input->post('tgl_acara')), ENT_QUOTES),
             'deskripsi_event' => htmlspecialchars($this->security->xss_clean($this->input->post('deskripsi_event')), ENT_QUOTES),
+            'linkevent' => htmlspecialchars($this->security->xss_clean($this->input->post('linkevent')), ENT_QUOTES),
         );
         $this->db->where('id_event', htmlspecialchars($this->security->xss_clean($this->input->post('id_event')), ENT_QUOTES));
         return $this->db->update('event', $data);
