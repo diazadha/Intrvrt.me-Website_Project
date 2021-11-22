@@ -642,10 +642,13 @@ class Home extends CI_Controller
         $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         if ($user) {
             $data['checkout'] = $this->MerchandiseModel->getkeranjangdipilih($user['id_user'])->result_array();
-            $data['checkout2'] = $this->MerchandiseModel->getkeranjangdipilih($user['id_user'])->result_array();
             $data['is_deliver'] = $this->MerchandiseModel->is_deliv($user['id_user'])->result_array();
+            if (!$data['checkout']){
+                $this->session->set_flashdata('message2', '<div class="alert tutup alert-warning" role="alert">Tidak ada Merchandise yang dipilih!</div>');
+                redirect(base_url('home/cart_merchandise'));
+            }
             $data['d'] = array();
-            foreach ($data['checkout2'] as $c){
+            foreach ($data['checkout'] as $c){
                 array_push($data['d'],$c['is_deliver']);
             }
             $c = in_array(0,$data['d']);
@@ -663,5 +666,12 @@ class Home extends CI_Controller
             $this->session->set_flashdata('message2', 'Anda Belum Login');
             redirect('home/login');
         }
+    }
+
+    public function proses_checkout_m(){
+        
+        $this->MerchandiseModel->checkout();
+        $this->MerchandiseModel->detailpesanan();
+        redirect(base_url('home'));
     }
 }

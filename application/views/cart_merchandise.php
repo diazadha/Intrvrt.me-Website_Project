@@ -14,6 +14,7 @@
                              <nav class="navbar navbar-light bg-light">
                                  <h1>Merchandise</h1>
                              </nav>
+                            <?= $this->session->flashdata('message2'); $this->session->unset_userdata('message2');?>
                              <hr class="mt-2">
                              <?php $no = 1;
                                 $grand_total = 0; ?>

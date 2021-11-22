@@ -1,19 +1,4 @@
  <!-- Main Wrap Start -->
-<!-- <?php 
-function get_data($url)
-{
-  $curl = curl_init();
-  curl_setopt($curl, CURLOPT_URL, $url);
-  curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); //1 kalo mau kembalianya teks
-  $result = curl_exec($curl);
-  curl_close($curl);
-
-  return json_decode($result, true);
-}
-$result = get_data('https://api.rajaongkir.com/starter/province?key=dddc44bba6b722b0e336f78911b521b9');
-
-$ambil = $ressult['rajaongkir']['results'];
-?> -->
  <main class="position-relative">
      <div class="cart-page">
          <div class="container">
@@ -29,21 +14,28 @@ $ambil = $ressult['rajaongkir']['results'];
                                     <h1>Checkout Merchandise</h1>
                                 </nav>
                                 <hr class="mt-2">
-
+                                <form action="<?php echo base_url('home/proses_checkout_m');?>" method="post" enctype="multipart/form-data">
                                 <nav class="navbar navbar-light bg-light">
                                     <div class="container-fluid" style="background-color: white;">
                                     
-                                    <div class="col-sm-6 mt-4">
+                                    <!-- <div class="col-sm-6 mt-4">
                                         <div class="form-group">
                                             <label style="font-weight:bold">Nama Penerima*</label>
                                             <input name="nama_penerima" class="form-control" required>
                                         </div>
-                                    </div>
+                                    </div> -->
 
-                                    <div class="col-sm-6  mt-4">
+                                    <div class="col-sm-6 mt-4">
                                         <div class="form-group">
                                             <label style="font-weight:bold">No Handphone Penerima*</label>
-                                            <input type="tel" name="no_tlpn_penerima" class="form-control" required>
+                                            <input type="tel" name="tlpn_penerima" class="form-control" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 mt-4">
+                                        <div class="form-group">
+                                            <label style="font-weight:bold">Email*</label>
+                                            <input type="email" name="email_penerima" class="form-control" required>
                                         </div>
                                     </div>
                                
@@ -112,7 +104,7 @@ $ambil = $ressult['rajaongkir']['results'];
                                                 </tr>
                                                 <tr>
                                                     <th>Total Bayar:</th>
-                                                    <td>Rp. <label id="total_bayar"></label></td>
+                                                    <td>Rp. <?php echo number_format($grand_total, 0,',','.'); ?></td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -126,15 +118,16 @@ $ambil = $ressult['rajaongkir']['results'];
                                 <input name="id_order" hidden>
                                 <input name="id_user" value="<?= $this->session->userdata('id_user') ?>" hidden>
                                 <input name="berat" value="<?= $tot_berat ?>" hidden><br>
+                                <input name="total_bayar" value="<?php echo $grand_total ?>" hidden><br>
                                 <input name="grand_total" value="<?php echo $grand_total ?>" hidden><br>
-                                <input name="total_bayar" hidden>
                              
                              <div class="modal-footer ml-auto">
                                  <a href="<?= base_url('home'); ?>">
                                      <div class="btn btn-sm btn-secondary">Kembali</div>
                                  </a>
-                                 <div class="btn btn-sm btn-secondary">Proses</div>
+                                 <button type="submit" class="btn btn-sm btn-secondary">Proses</button>
                              </div>
+                        </form>
                          </div>
                      </div>
                      <!-- </div> -->
