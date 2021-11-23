@@ -85,29 +85,30 @@
                  <div class="col-lg-5 col-md-5 mb-3">
                      <div class="card bg-white">
                          <div class="card-body">
-                            <?php if($checkout > 0):?>
-                                <div class="card-text">
-                                    <h4><small class="font-weight-bold">Pending Proses Checkout:</small></h4>
-                                </div>
-                                <center>
-                                    <div class="d-flex">
-                                        <div class="mr-auto">
-                                            <a href="<?=base_url('checkout/event')?>" class="btn btn-sm btn-primary">Lanjutkan Checkout</a>
-                                        </div>
-                                        <a href="<?=base_url('checkout/event_batal')?>" class="ml-2 btn btn-sm btn-primary">Batal</a>
-                                    </div>
-                                </center>
-                            <?php else:?>
-                                <div class="card-text">
-                                    <h2>Total Biaya :</h2>
-                                    <h3><span id="grand_total">Rp. <?= number_format($grand_total, 0, ',', '.'); ?> </span></h3>
-                                </div>
-                                <center>
-                                    <div class="cart-btn">
-                                        <a href="<?=base_url('checkout/event')?>" class="btn btn-sm btn-warning">Checkout</a>
-                                    </div>
-                                </center>
-                            <?php endif;?>
+                             <?php if ($checkout > 0) : ?>
+                                 <div class="card-text">
+                                     <h4><small class="font-weight-bold">Pending Proses Checkout:</small></h4>
+                                 </div>
+                                 <center>
+                                     <div class="d-flex">
+                                         <div class="mr-auto">
+                                             <a href="<?= base_url('checkout/event') ?>" class="btn btn-sm btn-primary">Lanjutkan Checkout</a>
+                                         </div>
+                                         <a href="<?= base_url('checkout/event_batal') ?>" class="ml-2 btn btn-sm btn-primary">Batal</a>
+                                     </div>
+                                 </center>
+                             <?php else : ?>
+                                 <div class="card-text">
+                                     <h2>Total Biaya :</h2>
+                                     <h3><span id="grand_total">Rp. <?= number_format($grand_total, 0, ',', '.'); ?> </span></h3>
+                                     <input type="hidden" id="grand" name="grand" value="<?= $grand_total ?>">
+                                 </div>
+                                 <center>
+                                     <div class="cart-btn">
+                                         <a href="<?= base_url('checkout/event') ?>" class="btn btn-sm btn-warning">Checkout</a>
+                                     </div>
+                                 </center>
+                             <?php endif; ?>
                          </div>
                      </div>
                  </div>
