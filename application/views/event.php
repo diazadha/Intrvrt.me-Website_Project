@@ -235,8 +235,9 @@
                 </div>
                 <!-- main content -->
                 <div class="col-lg-10 col-md-9 order-1 order-md-2">
-                    <?=$this->session->flashdata('message'); $this->session->unset_userdata('message');?>
-                    <div class="row mb-50"> 
+                    <?= $this->session->flashdata('message');
+                    $this->session->unset_userdata('message'); ?>
+                    <div class="row mb-50">
                         <?php foreach ($event as $e) : ?>
                             <div class="col-lg-6 col-md-12">
                                 <div class="latest-post mb-50">
@@ -273,7 +274,7 @@
                                                             <?php $h_diskon = $e['harga_tiket'] * ($e['diskon'] / 100);
                                                             $diskon = $e['harga_tiket'] - $h_diskon;
                                                             ?>
-                                                             <div class="entry-meta meta-1" style="text-decoration: line-through; color:red;"><span style="color: black;">Rp <?= number_format($e['harga_tiket'], 0, ',', '.') ?></span></div>
+                                                            <div class="entry-meta meta-1" style="text-decoration: line-through; color:red;"><span style="color: black;">Rp <?= number_format($e['harga_tiket'], 0, ',', '.') ?></span></div>
                                                             <div class="entry-meta meta-0 font-small mb-30 mt-2">
                                                                 <span class="post-cat bg-success color-white">Rp <?= number_format($diskon, 0, ',', '.') ?></span>
                                                             </div>
@@ -284,10 +285,20 @@
                                                         <?php } ?>
                                                         <div class="row justify-content-around">
                                                             <div class="col">
-                                                                <a href="<?= base_url('home/event_detail/') . $e['id_event'] ?>"><i class="fas fa-info-circle fa-2x">Detail</i></a>
+                                                                <a href="<?= base_url('home/event_detail/') . $e['id_event'] ?>">
+                                                                    <div class="entry-meta meta-1">
+                                                                        <img src="<?= base_url('assets/logo/detail.png'); ?>" alt="" style="height: 25px; width: 30px;">
+                                                                        <span>Detail</span>
+                                                                    </div>
+                                                                </a>
                                                             </div>
                                                             <div class="col">
-                                                                <a href="<?= base_url('home/tambah_keranjang_event/') . $e['id_event']; ?>"><i class="fas fa-cart-plus fa-2x">Tambah</i></a>
+                                                                <a href="<?= base_url('home/tambah_keranjang_event/') . $e['id_event']; ?>">
+                                                                    <div class="entry-meta meta-1">
+                                                                        <img src="<?= base_url('assets/logo/cart.png'); ?>" alt="" style="height: 25px; width: 30px;">
+                                                                        <span>Tambah</span>
+                                                                    </div>
+                                                                </a>
                                                             </div>
                                                         </div>
                                                         <hr>
