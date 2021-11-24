@@ -1,14 +1,39 @@
 <!-- Footer Start-->
-<footer>
-    <div class="footer-area pt-50 bg-white">
+<footer class="pt-50">
+    <div class="footer-area pt-15 bg-white">
         <div class="container">
             <div class="row">
-                <div class="col">
+                <div class="col-md-8 col-6">
                     <ul class="float-left mr-30 font-medium">
-                        <li class="cat-item cat-item-2"><img class="logo-img d-inline" src="<?= $profil_perusahaan['logo']; ?>" alt="Responsive image" style="height: 40px; width: 60px;"></li>
-                        <li class="cat-item cat-item-3"><?= $profil_perusahaan['alamat']; ?></li>
-                        <li class="cat-item cat-item-3"><?= $profil_perusahaan['email']; ?></li>
-                        <li class="cat-item cat-item-3"><?= $profil_perusahaan['nomor_kontak']; ?></li>
+                        <li class="cat-item cat-item-2"><img class="logo-img d-inline" src="<?= $this->SettingModel->getRowPerusahaan('logo'); ?>" alt="Responsive image" style="height: 40px; width: 60px;"></li>
+                        <li class="cat-item cat-item-3"><?= $this->SettingModel->getRowPerusahaan('alamat'); ?></li>
+                        <li class="cat-item cat-item-3"><?= $this->SettingModel->getRowPerusahaan('email'); ?></li>
+                        <li class="cat-item cat-item-3"><?= $this->SettingModel->getRowPerusahaan('nomor_kontak'); ?></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 col-6">
+                    <ul class="float-left mr-30 font-medium">
+                        <li class="cat-item cat-item-2">
+                            Merchandise
+                        </li>
+                        <li class="cat-item cat-item-2">
+                            Event
+                        </li>
+                        <li class="cat-item cat-item-2">
+                            About Us
+                        </li>
+                        <li class="cat-item cat-item-2">
+                            <div class="d-flex">
+                                <!-- Facebook -->
+                                <a href="<?= $this->SettingModel->getRowPerusahaan('instagram'); ?>"><i class="fab fa-facebook-f"></i></a>
+
+                                <!-- Twitter -->
+                                <a href="<?= $this->SettingModel->getRowPerusahaan('twitter'); ?>"><i class="ml-3 fab fa-twitter"></i></a>
+
+                                <!-- Instagram -->
+                                <a href="<?= $this->SettingModel->getRowPerusahaan('facebook'); ?>"><i class="ml-3 fab fa-instagram"></i></a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>

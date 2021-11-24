@@ -20,6 +20,14 @@ class SettingModel extends CI_Model {
     var $column_search = array('sosmed'); //field yang diizin untuk pencarian
     var $order = array('sosmed' => 'asc'); // default order
 
+    public function getRowPerusahaan($field=null){
+        if($field == null){
+            return '-';
+        }else{
+            return $this->db->get('profile_perusahaan')->row()->$field;
+        }
+    }
+
     public function sosmed_data()
     {
         $this->_get_sosmed_query();

@@ -251,8 +251,6 @@
                                 </div>
                             </div>
                         <?php endforeach; ?>
-
-
                     </div> 
                     <div class="pagination-area mb-30">
                         <nav aria-label="Page navigation example">

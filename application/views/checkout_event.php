@@ -39,11 +39,11 @@
                                     <th width="10%">Qty</th>
                                     <th width="20%">Total</th>
                                 </tr>
-                                <?php $no=1; foreach($checkout as $c):?>
+                                <?php $no=1; foreach($checkout as $ch):?>
                                     <tr>
-                                        <td><?=$c->nama_event?></td>
-                                        <td align="center"><?=$c->qty?></td>
-                                        <td align="right"><?=number_format($c->harga * $c->qty)?></td>
+                                        <td><?=$ch->nama_event?></td>
+                                        <td align="center"><?=$ch->qty?></td>
+                                        <td align="right"><?=number_format($ch->harga * $ch->qty)?></td>
                                     </tr>
                                 <?php endforeach;?>
                                 <tr>

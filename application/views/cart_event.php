@@ -1,7 +1,8 @@
 <main class="position-relative">
      <div class="cart-page">
          <div class="container">
-             <div class="row">
+             <div class="text-center"><h3>Keranjang Event</h3></div>
+             <div class="row mt-3">
                  <div class="col-lg-8 col-md-8 mb-3">
                     <div class="d-flex justify-content-between">
                         <span>Kamu punya <?=count($keranjang_event)?> item event</span>
@@ -25,7 +26,7 @@
                                 <?php endif; ?>
                                 <input type="hidden" id="harga_<?= $e['id_keranjang']; ?>" value="<?= $harga_diskon ?>">
                                 <img class="ml-2 rounded" src="<?= base_url('assets/uploads/foto_event/') . $e['foto']; ?>" width="40">
-                                <div class="ml-2"><span class="font-weight-bold d-block"><?= $e['nama_event']; ?></span><span class="spec">Rp. <?= number_format($harga_diskon, 0, ',', '.') ?></span></div>
+                                <div class="ml-2"><a href="<?=base_url('home/event_detail/'.$e['id_event'])?>" class="font-weight-bold d-block"><?= $e['nama_event']; ?></a><span class="spec">Rp. <?= number_format($harga_diskon, 0, ',', '.') ?></span></div>
                             </div>
                             <div class="d-flex flex-row align-items-center">
                                 <div class="d-block">
@@ -75,7 +76,7 @@
                                      <input type="hidden" id="grand" name="grand" value="<?= $grand_total ?>">
                                  </div>
                                  <center>
-                                     <div class="cart-btn">
+                                     <div class="cart-btn <?= ($keranjang_event) ? '' : 'd-none'?>">
                                          <a href="<?= base_url('checkout/event') ?>" class="btn btn-sm btn-warning">Checkout</a>
                                      </div>
                                  </center>

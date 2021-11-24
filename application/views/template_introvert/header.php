@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" href="<?= $profil_perusahaan['logo']; ?>">
+    <link rel="shortcut icon" type="image/x-icon" href="<?= $this->SettingModel->getRowPerusahaan('logo'); ?>">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <!-- NewsViral CSS  -->
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/css/style.css">
@@ -28,17 +28,17 @@
                     <div class="col-lg-2 col-md-3">
                         <div class="header-logo d-none d-lg-block">
                             <a href="<?= base_url() ?>">
-                                <img class="logo-img d-inline" src="<?= $profil_perusahaan['logo']; ?>" alt="Responsive image" style="height: 40px; width: 60px;">
+                                <img class="logo-img d-inline" src="<?= $this->SettingModel->getRowPerusahaan('logo'); ?>" alt="Responsive image" style="height: 40px; width: 60px;">
                             </a>
                         </div>
                         <div class="logo-tablet d-md-inline d-lg-none d-none">
                             <a href="<?= base_url() ?>">
-                                <img class="logo-img d-inline" src="<?= $profil_perusahaan['logo']; ?>" alt="Responsive image" style="height: 40px; width: 60px;">
+                                <img class="logo-img d-inline" src="<?= $this->SettingModel->getRowPerusahaan('logo'); ?>" alt="Responsive image" style="height: 40px; width: 60px;">
                             </a>
                         </div>
                         <div class="logo-mobile d-block d-md-none">
                             <a href="<?= base_url() ?>">
-                                <img class="logo-img d-inline" src="<?= $profil_perusahaan['logo']; ?>" alt="Responsive image" style="height: 40px; width: 60px;">
+                                <img class="logo-img d-inline" src="<?= $this->SettingModel->getRowPerusahaan('logo'); ?>" alt="Responsive image" style="height: 40px; width: 60px;">
                             </a>
                         </div>
                     </div>

@@ -35,7 +35,7 @@ class Checkout extends CI_Controller
                 $this->db->where('id_user', $id_user);
                 $this->db->update('keranjang_event', $data);
 
-                $keranjang = $this->db->get_where('keranjang_event', ['id_user' => $id_user, 'status' => 2]);
+                $keranjang = $this->tiket_model->get_checkout_event($id_user, 2);
                 $data['checkout'] = $keranjang->result();
                 $data['count'] = $keranjang->num_rows();
                 $data['title'] = 'Checkout: '.$data['count'].' Event';

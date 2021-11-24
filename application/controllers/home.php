@@ -595,24 +595,40 @@ class Home extends CI_Controller
             $this->session->set_flashdata('message2', 'Daftar terlebih dahulu sebelum melakukan tambah ke keranjang');
             redirect('home/login');
         } else {
-            $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-            $keranjang = $this->tiket_model->cek_keranjang($id_event, $user['id_user'])->row_array();
+            $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row();
+            
+            $keranjang_0 = $this->db->get_where('keranjang_event', ['id_event' => $id_event, 'id_user' => $user->id_user, 'status' => 0]);
+            $keranjang_1 = $this->db->get_where('keranjang_event', ['id_event' => $id_event, 'id_user' => $user->id_user, 'status' => 1]);
+
             $this->session->set_flashdata('message', '
             <div class="alert alert-success" role="alert">
-                Berhasil ditambahkan ke keranjang Event!
+                Berhasil ditambahkan ke <a href="'.base_url('home/cart_event').'"><u>Keranjang Event!</u></a>
             </div>');
-            
-            if ($keranjang) {
-                $this->db->set('qty', $keranjang['qty'] + 1);
-                $this->db->where('id_keranjang', $keranjang['id_keranjang']);
-                $this->db->update('keranjang_event');
+
+            $count_k0 = $keranjang_0->num_rows();
+            $count_k1 = $keranjang_1->num_rows();
+
+            if($count_k0 > 0){
+                $qty = $keranjang_0->row()->qty + 1;
+                $id_keranjang = $keranjang_0->row()->id_keranjang;
+                $query = "UPDATE keranjang_event SET qty = $qty WHERE id_keranjang = $id_keranjang";
+                $this->db->query($query);
                 redirect('home/event');
-            } else {
+            }
+            else if ($count_k1 > 0){
+                //update
+                $qty = $keranjang_1->row()->qty + 1;
+                $id_keranjang = $keranjang_1->row()->id_keranjang;
+                $query = "UPDATE keranjang_event SET qty = $qty WHERE id_keranjang = $id_keranjang";
+                $this->db->query($query);
+                redirect('home/event');
+            }else{
+                //insert
                 $data = array(
-                    'id_event'      => $id_event,
+                    'id_event' => $id_event,
                     'qty'     => 1,
                     'status' => 1,
-                    'id_user' => $user['id_user'],
+                    'id_user' => $user->id_user,
                 );
                 $this->db->insert('keranjang_event', $data);
                 redirect('home/event');
