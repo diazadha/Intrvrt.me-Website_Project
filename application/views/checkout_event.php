@@ -34,19 +34,34 @@
                          <div class="card-body">
                              <h5>Ringkasan Pesanan</h5>
                             <table class="table table-bordered table-sm" width="100%">
-                                <tr>
+                                <tr class="text-center">
                                     <th>Event</th>
                                     <th width="10%">Qty</th>
-                                    <th>Total</th>
+                                    <th width="20%">Total</th>
                                 </tr>
                                 <?php $no=1; foreach($checkout as $c):?>
                                     <tr>
                                         <td><?=$c->nama_event?></td>
-                                        <td><?=$c->qty?></td>
-                                        <td><?=$c->harga?></td>
+                                        <td align="center"><?=$c->qty?></td>
+                                        <td align="right"><?=number_format($c->harga * $c->qty)?></td>
                                     </tr>
                                 <?php endforeach;?>
-                            </table><hr>
+                                <tr>
+                                    <td colspan="2" align="right" class="font-weight-bold">Sub Total</td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                            <div class="row mt-3 mb-3">
+                                <div class="col-md-12">
+                                    <label for="" class="font-weight-bold">Pilih Metode Bayar</label>
+                                    <select class="form-control" name="metode_bayar" id="">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <hr>
                             <a href="" class="btn btn-primary">Bayar Sekarang</a>
                          </div>
                      </div>

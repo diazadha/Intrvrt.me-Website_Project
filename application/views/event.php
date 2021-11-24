@@ -152,74 +152,17 @@
     <main class="position-relative">
         <div class="archive-header text-center mb-50">
             <div class="container">
-                <h2>
-                    <span class="" style="color: #E64F5E;">Event</span>
-                    <br>
-                    <span class="mt-1" style="font-size: x-large;"><?= count($event) ?> Events</span>
-                </h2>
+                <!-- <h2> -->
+                    <h4 class="text-center" style="color: #E64F5E;">Daftar Event</h4>
+                    <!-- <br>
+                    <span class="mt-1" style="font-size: x-large;"><?= count($event) ?> Events</span> -->
+                <!-- </h2> -->
             </div>
         </div>
         <div class="container">
             <div class="row">
                 <!-- sidebar-left -->
                 <div class="col-lg-2 col-md-3 primary-sidebar sticky-sidebar sidebar-left order-2 order-md-1">
-                    <!-- Widget Weather -->
-                    <div class="sidebar-widget widget-weather border-radius-10 bg-white mb-30">
-                        <div class="d-flex">
-                            <div class="font-medium">
-                                <p><?= date('l') ?></p>
-                                <h2><?= date('d') ?></h2>
-                                <p><strong><?= date('F') ?></strong></p>
-                            </div>
-                            <div class="font-medium ml-10 pt-20">
-                                <div id="datetime" class="d-inline-block">
-                                    <ul>
-                                        <li><span class="font-small">
-                                                <a class="text-primary" href="#">London</a><br>
-                                                <i class="wi wi-day-sunny mr-5"></i>32ºc
-                                            </span>
-                                            <p>Sunny</p>
-                                        </li>
-                                        <li><span class="font-small">
-                                                <a class="text-danger" href="#">Paris</a><br>
-                                                <i class="wi wi-day-cloudy mr-5"></i>28ºc
-                                            </span>
-                                            <p>Cloudy</p>
-                                        </li>
-                                        <li><span class="font-small">
-                                                <a class="text-success" href="#">New York</a><br>
-                                                <i class="wi wi-rain-mix mr-5"></i>25ºc
-                                            </span>
-                                            <p>Rainy</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Widget Categories -->
-                    <div class="sidebar-widget widget_categories_2 border-radius-10 bg-white mb-30">
-                        <ul class="font-small text-muted">
-                            <li class="cat-item cat-item-2 active"><a href="#"><span class="mr-10">
-                                        <ion-icon name="earth-outline"></ion-icon>
-                                    </span>International</a></li>
-                            <li class="cat-item cat-item-3"><a href="#"><span class="mr-10">
-                                        <ion-icon name="trending-up-outline"></ion-icon>
-                                    </span>Businesss</a></li>
-                            <li class="cat-item cat-item-4"><a href="#"><span class="mr-10">
-                                        <ion-icon name="glasses-outline"></ion-icon>
-                                    </span>Entertainment</a></li>
-                            <li class="cat-item cat-item-5"><a href="#"><span class="mr-10">
-                                        <ion-icon name="bicycle-outline"></ion-icon>
-                                    </span>Sport News</a></li>
-                            <li class="cat-item cat-item-6"><a href="#"><span class="mr-10">
-                                        <ion-icon name="fitness-outline"></ion-icon>
-                                    </span>Health</a></li>
-                            <li class="cat-item cat-item-2"><a href="#"><span class="mr-10">
-                                        <ion-icon name="book-outline"></ion-icon>
-                                    </span>Magazine</a></li>
-                        </ul>
-                    </div>
                     <!-- Widget Categories -->
                     <div class="sidebar-widget widget_categories border-radius-10 bg-white mb-30">
                         <div class="widget-header position-relative mb-15">
@@ -239,7 +182,7 @@
                     $this->session->unset_userdata('message'); ?>
                     <div class="row mb-50">
                         <?php foreach ($event as $e) : ?>
-                            <div class="col-lg-6 col-md-12">
+                            <div class="col-lg-6 col-6 col-md-12">
                                 <div class="latest-post mb-50">
                                     <div class="loop-list-style-1">
                                         <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
@@ -255,15 +198,9 @@
                                                         <a class="entry-meta meta-2" href="<?= base_url('home/ekategori/') . $k['id_kategori'] ?>"><span class="post-in text-danger font-x-small"><?= $e['nama_kategori']; ?></span></a>
                                                     </div>
                                                     <h5 class="post-title text-limit-2-row">
-                                                        <!-- <span class="post-format-icon">
-                                                        <ion-icon name="videocam-outline"></ion-icon>
-                                                    </span> -->
                                                         <a href="<?= base_url('home/event_detail/') . $e['id_event'] ?>"><?= ucwords($e['nama_event']); ?></a>
                                                     </h5>
                                                     <h7 class="post-title mb-15 text-limit-2-row">
-                                                        <!-- <span class="post-format-icon">
-                                                        <ion-icon name="videocam-outline"></ion-icon>
-                                                    </span> -->
                                                         <a href="<?= base_url('home/event_detail/') . $e['id_event'] ?>"><?= ucwords($e['tgl_acara']); ?></a>
                                                     </h7>
                                                     <div class="entry-meta meta-1 font-x-small color-grey float-left">
@@ -283,19 +220,19 @@
                                                                 <span class="post-cat bg-success color-white">Rp <?= number_format($e['harga_tiket'], 0, ',', '.') ?></span>
                                                             </div>
                                                         <?php } ?>
-                                                        <div class="row justify-content-around">
-                                                            <div class="col">
+                                                        <div class="row justify-content-center align-items-center">
+                                                            <div class="col d-flex">
                                                                 <a href="<?= base_url('home/event_detail/') . $e['id_event'] ?>">
                                                                     <div class="entry-meta meta-1">
-                                                                        <img src="<?= base_url('assets/logo/detail.png'); ?>" alt="" style="height: 25px; width: 30px;">
+                                                                        <img src="<?= base_url('assets/logo/detail.png'); ?>" alt="" style="height: 30px; width: 30px;">
                                                                         <span>Detail</span>
                                                                     </div>
                                                                 </a>
                                                             </div>
-                                                            <div class="col">
+                                                            <div class="col d-flex">
                                                                 <a href="<?= base_url('home/tambah_keranjang_event/') . $e['id_event']; ?>">
                                                                     <div class="entry-meta meta-1">
-                                                                        <img src="<?= base_url('assets/logo/cart.png'); ?>" alt="" style="height: 25px; width: 30px;">
+                                                                        <img src="<?= base_url('assets/logo/cart.png'); ?>" alt="" style="height: 30px; width: 30px;">
                                                                         <span>Tambah</span>
                                                                     </div>
                                                                 </a>
@@ -316,7 +253,7 @@
                         <?php endforeach; ?>
 
 
-                    </div>
+                    </div> 
                     <div class="pagination-area mb-30">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-start">

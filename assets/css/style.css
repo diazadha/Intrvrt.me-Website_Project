@@ -305,7 +305,7 @@ ul {
 	background: #ff3500;
 }
 .btn {
-	background: #ff656a;
+	/* background: #ff656a; */
 	text-transform: uppercase;
 	color: #fff;
 	cursor: pointer;
@@ -315,9 +315,9 @@ ul {
 	letter-spacing: 1px;
 	line-height: 0;
 	margin-bottom: 0;
-	padding: 27px 44px;
-	border-radius: 5px;
-	min-width: 200px;
+	padding: 20px;
+	border-radius: 10px;
+	min-width: 0px;
 	margin: 10px;
 	cursor: pointer;
 	transition: color 0.4s linear;
@@ -334,7 +334,7 @@ ul {
 	top: 0;
 	width: 100%;
 	height: 100%;
-	background: #e6373d;
+	/* background: #e6373d; */
 	z-index: 1;
 	border-radius: 5px;
 	transition: transform 0.5s;

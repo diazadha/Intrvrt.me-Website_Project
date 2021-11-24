@@ -1,5 +1,19 @@
 <!-- Footer Start-->
 <footer>
+    <div class="footer-area pt-50 bg-white">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <ul class="float-left mr-30 font-medium">
+                        <li class="cat-item cat-item-2"><img class="logo-img d-inline" src="<?= $profil_perusahaan['logo']; ?>" alt="Responsive image" style="height: 40px; width: 60px;"></li>
+                        <li class="cat-item cat-item-3"><?= $profil_perusahaan['alamat']; ?></li>
+                        <li class="cat-item cat-item-3"><?= $profil_perusahaan['email']; ?></li>
+                        <li class="cat-item cat-item-3"><?= $profil_perusahaan['nomor_kontak']; ?></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- footer-bottom aera -->
     <div class="footer-bottom-area bg-white text-muted">
         <div class="container">
@@ -14,10 +28,7 @@
             </div>
         </div>
     </div>
-    <!-- Footer End-->
 </footer>
-</div> <!-- Main Wrap End-->
-<div class="dark-mark"></div>
 <!-- Vendor JS-->
 <script src="<?= base_url('assets'); ?>/js/vendor/modernizr-3.6.0.min.js"></script>
 <script src="<?= base_url('assets'); ?>/js/vendor/jquery-3.6.0.min.js"></script>

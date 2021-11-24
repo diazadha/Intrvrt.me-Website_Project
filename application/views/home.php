@@ -153,41 +153,7 @@
         <div class="container">
             <div class="row">
                 <!-- sidebar-left -->
-                <div class="col-lg-2 col-md-3 primary-sidebar sticky-sidebar sidebar-left order-2 order-md-1">
-                    <!-- Widget Weather -->
-                    <div class="sidebar-widget widget-weather border-radius-10 bg-white mb-30 col-lg-12">
-                        <div class="d-flex">
-                            <div class="font-medium">
-                                <p><?= date('l') ?></p>
-                                <h2><?= date('d') ?></h2>
-                                <p><strong><?= date('F') ?></strong></p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Widget Categories -->
-                    <div class="sidebar-widget widget_categories_2 border-radius-10 bg-white mb-30">
-                        <ul class="font-small text-muted">
-                            <li class="cat-item cat-item-2 active"><a href="#"><span class="mr-10">
-                                        <ion-icon name="earth-outline"></ion-icon>
-                                    </span>International</a></li>
-                            <li class="cat-item cat-item-3"><a href="#"><span class="mr-10">
-                                        <ion-icon name="trending-up-outline"></ion-icon>
-                                    </span>Businesss</a></li>
-                            <li class="cat-item cat-item-4"><a href="#"><span class="mr-10">
-                                        <ion-icon name="glasses-outline"></ion-icon>
-                                    </span>Entertainment</a></li>
-                            <li class="cat-item cat-item-5"><a href="#"><span class="mr-10">
-                                        <ion-icon name="bicycle-outline"></ion-icon>
-                                    </span>Sport News</a></li>
-                            <li class="cat-item cat-item-6"><a href="#"><span class="mr-10">
-                                        <ion-icon name="fitness-outline"></ion-icon>
-                                    </span>Health</a></li>
-                            <li class="cat-item cat-item-2"><a href="#"><span class="mr-10">
-                                        <ion-icon name="book-outline"></ion-icon>
-                                    </span>Magazine</a></li>
-                        </ul>
-                    </div>
-                    <!-- Widget Categories -->
+                <div class="d-none col-lg-2 col-md-3 primary-sidebar sticky-sidebar sidebar-left order-2 order-md-1">
                     <div class="sidebar-widget widget_categories border-radius-10 bg-white mb-30">
                         <div class="widget-header position-relative mb-15">
                             <h5 class="widget-title"><strong>Categories</strong></h5>
@@ -213,7 +179,7 @@
                     </div>
                 </div>
                 <!-- main content -->
-                <div class="col-lg-10 col-md-9 order-10 order-md-2">
+                <div class="col-lg-12 col-md-9 order-10 order-md-2">
                     <div class="row">
                         <div class="col-lg-8 col-md-12">
                             <div class="latest-post mb-50">
@@ -281,18 +247,6 @@
                                         </article>
                                     <?php endforeach; ?>
                                 </div>
-                            </div>
-                            <div class="pagination-area mb-30">
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination justify-content-start">
-                                        <li class="page-item"><a class="page-link" href="#"><i class="ti-angle-left"></i></a></li>
-                                        <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">03</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">04</a></li>
-                                        <li class="page-item"><a class="page-link" href="#"><i class="ti-angle-right"></i></a></li>
-                                    </ul>
-                                </nav>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-12 sidebar-right">

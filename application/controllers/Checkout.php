@@ -45,4 +45,16 @@ class Checkout extends CI_Controller
             }
         }
     }
+
+    public function event_batal()
+    {
+        if (!$this->session->userdata('email')) {
+            $this->session->set_flashdata('message2', 'Anda belum login');
+            redirect('home/login');
+        } else {
+            $this->db->delete('keranjang_event', array('id_user' => $this->session->userdata('id_user'), 'status' => 2));
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Checkot berhasil dibatalkan</div>');
+            redirect('home/cart_event');
+        }
+    }
 }
