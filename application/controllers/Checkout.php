@@ -1,7 +1,7 @@
 <?php
-
 defined('BASEPATH') or exit('No direct script access allowed');
-
+require 'vendor/autoload.php';
+use Xendit\Xendit;
 class Checkout extends CI_Controller
 {
 
@@ -10,9 +10,20 @@ class Checkout extends CI_Controller
         parent::__construct();
     }
 
+    private function token(){
+        return 'xnd_development_E7UdRyMnxY1B18FytIEHESZeclPJ4OcrZvZ0m1Cs3AloopFHBRRRnRotWcBEL';
+    }
+
+    public function getVA(){
+        Xendit::setApiKey($this->token());
+        return \Xendit\VirtualAccounts::getVABanks(); //ARRAY
+    }   
+
     public function event()
     {
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $data['VABank'] = $this->getVA();
+
         if (!$this->session->userdata('email')) {
             $this->session->set_flashdata('message2', 'Anda belum login');
             redirect('home/login');

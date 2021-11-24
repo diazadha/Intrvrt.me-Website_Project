@@ -55,9 +55,11 @@
                                 <div class="col-md-12">
                                     <label for="" class="font-weight-bold">Pilih Metode Bayar</label>
                                     <select class="form-control" name="metode_bayar" id="">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
+                                        <?php foreach($VABank as $va):?>
+                                            <?php if($va['is_activated']):?>
+                                                <option value="<?= $va['code']?>"><?= $va['name']?></option>
+                                            <?php endif;?>
+                                        <?php endforeach;?>
                                     </select>
                                 </div>
                             </div>
