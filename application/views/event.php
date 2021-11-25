@@ -187,10 +187,9 @@
                                     <div class="loop-list-style-1">
                                         <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
                                             <div class="d-md-flex d-block">
-
                                                 <div class="post-thumb post-thumb-big d-flex mr-15 border-radius-15 img-hover-scale">
                                                     <a class="color-white" href="<?= base_url('home/event_detail/') . $e['id_event'] ?>">
-                                                        <img class="border-radius-15" src="<?= base_url('assets/uploads/foto_event/') . $e['foto']; ?>" alt="">
+                                                        <img class="img-fluid border-radius-15" src="<?= base_url('assets/uploads/foto_event/') . $e['foto']; ?>" alt="Responsive image" style="height: 250px; width: 250px;">
                                                     </a>
                                                 </div>
                                                 <div class="post-content media-body">
@@ -206,14 +205,22 @@
                                                     <div class="entry-meta meta-1 font-x-small color-grey float-left">
                                                         <?php
                                                         if ($e['harga_tiket'] == 0) { ?>
-                                                            <div class="entry-meta meta-0 font-small mb-60"><span class="post-in background5 text-dark font-x-small">GRATIS</span></div>
+                                                            <div class="entry-meta meta-0 font-small mb-30"><span class="post-in background5 text-dark font-x-small">GRATIS</span></div>
                                                         <?php } else if ($e['diskon'] != 0) { ?>
                                                             <?php $h_diskon = $e['harga_tiket'] * ($e['diskon'] / 100);
                                                             $diskon = $e['harga_tiket'] - $h_diskon;
                                                             ?>
-                                                            <div class="entry-meta meta-1" style="text-decoration: line-through; color:red;"><span style="color: black;">Rp <?= number_format($e['harga_tiket'], 0, ',', '.') ?></span></div>
-                                                            <div class="entry-meta meta-0 font-small mb-30 mt-2">
-                                                                <span class="post-cat bg-success color-white">Rp <?= number_format($diskon, 0, ',', '.') ?></span>
+                                                            <div class="row">
+                                                                <div class="col-sm-5 col-4">
+                                                                    <div class="entry-meta meta-1" style="text-decoration: line-through; color:red;">
+                                                                        <span style="color: black;">Rp <?= number_format($e['harga_tiket'], 0, ',', '.') ?></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <div class="entry-meta meta-0 font-small mb-30">
+                                                                        <span class="post-cat bg-success color-white">Rp <?= number_format($diskon, 0, ',', '.') ?></span>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         <?php } else { ?>
                                                             <div class="entry-meta meta-0 font-small mb-30 mt-1">
@@ -221,25 +228,36 @@
                                                             </div>
                                                         <?php } ?>
                                                         <div class="row justify-content-center align-items-center">
-                                                            <div class="col d-flex">
+                                                            <div class="col-sm-5">
                                                                 <a href="<?= base_url('home/event_detail/') . $e['id_event'] ?>">
                                                                     <div class="entry-meta meta-1">
-                                                                        <img src="<?= base_url('assets/logo/detail.png'); ?>" alt="" style="height: 30px; width: 30px;">
-                                                                        <span>Detail</span>
+                                                                        <div class="row">
+                                                                            <div class="col-sm-7 col-4">
+                                                                                <img src="<?= base_url('assets/logo/detail.png'); ?>" alt="" style="height: 30px; width: 30px;">
+                                                                            </div>
+                                                                            <div class="col-sm-2 col-2" style="margin-left: -28px; margin-top: 10px;">
+                                                                                <span>Detail</span>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </a>
                                                             </div>
-                                                            <div class="col d-flex">
+                                                            <div class="col">
                                                                 <a href="<?= base_url('home/tambah_keranjang_event/') . $e['id_event']; ?>">
                                                                     <div class="entry-meta meta-1">
-                                                                        <img src="<?= base_url('assets/logo/cart.png'); ?>" alt="" style="height: 30px; width: 30px;">
-                                                                        <span>Tambah</span>
+                                                                        <div class="row">
+                                                                            <div class="col-sm-5 col-4">
+                                                                                <img src="<?= base_url('assets/logo/cart.png'); ?>" alt="" style="height: 30px; width: 30px;">
+                                                                            </div>
+                                                                            <div class="col-2" style="margin-left: -28px; margin-top: 10px;">
+                                                                                <span>Tambah</span>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </a>
                                                             </div>
                                                         </div>
-                                                        <hr>
-
+                                                        <hr class="mb-2">
                                                         <span class="post-off" style="color: red;">Batas Pembelian: <?= $e['tgl_berakhir']; ?></span>
                                                         <br>
                                                         <span class="post-off">Stock: <?= $e['stock']; ?></span>
