@@ -12,7 +12,7 @@ class PesananModel extends CI_Model
     }
 
     public function admin_sudah_kirim(){
-        $query = "SELECT * FROM pesanan_m WHERE status = 1";
+        $query = "SELECT * FROM pesanan_m WHERE status = 2";
         return $this->db->query($query);
     }
 }

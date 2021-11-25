@@ -23,7 +23,7 @@
                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#BelumBayar" role="tab" aria-controls="#BelumBayar" aria-selected="true">Belum Bayar (<?= $jumlah1 ?>)</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#VerifikasiPembayaran" role="tab" aria-controls="#VerifikasiPembayaran" aria-selected="false">Verifikasi Pembayaran ( <?= $jumlah2 ?> )</a>
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#SudahBayar" role="tab" aria-controls="#VerifikasiPembayaran" aria-selected="false">Sudah Bayar ( <?= $jumlah2 ?> )</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Dikemas" role="tab" aria-controls="#Dikemas" aria-selected="false">Dikemas ( <?= $jumlah3 ?> )</a>
@@ -68,7 +68,7 @@
                     </div>
                 </div>
 
-                <div class="tab-pane fade" id="VerifikasiPembayaran" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="tab-pane fade" id="SudahBayar" role="tabpanel" aria-labelledby="profile-tab">
                     <div class="card shadow mb-4"> 
                         <div class="card-body">
                             <div class="table2">
