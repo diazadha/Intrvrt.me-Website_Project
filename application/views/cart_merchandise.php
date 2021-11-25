@@ -89,7 +89,7 @@
                              <div class="row">
                                  <div class="col-md-12">
                                      <div class="cart-summary">
-                                         <form action=" <?= base_url('home/checkout_m/') ?> " method="POST">
+                                         <form action=" <?= base_url('checkout/merchandise') ?> " method="POST">
                                              <div class="cart-content">
                                                  <h2>Total Biaya :</h2>
                                                  <h3><span id="grand_total">Rp. <?= number_format($grand_total, 0, ',', '.'); ?> </span></h3>
