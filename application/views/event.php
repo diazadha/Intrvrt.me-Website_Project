@@ -153,8 +153,8 @@
         <div class="archive-header text-center mb-50">
             <div class="container">
                 <!-- <h2> -->
-                    <h4 class="text-center" style="color: #E64F5E;">Daftar Event</h4>
-                    <!-- <br>
+                <h4 class="text-center" style="color: #E64F5E;">Daftar Event</h4>
+                <!-- <br>
                     <span class="mt-1" style="font-size: x-large;"><?= count($event) ?> Events</span> -->
                 <!-- </h2> -->
             </div>
@@ -251,7 +251,7 @@
                                 </div>
                             </div>
                         <?php endforeach; ?>
-                    </div> 
+                    </div>
                     <div class="pagination-area mb-30">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-start">

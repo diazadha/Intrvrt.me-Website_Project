@@ -1,7 +1,9 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 require 'vendor/autoload.php';
+
 use Xendit\Xendit;
+
 class Checkout extends CI_Controller
 {
 
@@ -10,14 +12,16 @@ class Checkout extends CI_Controller
         parent::__construct();
     }
 
-    private function token(){
+    private function token()
+    {
         return 'xnd_development_E7UdRyMnxY1B18FytIEHESZeclPJ4OcrZvZ0m1Cs3AloopFHBRRRnRotWcBEL';
     }
 
-    public function getVA(){
+    public function getVA()
+    {
         Xendit::setApiKey($this->token());
         return \Xendit\VirtualAccounts::getVABanks(); //ARRAY
-    }   
+    }
 
     public function event()
     {
@@ -30,15 +34,15 @@ class Checkout extends CI_Controller
         } else {
             $id_user = $this->session->userdata('id_user');
             $check = $this->db->get_where('keranjang_event', ['id_user' => $id_user, 'status' => 2])->num_rows();
-            if ($check > 0){
+            if ($check > 0) {
                 $keranjang = $this->tiket_model->get_checkout_event($id_user, 2);
                 $data['checkout'] = $keranjang->result();
                 $data['count'] = $keranjang->num_rows();
-                $data['title'] = 'Checkout: '.$data['count'].' Event';
+                $data['title'] = 'Checkout: ' . $data['count'] . ' Event';
                 $this->load->view('template_introvert/header', $data);
                 $this->load->view('checkout_event', $data);
                 $this->load->view('template_introvert/footer', $data);
-            }else{
+            } else {
                 $data = array(
                     'status' => 2
                 );
@@ -49,7 +53,7 @@ class Checkout extends CI_Controller
                 $keranjang = $this->tiket_model->get_checkout_event($id_user, 2);
                 $data['checkout'] = $keranjang->result();
                 $data['count'] = $keranjang->num_rows();
-                $data['title'] = 'Checkout: '.$data['count'].' Event';
+                $data['title'] = 'Checkout: ' . $data['count'] . ' Event';
                 $this->load->view('template_introvert/header', $data);
                 $this->load->view('checkout_event', $data);
                 $this->load->view('template_introvert/footer', $data);
