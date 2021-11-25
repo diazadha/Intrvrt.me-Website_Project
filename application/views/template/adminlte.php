@@ -240,6 +240,29 @@
             </li>
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-shopping-bag"></i>
+                <p>
+                  Pesanan
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="<?= base_url('admin/pesanan/merchandise') ?>" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Pesanan Merchandise</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="<?= base_url('admin/pesanan/event') ?>" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Pesanan Event</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                   Users

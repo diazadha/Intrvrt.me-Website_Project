@@ -187,7 +187,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 ml-3 col-form-label">Link Event</label>
                                     <div class="input-group col-9">
-                                        <input type="text" name="linkevent" value="<?= $event->linkevent ?>" class="form-control" aria-label="stok" aria-describedby="addon-wrapping" required>
+                                        <input type="text" name="linkevent" value="<?= $event->linkevent ?>" class="form-control" aria-label="stok" aria-describedby="addon-wrapping">
                                     </div>
                                 </div>
                             </div>
