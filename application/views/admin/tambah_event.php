@@ -122,7 +122,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 ml-4 col-form-label">Link Event</label>
                                             <div class="input-group flex-nowrap col-8">
-                                                <input type="text" class="form-control" placeholder="Link Event" name="linkevent" required>
+                                                <input type="text" class="form-control" placeholder="Link Event" name="linkevent">
                                             </div>
                                         </div>
                                     </div>
