@@ -152,74 +152,18 @@
     <main class="position-relative">
         <div class="archive-header text-center mb-50">
             <div class="container">
-                <h2>
+                <h4 class="text-center" style="color: #E64F5E;">Daftar Merchandise</h4>
+                <!-- <h2>
                     <span class="" style="color: #E64F5E;">Merchandise</span>
                     <br>
                     <span class="mt-1" style="font-size: x-large;"><?= count($getalldata) ?> Merchandise</span>
-                </h2>
+                </h2> -->
             </div>
         </div>
         <div class="container">
             <div class="row">
                 <!-- sidebar-left -->
                 <div class="col-lg-2 col-md-3 primary-sidebar sticky-sidebar sidebar-left order-2 order-md-1 mt-2">
-                    <!-- Widget Weather -->
-                    <div class="sidebar-widget widget-weather border-radius-10 bg-white mb-30">
-                        <div class="d-flex">
-                            <div class="font-medium">
-                                <p><?= date('l') ?></p>
-                                <h2><?= date('d') ?></h2>
-                                <p><strong><?= date('F') ?></strong></p>
-                            </div>
-                            <div class="font-medium ml-10 pt-20">
-                                <div id="datetime" class="d-inline-block">
-                                    <ul>
-                                        <li><span class="font-small">
-                                                <a class="text-primary" href="#">London</a><br>
-                                                <i class="wi wi-day-sunny mr-5"></i>32ºc
-                                            </span>
-                                            <p>Sunny</p>
-                                        </li>
-                                        <li><span class="font-small">
-                                                <a class="text-danger" href="#">Paris</a><br>
-                                                <i class="wi wi-day-cloudy mr-5"></i>28ºc
-                                            </span>
-                                            <p>Cloudy</p>
-                                        </li>
-                                        <li><span class="font-small">
-                                                <a class="text-success" href="#">New York</a><br>
-                                                <i class="wi wi-rain-mix mr-5"></i>25ºc
-                                            </span>
-                                            <p>Rainy</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Widget Categories -->
-                    <div class="sidebar-widget widget_categories_2 border-radius-10 bg-white mb-30">
-                        <ul class="font-small text-muted">
-                            <li class="cat-item cat-item-2 active"><a href="#"><span class="mr-10">
-                                        <ion-icon name="earth-outline"></ion-icon>
-                                    </span>International</a></li>
-                            <li class="cat-item cat-item-3"><a href="#"><span class="mr-10">
-                                        <ion-icon name="trending-up-outline"></ion-icon>
-                                    </span>Businesss</a></li>
-                            <li class="cat-item cat-item-4"><a href="#"><span class="mr-10">
-                                        <ion-icon name="glasses-outline"></ion-icon>
-                                    </span>Entertainment</a></li>
-                            <li class="cat-item cat-item-5"><a href="#"><span class="mr-10">
-                                        <ion-icon name="bicycle-outline"></ion-icon>
-                                    </span>Sport News</a></li>
-                            <li class="cat-item cat-item-6"><a href="#"><span class="mr-10">
-                                        <ion-icon name="fitness-outline"></ion-icon>
-                                    </span>Health</a></li>
-                            <li class="cat-item cat-item-2"><a href="#"><span class="mr-10">
-                                        <ion-icon name="book-outline"></ion-icon>
-                                    </span>Magazine</a></li>
-                        </ul>
-                    </div>
                     <!-- Widget Categories -->
                     <div class="sidebar-widget widget_categories border-radius-10 bg-white mb-30">
                         <div class="widget-header position-relative mb-15">
@@ -245,7 +189,9 @@
                                                 <div class="background-white border-radius-10 p-10 mb-10">
                                                     <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
                                                         <a href="<?= base_url('home/merchandise_detail/') . $m['id_merch'] ?>">
-                                                            <img class="img-responsive center-block border-radius-15" src="<?= base_url('assets/uploads/foto_merchandise/') . $m['foto']; ?>" alt="Responsive image" style="height:250px; width:100%; display:block; margin-left:auto; margin-right:auto;">
+                                                            <div class="card">
+                                                                <img class="img-fluid center-block border-radius-15" src="<?= base_url('assets/uploads/foto_merchandise/') . $m['foto']; ?>" alt="Responsive image" style="height: 300px; width: 500px;">
+                                                            </div>
                                                         </a>
                                                     </div>
                                                     <div class="pl-10 pr-10">
