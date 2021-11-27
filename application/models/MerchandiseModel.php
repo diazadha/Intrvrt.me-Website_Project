@@ -393,11 +393,12 @@ class MerchandiseModel extends CI_Model
         return $this->db->insert('pesanan_m', $data);
     }
 
-    public function detailpesanan(){
-        $id_pesanan = $this->db->insert_id();
+    public function detailpesanan($id_pesanan){
+        $query = "SELECT MAX(id_pesanan) AS id_pesanan FROM pesanan_m";
+        $id_pesanan = $this->db->query($query)->row_array();
         foreach ($this->MerchandiseModel->getkeranjangdipilih($this->session->userdata('id_user'))->result_array() as $items){
             $data = array(
-            'id_pesanan' => $id_pesanan,
+            'id_pesanan' => $id_pesanan['id_pesanan'],
             'id_merch' => $items['id_merch'],
             'qty' => $items['qty'],
         );

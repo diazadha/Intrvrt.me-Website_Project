@@ -15,4 +15,9 @@ class PesananModel extends CI_Model
         $query = "SELECT * FROM pesanan_m WHERE status = 2";
         return $this->db->query($query);
     }
+
+    public function getidpesanan($id_pesanan){
+        $query = "SELECT * FROM pesanan_m WHERE id_pesanan = $id_pesanan";
+        return $this->db->query($query)->row_array();
+    }
 }

@@ -129,9 +129,29 @@ class Checkout extends CI_Controller
 
     public function proses_m()
     {
+        $data['title'] = 'Checkout Merchandise';
+        $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
 
         $this->MerchandiseModel->checkout();
-        $this->MerchandiseModel->detailpesanan();
-        redirect(base_url('home'));
+        $data['pesanan'] = $this->PesananModel->getidpesanan($this->db->insert_id());
+        $this->MerchandiseModel->detailpesanan($this->db->insert_id());
+        Xendit::setApiKey($this->token());
+        $params = ["external_id" => $data['pesanan']['id_pesanan'],
+        "bank_code" => "MANDIRI",
+        "name" => "Steve Wozniak",
+        "expected_amount" => $this->input->post('total_bayar'),
+        "expiration_date" => date('c', mktime(date('H'), date('i'),date('s'),date('m'),date('d') + 1,date('y'))),
+        ];
+        
+        // var_dump($params);
+        // die;
+        $createVA = \Xendit\VirtualAccounts::create($params);
+        $id = $createVA['id'];
+        $data['getVA'] = \Xendit\VirtualAccounts::retrieve($id);
+        // var_dump($createVA);
+        // die;
+        $this->load->view('template_introvert/header', $data);
+        $this->load->view('virtual_account', $data);
+        $this->load->view('template_introvert/footer', $data);
     }
 }
