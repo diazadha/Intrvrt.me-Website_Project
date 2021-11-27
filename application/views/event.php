@@ -235,8 +235,8 @@
                                                                             <div class="col-sm-7 col-4">
                                                                                 <img src="<?= base_url('assets/logo/detail.png'); ?>" alt="" style="height: 30px; width: 30px;">
                                                                             </div>
-                                                                            <div class="col-sm-2 col-2" style="margin-left: -28px; margin-top: 10px;">
-                                                                                <span>Detail</span>
+                                                                            <div class="col-sm-2 col-2" style="margin-left: -28px; margin-top: 7px;">
+                                                                                <span style="font-size: medium;">Detail</span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -249,8 +249,8 @@
                                                                             <div class="col-sm-5 col-4">
                                                                                 <img src="<?= base_url('assets/logo/cart.png'); ?>" alt="" style="height: 30px; width: 30px;">
                                                                             </div>
-                                                                            <div class="col-2" style="margin-left: -28px; margin-top: 10px;">
-                                                                                <span>Tambah</span>
+                                                                            <div class="col-2" style="margin-left: -28px; margin-top: 7px;">
+                                                                                <span style="font-size: medium;">Tambah</span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
