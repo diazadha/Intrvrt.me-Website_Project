@@ -18,11 +18,11 @@
                                  <div class="carousel-inner">
 
                                      <div class="carousel-item active">
-                                         <img class="d-block w-50" src="<?= base_url('assets/uploads/foto_merchandise/') . $getdatabyid['foto'] ?>" alt="First slide" style="height:400px;">
+                                         <img class="d-block w-50" src="<?= base_url('assets/uploads/foto_merchandise/') . $getdatabyid['foto'] ?>" alt="First slide" style="height:310px;">
                                      </div>
                                      <?php foreach ($getfotobyid as $m) : ?>
                                          <div class="carousel-item">
-                                             <img class="d-block w-50" src="<?= base_url('assets/uploads/foto_merchandise/') . $m['foto'] ?>" alt="" style="height: 400px;">
+                                             <img class="d-block w-50" src="<?= base_url('assets/uploads/foto_merchandise/') . $m['foto'] ?>" alt="" style="height:310px;">
                                          </div>
                                      <?php endforeach; ?>
                                  </div>
@@ -79,11 +79,11 @@
                  <div class="row">
                      <div class="form-group">
                          <div class="col-sm-5">
-                             <a class="btn btn-primary" href="<?= base_url('home/tambah_keranjang_merch/') . $getdatabyid['id_merch']; ?>" role="button">Tambah Keranjang</a>
+                             <a class="btn btn-primary" href="<?= base_url('home/tambah_keranjang_merch/') . $getdatabyid['id_merch']; ?>" role="button" style="background-color: #E6505F;">Tambah ke Keranjang</a>
                          </div>
                      </div>
                      <div class="col-sm-6">
-                         <a class="btn btn-primary" href="<?= base_url('home/merchandise/'); ?>" role="button">Kembali</a>
+                         <a class="btn btn-secondary" href="<?= base_url('home/merchandise/'); ?>" role="button">Kembali</a>
                      </div>
 
                  </div>
