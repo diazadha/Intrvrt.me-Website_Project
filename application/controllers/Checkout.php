@@ -17,6 +17,16 @@ class Checkout extends CI_Controller
         return 'xnd_development_E7UdRyMnxY1B18FytIEHESZeclPJ4OcrZvZ0m1Cs3AloopFHBRRRnRotWcBEL';
     }
 
+    // public function get_VA()
+    // {
+    //     Xendit::setApiKey($this->token());
+
+    //     $id = '61a2486fe56dcb672012de87';
+    //     $getVA = \Xendit\VirtualAccounts::retrieve($id);
+    //     var_dump($getVA);
+    //     die;
+    // }
+
     public function getVA()
     {
         Xendit::setApiKey($this->token());
@@ -82,22 +92,22 @@ class Checkout extends CI_Controller
         if ($user) {
             $data['checkout'] = $this->MerchandiseModel->getkeranjangdipilih($user['id_user'])->result_array();
             $data['is_deliver'] = $this->MerchandiseModel->is_deliv($user['id_user'])->result_array();
-            if (!$data['checkout']){
+            if (!$data['checkout']) {
                 $this->session->set_flashdata('message2', '<div class="alert tutup alert-warning" role="alert">Tidak ada Merchandise yang dipilih!</div>');
                 redirect(base_url('home/cart_merchandise'));
             }
             $data['d'] = array();
-            foreach ($data['checkout'] as $c){
-                array_push($data['d'],$c['is_deliver']);
+            foreach ($data['checkout'] as $c) {
+                array_push($data['d'], $c['is_deliver']);
             }
-            $c = in_array(0,$data['d']);
-            $e = in_array(1,$data['d']);
-           
-            if($c == TRUE && $e == FALSE){
+            $c = in_array(0, $data['d']);
+            $e = in_array(1, $data['d']);
+
+            if ($c == TRUE && $e == FALSE) {
                 $this->load->view('template_introvert/header', $data);
                 $this->load->view('checkout_m2', $data);
                 $this->load->view('template_introvert/footer', $data);
-            }else{
+            } else {
                 $this->load->view('template_introvert/header', $data);
                 $this->load->view('checkout_m', $data);
             }
@@ -107,8 +117,19 @@ class Checkout extends CI_Controller
         }
     }
 
-    public function proses_m(){
-        
+    public function test()
+    {
+        $data['title'] = 'Checkout Merchandise';
+        $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+
+        $this->load->view('template_introvert/header', $data);
+        $this->load->view('virtual_account', $data);
+        $this->load->view('template_introvert/footer', $data);
+    }
+
+    public function proses_m()
+    {
+
         $this->MerchandiseModel->checkout();
         $this->MerchandiseModel->detailpesanan();
         redirect(base_url('home'));
