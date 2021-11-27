@@ -179,46 +179,44 @@
                 </div>
                 <!-- main content -->
                 <div class="col-lg-10 col-md-9 order-1 order-md-2">
+                    <?= $this->session->flashdata('message');
+                    $this->session->unset_userdata('message'); ?>
                     <div class="row mb-50">
-                        <div class="col-lg-12 col-md-12">
-                            <div class="latest-post mb-50">
-                                <div class="loop-grid">
-                                    <div class="row">
-                                        <?php foreach ($getalldata as $m) : ?>
-                                            <article class="p-10 col-lg-4 col-md-12 border-radius-10 mb-10 wow fadeIn animated col-6">
-                                                <div class="background-white border-radius-10 p-10 mb-10">
-                                                    <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
-                                                        <a href="<?= base_url('home/merchandise_detail/') . $m['id_merch'] ?>">
-
-                                                            <img class="img-fluid center-block border-radius-15" src="<?= base_url('assets/uploads/foto_merchandise/') . $m['foto']; ?>" alt="Responsive image" style="height: 300px; width: 350px;">
-
-                                                        </a>
+                        <?php foreach ($getalldata as $m) : ?>
+                            <div class="col-lg-6 col-6 col-md-12">
+                                <div class="latest-post mb-50">
+                                    <div class="loop-list-style-1">
+                                        <article class="p-10 background-white border-radius-10 mb-30 wow fadeIn animated">
+                                            <div class="d-md-flex d-block">
+                                                <div class="post-thumb post-thumb-big d-flex mr-15 border-radius-15 img-hover-scale">
+                                                    <a class="color-white" href="<?= base_url('home/merchandise_detail/') . $m['id_merch'] ?>">
+                                                        <img class="img-fluid border-radius-15" src="<?= base_url('assets/uploads/foto_merchandise/') . $m['foto']; ?>" alt="Responsive image" style="height: 250px; width: 250px;">
+                                                    </a>
+                                                </div>
+                                                <div class="post-content media-body">
+                                                    <div class="entry-meta mb-15 mt-10">
+                                                        <a class="entry-meta meta-2" href="<?= base_url('home/merchandise_kategori/') . $m['kategori']; ?>"><span class="post-in text-danger font-x-small"><?= $m['nama_kategori_merch']; ?></span></a>
                                                     </div>
-                                                    <div class="pl-10 pr-10">
-                                                        <div class="entry-meta mb-15 mt-10">
-                                                            <a class="entry-meta meta-2" href="<?= base_url('home/merchandise_kategori/') . $m['kategori']; ?>"><span class="post-in text-danger font-x-small"><?= $m['nama_kategori_merch']; ?></span></a>
-                                                        </div>
-                                                        <h5 class="post-title mb-15">
-                                                            <!-- <span class="post-format-icon">
-                                                                <ion-icon name="headset-outline"></ion-icon>
-                                                            </span> -->
-                                                            <a href="<?= base_url('home/merchandise_detail/') . $m['id_merch'] ?>">
-                                                                <?php if (strlen($m['nama_merch']) > 28) : ?>
-                                                                    <?= substr(ucwords($m['nama_merch']), 0, 28); ?>
-                                                                <?php else : ?>
-                                                                    <?= ucwords($m['nama_merch']); ?>
-                                                                <?php endif ?>
-                                                            </a>
-                                                        </h5>
-                                                        <div class="entry-meta meta-1 font-x-small color-grey">
-                                                            <?php
+                                                    <h5 class="post-title text-limit-2-row mb-4">
+                                                        <a href="<?= base_url('home/merchandise_detail/') . $m['id_merch'] ?>">
+                                                            <?php if (strlen($m['nama_merch']) > 28) : ?>
+                                                                <?= substr(ucwords($m['nama_merch']), 0, 28); ?>
+                                                            <?php else : ?>
+                                                                <?= ucwords($m['nama_merch']); ?>
+                                                            <?php endif ?>
+                                                        </a>
+                                                    </h5>
+                                                    <div class="entry-meta meta-1 font-x-small color-grey float-left">
+                                                       <?php
                                                             if ($m['diskon'] != 0) { ?>
                                                                 <?php $h_diskon = $m['harga'] * ($m['diskon'] / 100);
                                                                 $diskon = $m['harga'] - $h_diskon;
                                                                 ?>
                                                                 <div class="row">
-                                                                    <div class="col-sm-4 col-3">
-                                                                        <div class="entry-meta meta-1" style="text-decoration: line-through; color:red;"><span style="color: black;">Rp <?= number_format($m['harga'], 0, ',', '.') ?></span></div>
+                                                                    <div class="col-sm-5 col-4">
+                                                                        <div class="entry-meta meta-1" style="text-decoration: line-through; color:red;">
+                                                                             <span style="color: black;">Rp <?= number_format($m['harga'], 0, ',', '.') ?></span>
+                                                                        </div>
                                                                     </div>
                                                                     <div class="col">
                                                                         <div class="entry-meta meta-0 font-small mb-30">
@@ -226,63 +224,64 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            <?php } else { ?>
-                                                                <div class="entry-meta meta-0 font-small mb-30">
-                                                                    <span class="post-cat bg-success color-white">Rp <?= number_format($m['harga'], 0, ',', '.') ?></span>
-                                                                </div>
-                                                            <?php } ?>
-                                                            <div class="row justify-content-around">
-                                                                <div class="col-sm-4">
-                                                                    <a href="<?= base_url('home/merchandise_detail/') . $m['id_merch'] ?>">
-                                                                        <div class="entry-meta meta-1">
-                                                                            <div class="row">
-                                                                                <div class="col-sm-6 col-3">
-                                                                                    <img src="<?= base_url('assets/logo/detail.png'); ?>" alt="" style="height: 30px; width: 30px;">
-                                                                                </div>
-                                                                                <div class="col-sm-1 col-1" style="margin-left: -28px; margin-top: 7px;">
-                                                                                    <span style="font-size: medium;">Detail</span>
-                                                                                </div>
+                                                        <?php } else { ?>
+                                                            <div class="entry-meta meta-0 font-small mb-30 mt-1">
+                                                                <span class="post-cat bg-success color-white">Rp <?= number_format($m['harga'], 0, ',', '.') ?></span>
+                                                            </div>
+                                                        <?php } ?>
+                                                        <h6 class="post-title text-limit-2-row" style="margin-top: -20px; margin-bottom: 40px;">
+                                                            <span class="post-off">Stock: <?= $m['stock']; ?></span>
+                                                        </h6>
+                                                        <div class="row justify-content-center align-items-center">
+                                                            <div class="col-sm-5">
+                                                                <a href="<?= base_url('home/merchandise_detail/') . $m['id_merch'] ?>">
+                                                                    <div class="entry-meta meta-1">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-7 col-4">
+                                                                                <img src="<?= base_url('assets/logo/detail.png'); ?>" alt="" style="height: 30px; width: 30px;">
+                                                                            </div>
+                                                                            <div class="col-sm-2 col-2" style="margin-left: -28px; margin-top: 7px;">
+                                                                                <span style="font-size: medium;">Detail</span>
                                                                             </div>
                                                                         </div>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="col">
-                                                                    <a href="<?= base_url('home/tambah_keranjang_merch/') . $m['id_merch']; ?>">
-                                                                        <div class="entry-meta meta-1">
-                                                                            <div class="row">
-                                                                                <div class="col-sm-4 col-3">
-                                                                                    <img src="<?= base_url('assets/logo/cart.png'); ?>" alt="" style="height: 30px; width: 30px;">
-                                                                                </div>
-                                                                                <div class="col-sm-4 col-3" style="margin-left: -50px; margin-top: 7px;">
-                                                                                    <span style="font-size: medium;">Tambah</span>
-                                                                                </div>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="col">
+                                                                <a href="<?= base_url('home/tambah_keranjang_merch/') . $m['id_merch']; ?>">
+                                                                    <div class="entry-meta meta-1">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-5 col-4">
+                                                                                <img src="<?= base_url('assets/logo/cart.png'); ?>" alt="" style="height: 30px; width: 30px;">
+                                                                            </div>
+                                                                            <div class="col-2" style="margin-left: -28px; margin-top: 7px;">
+                                                                                <span style="font-size: medium;">Tambah</span>
                                                                             </div>
                                                                         </div>
-                                                                    </a>
-                                                                </div>
+                                                                    </div>
+                                                                </a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </article>
-                                        <?php endforeach; ?>
+                                            </div>
+                                        </article>
                                     </div>
                                 </div>
                             </div>
-                            <div class="pagination-area mb-30">
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination justify-content-start">
-                                        <li class="page-item"><a class="page-link" href="#"><i class="ti-angle-left"></i></a></li>
-                                        <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">03</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">04</a></li>
-                                        <li class="page-item"><a class="page-link" href="#"><i class="ti-angle-right"></i></a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="pagination-area mb-30">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-start">
+                                <li class="page-item"><a class="page-link" href="#"><i class="ti-angle-left"></i></a></li>
+                                <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                                <li class="page-item"><a class="page-link" href="#">02</a></li>
+                                <li class="page-item"><a class="page-link" href="#">03</a></li>
+                                <li class="page-item"><a class="page-link" href="#">04</a></li>
+                                <li class="page-item"><a class="page-link" href="#"><i class="ti-angle-right"></i></a></li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>

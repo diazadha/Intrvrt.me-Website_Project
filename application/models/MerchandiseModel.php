@@ -270,7 +270,7 @@ class MerchandiseModel extends CI_Model
 
     public function getallmerchandise()
     {
-        $query = "SELECT foto_merchandise.foto, merchandise_kategori.nama_kategori_merch, merchandise.nama_merch, merchandise.harga, merchandise.diskon, merchandise.deskripsi, merchandise.id_merch, merchandise.kategori
+        $query = "SELECT foto_merchandise.foto, merchandise_kategori.nama_kategori_merch, merchandise.nama_merch, merchandise.harga, merchandise.diskon, merchandise.deskripsi, merchandise.id_merch, merchandise.kategori, stock
         FROM foto_merchandise, merchandise, merchandise_kategori
         where merchandise.foto_utama = foto_merchandise.id and merchandise.kategori = merchandise_kategori.id_kategori_merch
         ";
@@ -291,7 +291,7 @@ class MerchandiseModel extends CI_Model
 
     public function getdatabyid($id)
     {
-        $query = "SELECT merchandise_kategori.nama_kategori_merch, merchandise.nama_merch, merchandise.harga, merchandise.diskon, merchandise.deskripsi, merchandise.id_merch, foto_merchandise.foto
+        $query = "SELECT merchandise_kategori.nama_kategori_merch, merchandise.nama_merch, merchandise.harga, stock, merchandise.diskon, merchandise.deskripsi, merchandise.id_merch, foto_merchandise.foto
         FROM merchandise, merchandise_kategori, foto_merchandise
         where merchandise.kategori = merchandise_kategori.id_kategori_merch and merchandise.foto_utama = foto_merchandise.id and merchandise.id_merch = $id";
         return $this->db->query($query);

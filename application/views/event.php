@@ -200,8 +200,11 @@
                                                         <a href="<?= base_url('home/event_detail/') . $e['id_event'] ?>"><?= ucwords($e['nama_event']); ?></a>
                                                     </h5>
                                                     <h7 class="post-title mb-15 text-limit-2-row">
-                                                        <a href="<?= base_url('home/event_detail/') . $e['id_event'] ?>"><?= ucwords($e['tgl_acara']); ?></a>
+                                                        <a href="<?= base_url('home/event_detail/') . $e['id_event'] ?>">Acara: <?= ucwords($e['tgl_acara']); ?></a>
                                                     </h7>
+                                                    <h6 class="post-title text-limit-2-row" style="margin-bottom: 20px;">
+                                                            <span class="post-off">Stock: <?= $e['stock']; ?></span>
+                                                        </h6>
                                                     <div class="entry-meta meta-1 font-x-small color-grey float-left">
                                                         <?php
                                                         if ($e['harga_tiket'] == 0) { ?>
@@ -257,10 +260,8 @@
                                                                 </a>
                                                             </div>
                                                         </div>
-                                                        <hr class="mb-2">
+                                                        <hr class="mb-2" style="margin-top: 4px;">
                                                         <span class="post-off" style="color: red;">Batas Pembelian: <?= $e['tgl_berakhir']; ?></span>
-                                                        <br>
-                                                        <span class="post-off">Stock: <?= $e['stock']; ?></span>
                                                     </div>
                                                 </div>
                                             </div>
