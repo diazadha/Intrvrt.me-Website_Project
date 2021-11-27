@@ -11,6 +11,7 @@
                             <h5>Checkout Merchandise</h5>
                          </div>
                          <div class="card-body table-responsive">
+                        <form  class="form-horizontal" enctype="multipart/form-data" action ="<?=base_url('checkout/proses_m')?>" method="POST">
                             <div class="row mt-3 mb-3">
                                 <div class="col-md-6 mb-1">
                                     <div class="form-group">
@@ -61,7 +62,7 @@
                                 <?php if(in_array('1',$d,TRUE)&& in_array('0',$d,TRUE)): ?>
                                 <div class="col-md-6 mb-1">
                                     <label style="font-weight:bold">Email Penerima*</label>
-                                    <input type="email" class="form-control">
+                                    <input type="email" name="email_penerima" class="form-control">
                                 </div>
                                 <?php endif; ?>
                                 <div class="col-md-12 mb-1">
@@ -149,7 +150,14 @@
                                 </div>
                             </div>
                             <hr>
-                            <a href="" class="btn btn-primary">Bayar Sekarang</a>
+                            <input name="id_user" value="<?= $this->session->userdata('id_user') ?>" hidden>
+                            <input name="estimasi" hidden>
+                            <input name="ongkir" hidden>
+                            <input name="berat" value="<?= $tot_berat ?>" hidden><br>
+                            <input name="grand_total" value="<?php echo $grand_total ?>" hidden><br>
+                            <input name="total_bayar" hidden>               
+                            <button type="submit"class="btn btn-primary">Bayar Sekarang</a>
+                            </form>
                          </div>
                      </div>
                  </div>
