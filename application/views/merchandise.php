@@ -185,13 +185,13 @@
                                 <div class="loop-grid">
                                     <div class="row">
                                         <?php foreach ($getalldata as $m) : ?>
-                                            <article class="p-10 col-lg-4 col-md-12 border-radius-10 mb-10 wow fadeIn animated">
+                                            <article class="p-10 col-lg-4 col-md-12 border-radius-10 mb-10 wow fadeIn animated col-6">
                                                 <div class="background-white border-radius-10 p-10 mb-10">
                                                     <div class="post-thumb d-flex mb-15 border-radius-15 img-hover-scale">
                                                         <a href="<?= base_url('home/merchandise_detail/') . $m['id_merch'] ?>">
-                                                            <div class="card">
-                                                                <img class="img-fluid center-block border-radius-15" src="<?= base_url('assets/uploads/foto_merchandise/') . $m['foto']; ?>" alt="Responsive image" style="height: 300px; width: 500px;">
-                                                            </div>
+
+                                                            <img class="img-fluid center-block border-radius-15" src="<?= base_url('assets/uploads/foto_merchandise/') . $m['foto']; ?>" alt="Responsive image" style="height: 300px; width: 350px;">
+
                                                         </a>
                                                     </div>
                                                     <div class="pl-10 pr-10">
@@ -217,11 +217,11 @@
                                                                 $diskon = $m['harga'] - $h_diskon;
                                                                 ?>
                                                                 <div class="row">
-                                                                    <div class="col">
+                                                                    <div class="col-sm-4 col-3">
                                                                         <div class="entry-meta meta-1" style="text-decoration: line-through; color:red;"><span style="color: black;">Rp <?= number_format($m['harga'], 0, ',', '.') ?></span></div>
                                                                     </div>
                                                                     <div class="col">
-                                                                        <div class="entry-meta meta-0 font-small mb-30 mt-2">
+                                                                        <div class="entry-meta meta-0 font-small mb-30">
                                                                             <span class="post-cat bg-success color-white">Rp <?= number_format($diskon, 0, ',', '.') ?></span>
                                                                         </div>
                                                                     </div>
@@ -232,19 +232,31 @@
                                                                 </div>
                                                             <?php } ?>
                                                             <div class="row justify-content-around">
-                                                                <div class="col">
+                                                                <div class="col-sm-4">
                                                                     <a href="<?= base_url('home/merchandise_detail/') . $m['id_merch'] ?>">
                                                                         <div class="entry-meta meta-1">
-                                                                            <img src="<?= base_url('assets/logo/detail.png'); ?>" alt="" style="height: 25px; width: 30px;">
-                                                                            <span>Detail</span>
+                                                                            <div class="row">
+                                                                                <div class="col-sm-6 col-3">
+                                                                                    <img src="<?= base_url('assets/logo/detail.png'); ?>" alt="" style="height: 30px; width: 30px;">
+                                                                                </div>
+                                                                                <div class="col-sm-1 col-1" style="margin-left: -28px; margin-top: 7px;">
+                                                                                    <span style="font-size: medium;">Detail</span>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </a>
                                                                 </div>
                                                                 <div class="col">
                                                                     <a href="<?= base_url('home/tambah_keranjang_merch/') . $m['id_merch']; ?>">
                                                                         <div class="entry-meta meta-1">
-                                                                            <img src="<?= base_url('assets/logo/cart.png'); ?>" alt="" style="height: 25px; width: 30px;">
-                                                                            <span>Tambah</span>
+                                                                            <div class="row">
+                                                                                <div class="col-sm-4 col-3">
+                                                                                    <img src="<?= base_url('assets/logo/cart.png'); ?>" alt="" style="height: 30px; width: 30px;">
+                                                                                </div>
+                                                                                <div class="col-sm-4 col-3" style="margin-left: -50px; margin-top: 7px;">
+                                                                                    <span style="font-size: medium;">Tambah</span>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </a>
                                                                 </div>
