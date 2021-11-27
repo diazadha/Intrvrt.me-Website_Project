@@ -92,6 +92,17 @@
                          </div>
                      </div>
                  <?php endif; ?>
+                 <div class="row">
+                    <div class="col-2">
+                        <h5>Stock </h5>
+                    </div>
+
+                    <div class="col">
+                        <div class="entry-meta meta-0 font-small mb-30 mt-1">
+                            <span class="post-cat bg-success color-white"><?= $getdatabyid['stock'] ?></span>
+                        </div>
+                    </div>
+                 </div>
                  <h6>Deskripsi</h6>
                  <p><?= htmlspecialchars_decode($getdatabyid['deskripsi_event']); ?></p>
                  <div class="row">
