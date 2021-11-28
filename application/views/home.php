@@ -260,9 +260,9 @@
                                         <?php foreach ($getalldata as $g) : ?>
                                             <li class="mb-30 wow fadeIn animated">
                                                 <div class="d-flex">
-                                                    <div class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
+                                                    <div class="post-thumb border-radius-5 mr-15 img-hover-scale">
                                                         <a class="color-white" href="<?= base_url('home/merchandise_detail/') . $g['id_merch'] ?>">
-                                                            <img src="<?= base_url('assets/uploads/foto_merchandise/') . $g['foto']; ?>" alt="">
+                                                            <img class="img-fluid" src="<?= base_url('assets/uploads/foto_merchandise/') . $g['foto']; ?>" alt="Responsive image" style="height: 65px; width: 80px;">
                                                         </a>
                                                     </div>
                                                     <div class="post-content media-body">
@@ -308,7 +308,7 @@
                                                 <div class="d-flex">
                                                     <div class="post-thumb d-flex mr-15 border-radius-5 img-hover-scale">
                                                         <a class="color-white" href="<?= base_url('home/event_detail/') . $e['id_event'] ?>">
-                                                            <img src="<?= base_url('assets/uploads/foto_event/') . $e['foto']; ?>" alt="">
+                                                            <img class="img-fluid" src="<?= base_url('assets/uploads/foto_event/') . $e['foto']; ?>" alt="Responsive image" style="height: 65px; width: 80px;">
                                                         </a>
                                                     </div>
                                                     <div class="post-content media-body">
