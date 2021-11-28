@@ -526,7 +526,7 @@ class Home extends CI_Controller
         $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         if ($user) {
             $data['keranjang_event'] = $this->Tiket_model->get_keranjang($user['id_user'])->result_array();
-            $data['checkout'] = $this->db->get_where('keranjang_event', ['id_user' => $user['id_user'], 'status' => 2])->num_rows();
+            $data['nullcheck'] = $this->Tiket_model->nullcheck($user['id_user'])->num_rows();
             $this->load->view('template_introvert/header', $data);
             $this->load->view('cart_event', $data);
             $this->load->view('template_introvert/footer', $data);
