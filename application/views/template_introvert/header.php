@@ -68,7 +68,7 @@
                                                 <i class="fas fa-user"></i>
                                             </span>Hai, <?= $this->session->userdata('nama'); ?></a>
                                         <ul class="sub-menu text-muted font-small">
-                                            <li><a href="<?= base_url('home/profil') ?>">Profil</a></li>
+                                            <li><a href="<?= base_url('home/my_account') ?>">My Account</a></li>
                                             <li><a href="<?= base_url('home/logout') ?>">Log Out</a></li>
                                         </ul>
                                     </li>
@@ -145,7 +145,7 @@
                                                     <i class="fas fa-user"></i>
                                                 </span>Hai, <?= $this->session->userdata('nama'); ?></a>
                                             <ul class="sub-menu text-muted font-small">
-                                                <li><a href="<?= base_url('home/profil') ?>">Profil</a></li>
+                                                <li><a href="<?= base_url('home/my_account') ?>">My Account</a></li>
                                                 <li><a href="<?= base_url('home/logout') ?>">Log Out</a></li>
                                             </ul>
                                         </li>

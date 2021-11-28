@@ -282,14 +282,23 @@ class Home extends CI_Controller
         redirect('home');
     }
 
-    public function profil()
+    public function my_account()
     {
-        $data['title'] = 'Profil';
+        $data['title'] = 'Akun Saya';
         $data['data_user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
         $this->load->view('template_introvert/header', $data);
-        $this->load->view('profil_user', $data);
-        // $this->load->view('template/adminlte', $data);
+        $this->load->view('my_account', $data);
+        $this->load->view('template_introvert/footer', $data);
+    }
+
+    public function detail_riwayat_merchandise()
+    {
+        $data['title'] = 'Riwayat Merchandise';
+        $data['data_user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $this->load->view('template_introvert/header', $data);
+        $this->load->view('detail_riwayat_merchandise', $data);
         $this->load->view('template_introvert/footer', $data);
     }
 
@@ -517,7 +526,7 @@ class Home extends CI_Controller
         $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         if ($user) {
             $data['keranjang_event'] = $this->Tiket_model->get_keranjang($user['id_user'])->result_array();
-            $data['checkout'] = $this->db->get_where('keranjang_event', ['id_user' => $user['id_user'], 'status' => 2])->num_rows(); 
+            $data['checkout'] = $this->db->get_where('keranjang_event', ['id_user' => $user['id_user'], 'status' => 2])->num_rows();
             $this->load->view('template_introvert/header', $data);
             $this->load->view('cart_event', $data);
             $this->load->view('template_introvert/footer', $data);
@@ -599,10 +608,10 @@ class Home extends CI_Controller
             redirect('home/login');
         } else {
             $keranjang_event = $this->db->get_where('keranjang_event', ['id_user' => $id_user, 'status' => 1]); //cek di keranjang apa udah ada dengan id_user tersebut dan status keranjang_event 1 (di keranjang/belum dicheckout)
-            
-            if($keranjang_event->num_rows() == 0){
+
+            if ($keranjang_event->num_rows() == 0) {
                 //insert keranjang
-                $data=array(
+                $data = array(
                     'id_user' => $id_user,
                     'status' => 1
                 );
@@ -610,7 +619,7 @@ class Home extends CI_Controller
                 $id_keranjang = $this->db->insert_id();
 
                 //insert data event
-                $data=array(
+                $data = array(
                     'id_keranjang' => $id_keranjang,
                     'id_event' => $id_event,
                     'qty' => 1,
@@ -620,16 +629,16 @@ class Home extends CI_Controller
 
                 $this->session->set_flashdata('message', '
                 <div class="alert alert-success" role="alert">
-                    Berhasil ditambahkan ke <a href="'.base_url('home/cart_event').'"><u>Keranjang Event!</u></a>
+                    Berhasil ditambahkan ke <a href="' . base_url('home/cart_event') . '"><u>Keranjang Event!</u></a>
                 </div>');
                 redirect('home/event');
-            }else{
+            } else {
                 $id_keranjang = $keranjang_event->row()->id;
                 //cek id_event
                 $row = $this->db->get_where('keranjang_event_detail', ['id_keranjang' => $id_keranjang, 'id_event' => $id_event]);
-                if($row->num_rows() == 0){
+                if ($row->num_rows() == 0) {
                     //insert event baru
-                    $data=array(
+                    $data = array(
                         'id_keranjang' => $id_keranjang,
                         'id_event' => $id_event,
                         'qty' => 1,
@@ -638,19 +647,19 @@ class Home extends CI_Controller
                     $this->db->insert('keranjang_event_detail', $data);
                     $this->session->set_flashdata('message', '
                     <div class="alert alert-success" role="alert">
-                        Berhasil ditambahkan ke <a href="'.base_url('home/cart_event').'"><u>Keranjang Event!</u></a>
+                        Berhasil ditambahkan ke <a href="' . base_url('home/cart_event') . '"><u>Keranjang Event!</u></a>
                     </div>');
                     redirect('home/event');
-                }else{
+                } else {
                     //update
-                    $data=array(
+                    $data = array(
                         'qty' => $row->row()->qty + 1,
                     );
                     $this->db->where('id', $row->row()->id);
                     $this->db->update('keranjang_event_detail', $data);
                     $this->session->set_flashdata('message', '
                     <div class="alert alert-success" role="alert">
-                        Qty Berhasil diupdate! lihat <a href="'.base_url('home/cart_event').'"><u>Keranjang Event!</u></a>
+                        Qty Berhasil diupdate! lihat <a href="' . base_url('home/cart_event') . '"><u>Keranjang Event!</u></a>
                     </div>');
                     redirect('home/event');
                 }

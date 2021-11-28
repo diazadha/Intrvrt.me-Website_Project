@@ -46,7 +46,7 @@
                 <div class="row d-flex align-items-center justify-content-between">
                     <div class="col-12">
                         <div class="footer-copy-right">
-                            <p class="font-small text-muted">© <?=date('Y')?>, intrvrt.me | All rights reserved </p>
+                            <p class="font-small text-muted">© <?= date('Y') ?>, intrvrt.me | All rights reserved </p>
                         </div>
                     </div>
                 </div>
@@ -94,6 +94,22 @@
     });
     $(document).ready(function() {
         $('#table_m').DataTable();
+    });
+</script>
+<script>
+    $(function() {
+        $("#table_merchandise").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+        });
+    });
+</script>
+<script>
+    $(function() {
+        $("#table_event").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+        });
     });
 </script>
 </body>
