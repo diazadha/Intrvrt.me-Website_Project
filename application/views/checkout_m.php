@@ -59,12 +59,10 @@
                                         <input type="number" name="kodepos" class="form-control" onKeyPress="if(this.value.length==5) return false;" required>
                                     </div>
                                 </div>
-                                <?php if(in_array('1',$d,TRUE)&& in_array('0',$d,TRUE)): ?>
                                 <div class="col-md-6 mb-1">
                                     <label style="font-weight:bold">Email Penerima*</label>
-                                    <input type="email" name="email_penerima" class="form-control">
+                                    <input type="email" name="email_penerima" class="form-control" required>
                                 </div>
-                                <?php endif; ?>
                                 <div class="col-md-12 mb-1">
                                     <div class="form-group">
                                         <label style="font-weight:bold">Alamat Penerima*</label>
