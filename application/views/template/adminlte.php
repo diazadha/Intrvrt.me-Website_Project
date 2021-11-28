@@ -377,6 +377,22 @@
       });
     });
   </script>
+  <script>
+    $(function() {
+      $("#example2").DataTable({
+        "responsive": true,
+        "autoWidth": false,
+      });
+    });
+  </script>
+  <script>
+    $(function() {
+      $("#example3").DataTable({
+        "responsive": true,
+        "autoWidth": false,
+      });
+    });
+  </script>
   <?php if (isset($js)) : foreach ($js as $j) : ?>
       <script src="<?= base_url('assets/js/' . $j) ?>"></script>
   <?php endforeach;

@@ -33,8 +33,8 @@
                 <div class="tab-pane fade show active" id="BelumBayar" role="tabpanel" aria-labelledby="home-tab">
                     <div class="card shadow mb-4">
                         <div class="card-body">
-                            <div class="table">
-                                <table class="table table-bordered" id="table1" width="100%" cellspacing="0">
+                            <div class="table1">
+                                <table class="table table-bordered" id="example1" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -49,18 +49,13 @@
                                         <tr>
                                             <td><?php echo $p1['id_pesanan'] ?></td>
                                             <td><?php echo $p1['tgl_pesan'] ?> </td>
-                                        <?php if($p1['is_deliver'] == 1) { ?>
                                             <td>
                                                 <b><?php echo $p1['expedisi'] ?></b><br>
                                                 Paket : <?php echo $p1['paket'] ?><br>
                                                 Estimasi : <?php echo $p1['estimasi'] ?><br>
-                                                Ongkir : Rp. <?php echo number_format($p1['ongkir'], 0,',','.') ?>
-                                            </td>
-                                        <?php }else{ ?>
-                                            <td>
+                                                Ongkir : Rp. <?php echo number_format($p1['ongkir'], 0,',','.') ?><br>
                                                 email penerima : <?= $p1['email_penerima']; ?> 
                                             </td>
-                                        <?php } ?>
                                             <td>Rp. <?php echo number_format($p1['total_bayar'], 0,',','.') ?> </td>
                                             <td>
                                                 <a class='btn btn-info btn-sm' href='<?php echo base_url('admin/pesanan1/detail/').$p1['id_pesanan'] ?>'><span class='fas fa-info-circle'></span></a>
@@ -77,8 +72,8 @@
                 <div class="tab-pane fade" id="SudahBayar" role="tabpanel" aria-labelledby="profile-tab">
                     <div class="card shadow mb-4"> 
                         <div class="card-body">
-                            <div class="table2">
-                                <table class="table table-bordered" id="table2" width="100%" cellspacing="0">
+                            <div class="example2">
+                                <table class="table table-bordered" id="example2" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -93,18 +88,13 @@
                                         <tr>
                                             <td><?php echo $p2['id_pesanan'] ?></td>
                                             <td><?php echo $p2['tgl_pesan'] ?> </td>
-                                        <?php if($p1['is_deliver'] == 1) { ?>
                                             <td>
                                                 <b><?php echo $p1['expedisi'] ?></b><br>
                                                 Paket : <?php echo $p1['paket'] ?><br>
                                                 Estimasi : <?php echo $p1['estimasi'] ?><br>
                                                 Ongkir : Rp. <?php echo number_format($p1['ongkir'], 0,',','.') ?>
-                                            </td>
-                                        <?php }else{ ?>
-                                            <td>
                                                 email penerima : <?= $p1['email_penerima']; ?> 
                                             </td>
-                                        <?php } ?>
                                             <td>Rp. <?php echo number_format($p2['total_bayar'], 0,',','.') ?> </td>
                                             <td>
                                                 <a class='btn btn-info btn-sm' href='<?php echo base_url('admin/pesanan1/detail/').$p2['id_pesanan'] ?>'><span class='fas fa-info-circle'></span></a>
@@ -121,8 +111,8 @@
                 <div class="tab-pane fade" id="Dikemas" role="tabpanel" aria-labelledby="contact-tab">
                     <div class="card shadow mb-4">
                         <div class="card-body">
-                            <div class="table3">
-                                <table class="table table-bordered" id="table3" width="100%" cellspacing="0">
+                            <div class="example3">
+                                <table class="table table-bordered" id="example3" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -137,18 +127,13 @@
                                             <tr>
                                                 <td><?php echo $p3['id_pesanan'] ?></td>
                                                 <td><?php echo $p3['tgl_pesan'] ?> </td>
-                                        <?php if($p1['is_deliver'] == 1) { ?>
-                                            <td>
-                                                <b><?php echo $p1['expedisi'] ?></b><br>
-                                                Paket : <?php echo $p1['paket'] ?><br>
-                                                Estimasi : <?php echo $p1['estimasi'] ?><br>
-                                                Ongkir : Rp. <?php echo number_format($p1['ongkir'], 0,',','.') ?>
-                                            </td>
-                                        <?php }else{ ?>
-                                            <td>
-                                                email penerima : <?= $p1['email_penerima']; ?> 
-                                            </td>
-                                        <?php } ?>
+                                                <td>
+                                                    <b><?php echo $p1['expedisi'] ?></b><br>
+                                                    Paket : <?php echo $p1['paket'] ?><br>
+                                                    Estimasi : <?php echo $p1['estimasi'] ?><br>
+                                                    Ongkir : Rp. <?php echo number_format($p1['ongkir'], 0,',','.') ?>
+                                                    email penerima : <?= $p1['email_penerima']; ?> 
+                                                </td>
                                                 <td>Rp. <?php echo number_format($p3['total_bayar'], 0,',','.') ?> </td>
                                                 <td>
                                                     <a class='btn btn-info btn-sm' href='<?php echo base_url('admin/pesanan1/detail/').$p3['id_pesanan'] ?>'><span class='fas fa-info-circle'></span></a>
