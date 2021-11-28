@@ -20,7 +20,7 @@ class Home extends CI_Controller
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
         $data['partner'] = $this->db->get_where('partner', ['status' => 1])->result_array();
         $data['getalldata'] = $this->MerchandiseModel->getallmerchandiselimit()->result_array();
-        $data['event'] = $this->tiket_model->getdataeventlimit()->result_array();
+        $data['event'] = $this->Tiket_model->getdataeventlimit()->result_array();
         $data['firstLatePost'] = $this->BlogModel->firstLatePost();
         $this->load->view('template_introvert/header', $data);
         $this->load->view('home', $data);
@@ -420,8 +420,8 @@ class Home extends CI_Controller
     {
         $data['title'] = 'Event';
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
-        $data['event'] = $this->tiket_model->getallevent()->result_array();
-        $data['kategori'] = $this->tiket_model->datakategori()->result_array();
+        $data['event'] = $this->Tiket_model->getallevent()->result_array();
+        $data['kategori'] = $this->Tiket_model->datakategori()->result_array();
         $this->load->view('template_introvert/header', $data);
         $this->load->view('event', $data);
         $this->load->view('template_introvert/footer', $data);
@@ -431,9 +431,9 @@ class Home extends CI_Controller
     {
         $data['title'] = 'Event';
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
-        $data['event'] = $this->tiket_model->view_join($id)->row();
-        $data['getdatabyid'] = $this->tiket_model->getdatabyid2($id)->row_array();
-        $data['getfotobyid'] = $this->tiket_model->getfotobyid($id, $data['getdatabyid']['foto'])->result_array();
+        $data['event'] = $this->Tiket_model->view_join($id)->row();
+        $data['getdatabyid'] = $this->Tiket_model->getdatabyid2($id)->row_array();
+        $data['getfotobyid'] = $this->Tiket_model->getfotobyid($id, $data['getdatabyid']['foto'])->result_array();
         $this->load->view('template_introvert/header', $data);
         $this->load->view('detail_event', $data);
         $this->load->view('template_introvert/footer', $data);
@@ -443,8 +443,8 @@ class Home extends CI_Controller
     {
         $data['title'] = 'Kategori Event';
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
-        $data['event'] = $this->tiket_model->perkategori($id)->result_array();
-        $data['kategori'] = $this->tiket_model->datakategori()->result_array();
+        $data['event'] = $this->Tiket_model->perkategori($id)->result_array();
+        $data['kategori'] = $this->Tiket_model->datakategori()->result_array();
         $this->load->view('template_introvert/header', $data);
         $this->load->view('event', $data);
         $this->load->view('template_introvert/footer', $data);
@@ -516,7 +516,7 @@ class Home extends CI_Controller
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
         $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         if ($user) {
-            $data['keranjang_event'] = $this->tiket_model->get_keranjang($user['id_user'])->result_array();
+            $data['keranjang_event'] = $this->Tiket_model->get_keranjang($user['id_user'])->result_array();
             $data['checkout'] = $this->db->get_where('keranjang_event', ['id_user' => $user['id_user'], 'status' => 2])->num_rows(); 
             $this->load->view('template_introvert/header', $data);
             $this->load->view('cart_event', $data);
@@ -551,15 +551,15 @@ class Home extends CI_Controller
 
     public function uncheck_status_event()
     {
-        $id_keranjang = $_POST['id_keranjang'];
-        $this->tiket_model->uncheck_status_event($id_keranjang);
-        echo json_encode($this->tiket_model->get_keranjang_status_event($id_keranjang)->row_array());
+        $id = $_POST['id'];
+        $this->Tiket_model->uncheck_status_event($id);
+        echo json_encode(['Success' => 1]);
     }
 
     public function check_status_event()
     {
-        $id_keranjang = $_POST['id_keranjang'];
-        $this->tiket_model->check_status_event($id_keranjang);
+        $id = $_POST['id'];
+        $this->Tiket_model->check_status_event($id);
         echo json_encode(['Success' => 1]);
     }
 
@@ -663,9 +663,9 @@ class Home extends CI_Controller
         $id_keranjang = $_POST['id_keranjang'];
         $qty = $_POST['qty'];
 
-        $query = "UPDATE keranjang_event SET qty = $qty WHERE id_keranjang = $id_keranjang";
+        $query = "UPDATE keranjang_event_detail SET qty = $qty WHERE id = $id_keranjang";
         $this->db->query($query);
-        echo json_encode($this->tiket_model->get_keranjang_byid($id_keranjang)->row_array());
+        echo json_encode(['Success' => 1]);
     }
 
     public function updatekeranjang_merchandise()

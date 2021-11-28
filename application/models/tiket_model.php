@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class tiket_model extends CI_Model
+class Tiket_model extends CI_Model
 {
     public function getalldata()
     {
@@ -212,26 +212,26 @@ class tiket_model extends CI_Model
 
     public function get_keranjang($id_user)
     {
-        $query = "SELECT keranjang_event.*, foto_event.*, event.id_event, event.nama_event, event.stock, event.harga_tiket, event.diskon
-        FROM keranjang_event, user, event, foto_event
-        WHERE user.id_user = keranjang_event.id_user 
-        AND keranjang_event.id_user = $id_user 
-        AND event.id_event = keranjang_event.id_event 
-        AND event.foto_utama = foto_event.id
-        AND keranjang_event.status IN (1,0)
+        $query = "SELECT keranjang_event_detail.*, foto_event.foto, event.nama_event, event.stock, event.harga_tiket, event.diskon
+        FROM keranjang_event
+        JOIN keranjang_event_detail ON keranjang_event_detail.id_keranjang = keranjang_event.id 
+        JOIN `event` ON `event`.id_event = keranjang_event_detail.id_event
+        JOIN foto_event ON foto_event.id = `event`.foto_utama
+        WHERE keranjang_event.status = 1 
+        AND keranjang_event.id_user = $id_user
         ";
         return $this->db->query($query);
     }
 
-    public function uncheck_status_event($id_keranjang)
+    public function uncheck_status_event($id)
     {
-        $query = "UPDATE keranjang_event SET keranjang_event.status = 0 WHERE id_keranjang = $id_keranjang";
+        $query = "UPDATE keranjang_event_detail SET keranjang_event_detail.status = 0 WHERE id = $id";
         return $this->db->query($query);
     }
 
-    public function check_status_event($id_keranjang)
+    public function check_status_event($id)
     {
-        $query = "UPDATE keranjang_event SET keranjang_event.status = 1 WHERE id_keranjang = $id_keranjang";
+        $query = "UPDATE keranjang_event_detail SET keranjang_event_detail.status = 1 WHERE id = $id";
         return $this->db->query($query);
     }
 
