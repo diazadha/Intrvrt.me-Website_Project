@@ -222,6 +222,19 @@ class Tiket_model extends CI_Model
         return $this->db->query($query);
     }
 
+    public function nullcheck($id_user){
+        $query = "SELECT keranjang_event_detail.*, foto_event.foto, event.nama_event, event.stock, event.harga_tiket, event.diskon
+        FROM keranjang_event
+        JOIN keranjang_event_detail ON keranjang_event_detail.id_keranjang = keranjang_event.id 
+        JOIN `event` ON `event`.id_event = keranjang_event_detail.id_event
+        JOIN foto_event ON foto_event.id = `event`.foto_utama
+        WHERE keranjang_event.status = 1 
+        AND keranjang_event.id_user = $id_user
+        AND keranjang_event_detail.status = 0;
+        ";
+        return $this->db->query($query);
+    }
+
     public function uncheck_status_event($id)
     {
         $query = "UPDATE keranjang_event_detail SET keranjang_event_detail.status = 0 WHERE id = $id";

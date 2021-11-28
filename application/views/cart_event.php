@@ -54,34 +54,31 @@
                  <div class="col-lg-4 col-md-4 mb-3">
                      <div class="card bg-white">
                          <div class="card-body">
-                             <?php if ($checkout > 0) : ?>
-                                 <div class="card-text">
-                                     <h4><small class="font-weight-bold">Pending Proses Checkout:</small></h4>
-                                 </div>
-                                 <center>
-                                     <div class="d-flex">
-                                         <div class="mr-auto">
-                                             <a href="<?= base_url('checkout/event') ?>" class="btn btn-sm btn-primary">Lanjutkan Checkout</a>
-                                         </div>
-                                         <a href="<?= base_url('checkout/event_batal') ?>" class="ml-2 btn btn-sm btn-primary">Batal</a>
-                                     </div>
-                                 </center>
-                             <?php else : ?>
-                                 <div class="card-text">
-                                     <h4><small class="font-weight-bold">Ringkasan Pesanan:</small></h4>
-                                 </div>
-                                 <div class="card-text d-flex">
-                                     <label class="mr-auto">Total Biaya :</label>
-                                     <label ><span id="grand_total">Rp. <?= number_format($grand_total, 0, ',', '.'); ?> </span></label>
-                                     <input type="hidden" id="grand" name="grand" value="<?= $grand_total ?>">
-                                 </div>
-                                 <center>
-                                     <div class="cart-btn <?= ($keranjang_event) ? '' : 'd-none'?>">
-                                         <a href="<?= base_url('checkout/event') ?>" class="btn btn-sm btn-warning">Checkout</a>
-                                     </div>
-                                 </center>
-                             <?php endif; ?>
+                            <div class="card-text">
+                                <h4><small class="font-weight-bold">Ringkasan Pesanan:</small></h4>
+                            </div>
+                            <div class="card-text d-flex">
+                                <label class="mr-auto">Total Biaya :</label>
+                                <label ><span id="grand_total">Rp. <?= number_format($grand_total, 0, ',', '.'); ?> </span></label>
+                                <input type="hidden" id="grand" name="grand" value="<?= $grand_total ?>">
+                            </div>
                          </div>
+                         <?php if(!empty($keranjang_event)):?>
+                            <?php if(count($keranjang_event) != $nullcheck):?>
+                                    <div class="card-footer">
+                                        <center>
+                                            <div class="cart-btn">
+                                                <a href="<?= base_url('checkout/event') ?>" class="btn btn-sm btn-warning">Checkout</a>
+                                            </div>
+                                        </center>
+                                    </div>
+                            <?php endif;?>
+                         <?php endif;?>
+                         <?php if($nullcheck == count($keranjang_event) ):?>
+                            <div class="card-footer">
+                                <div class="alert alert-danger">Pilih item event dengan memberi centang.</div> 
+                            </div>
+                         <?php endif;?>
                      </div>
                  </div>
              </div>

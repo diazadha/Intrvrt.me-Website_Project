@@ -76,6 +76,17 @@ class Checkout extends CI_Controller
         $this->db->where('id', $id_transaksi);
         $this->db->update('keranjang_event', $toTable);
 
+        //update status
+        $list       = $this->db->get_where('keranjang_event_detail', ['id_keranjang' => $id_transaksi, 'status' => 1])->result();
+        foreach($list as $l){
+            //update
+            $data__=array(
+                'status' => 2,
+            );
+            $this->db->where('id', $l->id);
+            $this->db->update('keranjang_event_detail', $data__);
+        }
+
         //create keranjang baru untuk event yang tidak di centang
         $movecreate = $this->db->get_where('keranjang_event_detail', ['id_keranjang' => $id_transaksi, 'status' => 0])->result();
         //insert keranjang
