@@ -229,6 +229,13 @@ class Checkout extends CI_Controller
         // die;
         $createVA = \Xendit\VirtualAccounts::create($params);
         $id = $createVA['id'];
+        $dataXendit = array(
+            "id_xendit" => $id,
+            "account_number" => $createVA['account_number']
+        );
+        $this->db->where('id_pesanan', $data['pesanan']['id_pesanan']);
+        $this->db->update('pesanan_m', $dataXendit);
+
         $data['getVA'] = \Xendit\VirtualAccounts::retrieve($id);
         // var_dump($createVA);
         // die;
