@@ -2,17 +2,20 @@
 class PesananModel extends CI_Model
 {
     public function admin_belum_bayar(){
-        $query = "SELECT * FROM pesanan_m WHERE status = 0";
+        $query = "SELECT * FROM pesanan_m, detailpesanan_m, merchandise WHERE status = 0 AND pesanan_m .id_pesanan = detailpesanan_m.id_pesanan
+        AND detailpesanan_m.id_merch = merchandise.id_merch";
         return $this->db->query($query);
     }
 
     public function admin_sudah_bayar(){
-        $query = "SELECT * FROM pesanan_m WHERE status = 1";
+        $query = "SELECT * FROM pesanan_m, detailpesanan_m, merchandise WHERE status = 1 AND pesanan_m .id_pesanan = detailpesanan_m.id_pesanan
+        AND detailpesanan_m.id_merch = merchandise.id_merch";
         return $this->db->query($query);
     }
 
     public function admin_sudah_kirim(){
-        $query = "SELECT * FROM pesanan_m WHERE status = 2";
+        $query = "SELECT * FROM pesanan_m, detailpesanan_m, merchandise WHERE status = 2 AND pesanan_m .id_pesanan = detailpesanan_m.id_pesanan
+        AND detailpesanan_m.id_merch = merchandise.id_merch";
         return $this->db->query($query);
     }
 
