@@ -116,6 +116,37 @@ class Checkout extends CI_Controller
         }   
         $this->db->insert_batch('keranjang_event_peserta', $value);
 
+        //send email notif;
+        $config = [
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 'intrvrt.me1@gmail.com',
+            'smtp_pass' => 'Ayamgoreng123',
+            'smtp_port' => 465,
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'newline' => "\r\n",
+            'validation' => TRUE // bool whether to validate email or not  
+        ];
+        $this->load->library('email', $config);
+        $this->email->initialize($config);
+        $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
+        $this->email->to($user->email);
+        $this->email->subject('Verifikasi Akun');
+
+        $message = "Hi $user->nama_user, <br>
+        Terimakasih telah melakukan pembelian tike event di intrvrt.me
+        <p>Berikut Detail Pesanan Anda:</p>
+        ";
+        $this->email->message($message);
+
+        if ($this->email->send()) {
+            return true;
+        } else {
+            echo $this->email->print_debugger();
+        }
+        //end email
+
         $data['getVA'] = \Xendit\VirtualAccounts::retrieve($idVA);
         $this->load->view('template_introvert/header', $data);
         $this->load->view('virtual_account', $data);
