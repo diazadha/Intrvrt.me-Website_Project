@@ -11,29 +11,29 @@
                         <div class="bg-white border d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
                             <div class="d-flex flex-row align-items-center">
                                 <?php if ($e['status'] == 1) : ?>
-                                    <input type="checkbox" checked onclick="uncheck_status_event(<?= $e['id_keranjang']; ?>)">
+                                    <input type="checkbox" checked onclick="uncheck_status_event(<?= $e['id']; ?>)">
                                     <?php $diskon = $e['harga_tiket'] * ($e['diskon'] / 100);
                                     $harga_diskon = $e['harga_tiket'] - $diskon;
                                     $total_harga =  $harga_diskon * $e['qty'];
                                     $total_harga_row =  $harga_diskon * $e['qty'];
                                     ?>
                                 <?php else : ?>
-                                    <input type="checkbox" onclick="check_status_event(<?= $e['id_keranjang']; ?>)">
+                                    <input type="checkbox" onclick="check_status_event(<?= $e['id']; ?>)">
                                     <?php $diskon = $e['harga_tiket'] * ($e['diskon'] / 100);
                                     $harga_diskon = $e['harga_tiket'] - $diskon;
                                     $total_harga_row = $harga_diskon * $e['qty'];
                                     $total_harga = 0; ?>
                                 <?php endif; ?>
-                                <input type="hidden" id="harga_<?= $e['id_keranjang']; ?>" value="<?= $harga_diskon ?>">
+                                <input type="hidden" id="harga_<?= $e['id']; ?>" value="<?= $harga_diskon ?>">
                                 <img class="ml-2 rounded" src="<?= base_url('assets/uploads/foto_event/') . $e['foto']; ?>" width="40">
                                 <div class="ml-2"><a href="<?=base_url('home/event_detail/'.$e['id_event'])?>" class="font-weight-bold d-block"><?= $e['nama_event']; ?></a><span class="spec">Rp. <?= number_format($harga_diskon, 0, ',', '.') ?></span></div>
                             </div>
                             <div class="d-flex flex-row align-items-center">
                                 <div class="d-block">
                                     <center>
-                                            <button class="btn-sm" onclick="kurang_qty(<?= $e['id_keranjang']; ?>)" style="background-color: #FF656A; color:white; border-color:#FF656A;"><i class="fa fa-minus"></i></button>
-                                            <input class="text-center" type="text" readonly id="qty_<?= $e['id_keranjang']; ?>" value="<?= $e['qty']; ?>" min="1" style="width: 20%;  border: 1px solid #FF656A; border-radius: 5px">
-                                            <button class="btn-sm" onclick="tambah_qty(<?= $e['id_keranjang']; ?>)" style="background-color: #FF656A; color:white; border-color:#FF656A;"><i class="fa fa-plus"></i></button>
+                                            <button class="btn-sm" onclick="kurang_qty(<?= $e['id']; ?>)" style="background-color: #FF656A; color:white; border-color:#FF656A;"><i class="fa fa-minus"></i></button>
+                                            <input class="text-center" type="text" readonly id="qty_<?= $e['id']; ?>" value="<?= $e['qty']; ?>" min="1" style="width: 20%;  border: 1px solid #FF656A; border-radius: 5px">
+                                            <button class="btn-sm" onclick="tambah_qty(<?= $e['id']; ?>)" style="background-color: #FF656A; color:white; border-color:#FF656A;"><i class="fa fa-plus"></i></button>
                                     </center>
                                 </div>
                                 <div class="d-block ml-5 mr-5 font-weight-bold">Rp. <?= number_format($total_harga_row, 0, ',', '.') ?></div>
@@ -89,11 +89,11 @@
      </div>
  </main>
  <script>
-     function uncheck_status_event(id_keranjang) {
+     function uncheck_status_event(id) {
          $.ajax({
              url: '<?= base_url('home/uncheck_status_event'); ?>',
              data: {
-                 id_keranjang: id_keranjang,
+                 id: id,
              },
              method: 'post',
              dataType: 'json',
@@ -104,11 +104,11 @@
          });
      }
 
-     function check_status_event(id_keranjang) {
+     function check_status_event(id) {
          $.ajax({
              url: '<?= base_url('home/check_status_event'); ?>',
              data: {
-                 id_keranjang: id_keranjang,
+                 id: id,
              },
              method: 'post',
              dataType: 'json',
