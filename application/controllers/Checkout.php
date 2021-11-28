@@ -199,16 +199,6 @@ class Checkout extends CI_Controller
         }
     }
 
-    public function test()
-    {
-        $data['title'] = 'Checkout Merchandise';
-        $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
-
-        $this->load->view('template_introvert/header', $data);
-        $this->load->view('virtual_account', $data);
-        $this->load->view('template_introvert/footer', $data);
-    }
-
     public function proses_m()
     {
         $data['title'] = 'Checkout Merchandise';
@@ -216,13 +206,14 @@ class Checkout extends CI_Controller
 
         $this->MerchandiseModel->checkout();
         $data['pesanan'] = $this->PesananModel->getidpesanan($this->db->insert_id());
-        $this->MerchandiseModel->detailpesanan($this->db->insert_id());
+        $this->MerchandiseModel->detailpesanan();
         Xendit::setApiKey($this->token());
-        $params = ["external_id" => $data['pesanan']['id_pesanan'],
+        $params = ["external_id" => 'intrvrt.me-'.$data['pesanan']['id_pesanan'],
         "bank_code" => $this->input->post('metode_bayar'),
         "name" => $this->input->post('nama_penerima'),
         "expected_amount" => $this->input->post('total_bayar'),
         "expiration_date" => date('c', mktime(date('H'), date('i'),date('s'),date('m'),date('d') + 1,date('y'))),
+        "is_single_use" => TRUE,
         ];
         
         // var_dump($params);
@@ -231,16 +222,28 @@ class Checkout extends CI_Controller
         $id = $createVA['id'];
         $dataXendit = array(
             "id_xendit" => $id,
-            "account_number" => $createVA['account_number']
+            "account_number" => $createVA['account_number'],
+            "bank_code" => $createVA['bank_code'],
         );
         $this->db->where('id_pesanan', $data['pesanan']['id_pesanan']);
         $this->db->update('pesanan_m', $dataXendit);
 
-        $data['getVA'] = \Xendit\VirtualAccounts::retrieve($id);
-        // var_dump($createVA);
-        // die;
-        $this->load->view('template_introvert/header', $data);
-        $this->load->view('virtual_account', $data);
-        $this->load->view('template_introvert/footer', $data);
+        redirect('checkout/bayar_m/'.$data['pesanan']['id_pesanan']);
+    }
+
+    public function bayar_m($id_pesanan){
+        $data['pesanan'] = $this->PesananModel->getidpesanan($id_pesanan);
+        if (!$this->session->userdata('email')) {
+            $this->session->set_flashdata('message2', 'Anda belum login');
+            redirect('home/login');
+        } else {
+            $data['title'] = 'Bayar Merchandise';
+            $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+            Xendit::setApiKey($this->token());
+            $data['getVA'] = \Xendit\VirtualAccounts::retrieve($data['pesanan']['id_xendit']);
+            $this->load->view('template_introvert/header', $data);
+            $this->load->view('virtual_account', $data);
+            $this->load->view('template_introvert/footer', $data);
+        }
     }
 }

@@ -16,8 +16,26 @@
                                      <h5>Virtual Account :</h5>
                                      <h3><?= $getVA['account_number']?></h3>
                                  </div>
-                                 <div class="col-sm-6" style="margin-top: -60px;">
-                                     <img src="<?= base_url('assets/bank_logo/bca.png') ?>" alt="Responsive image" class="img-fluid">
+                                 <div class="col-sm-6 mb-4" >
+                                <?php if($getVA['bank_code'] == 'BCA'){ ?>
+                                    <img src="<?= base_url('assets/bank_logo/bca2.png') ?>" alt="Responsive image" class="img-fluid">
+                                <?php }else if($getVA['bank_code'] == 'BRI'){ ?>
+                                    <img src="<?= base_url('assets/bank_logo/bri2.png') ?>" alt="Responsive image" class="img-fluid">
+                                <?php }else if($getVA['bank_code'] == 'BNI'){ ?>
+                                    <img src="<?= base_url('assets/bank_logo/bni.png') ?>" alt="Responsive image" class="img-fluid">
+                                <?php }else if($getVA['bank_code'] == 'MANDIRI'){ ?>
+                                    <img src="<?= base_url('assets/bank_logo/mandiri.png') ?>" alt="Responsive image" class="img-fluid">
+                                <?php }else if($getVA['bank_code'] == 'PERMATA'){ ?>
+                                    <img src="<?= base_url('assets/bank_logo/permata.png') ?>" alt="Responsive image" class="img-fluid">
+                                <?php }else if($getVA['bank_code'] == 'CIMB'){ ?>
+                                    <img src="<?= base_url('assets/bank_logo/cimb.png') ?>" alt="Responsive image" class="img-fluid">
+                                <?php }else if($getVA['bank_code'] == 'BSI'){ ?>
+                                    <img src="<?= base_url('assets/bank_logo/bsi.png') ?>" alt="Responsive image" class="img-fluid">
+                                <?php }else if($getVA['bank_code'] == 'SAHABAT_SAMPOERNA'){ ?>
+                                    <img src="<?= base_url('assets/bank_logo/sahabat_sampoerna.png') ?>" alt="Responsive image" class="img-fluid">
+                                <?php }else{ ?>
+                                    <h5>Logo Tidak Tersedia</h5>
+                                <?php } ?>
                                  </div>
                              </div>
                              <center>
@@ -43,7 +61,7 @@
                              <hr>
                              <div class="row" style="float:right;">
                                  <div class="col" style="margin-top: -15px; ">
-                                     <a class="btn btn-secondary" href="<?= base_url('home/merchandise/'); ?>" role="button">Bayar Nanti</a>
+                                     <a class="btn btn-secondary" href="<?= base_url('home/my_account/'); ?>" role="button">Bayar Nanti</a>
                                  </div>
                              </div>
                          </div>
