@@ -1,9 +1,9 @@
  <!-- Main Wrap Start -->
-
  <main class="position-relative">
      <div class="cart-page">
          <div class="container">
              <!-- main content -->
+             <?= form_open(base_url('checkout/proses_event'));?>   
              <div class="row">
                  <div class="col-lg-7 col-md-7 mb-3">
                      <div class="card">
@@ -17,11 +17,12 @@
                                     <div class="row mt-3 mb-3">
                                         <div class="col-md-6 mb-1">
                                             <label for="">Nama Peserta</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" name="nama[]">
+                                            <input type="hidden" readonly class="form-control" name="id_event_detail[]" value="<?=$c->id?>">
                                         </div>
                                         <div class="col-md-6 mb-1">
                                             <label for="">Email Peserta</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" name="email[]">
                                         </div>
                                     </div>
                                 <?php endfor;?>
@@ -39,22 +40,26 @@
                                     <th width="10%">Qty</th>
                                     <th width="20%">Total</th>
                                 </tr>
-                                <?php $no=1; foreach($checkout as $ch):?>
+                                <?php $no=1; $subtotal=0;  foreach($checkout as $ch): 
+                                    $diskon = $ch->harga * ($ch->diskon / 100);
+                                    $harga_diskon = $ch->harga - $diskon;
+                                    $total = $harga_diskon * $ch->qty;
+                                    $subtotal+=$total;?>
                                     <tr>
                                         <td><?=$ch->nama_event?></td>
                                         <td align="center"><?=$ch->qty?></td>
-                                        <td align="right"><?=number_format($ch->harga * $ch->qty)?></td>
+                                        <td align="right"><?=number_format($total)?></td>
                                     </tr>
                                 <?php endforeach;?>
                                 <tr>
                                     <td colspan="2" align="right" class="font-weight-bold">Sub Total</td>
-                                    <td></td>
+                                    <td align="right"><?=number_format($subtotal)?></td>
                                 </tr>
                             </table>
                             <div class="row mt-3 mb-3">
                                 <div class="col-md-12">
                                     <label for="" class="font-weight-bold">Pilih Metode Bayar</label>
-                                    <select class="form-control" name="metode_bayar" id="">
+                                    <select class="form-control" name="vaBank" id="">
                                         <?php foreach($VABank as $va):?>
                                             <?php if($va['is_activated']):?>
                                                 <option value="<?= $va['code']?>"><?= $va['name']?></option>
@@ -64,21 +69,13 @@
                                 </div>
                             </div>
                             <hr>
-                            <a href="" class="btn btn-primary">Bayar Sekarang</a>
+                            <input type="hidden" readonly value="<?=$subtotal?>" name="tagihan">
+                            <button type="submit" class="btn btn-primary">Bayar Sekarang</button>
                          </div>
                      </div>
                  </div>
              </div>
+             <?php echo form_close(); ?>
          </div>
      </div>
-     <div class="cart-page">
-         <div class="container">
-             <div class="col-lg-2 d-none d-lg-block"></div>
-             <!-- main content -->
-             <div class="row">
-
-             </div>
-         </div>
-     </div>
-
  </main>

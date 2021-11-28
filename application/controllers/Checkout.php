@@ -43,32 +43,72 @@ class Checkout extends CI_Controller
             redirect('home/login');
         } else {
             $id_user = $this->session->userdata('id_user');
-            $check = $this->db->get_where('keranjang_event', ['id_user' => $id_user, 'status' => 2])->num_rows();
-            if ($check > 0) {
-                $keranjang = $this->tiket_model->get_checkout_event($id_user, 2);
-                $data['checkout'] = $keranjang->result();
-                $data['count'] = $keranjang->num_rows();
-                $data['title'] = 'Checkout: ' . $data['count'] . ' Event';
-                $this->load->view('template_introvert/header', $data);
-                $this->load->view('checkout_event', $data);
-                $this->load->view('template_introvert/footer', $data);
-            } else {
-                $data = array(
-                    'status' => 2
-                );
-                $this->db->where('status', 1);
-                $this->db->where('id_user', $id_user);
-                $this->db->update('keranjang_event', $data);
+            $keranjang = $this->Tiket_model->get_checkout_event($id_user);
+            $data['checkout'] = $keranjang->result();
+            $data['count'] = $keranjang->num_rows();
+            $data['title'] = 'Checkout: ' . $data['count'] . ' Event';
+            $this->load->view('template_introvert/header', $data);
+            $this->load->view('checkout_event', $data);
+            $this->load->view('template_introvert/footer', $data);
+        }  
+    }
 
-                $keranjang = $this->tiket_model->get_checkout_event($id_user, 2);
-                $data['checkout'] = $keranjang->result();
-                $data['count'] = $keranjang->num_rows();
-                $data['title'] = 'Checkout: ' . $data['count'] . ' Event';
-                $this->load->view('template_introvert/header', $data);
-                $this->load->view('checkout_event', $data);
-                $this->load->view('template_introvert/footer', $data);
-            }
+    public function proses_event(){
+        $keranjang = $this->db->get_where('keranjang_event',['id_user' => $this->session->userdata('id_user')])->row();
+        $id_transaksi = $keranjang->id;
+        $vaBank = $this->input->post('vaBank');
+
+        $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row();
+        Xendit::setApiKey($this->token());
+        $params = [
+            "external_id" => 'intrvrt.me-'.$id_transaksi,
+            "bank_code" => $vaBank,
+            "name" => $user->nama_user,
+            "expected_amount" => $this->input->post('tagihan'),
+            "expiration_date" => date('c', mktime(date('H'), date('i'),date('s'),date('m'),date('d') + 1,date('y'))),
+        ];
+        $createVA = \Xendit\VirtualAccounts::create($params);
+        $idVA = $createVA['id'];
+
+        $toTable = $params;
+        $toTable['status'] = 2; //menunggu pembayaran
+
+        $this->db->where('id', $id_transaksi);
+        $this->db->update('keranjang_event', $toTable);
+
+        //create keranjang baru untuk event yang tidak di centang
+        $movecreate = $this->db->get_where('keranjang_event_detail', ['id_keranjang' => $id_transaksi, 'status' => 0])->result();
+        //insert keranjang
+        $data=array(
+            'id_user' => $user->id_user,
+            'status' => 1
+        );
+        $this->db->insert('keranjang_event', $data);
+        $new_id_keranjang = $this->db->insert_id();
+
+        foreach($movecreate as $m){
+            //update
+            $data_=array(
+                'id_keranjang' => $new_id_keranjang,
+            );
+            $this->db->where('id', $m->id);
+            $this->db->update('keranjang_event_detail', $data_);
         }
+
+        //data peserta
+        foreach ($_POST['nama'] as $key => $val) {
+            $value[] = array(             
+                'id_event_detail' => $_POST['id_event_detail'][$key],
+                'nama' => $_POST['nama'][$key],
+                'email' => $_POST['email'][$key],
+            );   
+        }   
+        $this->db->insert_batch('keranjang_event_peserta', $value);
+
+        $data['getVA'] = \Xendit\VirtualAccounts::retrieve($idVA);
+        $this->load->view('template_introvert/header', $data);
+        $this->load->view('virtual_account', $data);
+        $this->load->view('template_introvert/footer', $data);
     }
 
     public function event_batal()

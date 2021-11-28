@@ -11,17 +11,16 @@ class Tiket_model extends CI_Model
         return $this->db->query($query);
     }
 
-    public function get_checkout_event($id_user, $status){
-        $query = $this->db->query("SELECT keranjang_event.id_keranjang, keranjang_event.qty, event.harga_tiket as harga, 
-        event.nama_event, 
-        event.foto_utama, 
-        tiket_kategori.nama_kategori
-        FROM `keranjang_event`
-        JOIN `event` ON `event`.`id_event` = keranjang_event.id_event
-        JOIN tiket_kategori ON event.kategori = `event`.`kategori`
-        WHERE keranjang_event.status= $status
-        AND keranjang_event.id_user = $id_user
-        GROUP BY id_keranjang;");
+    public function get_checkout_event($id_user){
+        $query="SELECT keranjang_event_detail.*, foto_event.foto, event.nama_event, event.stock, event.harga_tiket as harga, event.diskon
+        FROM keranjang_event
+        JOIN keranjang_event_detail ON keranjang_event_detail.id_keranjang = keranjang_event.id 
+        JOIN `event` ON `event`.id_event = keranjang_event_detail.id_event
+        JOIN foto_event ON foto_event.id = `event`.foto_utama
+        WHERE keranjang_event_detail.status = 1 
+        AND keranjang_event.id_user = $id_user";
+
+        $query = $this->db->query($query);
         return $query;
     }
 

@@ -110,16 +110,6 @@
              </div>
          </div>
      </div>
-     <div class="cart-page">
-         <div class="container">
-             <div class="col-lg-2 d-none d-lg-block"></div>
-             <!-- main content -->
-             <div class="row">
-
-             </div>
-         </div>
-     </div>
-
  </main>
  <script>
      function uncheck_status_merchandise(id_keranjang) {
