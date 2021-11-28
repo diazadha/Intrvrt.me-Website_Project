@@ -137,8 +137,8 @@ class Checkout extends CI_Controller
         $this->MerchandiseModel->detailpesanan($this->db->insert_id());
         Xendit::setApiKey($this->token());
         $params = ["external_id" => $data['pesanan']['id_pesanan'],
-        "bank_code" => "MANDIRI",
-        "name" => "Steve Wozniak",
+        "bank_code" => $this->input->post('metode_bayar'),
+        "name" => $this->input->post('nama_penerima'),
         "expected_amount" => $this->input->post('total_bayar'),
         "expiration_date" => date('c', mktime(date('H'), date('i'),date('s'),date('m'),date('d') + 1,date('y'))),
         ];
