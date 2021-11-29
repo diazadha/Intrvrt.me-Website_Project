@@ -674,7 +674,7 @@ class Home extends CI_Controller
 
         $query = "UPDATE keranjang_event_detail SET qty = $qty WHERE id = $id_keranjang";
         $this->db->query($query);
-        echo json_encode(['Success' => 1]);
+        echo json_encode($this->tiket_model->get_keranjang_byid($id_keranjang)->row_array());
     }
 
     public function updatekeranjang_merchandise()

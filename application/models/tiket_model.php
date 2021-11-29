@@ -11,8 +11,9 @@ class Tiket_model extends CI_Model
         return $this->db->query($query);
     }
 
-    public function get_checkout_event($id_user){
-        $query="SELECT keranjang_event_detail.*, foto_event.foto, event.nama_event, event.stock, event.harga_tiket as harga, event.diskon
+    public function get_checkout_event($id_user)
+    {
+        $query = "SELECT keranjang_event_detail.*, foto_event.foto, event.nama_event, event.stock, event.harga_tiket as harga, event.diskon
         FROM keranjang_event
         JOIN keranjang_event_detail ON keranjang_event_detail.id_keranjang = keranjang_event.id 
         JOIN `event` ON `event`.id_event = keranjang_event_detail.id_event
@@ -23,9 +24,10 @@ class Tiket_model extends CI_Model
         $query = $this->db->query($query);
         return $query;
     }
-    
-    public function get_acara($id_transaksi){
-        $query="SELECT `event`.nama_event, tiket_kategori.nama_kategori
+
+    public function get_acara($id_transaksi)
+    {
+        $query = "SELECT `event`.nama_event, tiket_kategori.nama_kategori
         FROM keranjang_event
         JOIN keranjang_event_detail ON keranjang_event_detail.id_keranjang = keranjang_event.id 
         JOIN `event` ON `event`.id_event = keranjang_event_detail.id_event
@@ -97,7 +99,7 @@ class Tiket_model extends CI_Model
             'tgl_acara' => htmlspecialchars($this->security->xss_clean($this->input->post('tgl_acara')), ENT_QUOTES),
             'deskripsi_event' => htmlspecialchars($this->security->xss_clean($this->input->post('deskripsi')), ENT_QUOTES),
             'linkevent' => htmlspecialchars($this->security->xss_clean($this->input->post('linkevent')), ENT_QUOTES),
-        );  
+        );
         return $this->db->insert('event', $data);
     }
 
@@ -234,7 +236,8 @@ class Tiket_model extends CI_Model
         return $this->db->query($query);
     }
 
-    public function nullcheck($id_user){
+    public function nullcheck($id_user)
+    {
         $query = "SELECT keranjang_event_detail.*, foto_event.foto, event.nama_event, event.stock, event.harga_tiket, event.diskon
         FROM keranjang_event
         JOIN keranjang_event_detail ON keranjang_event_detail.id_keranjang = keranjang_event.id 
@@ -262,8 +265,8 @@ class Tiket_model extends CI_Model
     public function get_keranjang_byid($id_keranjang)
     {
         $query = "SELECT *
-        FROM keranjang_event
-        WHERE id_keranjang = $id_keranjang";
+        FROM keranjang_event_detail
+        WHERE id = $id_keranjang";
         return $this->db->query($query);
     }
 

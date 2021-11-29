@@ -117,7 +117,7 @@
                                                                          <h3>262159939380502</h3>
                                                                      </div>
                                                                      <div class="col-sm-6" style="margin-top: -60px;">
-                                                                         <img src="<?= base_url('assets/bank_logo/bca.png') ?>" alt="Responsive image" class="img-fluid">
+                                                                         <img src="<?= base_url('assets/bank_logo/bca2.png') ?>" alt="Responsive image" class="img-fluid">
                                                                      </div>
                                                                  </div>
                                                                  <center>
