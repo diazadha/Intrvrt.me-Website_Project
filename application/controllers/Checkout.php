@@ -17,15 +17,6 @@ class Checkout extends CI_Controller
         return 'xnd_development_E7UdRyMnxY1B18FytIEHESZeclPJ4OcrZvZ0m1Cs3AloopFHBRRRnRotWcBEL';
     }
 
-    // public function get_VA()
-    // {
-    //     Xendit::setApiKey($this->token());
-
-    //     $id = '61a2486fe56dcb672012de87';
-    //     $getVA = \Xendit\VirtualAccounts::retrieve($id);
-    //     var_dump($getVA);
-    //     die;
-    // }
 
     public function getVA()
     {
@@ -163,7 +154,7 @@ class Checkout extends CI_Controller
                 "name" => $user->nama_user,
                 "expected_amount" => $this->input->post('tagihan'),
                 "expiration_date" => date('c', mktime(date('H'), date('i'),date('s'),date('m'),date('d') + 1,date('y'))),
-                "is_single_use" => true
+                "is_single_use" => TRUE
             ];
             $createVA = \Xendit\VirtualAccounts::create($params);
             $idVA = $createVA['id'];
@@ -184,6 +175,7 @@ class Checkout extends CI_Controller
         }else{
             //jika gratis update status terjual
             $toTable['status'] = 3; //menunggu pembayaran
+            $toTable['tgl_pesan'] = date('Y-m-d H:i:s');
     
             $this->db->where('id', $id_transaksi);
             $this->db->update('keranjang_event', $toTable);
