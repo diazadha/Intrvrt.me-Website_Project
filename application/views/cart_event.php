@@ -155,30 +155,35 @@
     }
 
     function kurang_qty(id_keranjang) {
-        let qty = $('#qty_' + id_keranjang).val();
-        let qty_new = parseInt(qty) - 1;
-        $('#qty_' + id_keranjang).val(qty_new);
+        if ($('#qty_' + id_keranjang).val() - 1 < 1) {
+            alert('Minimal quantity yang dapat dibeli adalah 1');
+        } else {
+            let qty = $('#qty_' + id_keranjang).val();
+            let qty_new = parseInt(qty) - 1;
+            $('#qty_' + id_keranjang).val(qty_new);
 
-        $.ajax({
-            url: '<?= base_url('home/updatekeranjang_event'); ?>',
-            data: {
-                id_keranjang: id_keranjang,
-                qty: qty_new
-            },
-            method: 'post',
-            dataType: 'json',
-            success: function(data) {
-                console.log(data);
-                let harga_before = $('#harga_' + id_keranjang).val();
-                let new_harga = parseInt(harga_before) * data.qty;
-                $('#total_harga_' + id_keranjang).html('Rp. ' + new_harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+            $.ajax({
+                url: '<?= base_url('home/updatekeranjang_event'); ?>',
+                data: {
+                    id_keranjang: id_keranjang,
+                    qty: qty_new
+                },
+                method: 'post',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    let harga_before = $('#harga_' + id_keranjang).val();
+                    let new_harga = parseInt(harga_before) * data.qty;
+                    $('#total_harga_' + id_keranjang).html('Rp. ' + new_harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
 
-                let grand_total_before = $('#grand').val();
-                let new_grand = parseInt(grand_total_before) - parseInt($('#harga_' + id_keranjang).val());
+                    let grand_total_before = $('#grand').val();
+                    let new_grand = parseInt(grand_total_before) - parseInt($('#harga_' + id_keranjang).val());
 
-                $('#grand_total').html('Rp. ' + new_grand.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
-                $('#grand').val(new_grand);
-            }
-        });
+                    $('#grand_total').html('Rp. ' + new_grand.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+                    $('#grand').val(new_grand);
+                }
+            });
+        }
+
     }
 </script>
