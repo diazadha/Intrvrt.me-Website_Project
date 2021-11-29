@@ -536,9 +536,9 @@ class Home extends CI_Controller
         }
     }
 
-    public function hapus_keranjang_event($id_keranjang)
+    public function hapus_keranjang_event($id_keranjang_detail)
     {
-        $this->db->where('id', $id_keranjang);
+        $this->db->where('id', $id_keranjang_detail);
         $this->db->delete('keranjang_event_detail');
         redirect('home/cart_event');
     }
@@ -685,5 +685,38 @@ class Home extends CI_Controller
         $query = "UPDATE keranjang_merchandise SET qty = $qty WHERE id_keranjang = $id_keranjang";
         $this->db->query($query);
         echo json_encode($this->MerchandiseModel->get_keranjang_byid($id_keranjang)->row_array());
+    }
+
+    public function email($id_pesanan = 4)
+    {
+        $data['title'] = 'Intrvrt.me';
+        $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $data['pesanan'] = $this->PesananModel->emailpesanan_m($id_pesanan)->row_array();
+
+        $config = [
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 'intrvrt.me1@gmail.com',
+            'smtp_pass' => 'Ayamgoreng123',
+            'smtp_port' => 465,
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'newline' => "\r\n"
+        ];
+        $this->load->library('email', $config);
+        $this->email->initialize($config);
+        $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
+        $this->email->to('mahmah992013@gmail.com');
+
+        $this->email->subject('Pesanan ' . $data['pesanan']['nama_merch']);
+
+
+        $this->email->message($this->load->view('admin/email_ebook', $data, TRUE));
+        if ($this->email->send()) {
+            return true;
+        } else {
+            echo $this->email->print_debugger();
+            die;
+        }
     }
 }

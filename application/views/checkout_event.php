@@ -56,6 +56,7 @@
                                     <td align="right"><?=number_format($subtotal)?></td>
                                 </tr>
                             </table>
+                            <?php if($subtotal != 0):?>
                             <div class="row mt-3 mb-3">
                                 <div class="col-md-12">
                                     <label for="" class="font-weight-bold">Pilih Metode Bayar</label>
@@ -68,8 +69,9 @@
                                     </select>
                                 </div>
                             </div>
+                            <?php endif;?>
                             <hr>
-                            <input type="hidden" readonly value="<?=$subtotal?>" name="tagihan">
+                            <input type="hidden" readonly value="<?=$subtotal?>" name="totaltagihan">
                             <button type="submit" class="btn btn-primary">Bayar Sekarang</button>
                          </div>
                      </div>

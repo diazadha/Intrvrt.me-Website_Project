@@ -57,7 +57,8 @@
                                     </div>
                                 </div>
                                 <!-- Jika yang di checkout hanya ebook maka tidak ada alamat pemesanan -->
-                                <div class="row  mb-4">
+                                <?php if($pesanan['alamat']){ ?>
+                                <div class="row">
                                     <div class="col-sm-6">
                                         <b>Alamat Pemesanan</b>
                                     </div>
@@ -65,13 +66,14 @@
                                         <b>: <?= $pesanan['alamat']; ?></b>
                                     </div>
                                 </div>
+                                <?php }else{} ?>
                             </div>
                             <!-- /.col -->
                         </div>
                         <!-- /.row -->
 
                         <!-- Table row -->
-                        <div class="row">
+                        <div class="row mt-4">
                             <div class="col-12 table-responsive">
                                 <table class="table table-striped">
                                     <thead>
@@ -123,7 +125,7 @@
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <h5>Virtual Account :</h5>
-                                                <h3>262159939380502</h3>
+                                                <h3><?= $pesanan['account_number']; ?></h3>
                                             </div>
                                             <div class="col-sm-6" style="margin-top: -60px;">
                                                 <img src="<?= base_url('assets/bank_logo/bca.png') ?>" alt="Responsive image" class="img-fluid">
@@ -144,7 +146,8 @@
                                                 <div class="col-sm-12">
                                                     <h5>Batas Pembayaran : </h5>
                                                     <div class="mb-20">
-                                                        <span class="post-cat" style="font-size:large;"><?= date('d-m-Y H:i:s', strtotime(28)); ?></span>
+                                                        <?php $tgl_expired = date($pesanan['tgl_pesan'], mktime(date('H'), date('i'),date('s'),date('m'),date('d') + 1,date('y')));?>
+                                                        <span class="post-cat" style="font-size:large;"><?= date('d-m-Y H:i:s', strtotime($tgl_expired)); ?></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -157,12 +160,12 @@
                                 <div class="table-responsive">
                                     <table class="table">
                                         <tr>
-                                            <th style="width:50%">Subtotal:</th>
+                                            <th style="width:50%">Subtotal</th>
                                             <td>Rp. <?= number_format($grand_total, 0, ',', '.'); ?></td>
                                         </tr>
                                         <tr>
                                             <th>Berat</th>
-                                            <td><?= $pesanan['total_berat']; ?>Gr</td>
+                                            <td><?= $pesanan['total_berat']; ?> Gr</td>
                                         </tr>
                                         <tr>
                                             <th>Ongkos Kirim</th>
@@ -172,19 +175,24 @@
                                             <th>Total Bayar</th>
                                             <td>Rp. <?= number_format($pesanan['total_bayar'], 0, ',', '.'); ?></td>
                                         </tr>
+                                        <?php if($pesanan['expedisi']){ ?>
                                         <tr>
                                             <th>Ekspedisi</th>
                                             <td><?= strtoupper($pesanan['expedisi']); ?></td>
                                         </tr>
+                                        <?php }else{} ?>
+                                        <?php if($pesanan['paket']){ ?>
                                         <tr>
                                             <th>Paket</th>
                                             <td><?= $pesanan['paket']; ?></td>
                                         </tr>
+                                        <?php }else{} ?>
+                                        <?php if($pesanan['estimasi']){ ?>
                                         <tr>
                                             <th>Estimasi</th>
                                             <td><?= $pesanan['estimasi']; ?></td>
                                         </tr>
-
+                                        <?php }else{} ?>
                                     </table>
                                 </div>
                             </div>
