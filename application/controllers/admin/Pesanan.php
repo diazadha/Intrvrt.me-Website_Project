@@ -14,12 +14,29 @@ class Pesanan extends CI_Controller
         $data['content'] = "admin/pesanan.php";
         $this->load->view("template/adminlte", $data);
     }
+    
+    public function event(){
+        $data['profil'] = $this->db->get('profile_perusahaan')->row();
+        $data['belumbayar'] = $this->PesananModel->tiket_belum_bayar()->result();
+        $data['sudahbayar'] = $this->PesananModel->tiket_sudah_bayar()->result();
+        $data['countbelum']   = count($data['belumbayar']);
+        $data['countsudah']   = count($data['sudahbayar']);
+        $data['content'] = "admin/pesanan_event.php";
+        $this->load->view("template/adminlte", $data);
+    }
 
     public function detail_m($id_pesanan){
         $data['profil'] = $this->db->get('profile_perusahaan')->row();
         $data['pesanan'] = $this->PesananModel->detailpesanan_m($id_pesanan)->row_array();
         $data['pesanan1'] = $this->PesananModel->detailpesanan_m($id_pesanan)->result_array();
         $data['content'] = "admin/detailpesanan.php";
+        $this->load->view("template/adminlte", $data);
+    }
+    
+    public function detail_event($id_pesanan){
+        $data['profil'] = $this->db->get('profile_perusahaan')->row();
+        $data['pesanan'] = $this->PesananModel->detailpesanan_e($id_pesanan)->row();
+        $data['content'] = "admin/detailpesananevent.php";
         $this->load->view("template/adminlte", $data);
     }
 

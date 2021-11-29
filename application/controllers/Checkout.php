@@ -59,25 +59,8 @@ class Checkout extends CI_Controller
         $keranjang = $this->db->get_where('keranjang_event',['id_user' => $this->session->userdata('id_user'), 'status' => 1])->row();
         $id_transaksi = $keranjang->id;
         $vaBank = $this->input->post('vaBank');
-
+        $totaltagihan = $this->input->post('totaltagihan');
         $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row();
-        Xendit::setApiKey($this->token());
-        $params = [
-            "external_id" => 'intrvrt.me-'.$id_transaksi,
-            "bank_code" => $vaBank,
-            "name" => $user->nama_user,
-            "expected_amount" => $this->input->post('tagihan'),
-            "expiration_date" => date('c', mktime(date('H'), date('i'),date('s'),date('m'),date('d') + 1,date('y'))),
-        ];
-        $createVA = \Xendit\VirtualAccounts::create($params);
-        $idVA = $createVA['id'];
-
-        $toTable = $params;
-        $toTable['tgl_pesan'] = date('Y-m-d H:i:s');
-        $toTable['status'] = 2; //menunggu pembayaran
-
-        $this->db->where('id', $id_transaksi);
-        $this->db->update('keranjang_event', $toTable);
 
         //update status
         $list       = $this->db->get_where('keranjang_event_detail', ['id_keranjang' => $id_transaksi, 'status' => 1])->result();
@@ -171,10 +154,43 @@ class Checkout extends CI_Controller
             echo $this->email->print_debugger();
         }
 
-        //end email
-        $data['title'] = 'Pembayaran Event';
-        $data['getVA'] = \Xendit\VirtualAccounts::retrieve($idVA);
 
+        if($totaltagihan != 0){
+            Xendit::setApiKey($this->token());
+            $params = [
+                "external_id" => 'intrvrt.me-'.$id_transaksi,
+                "bank_code" => $vaBank,
+                "name" => $user->nama_user,
+                "expected_amount" => $this->input->post('tagihan'),
+                "expiration_date" => date('c', mktime(date('H'), date('i'),date('s'),date('m'),date('d') + 1,date('y'))),
+                "is_single_use" => true
+            ];
+            $createVA = \Xendit\VirtualAccounts::create($params);
+            $idVA = $createVA['id'];
+    
+            $toTable = $params;
+            $toTable['tgl_pesan'] = date('Y-m-d H:i:s');
+            $toTable['status'] = 2; //menunggu pembayaran
+    
+            $this->db->where('id', $id_transaksi);
+            $this->db->update('keranjang_event', $toTable);
+    
+            $data['title'] = 'Pembayaran Event';
+            $data['getVA'] = \Xendit\VirtualAccounts::retrieve($idVA);
+    
+            // var_dump($data['getVA']);
+            $this->db->where('id', $id_transaksi);
+            $this->db->update('keranjang_event', array('account_number'=>$data['getVA']['account_number']));
+        }else{
+            //jika gratis update status terjual
+            $toTable['status'] = 3; //menunggu pembayaran
+    
+            $this->db->where('id', $id_transaksi);
+            $this->db->update('keranjang_event', $toTable);
+            redirect('home/my_account#list-profile');
+        }
+
+        $data['title'] = 'Pembayaran Event';
         $this->load->view('template_introvert/header', $data);
         $this->load->view('virtual_account', $data);
         $this->load->view('template_introvert/footer', $data);

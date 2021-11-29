@@ -37,7 +37,7 @@
                                     </center>
                                 </div>
                                 <div class="d-block ml-5 mr-5 font-weight-bold">Rp. <?= number_format($total_harga_row, 0, ',', '.') ?></div>
-                                <a href="<?= base_url('home/hapus_keranjang_event/') . $e['id_keranjang']; ?>">
+                                <a href="<?= base_url('home/hapus_keranjang_event/') .$e['id']; ?>">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </div>
