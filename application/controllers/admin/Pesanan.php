@@ -15,4 +15,12 @@ class Pesanan extends CI_Controller
         $this->load->view("template/adminlte", $data);
     }
 
+    public function detail_m($id_pesanan){
+        $data['profil'] = $this->db->get('profile_perusahaan')->row();
+        $data['pesanan'] = $this->PesananModel->detailpesanan_m($id_pesanan)->row_array();
+        $data['pesanan1'] = $this->PesananModel->detailpesanan_m($id_pesanan)->result_array();
+        $data['content'] = "admin/detailpesanan.php";
+        $this->load->view("template/adminlte", $data);
+    }
+
 }
