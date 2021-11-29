@@ -271,6 +271,9 @@ class Checkout extends CI_Controller
             $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
             Xendit::setApiKey($this->token());
             $data['getVA'] = \Xendit\VirtualAccounts::retrieve($data['pesanan']['id_xendit']);
+
+            // var_dump($data['getVA']);
+            // die;
             $this->load->view('template_introvert/header', $data);
             $this->load->view('virtual_account', $data);
             $this->load->view('template_introvert/footer', $data);
