@@ -56,7 +56,7 @@ class Checkout extends CI_Controller
     public function proses_event(){
         date_default_timezone_set('Asia/Jakarta');
 
-        $keranjang = $this->db->get_where('keranjang_event',['id_user' => $this->session->userdata('id_user')])->row();
+        $keranjang = $this->db->get_where('keranjang_event',['id_user' => $this->session->userdata('id_user'), 'status' => 1])->row();
         $id_transaksi = $keranjang->id;
         $vaBank = $this->input->post('vaBank');
 
@@ -170,6 +170,7 @@ class Checkout extends CI_Controller
         if (!$this->email->send()) {
             echo $this->email->print_debugger();
         }
+
         //end email
         $data['title'] = 'Pembayaran Event';
         $data['getVA'] = \Xendit\VirtualAccounts::retrieve($idVA);
