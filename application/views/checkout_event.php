@@ -17,12 +17,12 @@
                                     <div class="row mt-3 mb-3">
                                         <div class="col-md-6 mb-1">
                                             <label for="">Nama Peserta</label>
-                                            <input type="text" class="form-control" name="nama[]">
+                                            <input type="text" class="form-control" required name="nama[]">
                                             <input type="hidden" readonly class="form-control" name="id_event_detail[]" value="<?=$c->id?>">
                                         </div>
                                         <div class="col-md-6 mb-1">
                                             <label for="">Email Peserta</label>
-                                            <input type="text" class="form-control" name="email[]">
+                                            <input type="text" class="form-control" required name="email[]">
                                         </div>
                                     </div>
                                 <?php endfor;?>
@@ -59,7 +59,7 @@
                             <div class="row mt-3 mb-3">
                                 <div class="col-md-12">
                                     <label for="" class="font-weight-bold">Pilih Metode Bayar</label>
-                                    <select class="form-control" name="vaBank" id="">
+                                    <select class="form-control" name="vaBank" required>
                                         <?php foreach($VABank as $va):?>
                                             <?php if($va['is_activated']):?>
                                                 <option value="<?= $va['code']?>"><?= $va['name']?></option>

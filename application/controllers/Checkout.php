@@ -140,9 +140,7 @@ class Checkout extends CI_Controller
         ";
         $this->email->message($message);
 
-        if ($this->email->send()) {
-            return true;
-        } else {
+        if (!$this->email->send()) {
             echo $this->email->print_debugger();
         }
         //end email
