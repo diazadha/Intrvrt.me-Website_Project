@@ -29,6 +29,7 @@
                                     $total_harga = 0; ?>
                                 <?php endif; ?>
                                 <input type="hidden" id="harga_<?= $e['id']; ?>" value="<?= $harga_diskon ?>">
+                                <input type="hidden" id="status_<?= $e['id']; ?>" value="<?= $e['status'] ?>">
                                 <img class="ml-2 rounded" src="<?= base_url('assets/uploads/foto_event/') . $e['foto']; ?>" width="40">
 
                                 <div class="ml-2">
@@ -127,36 +128,79 @@
     }
 
     function tambah_qty(id_keranjang) {
-        let qty = $('#qty_' + id_keranjang).val();
-        let qty_new = parseInt(qty) + 1;
-        $('#qty_' + id_keranjang).val(qty_new);
+        if ($('#status_' + id_keranjang).val() == 0) {
+            let qty = $('#qty_' + id_keranjang).val();
+            let qty_new = parseInt(qty) + 1;
+            $('#qty_' + id_keranjang).val(qty_new);
 
-        $.ajax({
-            url: '<?= base_url('home/updatekeranjang_event'); ?>',
-            data: {
-                id_keranjang: id_keranjang,
-                qty: qty_new
-            },
-            method: 'post',
-            dataType: 'json',
-            success: function(data) {
-                console.log(data);
-                let harga_before = $('#harga_' + id_keranjang).val();
-                let new_harga = parseInt(harga_before) * data.qty;
-                $('#total_harga_' + id_keranjang).html('Rp. ' + new_harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+            $.ajax({
+                url: '<?= base_url('home/updatekeranjang_event'); ?>',
+                data: {
+                    id_keranjang: id_keranjang,
+                    qty: qty_new
+                },
+                method: 'post',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    let harga_before = $('#harga_' + id_keranjang).val();
+                    let new_harga = parseInt(harga_before) * data.qty;
+                    $('#total_harga_' + id_keranjang).html('Rp. ' + new_harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+                }
+            });
+        } else {
+            let qty = $('#qty_' + id_keranjang).val();
+            let qty_new = parseInt(qty) + 1;
+            $('#qty_' + id_keranjang).val(qty_new);
 
-                let grand_total_before = $('#grand').val();
-                let new_grand = parseInt(grand_total_before) + parseInt($('#harga_' + id_keranjang).val());
+            $.ajax({
+                url: '<?= base_url('home/updatekeranjang_event'); ?>',
+                data: {
+                    id_keranjang: id_keranjang,
+                    qty: qty_new
+                },
+                method: 'post',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    let harga_before = $('#harga_' + id_keranjang).val();
+                    let new_harga = parseInt(harga_before) * data.qty;
+                    $('#total_harga_' + id_keranjang).html('Rp. ' + new_harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
 
-                $('#grand_total').html('Rp. ' + new_grand.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
-                $('#grand').val(new_grand);
-            }
-        });
+                    let grand_total_before = $('#grand').val();
+                    let new_grand = parseInt(grand_total_before) + parseInt($('#harga_' + id_keranjang).val());
+
+                    $('#grand_total').html('Rp. ' + new_grand.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+                    $('#grand').val(new_grand);
+                }
+            });
+        }
+
     }
 
     function kurang_qty(id_keranjang) {
         if ($('#qty_' + id_keranjang).val() - 1 < 1) {
             alert('Minimal quantity yang dapat dibeli adalah 1');
+        } else if ($('#status_' + id_keranjang).val() == 0) {
+            let qty = $('#qty_' + id_keranjang).val();
+            let qty_new = parseInt(qty) - 1;
+            $('#qty_' + id_keranjang).val(qty_new);
+
+            $.ajax({
+                url: '<?= base_url('home/updatekeranjang_event'); ?>',
+                data: {
+                    id_keranjang: id_keranjang,
+                    qty: qty_new
+                },
+                method: 'post',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    let harga_before = $('#harga_' + id_keranjang).val();
+                    let new_harga = parseInt(harga_before) * data.qty;
+                    $('#total_harga_' + id_keranjang).html('Rp. ' + new_harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+                }
+            });
         } else {
             let qty = $('#qty_' + id_keranjang).val();
             let qty_new = parseInt(qty) - 1;
