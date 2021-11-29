@@ -208,7 +208,7 @@ class Checkout extends CI_Controller
         $data['pesanan'] = $this->PesananModel->getidpesanan($this->db->insert_id());
         $this->MerchandiseModel->detailpesanan();
         Xendit::setApiKey($this->token());
-        $params = ["external_id" => 'intrvrt.me-'.$data['pesanan']['id_pesanan'],
+        $params = ["external_id" => 'intrvrt.me-merch-'.$data['pesanan']['id_pesanan'],
         "bank_code" => $this->input->post('metode_bayar'),
         "name" => $this->input->post('nama_penerima'),
         "expected_amount" => $this->input->post('total_bayar'),
@@ -221,10 +221,13 @@ class Checkout extends CI_Controller
         $createVA = \Xendit\VirtualAccounts::create($params);
         $id = $createVA['id'];
         $dataXendit = array(
+            "external_id" => 'intrvrt.me-merch-'.$data['pesanan']['id_pesanan'],
             "id_xendit" => $id,
             "account_number" => $createVA['account_number'],
             "bank_code" => $createVA['bank_code'],
         );
+        // var_dump($createVA);
+        // die;
         $this->db->where('id_pesanan', $data['pesanan']['id_pesanan']);
         $this->db->update('pesanan_m', $dataXendit);
 
