@@ -58,7 +58,7 @@
                                               ?>
                                             </td>
                                             <td>Rp <?= number_format($b->expected_amount) ?></td>
-                                            <td><a class='btn btn-info btn-sm' href='<?php echo base_url('admin/pesanan/detail_event/').$e->id ?>'><span class='fas fa-info-circle'></span></a></td>
+                                            <td><a class='btn btn-info btn-sm' href='<?php echo base_url('admin/pesanan/detail_event/').$b->id ?>'><span class='fas fa-info-circle'></span></a></td>
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>
@@ -99,7 +99,7 @@
                                               ?>
                                             </td>
                                             <td>Rp <?= number_format($b->expected_amount) ?></td>
-                                            <td><a class='btn btn-info btn-sm' href='<?php echo base_url('admin/pesanan/detail_event/').$e->id ?>'><span class='fas fa-info-circle'></span></a></td>
+                                            <td><a class='btn btn-info btn-sm' href='<?php echo base_url('admin/pesanan/detail_event/').$b->id ?>'><span class='fas fa-info-circle'></span></a></td>
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>

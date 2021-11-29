@@ -61,9 +61,23 @@
                         <div class="row">
                             <div class="col-12 table-responsive">
                                 <table class="table table-striped">
+                                    <?php foreach($this->PesananModel->get_event($pesanan->id)->result() as $e):?>
                                         <tr>
-                                            <td colspan="3">Nama eventnya</td>
+                                            <td colspan="3"><h5 class="font-weight-bold"><?= $e->nama_event?></h5></td>
                                         </tr>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>Email</th>
+                                        </tr>
+                                        <?php $no=1; foreach($this->PesananModel->get_peserta($e->id)->result() as $pp):?>
+                                            <tr>
+                                                <td width="5%"><?=$no?></td>
+                                                <td><?=$pp->nama?></td>
+                                                <td><?=$pp->email?></td>
+                                            </tr>
+                                        <?php $no++; endforeach;?>
+                                    <?php endforeach;?>
                                 </table>
                             </div>
                         </div>

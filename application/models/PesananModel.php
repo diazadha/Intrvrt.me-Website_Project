@@ -44,6 +44,12 @@ class PesananModel extends CI_Model
         $query = $this->db->query($query);
         return $query;
     }
+
+    public function get_peserta($id_detail){
+        $query = "SELECT * FROM keranjang_event_peserta WHERE id_event_detail = $id_detail";
+        return $this->db->query($query);
+    }
+
     public function tiket_belum_bayar(){
         $query="SELECT keranjang_event.*, user.nama_user as pemesan
         FROM keranjang_event
