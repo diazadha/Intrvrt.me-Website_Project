@@ -23,4 +23,12 @@ class Pesanan extends CI_Controller
         $this->load->view("template/adminlte", $data);
     }
 
+    public function dikirim_m($id_pesanan){
+        $data = array(
+            'status' => 2,
+        );
+        $this->db->where('id_pesanan', $id_pesanan);
+        $this->db->update('pesanan_m', $data);
+        redirect('admin/pesanan/merchandise');
+    }
 }

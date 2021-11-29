@@ -98,8 +98,29 @@
                                             <td>Rp. <?php echo number_format($p2['total_bayar'], 0,',','.') ?> </td>
                                             <td>
                                                 <a class='btn btn-info btn-sm' href='<?php echo base_url('admin/pesanan/detail_m/').$p2['id_pesanan'] ?>'><span class='fas fa-info-circle'></span></a>
+                                                <button type='button' class='btn btn-success btn-sm' data-toggle='modal' data-target='#Dikirim<?= $p2['id_pesanan'] ?>'>Dikirim</button>
                                             </td>
                                         </tr>
+                                            <!-- Modal -->
+                                        <div class='modal fade' id='Dikirim<?= $p2['id_pesanan'] ?>' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'>
+                                            <div class='modal-dialog modal-dialog-centered' role='document'>
+                                            <div class='modal-content'>
+                                                <div class='modal-header'>
+                                                <h5 class='modal-title' id='exampleModalLongTitle'>Update Status Pengiriman </b></h5>
+                                                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                                    <span aria-hidden='true'>&times;</span>
+                                                </button>
+                                                </div>
+                                                <div class='modal-body'>
+                                                Apakah Anda yakin update status pengiriman ID Pesanan <b>#<?= $p2['id_pesanan'] ?> </b>?
+                                                </div>
+                                                <div class='modal-footer'>
+                                                <button type='button' class='btn btn-secondary' data-dismiss='modal'>Batal</button>
+                                                <a class='btn btn-danger' href='<?= base_url('admin/pesanan/dikirim_m/').$p2['id_pesanan'] ?>'>Update</a>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
