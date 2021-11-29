@@ -538,8 +538,8 @@ class Home extends CI_Controller
 
     public function hapus_keranjang_event($id_keranjang)
     {
-        $this->db->where('id_keranjang', $id_keranjang);
-        $this->db->delete('keranjang_event');
+        $this->db->where('id', $id_keranjang);
+        $this->db->delete('keranjang_event_detail');
         redirect('home/cart_event');
     }
 

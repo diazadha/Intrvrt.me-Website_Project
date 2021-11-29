@@ -12,6 +12,9 @@
                     <?php $no = 1;
                     $grand_total = 0;
                     foreach ($keranjang_event as $e) : ?>
+                        <?php if ($e['stock'] == 0) {
+                            redirect('home/hapus_keranjang_event/' . $e['id']);
+                        } ?>
                         <div class="bg-white border d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
                             <div class="d-flex flex-row align-items-center">
                                 <?php if ($e['status'] == 1) : ?>
@@ -47,7 +50,7 @@
                                     </center>
                                 </div>
                                 <div class="d-block ml-5 mr-5 font-weight-bold" id="total_harga_<?= $e['id']; ?>">Rp. <?= number_format($total_harga_row, 0, ',', '.') ?></div>
-                                <a href="<?= base_url('home/hapus_keranjang_event/') . $e['id_keranjang']; ?>">
+                                <a href="<?= base_url('home/hapus_keranjang_event/') . $e['id']; ?>">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </div>
