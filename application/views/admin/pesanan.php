@@ -157,7 +157,7 @@
                                                 </td>
                                                 <td>Rp. <?php echo number_format($p3['total_bayar'], 0,',','.') ?> </td>
                                                 <td>
-                                                    <a class='btn btn-info btn-sm' href='<?php echo base_url('admin/pesanan1/detail/').$p3['id_pesanan'] ?>'><span class='fas fa-info-circle'></span></a>
+                                                    <a class='btn btn-info btn-sm' href='<?php echo base_url('admin/pesanan/detail_m/').$p3['id_pesanan'] ?>'><span class='fas fa-info-circle'></span></a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
