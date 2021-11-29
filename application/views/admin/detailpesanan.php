@@ -89,11 +89,8 @@
                                         $diskon = 0;
                                         $harga_setelah_diskon = 0;
                                         $grand_total = 0;
-                                        $tot_berat = 0;
                                         foreach($pesanan1 as $p): 
                                         $total_harga = 0;
-                                        $berat = $p['qty'] * $p['berat'];
-                                        $tot_berat = $tot_berat + $berat;
                                         $diskon = $p['harga'] * $p['diskon'] / 100;
                                         $harga_setelah_diskon = $p['harga'] - $diskon;
                                         $total_harga = $p['qty'] * $harga_setelah_diskon;
