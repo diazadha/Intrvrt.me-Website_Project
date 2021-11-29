@@ -23,6 +23,18 @@ class Tiket_model extends CI_Model
         $query = $this->db->query($query);
         return $query;
     }
+    
+    public function get_acara($id_transaksi){
+        $query="SELECT `event`.nama_event, tiket_kategori.nama_kategori
+        FROM keranjang_event
+        JOIN keranjang_event_detail ON keranjang_event_detail.id_keranjang = keranjang_event.id 
+        JOIN `event` ON `event`.id_event = keranjang_event_detail.id_event
+        JOIN tiket_kategori ON tiket_kategori.id_kategori = `event`.kategori
+        WHERE keranjang_event.id = $id_transaksi";
+
+        $query = $this->db->query($query);
+        return $query;
+    }
 
     public function getdatabyid($id)
     {

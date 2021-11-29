@@ -54,6 +54,8 @@ class Checkout extends CI_Controller
     }
 
     public function proses_event(){
+        date_default_timezone_set('Asia/Jakarta');
+
         $keranjang = $this->db->get_where('keranjang_event',['id_user' => $this->session->userdata('id_user')])->row();
         $id_transaksi = $keranjang->id;
         $vaBank = $this->input->post('vaBank');
@@ -71,6 +73,7 @@ class Checkout extends CI_Controller
         $idVA = $createVA['id'];
 
         $toTable = $params;
+        $toTable['tgl_pesan'] = date('Y-m-d H:i:s');
         $toTable['status'] = 2; //menunggu pembayaran
 
         $this->db->where('id', $id_transaksi);
@@ -89,21 +92,23 @@ class Checkout extends CI_Controller
 
         //create keranjang baru untuk event yang tidak di centang
         $movecreate = $this->db->get_where('keranjang_event_detail', ['id_keranjang' => $id_transaksi, 'status' => 0])->result();
-        //insert keranjang
-        $data=array(
-            'id_user' => $user->id_user,
-            'status' => 1
-        );
-        $this->db->insert('keranjang_event', $data);
-        $new_id_keranjang = $this->db->insert_id();
-
-        foreach($movecreate as $m){
-            //update
-            $data_=array(
-                'id_keranjang' => $new_id_keranjang,
+        if(count($movecreate) > 0){
+            //insert keranjang
+            $data=array(
+                'id_user' => $user->id_user,
+                'status' => 1
             );
-            $this->db->where('id', $m->id);
-            $this->db->update('keranjang_event_detail', $data_);
+            $this->db->insert('keranjang_event', $data);
+            $new_id_keranjang = $this->db->insert_id();
+
+            foreach($movecreate as $m){
+                //update
+                $data_=array(
+                    'id_keranjang' => $new_id_keranjang,
+                );
+                $this->db->where('id', $m->id);
+                $this->db->update('keranjang_event_detail', $data_);
+            }
         }
 
         //data peserta
@@ -134,9 +139,31 @@ class Checkout extends CI_Controller
         $this->email->to($user->email);
         $this->email->subject('Verifikasi Akun');
 
-        $message = "Hi $user->nama_user, <br>
-        Terimakasih telah melakukan pembelian tike event di intrvrt.me
-        <p>Berikut Detail Pesanan Anda:</p>
+        $acara = $this->Tiket_model->get_acara($id_transaksi)->result();
+        $table="<table>
+        <tr>
+            <th><b>No</b></th>
+            <th><b>Nama Event</b></th>
+            <th><b>Nama Kategori</b></th>
+        </tr>
+        ";
+        $no=1;
+        foreach($acara as $a){
+            $table.="<tr>
+                        <td>".$no."</td>
+                        <td>".$a->nama_event."</td>
+                        <td>".$a->nama_kategori."</td>
+                    </tr>";
+            $no++;
+        }
+        $table.="</table>";
+
+        $message = "Hi <b>$user->nama_user</b>, <br>
+        Pembelian Tiket Berhasil !!!<br>
+        
+        $table
+
+        Terimakasih telah melakukan pembelian tike event. Link acara akan dikirim h-1 acara<br><br>
         ";
         $this->email->message($message);
 
@@ -144,8 +171,9 @@ class Checkout extends CI_Controller
             echo $this->email->print_debugger();
         }
         //end email
-
+        $data['title'] = 'Pembayaran Event';
         $data['getVA'] = \Xendit\VirtualAccounts::retrieve($idVA);
+
         $this->load->view('template_introvert/header', $data);
         $this->load->view('virtual_account', $data);
         $this->load->view('template_introvert/footer', $data);

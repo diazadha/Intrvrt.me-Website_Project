@@ -8,7 +8,7 @@
                  <div class="col-lg-6 col-md-7 mb-3">
                      <div class="card">
                          <div class="card-header">
-                             <h5>Checkout Merchandise</h5>
+                             <h5>Pembayaran</h5>
                          </div> 
                          <div class="card-body table-responsive">
                              <div class="row">
