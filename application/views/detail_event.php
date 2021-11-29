@@ -93,29 +93,48 @@
                      </div>
                  <?php endif; ?>
                  <div class="row">
-                    <div class="col-2">
-                        <h5>Stock </h5>
-                    </div>
+                     <div class="col-2">
+                         <h5>Stock </h5>
+                     </div>
 
-                    <div class="col">
-                        <div class="entry-meta meta-0 font-small mb-30 mt-1">
-                            <span class="post-cat bg-success color-white"><?= $getdatabyid['stock'] ?></span>
-                        </div>
-                    </div>
+                     <div class="col">
+                         <div class="entry-meta meta-0 font-small mb-30 mt-1">
+                             <span class="post-cat bg-success color-white"><?= $getdatabyid['stock'] ?></span>
+                         </div>
+                     </div>
                  </div>
                  <h6>Deskripsi</h6>
                  <p><?= htmlspecialchars_decode($getdatabyid['deskripsi_event']); ?></p>
-                 <div class="row">
-                     <div class="form-group">
-                         <div class="col-sm-5">
-                             <a class="btn btn-primary" href="<?= base_url('home/tambah_keranjang_event/') . $getdatabyid['id_event']; ?>" role="button" style="background-color: #E6505F;">Tambah Keranjang</a>
+                 <?php if ($getdatabyid['stock'] == 0) : ?>
+                     <div class="row">
+                         <div class="form-group">
+                             <div class="col-sm-12">
+                                 <div class="entry-meta meta-0 font-small mb-10 mt-1">
+                                     <span class="post-cat bg-success color-white">Stock Habis</span>
+                                 </div>
+                             </div>
+                         </div>
+
+                     </div>
+                     <div class="row">
+                         <div class="col-sm-4">
+                             <a class="btn btn-secondary" href="<?= base_url('home/merchandise/'); ?>" role="button">Kembali</a>
                          </div>
                      </div>
-                     <div class="col-sm-6">
-                         <a class="btn btn-secondary" href="<?= base_url('home/event/'); ?>" role="button">Kembali</a>
-                     </div>
+                 <?php else : ?>
+                     <div class="row">
+                         <div class="form-group">
+                             <div class="col-sm-5">
+                                 <a class="btn btn-primary" href="<?= base_url('home/tambah_keranjang_event/') . $getdatabyid['id_event']; ?>" role="button" style="background-color: #E6505F;">Tambah Keranjang</a>
+                             </div>
+                         </div>
+                         <div class="col-sm-6">
+                             <a class="btn btn-secondary" href="<?= base_url('home/event/'); ?>" role="button">Kembali</a>
+                         </div>
 
-                 </div>
+                     </div>
+                 <?php endif; ?>
+
              </div>
          </div>
          <!--End row-->

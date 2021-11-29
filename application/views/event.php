@@ -203,8 +203,8 @@
                                                         <a href="<?= base_url('home/event_detail/') . $e['id_event'] ?>">Acara: <?= ucwords($e['tgl_acara']); ?></a>
                                                     </h7>
                                                     <h6 class="post-title text-limit-2-row" style="margin-bottom: 20px;">
-                                                            <span class="post-off">Stock: <?= $e['stock']; ?></span>
-                                                        </h6>
+                                                        <span class="post-off">Stock: <?= $e['stock']; ?></span>
+                                                    </h6>
                                                     <div class="entry-meta meta-1 font-x-small color-grey float-left">
                                                         <?php
                                                         if ($e['harga_tiket'] == 0) { ?>
@@ -230,36 +230,47 @@
                                                                 <span class="post-cat bg-success color-white">Rp <?= number_format($e['harga_tiket'], 0, ',', '.') ?></span>
                                                             </div>
                                                         <?php } ?>
-                                                        <div class="row justify-content-center align-items-center">
-                                                            <div class="col-sm-5">
-                                                                <a href="<?= base_url('home/event_detail/') . $e['id_event'] ?>">
-                                                                    <div class="entry-meta meta-1">
-                                                                        <div class="row">
-                                                                            <div class="col-sm-7 col-4">
-                                                                                <img src="<?= base_url('assets/logo/detail.png'); ?>" alt="" style="height: 30px; width: 30px;">
-                                                                            </div>
-                                                                            <div class="col-sm-2 col-2" style="margin-left: -28px; margin-top: 7px;">
-                                                                                <span style="font-size: medium;">Detail</span>
+                                                        <?php if ($e['stock'] == 0) : ?>
+                                                            <div class="row justify-content-center align-items-center">
+                                                                <div class="col-sm-12">
+                                                                    <div class="entry-meta meta-0 font-small mb-30 mt-1">
+                                                                        <span class="post-cat bg-success color-white">Stock Habis</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        <?php else : ?>
+                                                            <div class="row justify-content-center align-items-center">
+                                                                <div class="col-sm-5">
+                                                                    <a href="<?= base_url('home/event_detail/') . $e['id_event'] ?>">
+                                                                        <div class="entry-meta meta-1">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-7 col-4">
+                                                                                    <img src="<?= base_url('assets/logo/detail.png'); ?>" alt="" style="height: 30px; width: 30px;">
+                                                                                </div>
+                                                                                <div class="col-sm-2 col-2" style="margin-left: -28px; margin-top: 7px;">
+                                                                                    <span style="font-size: medium;">Detail</span>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                </a>
-                                                            </div>
-                                                            <div class="col">
-                                                                <a href="<?= base_url('home/tambah_keranjang_event/') . $e['id_event']; ?>">
-                                                                    <div class="entry-meta meta-1">
-                                                                        <div class="row">
-                                                                            <div class="col-sm-5 col-4">
-                                                                                <img src="<?= base_url('assets/logo/cart.png'); ?>" alt="" style="height: 30px; width: 30px;">
-                                                                            </div>
-                                                                            <div class="col-2" style="margin-left: -28px; margin-top: 7px;">
-                                                                                <span style="font-size: medium;">Tambah</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <a href="<?= base_url('home/tambah_keranjang_event/') . $e['id_event']; ?>">
+                                                                        <div class="entry-meta meta-1">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-5 col-4">
+                                                                                    <img src="<?= base_url('assets/logo/cart.png'); ?>" alt="" style="height: 30px; width: 30px;">
+                                                                                </div>
+                                                                                <div class="col-2" style="margin-left: -28px; margin-top: 7px;">
+                                                                                    <span style="font-size: medium;">Tambah</span>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                </a>
+                                                                    </a>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        <?php endif; ?>
+
                                                         <hr class="mb-2" style="margin-top: 4px;">
                                                         <span class="post-off" style="color: red;">Batas Pembelian: <?= $e['tgl_berakhir']; ?></span>
                                                     </div>
