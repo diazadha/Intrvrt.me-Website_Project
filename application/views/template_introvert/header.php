@@ -128,9 +128,11 @@
                             <nav>
                                 <ul class="main-menu d-none d-lg-inline">
                                     <li class="menu-item-has-children">
-                                        <a href="<?= base_url(); ?>"><span class="mr-15">
-                                                <!-- <ion-icon name="contact"></ion-icon> -->
-                                                <i class="fas fa-shopping-cart"></i>
+                                        <a href="<?= base_url(); ?>">
+                                            <span class="mr-15">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            </span>
+                                             Keranjang
                                         </a>
                                         <ul class="sub-menu text-muted font-small">
                                             <li><a href="<?= base_url('home/cart_merchandise') ?>">Merchandise</a></li>
