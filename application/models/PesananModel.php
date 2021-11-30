@@ -76,4 +76,14 @@ class PesananModel extends CI_Model
         $query = $this->db->query($query);
         return $query;
     }
+    
+    public function get_riwayat_event($id_user){
+        $query="SELECT keranjang_event.*
+        FROM keranjang_event
+        JOIN user ON user.id_user = keranjang_event.id_user
+        WHERE keranjang_event.status != 1
+        AND keranjang_event.id_user = $id_user";
+        $query = $this->db->query($query);
+        return $query;
+    }
 }

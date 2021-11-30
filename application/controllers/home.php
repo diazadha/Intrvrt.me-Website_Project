@@ -286,9 +286,13 @@ class Home extends CI_Controller
 
     public function my_account()
     {
+        if($this->session->userdata('email') == ''){
+            redirect('home/login');
+        }
         $data['title'] = 'Akun Saya';
         $data['data_user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $data['riwayat_event'] = $this->PesananModel->get_riwayat_event($this->session->userdata('id_user'))->result();
         $this->load->view('template_introvert/header', $data);
         $this->load->view('my_account', $data);
         $this->load->view('template_introvert/footer', $data);
@@ -301,6 +305,17 @@ class Home extends CI_Controller
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
         $this->load->view('template_introvert/header', $data);
         $this->load->view('detail_riwayat_merchandise', $data);
+        $this->load->view('template_introvert/footer', $data);
+    }
+
+    public function detail_riwayat_event($id_pesanan)
+    {
+        $data['title'] = 'Riwayat Event';
+        $data['data_user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $data['pesanan'] = $this->PesananModel->detailpesanan_e($id_pesanan)->row();
+        $this->load->view('template_introvert/header', $data);
+        $this->load->view('detail_riwayat_event', $data);
         $this->load->view('template_introvert/footer', $data);
     }
 
