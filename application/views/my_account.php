@@ -46,14 +46,17 @@
                                                                      </tr>
                                                                  </thead>
                                                                  <tbody>
-                                                                     <tr>
-                                                                         <td>Trident</td>
-                                                                         <td>Internet
-                                                                             Explorer 4.0
-                                                                         </td>
-                                                                         <td>Win 95+</td>
-                                                                         <td class="text-center"> <a class="btn btn-primary" href="<?= base_url('home/detail_riwayat_merchandise') ?>" role="button">Detail</a></td>
-                                                                     </tr>
+                                                                     <?php $no = 1;
+                                                                        foreach ($riwayat_pesanan as $r) : ?>
+                                                                         <tr>
+                                                                             <td class="text-center"><?= $no; ?></td>
+                                                                             <td><?= $r['nama_user']; ?>
+                                                                             </td>
+                                                                             <td class="text-center"><?= date('d F Y | H:i:s', strtotime($r['tgl_pesan'])); ?></td>
+                                                                             <td class="text-center"> <a class="btn btn-primary" href="<?= base_url('home/detail_riwayat_merchandise/') . $r['id_pesanan']; ?>" role="button">Detail</a></td>
+                                                                             <?php $no++; ?>
+                                                                         </tr>
+                                                                     <?php endforeach; ?>
                                                                  </tbody>
                                                              </table>
                                                          </div>
@@ -127,7 +130,7 @@
                                                                      </div>
                                                                  <?php else : ?>
                                                                      <div class="col-md-5 mb-4">
-                                                                         <img src="<?= base_url('assets/uploads/user/') . $data_user['foto_user']; ?>" class="img-thumbnail img-fluid z-depth-2" alt="circular image and responsive" data-holder-rendered="true">
+                                                                         <img src="<?= base_url('assets/uploads/user/') . $data_user['foto_user']; ?>" class="img-thumbnail img-fluid z-depth-2" alt="circular image and responsive" data-holder-rendered="true" style="width: 250px; height:250px">
                                                                      </div>
                                                                  <?php endif; ?>
                                                              </div>

@@ -287,16 +287,21 @@ class Home extends CI_Controller
         $data['title'] = 'Akun Saya';
         $data['data_user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $data['riwayat_pesanan'] = $this->MerchandiseModel->get_pesanan_merch($data['data_user']['id_user'])->result_array();
+
         $this->load->view('template_introvert/header', $data);
         $this->load->view('my_account', $data);
         $this->load->view('template_introvert/footer', $data);
     }
 
-    public function detail_riwayat_merchandise()
+    public function detail_riwayat_merchandise($id)
     {
         $data['title'] = 'Riwayat Merchandise';
         $data['data_user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $data['data_riwayat_biodata'] = $this->MerchandiseModel->get_pesanan_merch_by_id($data['data_user']['id_user'], $id)->row_array();
+        $data['data_riwayat_barang'] = $this->MerchandiseModel->get_pesanan_merch_by_id_barang($data['data_user']['id_user'], $id)->result_array();
+
         $this->load->view('template_introvert/header', $data);
         $this->load->view('detail_riwayat_merchandise', $data);
         $this->load->view('template_introvert/footer', $data);
@@ -328,7 +333,7 @@ class Home extends CI_Controller
                 $this->db->where('id_user', $this->input->post('id_user'));
                 $this->db->update('user', $data);
                 $this->session->set_flashdata('message1', 'Update Berhasil!');
-                redirect('home/profil');
+                redirect('home/my_account');
             }
         } else {
             $this->form_validation->set_rules('nama', 'Name', 'required|trim');
@@ -360,7 +365,7 @@ class Home extends CI_Controller
                 $this->db->where('id_user', $this->input->post('id_user'));
                 $this->db->update('user', $data);
                 $this->session->set_flashdata('message1', 'Update Berhasil!');
-                redirect('home/profil');
+                redirect('home/my_account');
             }
         }
     }
@@ -388,7 +393,7 @@ class Home extends CI_Controller
             $this->db->set('foto_user', $foto_user);
             $this->db->where('id_user', $id_user);
             $this->db->update('user');
-            redirect('home/profil');
+            redirect('home/my_account');
         }
     }
 

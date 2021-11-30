@@ -416,4 +416,27 @@ class MerchandiseModel extends CI_Model
         WHERE user.id_user = keranjang_merchandise.id_user AND keranjang_merchandise.id_user = $id_user AND merchandise.id_merch = keranjang_merchandise.id_merchandise AND foto_merchandise.id = merchandise.foto_utama AND keranjang_merchandise.status = 0";
         return $this->db->query($query);
     }
+
+    public function get_pesanan_merch($id_user)
+    {
+        $query = "SELECT user.nama_user, pesanan_m.tgl_pesan, pesanan_m.id_pesanan
+                    FROM pesanan_m, user
+                    WHERE pesanan_m.id_user = $id_user AND pesanan_m.id_user = user.id_user";
+        return $this->db->query($query);
+    }
+
+    public function get_pesanan_merch_by_id($id_user, $id_pesanan)
+    {
+        $query = "SELECT *
+        FROM pesanan_m, user
+        WHERE pesanan_m.id_user = $id_user AND pesanan_m.id_user = user.id_user AND pesanan_m.id_pesanan = $id_pesanan";
+        return $this->db->query($query);
+    }
+    public function get_pesanan_merch_by_id_barang($id_user, $id_pesanan)
+    {
+        $query = "SELECT detailpesanan_m.*, merchandise.*
+        FROM pesanan_m, user, detailpesanan_m, merchandise
+        WHERE pesanan_m.id_user = $id_user AND pesanan_m.id_user = user.id_user AND pesanan_m.id_pesanan = detailpesanan_m.id_pesanan AND detailpesanan_m.id_merch = merchandise.id_merch AND pesanan_m.id_pesanan = $id_pesanan";
+        return $this->db->query($query);
+    }
 }
