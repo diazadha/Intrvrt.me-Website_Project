@@ -21,8 +21,17 @@ class PesananModel extends CI_Model
         return $this->db->query($query)->row_array();
     }
 
-    public function emailpesanan_m($id_pesanan){
-        $query = "SELECT *, pesanan_m.berat AS total_berat FROM pesanan_m, detailpesanan_m, merchandise, user WHERE pesanan_m.id_pesanan = $id_pesanan
+    public function emailpesanan_m($external_id){
+        $query = "SELECT * FROM pesanan_m, detailpesanan_m, merchandise, user
+        WHERE pesanan_m.external_id = '$external_id'
+        AND pesanan_m.id_pesanan = detailpesanan_m.id_pesanan AND detailpesanan_m.id_merch = merchandise.id_merch
+        AND user.id_user = pesanan_m.id_user";
+        return $this->db->query($query);
+    }
+
+    public function emailpesanan_m2($external_id){
+        $query = "SELECT * FROM pesanan_m, detailpesanan_m, merchandise, user
+        WHERE pesanan_m.external_id = '$external_id'
         AND pesanan_m.id_pesanan = detailpesanan_m.id_pesanan AND detailpesanan_m.id_merch = merchandise.id_merch
         AND user.id_user = pesanan_m.id_user AND is_deliver = 0";
         return $this->db->query($query);

@@ -1,5 +1,7 @@
 <?php
 
+use GuzzleHttp\Psr7\Request;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Home extends CI_Controller
@@ -687,36 +689,77 @@ class Home extends CI_Controller
         echo json_encode($this->MerchandiseModel->get_keranjang_byid($id_keranjang)->row_array());
     }
 
-    public function email($id_pesanan = 4)
+    public function email()
     {
+        $rawRequestInput = file_get_contents("php://input");
+        // Baris ini melakukan format input mentah menjadi array asosiatif
+        $data['pay'] = json_decode($rawRequestInput, true);
         $data['title'] = 'Intrvrt.me';
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
-        $data['pesanan'] = $this->PesananModel->emailpesanan_m($id_pesanan)->row_array();
+        $data['pesanan'] = $this->PesananModel->emailpesanan_m($data['pay']['external_id'])->result_array();
+        $data['pesanan2'] = $this->PesananModel->emailpesanan_m2($data['pay']['external_id'])->result_array();
 
-        $config = [
-            'protocol' => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_user' => 'intrvrt.me1@gmail.com',
-            'smtp_pass' => 'Ayamgoreng123',
-            'smtp_port' => 465,
-            'mailtype' => 'html',
-            'charset' => 'utf-8',
-            'newline' => "\r\n"
-        ];
-        $this->load->library('email', $config);
-        $this->email->initialize($config);
-        $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
-        $this->email->to('mahmah992013@gmail.com');
+        if($data['pesanan'][0]['is_deliver'] == 0 || $data['pesanan'][1]['is_deliver'] == 0){
+            $config = [
+                'protocol' => 'smtp',
+                'smtp_host' => 'ssl://smtp.googlemail.com',
+                'smtp_user' => 'intrvrt.me1@gmail.com',
+                'smtp_pass' => 'Ayamgoreng123',
+                'smtp_port' => 465,
+                'mailtype' => 'html',
+                'charset' => 'utf-8',
+                'newline' => "\r\n"
+            ];
+            $this->load->library('email', $config);
+            $this->email->initialize($config);
+            $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
+            $this->email->to($data['pesanan'][0]['email_penerima']);
 
-        $this->email->subject('Pesanan ' . $data['pesanan']['nama_merch']);
+            $this->email->subject('Pesanan ',$data['pesanan'][0]['nama_penerima'] );
 
+            $this->email->message($this->load->view('admin/email_ebook', $data, TRUE));
+            if ($this->email->send()) {
+                $dataXendit = array(
+                    "status" => 1,
+                );
+                $this->db->where('external_id', $data['pesanan'][0]['external_id']);
+                $this->db->update('pesanan_m', $dataXendit);
+                return true;
+            } else {
+                echo $this->email->print_debugger();
+                die;
+            }
+        }else{
+            $config = [
+                'protocol' => 'smtp',
+                'smtp_host' => 'ssl://smtp.googlemail.com',
+                'smtp_user' => 'intrvrt.me1@gmail.com',
+                'smtp_pass' => 'Ayamgoreng123',
+                'smtp_port' => 465,
+                'mailtype' => 'html',
+                'charset' => 'utf-8',
+                'newline' => "\r\n"
+            ];
+            $this->load->library('email', $config);
+            $this->email->initialize($config);
+            $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
+            $this->email->to($data['pesanan'][0]['email_penerima']);
 
-        $this->email->message($this->load->view('admin/email_ebook', $data, TRUE));
-        if ($this->email->send()) {
-            return true;
-        } else {
-            echo $this->email->print_debugger();
-            die;
+            $this->email->subject('Pesanan ',$data['pesanan'][0]['nama_penerima'] );
+
+            $this->email->message($this->load->view('admin/email_merch', $data, TRUE));
+            if ($this->email->send()) {
+                $dataXendit = array(
+                    "status" => 1,
+                );
+                $this->db->where('external_id', $data['pesanan'][0]['external_id']);
+                $this->db->update('pesanan_m', $dataXendit);
+                return true;
+            } else {
+                echo $this->email->print_debugger();
+                die;
+            }
         }
+        
     }
 }

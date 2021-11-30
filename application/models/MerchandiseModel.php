@@ -376,13 +376,13 @@ class MerchandiseModel extends CI_Model
             'tgl_pesan' => date('Y-m-d H:i:s'),
             'expedisi' => htmlspecialchars($this->security->xss_clean($this->input->post('expedisi')), ENT_QUOTES),
             'paket' => htmlspecialchars($this->security->xss_clean($this->input->post('paket')), ENT_QUOTES),
-            'email_penerima' => htmlspecialchars($this->security->xss_clean($this->input->post('email_penerima')), ENT_QUOTES),
             'estimasi' => htmlspecialchars($this->security->xss_clean($this->input->post('estimasi')), ENT_QUOTES),
             'ongkir' => htmlspecialchars($this->security->xss_clean($this->input->post('ongkir')), ENT_QUOTES),
             'berat' => htmlspecialchars($this->security->xss_clean($this->input->post('berat')), ENT_QUOTES),
             'grand_total' => htmlspecialchars($this->security->xss_clean($this->input->post('grand_total')), ENT_QUOTES),
             'total_bayar' => htmlspecialchars($this->security->xss_clean($this->input->post('total_bayar')), ENT_QUOTES),
             'nama_penerima' => htmlspecialchars($this->security->xss_clean($this->input->post('nama_penerima')), ENT_QUOTES),
+            'email_penerima' => htmlspecialchars($this->security->xss_clean($this->input->post('email_penerima')), ENT_QUOTES),
             'tlpn_penerima' => htmlspecialchars($this->security->xss_clean($this->input->post('tlpn_penerima')), ENT_QUOTES),
             'alamat' => htmlspecialchars($this->security->xss_clean($this->input->post('alamat')), ENT_QUOTES),
             'provinsi' => htmlspecialchars($this->security->xss_clean($this->input->post('provinsi')), ENT_QUOTES),
@@ -393,17 +393,17 @@ class MerchandiseModel extends CI_Model
         return $this->db->insert('pesanan_m', $data);
     }
 
-    public function detailpesanan(){
-        $query = "SELECT MAX(id_pesanan) AS id_pesanan FROM pesanan_m";
-        $id_pesanan = $this->db->query($query)->row_array();
-        foreach ($this->MerchandiseModel->getkeranjangdipilih($this->session->userdata('id_user'))->result_array() as $items){
-            $data = array(
-            'id_pesanan' => $id_pesanan['id_pesanan'],
-            'id_merch' => $items['id_merch'],
-            'qty' => $items['qty'],
-        );
-        $this->db->insert('detailpesanan_m', $data);
-        }
-        return 'berhasil';
-    }
+    // public function detailpesanan(){
+    //     $query = "SELECT MAX(id_pesanan) AS id_pesanan FROM pesanan_m";
+    //     $id_pesanan = $this->db->query($query)->row_array();
+    //     foreach ($this->MerchandiseModel->getkeranjangdipilih($this->session->userdata('id_user'))->result_array() as $items){
+    //         $data = array(
+    //         'id_pesanan' => $id_pesanan['id_pesanan'],
+    //         'id_merch' => $items['id_merch'],
+    //         'qty' => $items['qty'],
+    //     );
+    //     $this->db->insert('detailpesanan_m', $data);
+    //     }
+    //     return 'berhasil';
+    // }
 }

@@ -16,24 +16,7 @@
     <div class="row mt-4">
         <div class="col-sm-5">
             <p style="font-family:cursive;">
-            Terima kasih telah melakukan pembelian, berikut link untuk mengakses :<br>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Nama Merchandise</th>
-                        <th>Link Akses</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($pesanan2 as $p2): ?>
-                        <tr>
-                            <td><?= $p2['nama_merch'] ?></td>
-                            <td><a href="<?= $p2['linkebook']; ?>"><?= $p2['linkebook']; ?></a></td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-            
+            Terima kasih telah melakukan pembelian di Intrvt.me
             </p>
         </div>
     </div>

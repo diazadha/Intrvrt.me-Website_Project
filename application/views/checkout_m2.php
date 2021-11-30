@@ -27,7 +27,7 @@
                                 </div>
                                 <div class="col-md-6 mb-1">
                                     <label style="font-weight:bold">Email Penerima*</label>
-                                    <input type="email" class="form-control" required>
+                                    <input type="email" name="email_penerima" class="form-control" required>
                                 </div>
                             </div>
                          </div>
