@@ -182,7 +182,7 @@ class MerchandiseModel extends CI_Model
             'deskripsi' => htmlspecialchars($this->security->xss_clean($this->input->post('deskripsi')), ENT_QUOTES),
             'is_deliver' => htmlspecialchars($this->security->xss_clean($this->input->post('is_deliver')), ENT_QUOTES),
             'linkebook' => htmlspecialchars($this->security->xss_clean($this->input->post('linkebook')), ENT_QUOTES),
-        );  
+        );
         return $this->db->insert('merchandise', $data);
     }
 
@@ -361,7 +361,8 @@ class MerchandiseModel extends CI_Model
         return $this->db->query($query);
     }
 
-    public function is_deliv($id){
+    public function is_deliv($id)
+    {
         $query = "SELECT *
         FROM keranjang_merchandise, merchandise
         WHERE status = 1 AND id_merchandise = id_merch AND id_user = $id AND is_deliver = 0 ";
@@ -393,17 +394,26 @@ class MerchandiseModel extends CI_Model
         return $this->db->insert('pesanan_m', $data);
     }
 
-    public function detailpesanan(){
+    public function detailpesanan()
+    {
         $query = "SELECT MAX(id_pesanan) AS id_pesanan FROM pesanan_m";
         $id_pesanan = $this->db->query($query)->row_array();
-        foreach ($this->MerchandiseModel->getkeranjangdipilih($this->session->userdata('id_user'))->result_array() as $items){
+        foreach ($this->MerchandiseModel->getkeranjangdipilih($this->session->userdata('id_user'))->result_array() as $items) {
             $data = array(
-            'id_pesanan' => $id_pesanan['id_pesanan'],
-            'id_merch' => $items['id_merch'],
-            'qty' => $items['qty'],
-        );
-        $this->db->insert('detailpesanan_m', $data);
+                'id_pesanan' => $id_pesanan['id_pesanan'],
+                'id_merch' => $items['id_merch'],
+                'qty' => $items['qty'],
+            );
+            $this->db->insert('detailpesanan_m', $data);
         }
         return 'berhasil';
+    }
+
+    public function nullcheck($id_user)
+    {
+        $query = "SELECT keranjang_merchandise.*, foto_merchandise.*, merchandise.id_merch, merchandise.nama_merch, merchandise.stock, merchandise.harga, merchandise.diskon, merchandise.is_deliver
+        FROM keranjang_merchandise, user, merchandise, foto_merchandise
+        WHERE user.id_user = keranjang_merchandise.id_user AND keranjang_merchandise.id_user = $id_user AND merchandise.id_merch = keranjang_merchandise.id_merchandise AND foto_merchandise.id = merchandise.foto_utama AND keranjang_merchandise.status = 0";
+        return $this->db->query($query);
     }
 }

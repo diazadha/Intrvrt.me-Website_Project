@@ -501,6 +501,7 @@ class Home extends CI_Controller
         $user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         if ($user) {
             $data['keranjang_merchandise'] = $this->MerchandiseModel->get_keranjang($user['id_user'])->result_array();
+            $data['nullcheck'] = $this->MerchandiseModel->nullcheck($user['id_user'])->num_rows();
             $this->load->view('template_introvert/header', $data);
             $this->load->view('cart_merchandise', $data);
             $this->load->view('template_introvert/footer', $data);
@@ -584,6 +585,10 @@ class Home extends CI_Controller
                 $this->db->set('qty', $keranjang['qty'] + 1);
                 $this->db->where('id_keranjang', $keranjang['id_keranjang']);
                 $this->db->update('keranjang_merchandise');
+                $this->session->set_flashdata('message', '
+                <div class="alert alert-success" role="alert">
+                    Berhasil ditambahkan ke <a href="' . base_url('home/cart_merchandise') . '"><u>Keranjang Merchandise!</u></a>
+                </div>');
                 redirect('home/merchandise');
             } else {
                 $data = array(
@@ -593,6 +598,10 @@ class Home extends CI_Controller
                     'id_user' => $user['id_user'],
                 );
                 $this->db->insert('keranjang_merchandise', $data);
+                $this->session->set_flashdata('message', '
+                <div class="alert alert-success" role="alert">
+                    Berhasil ditambahkan ke <a href="' . base_url('home/cart_merchandise') . '"><u>Keranjang Merchandise!</u></a>
+                </div>');
                 redirect('home/merchandise');
             }
         }
