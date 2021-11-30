@@ -73,7 +73,7 @@
                         <div class="card-body">
                             <div class="example2">
                                 <table class="table table-bordered" id="example2" width="100%" cellspacing="0">
-                                <thead>
+                                    <thead>
                                         <tr>
                                             <th>ID</th>
                                             <th>Tgl Pemesanan</th>
