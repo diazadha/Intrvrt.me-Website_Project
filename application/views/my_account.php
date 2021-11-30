@@ -42,6 +42,7 @@
                                                                          <th>No</th>
                                                                          <th>Nama Pemesan</th>
                                                                          <th>Tanggal Pemesanan</th>
+                                                                         <th>Status</th>
                                                                          <th>Aksi</th>
                                                                      </tr>
                                                                  </thead>
@@ -52,8 +53,17 @@
                                                                              <td class="text-center"><?= $no; ?></td>
                                                                              <td><?= $r['nama_user']; ?>
                                                                              </td>
+
                                                                              <td class="text-center"><?= date('d F Y | H:i:s', strtotime($r['tgl_pesan'])); ?></td>
-                                                                             <td class="text-center"> <a class="btn btn-primary" href="<?= base_url('home/detail_riwayat_merchandise/') . $r['id_pesanan']; ?>" role="button">Detail</a></td>
+                                                                             <td><?php if ($r['status'] == 0) {
+                                                                                        echo '<span class="text-danger">BELUM BAYAR</span>';
+                                                                                    } else if ($r['status'] == 1) {
+                                                                                        echo '<span class="text-success">SUDAH BAYAR</span>';
+                                                                                    } else if ($r['status'] == 2) {
+                                                                                        echo '<span class="text-success">SUDAH DIKIRIM</span>';
+                                                                                    } ?>
+                                                                             </td>
+                                                                             <td class="text-center"><a class='btn btn-info btn-sm' href='<?php echo base_url('home/detail_riwayat_merchandise/') . $r['id_pesanan'] ?>'><span class='fas fa-info-circle'></span></a></td>
                                                                              <?php $no++; ?>
                                                                          </tr>
                                                                      <?php endforeach; ?>
@@ -72,38 +82,42 @@
                                                          <!-- /.card-header -->
                                                          <div class="card-body">
                                                              <table id="table_event" class="table table-bordered table-striped">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>ID</th>
-                                                                        <th>Tgl Pemesanan</th>
-                                                                        <th>Pemesan</th>
-                                                                        <th>Event</th>
-                                                                        <th>Tagihan</th>
-                                                                        <th>Status</th>
-                                                                        <th width="5%">Detail</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                <?php foreach ($riwayat_event as $b): ?>
-                                                                    <tr>
-                                                                        <td width="5%"><?= $b->id?></td>
-                                                                        <td><?= $b->tgl_pesan ?> </td>
-                                                                        <td><?= $b->name ?></td>
-                                                                        <td>
-                                                                        <?php 
-                                                                        $field=""; 
-                                                                        foreach($this->PesananModel->get_event($b->id)->result() as $e){
-                                                                            $field.= $e->nama_event.',';
-                                                                        }
-                                                                        echo rtrim($field, ',');
-                                                                        ?>
-                                                                        </td>
-                                                                        <td>Rp <?= number_format($b->expected_amount) ?></td>
-                                                                        <td><?php if($b->status == 3){echo '<span class="text-success"> LUNAS </span>';}else{echo '<span class="text-danger">BELUM BAYAR</span>';}?></td>
-                                                                        <td><a class='btn btn-info btn-sm' href='<?php echo base_url('home/detail_riwayat_event/').$b->id ?>'><span class='fas fa-info-circle'></span></a></td>
-                                                                    </tr>
-                                                                    <?php endforeach; ?>
-                                                                </tbody>
+                                                                 <thead>
+                                                                     <tr>
+                                                                         <th>ID</th>
+                                                                         <th>Tgl Pemesanan</th>
+                                                                         <th>Pemesan</th>
+                                                                         <th>Event</th>
+                                                                         <th>Tagihan</th>
+                                                                         <th>Status</th>
+                                                                         <th width="5%">Detail</th>
+                                                                     </tr>
+                                                                 </thead>
+                                                                 <tbody>
+                                                                     <?php foreach ($riwayat_event as $b) : ?>
+                                                                         <tr>
+                                                                             <td width="5%"><?= $b->id ?></td>
+                                                                             <td><?= $b->tgl_pesan ?> </td>
+                                                                             <td><?= $b->name ?></td>
+                                                                             <td>
+                                                                                 <?php
+                                                                                    $field = "";
+                                                                                    foreach ($this->PesananModel->get_event($b->id)->result() as $e) {
+                                                                                        $field .= $e->nama_event . ',';
+                                                                                    }
+                                                                                    echo rtrim($field, ',');
+                                                                                    ?>
+                                                                             </td>
+                                                                             <td>Rp <?= number_format($b->expected_amount) ?></td>
+                                                                             <td><?php if ($b->status == 3) {
+                                                                                        echo '<span class="text-success"> LUNAS </span>';
+                                                                                    } else {
+                                                                                        echo '<span class="text-danger">BELUM BAYAR</span>';
+                                                                                    } ?></td>
+                                                                             <td><a class='btn btn-info btn-sm' href='<?php echo base_url('home/detail_riwayat_event/') . $b->id ?>'><span class='fas fa-info-circle'></span></a></td>
+                                                                         </tr>
+                                                                     <?php endforeach; ?>
+                                                                 </tbody>
                                                              </table>
                                                          </div>
                                                          <!-- /.card-body -->

@@ -419,7 +419,7 @@ class MerchandiseModel extends CI_Model
 
     public function get_pesanan_merch($id_user)
     {
-        $query = "SELECT user.nama_user, pesanan_m.tgl_pesan, pesanan_m.id_pesanan
+        $query = "SELECT user.nama_user, pesanan_m.tgl_pesan, pesanan_m.id_pesanan, pesanan_m.status
                     FROM pesanan_m, user
                     WHERE pesanan_m.id_user = $id_user AND pesanan_m.id_user = user.id_user";
         return $this->db->query($query);
