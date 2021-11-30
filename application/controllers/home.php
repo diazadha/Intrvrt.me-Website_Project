@@ -718,14 +718,21 @@ class Home extends CI_Controller
         echo json_encode($this->MerchandiseModel->get_keranjang_byid($id_keranjang)->row_array());
     }
 
-    public function callback_event(){
+    public function callback_xendit()
+    {
         date_default_timezone_set('Asia/Jakarta');
         $rawRequestInput = file_get_contents("php://input");
-        $data['response'] = json_decode($rawRequestInput, true);
-        $external_id = $data['response']['external_id'];
-        
+        // Baris ini melakukan format input mentah menjadi array asosiatif
+        $data['pay'] = json_decode($rawRequestInput, true);
+        $data['title'] = 'Intrvrt.me';
+        $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $data['pesanan'] = $this->PesananModel->emailpesanan_m($data['pay']['external_id'])->result_array();
+        $data['pesanan2'] = $this->PesananModel->emailpesanan_m2($data['pay']['external_id'])->result_array();
+
+        $external_id = $data['pay']['external_id'];
+
         $cek = explode("-", $external_id);
-        if ($cek[0] == 'intrvrt.me'){
+        if ($cek[0] == 'intrvrtme_event') {
             $field = array(
                 "status" => 3, //LUNAS
                 "tgl_bayar" => date('Y-m-d H:i:s'),
@@ -734,7 +741,7 @@ class Home extends CI_Controller
             $this->db->update('keranjang_event', $field);
 
             $id_user = $this->db->get_where('keranjang_event', ['external_id' => $external_id])->row()->id_user;
-            $user = $this->db->get_where('user', ['id_user'=>$id_user])->row();
+            $user = $this->db->get_where('user', ['id_user' => $id_user])->row();
             //send email 
             //send email notif;
             $config = [
@@ -752,26 +759,26 @@ class Home extends CI_Controller
             $this->email->initialize($config);
             $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
             $this->email->to($user->email);
-            $this->email->subject('Verifikasi Akun');
+            $this->email->subject('Pembayaran Berhasil');
 
             $acara = $this->Tiket_model->get_acara($cek[1])->result();
-            $table="<table>
+            $table = "<table>
             <tr>
                 <th><b>No</b></th>
                 <th><b>Nama Event</b></th>
                 <th><b>Nama Kategori</b></th>
             </tr>
             ";
-            $no=1;
-            foreach($acara as $a){
-                $table.="<tr>
-                            <td>".$no."</td>
-                            <td>".$a->nama_event."</td>
-                            <td>".$a->nama_kategori."</td>
+            $no = 1;
+            foreach ($acara as $a) {
+                $table .= "<tr>
+                            <td>" . $no . "</td>
+                            <td>" . $a->nama_event . "</td>
+                            <td>" . $a->nama_kategori . "</td>
                         </tr>";
                 $no++;
             }
-            $table.="</table>";
+            $table .= "</table>";
 
             $message = "Hi <b>$user->nama_user</b>, <br>
             Pembelian Tiket Berhasil !!!<br>
@@ -789,82 +796,70 @@ class Home extends CI_Controller
             if (!$this->email->send()) {
                 echo $this->email->print_debugger();
             }
-        }
-    }
-
-    public function email()
-    {
-        date_default_timezone_set('Asia/Jakarta');
-        $rawRequestInput = file_get_contents("php://input");
-        // Baris ini melakukan format input mentah menjadi array asosiatif
-        $data['pay'] = json_decode($rawRequestInput, true);
-        $data['title'] = 'Intrvrt.me';
-        $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
-        $data['pesanan'] = $this->PesananModel->emailpesanan_m($data['pay']['external_id'])->result_array();
-        $data['pesanan2'] = $this->PesananModel->emailpesanan_m2($data['pay']['external_id'])->result_array();
-
-        if ($data['pesanan'][0]['is_deliver'] == 0 || $data['pesanan'][1]['is_deliver'] == 0) {
-            $config = [
-                'protocol' => 'smtp',
-                'smtp_host' => 'ssl://smtp.googlemail.com',
-                'smtp_user' => 'intrvrt.me1@gmail.com',
-                'smtp_pass' => 'Ayamgoreng123',
-                'smtp_port' => 465,
-                'mailtype' => 'html',
-                'charset' => 'utf-8',
-                'newline' => "\r\n"
-            ];
-            $this->load->library('email', $config);
-            $this->email->initialize($config);
-            $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
-            $this->email->to($data['pesanan'][0]['email_penerima']);
-
-            $this->email->subject('Pesanan ', $data['pesanan'][0]['nama_penerima']);
-
-            $this->email->message($this->load->view('admin/email_ebook', $data, TRUE));
-            if ($this->email->send()) {
-                $dataXendit = array(
-                    "status" => 2,
-                    "tgl_bayar" => date('Y-m-d H:i:s'),
-                    "tgl_kirim" => date('Y-m-d H:i:s'),
-                );
-                $this->db->where('external_id', $data['pesanan'][0]['external_id']);
-                $this->db->update('pesanan_m', $dataXendit);
-                return true;
-            } else {
-                echo $this->email->print_debugger();
-                die;
-            }
         } else {
-            $config = [
-                'protocol' => 'smtp',
-                'smtp_host' => 'ssl://smtp.googlemail.com',
-                'smtp_user' => 'intrvrt.me1@gmail.com',
-                'smtp_pass' => 'Ayamgoreng123',
-                'smtp_port' => 465,
-                'mailtype' => 'html',
-                'charset' => 'utf-8',
-                'newline' => "\r\n"
-            ];
-            $this->load->library('email', $config);
-            $this->email->initialize($config);
-            $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
-            $this->email->to($data['pesanan'][0]['email_penerima']);
+            if ($data['pesanan'][0]['is_deliver'] == 0 || $data['pesanan'][1]['is_deliver'] == 0) {
+                $config = [
+                    'protocol' => 'smtp',
+                    'smtp_host' => 'ssl://smtp.googlemail.com',
+                    'smtp_user' => 'intrvrt.me1@gmail.com',
+                    'smtp_pass' => 'Ayamgoreng123',
+                    'smtp_port' => 465,
+                    'mailtype' => 'html',
+                    'charset' => 'utf-8',
+                    'newline' => "\r\n"
+                ];
+                $this->load->library('email', $config);
+                $this->email->initialize($config);
+                $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
+                $this->email->to($data['pesanan'][0]['email_penerima']);
 
-            $this->email->subject('Pesanan ', $data['pesanan'][0]['nama_penerima']);
+                $this->email->subject('Pesanan ', $data['pesanan'][0]['nama_penerima']);
 
-            $this->email->message($this->load->view('admin/email_merch', $data, TRUE));
-            if ($this->email->send()) {
-                $dataXendit = array(
-                    "status" => 1,
-                    "tgl_bayar" => date('Y-m-d H:i:s'),
-                );
-                $this->db->where('external_id', $data['pesanan'][0]['external_id']);
-                $this->db->update('pesanan_m', $dataXendit);
-                return true;
+                $this->email->message($this->load->view('admin/email_ebook', $data, TRUE));
+                if ($this->email->send()) {
+                    $dataXendit = array(
+                        "status" => 2,
+                        "tgl_bayar" => date('Y-m-d H:i:s'),
+                        "tgl_kirim" => date('Y-m-d H:i:s'),
+                    );
+                    $this->db->where('external_id', $data['pesanan'][0]['external_id']);
+                    $this->db->update('pesanan_m', $dataXendit);
+                    return true;
+                } else {
+                    echo $this->email->print_debugger();
+                    die;
+                }
             } else {
-                echo $this->email->print_debugger();
-                die;
+                $config = [
+                    'protocol' => 'smtp',
+                    'smtp_host' => 'ssl://smtp.googlemail.com',
+                    'smtp_user' => 'intrvrt.me1@gmail.com',
+                    'smtp_pass' => 'Ayamgoreng123',
+                    'smtp_port' => 465,
+                    'mailtype' => 'html',
+                    'charset' => 'utf-8',
+                    'newline' => "\r\n"
+                ];
+                $this->load->library('email', $config);
+                $this->email->initialize($config);
+                $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
+                $this->email->to($data['pesanan'][0]['email_penerima']);
+
+                $this->email->subject('Pesanan ', $data['pesanan'][0]['nama_penerima']);
+
+                $this->email->message($this->load->view('admin/email_merch', $data, TRUE));
+                if ($this->email->send()) {
+                    $dataXendit = array(
+                        "status" => 1,
+                        "tgl_bayar" => date('Y-m-d H:i:s'),
+                    );
+                    $this->db->where('external_id', $data['pesanan'][0]['external_id']);
+                    $this->db->update('pesanan_m', $dataXendit);
+                    return true;
+                } else {
+                    echo $this->email->print_debugger();
+                    die;
+                }
             }
         }
     }

@@ -8,7 +8,7 @@
                      <div class="row">
                          <div class="col-12">
                              <h4>
-                                 #INTRVRT<?= $pesanan->id ?> 
+                                 #INTRVRT.ME-<?= $pesanan->id ?> 
                              </h4>
                          </div>
                          <!-- /.col -->
@@ -23,6 +23,17 @@
                                  Status: <?= ($pesanan->status == 2) ? '<span class="text-danger">BELUM BAYAR</span>' : '<span class="text-success">LUNAS</span>';?><br>
                              </address>
                          </div>
+                         <?php if($pesanan->status == 2):?>
+                         <div class="col-sm-4 invoice-col">
+                             <address>
+                                 Silahkan Melakukan Pembayaran Anda ke:<br>
+                                 Bank: <strong><?= $pesanan->bank_code?></strong><br>
+                                 Virtual Account: <strong><?= $pesanan->account_number?></strong><br>
+                                 Tagihan Pembayaran: <strong>Rp. <?= number_format($pesanan->expected_amount) ?></strong> <br>
+                                 Batas Pembayaran: <span class="text-danger"><?= $pesanan->expiration_date; ?></span>
+                             </address>
+                         </div>
+                         <?php endif;?>
                      </div>
                      <!-- /.row -->
 

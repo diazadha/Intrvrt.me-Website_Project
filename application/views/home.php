@@ -188,11 +188,6 @@
                                         <div class="col-7">
                                             <h4 class="widget-title mb-0">Latest <span>Posts</span></h4>
                                         </div>
-                                        <div class="col-5 text-right">
-                                            <h6 class="font-medium pr-15">
-                                                <a class="text-muted font-small" href="#">View all</a>
-                                            </h6>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="loop-list-style-1">
@@ -206,11 +201,6 @@
                                         <div class="pr-10 pl-10">
                                             <div class="entry-meta mb-30">
                                                 <a class="entry-meta meta-0" href="category.html"><span class="post-in background2 text-primary font-x-small"><?= $this->BlogModel->get_kategori_IN($firstLatePost->kategori, 'html') ?></span></a>
-                                                <div class="float-right font-small">
-                                                    <span><span class="mr-10 text-muted"><i class="fa fa-eye" aria-hidden="true"></i></span>5.8k</span>
-                                                    <span class="ml-30"><span class="mr-10 text-muted"><i class="fa fa-comment" aria-hidden="true"></i></span>2.5k</span>
-                                                    <span class="ml-30"><span class="mr-10 text-muted"><i class="fa fa-share-alt" aria-hidden="true"></i></span>125k</span>
-                                                </div>
                                             </div>
                                             <h4 class="post-title mb-20">
                                                 <a href="<?= base_url('blog/p/' . $firstLatePost->slug) ?>"><?= $firstLatePost->judul ?></a>

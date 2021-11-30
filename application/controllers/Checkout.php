@@ -100,7 +100,7 @@ class Checkout extends CI_Controller
         if ($totaltagihan != 0) {
             Xendit::setApiKey($this->token());
             $params = [
-                "external_id" => 'intrvrt.me-' . $id_transaksi,
+                "external_id" => 'intrvrtme_event-' . $id_transaksi,
                 "bank_code" => $vaBank,
                 "name" => $user->nama_user,
                 "expected_amount" => $this->input->post('totaltagihan'),
