@@ -2,7 +2,7 @@
     <div class="cart-page">
         <div class="container">
             <div class="text-center">
-                <h3>Keranjang Event</h3>
+                <h3>Keranjang Merchandise</h3>
             </div>
             <div class="row mt-3">
                 <div class="col-lg-8 col-md-8 mb-3">

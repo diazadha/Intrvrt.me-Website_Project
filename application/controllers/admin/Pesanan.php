@@ -41,8 +41,10 @@ class Pesanan extends CI_Controller
     }
 
     public function dikirim_m($id_pesanan){
+        date_default_timezone_set('Asia/Jakarta');
         $data = array(
             'status' => 2,
+            'tgl_kirim' => date('Y-m-d H:i:s'),
         );
         $this->db->where('id_pesanan', $id_pesanan);
         $this->db->update('pesanan_m', $data);

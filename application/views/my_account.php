@@ -72,24 +72,38 @@
                                                          <!-- /.card-header -->
                                                          <div class="card-body">
                                                              <table id="table_event" class="table table-bordered table-striped">
-                                                                 <thead class="text-center">
-                                                                     <tr>
-                                                                         <th>No</th>
-                                                                         <th>Nama Pemesan</th>
-                                                                         <th>Tanggal Pemesanan</th>
-                                                                         <th>Action</th>
-                                                                     </tr>
-                                                                 </thead>
-                                                                 <tbody>
-                                                                     <tr>
-                                                                         <td>Trident</td>
-                                                                         <td>Internet
-                                                                             Explorer 4.0
-                                                                         </td>
-                                                                         <td>Win 95+</td>
-                                                                         <td class="text-center"> <a class="btn btn-primary" href="#" role="button">Detail</a></td>
-                                                                     </tr>
-                                                                 </tbody>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>ID</th>
+                                                                        <th>Tgl Pemesanan</th>
+                                                                        <th>Pemesan</th>
+                                                                        <th>Event</th>
+                                                                        <th>Tagihan</th>
+                                                                        <th>Status</th>
+                                                                        <th width="5%">Detail</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <?php foreach ($riwayat_event as $b): ?>
+                                                                    <tr>
+                                                                        <td width="5%"><?= $b->id?></td>
+                                                                        <td><?= $b->tgl_pesan ?> </td>
+                                                                        <td><?= $b->name ?></td>
+                                                                        <td>
+                                                                        <?php 
+                                                                        $field=""; 
+                                                                        foreach($this->PesananModel->get_event($b->id)->result() as $e){
+                                                                            $field.= $e->nama_event.',';
+                                                                        }
+                                                                        echo rtrim($field, ',');
+                                                                        ?>
+                                                                        </td>
+                                                                        <td>Rp <?= number_format($b->expected_amount) ?></td>
+                                                                        <td><?php if($b->status == 3){echo '<span class="text-success"> LUNAS </span>';}else{echo '<span class="text-danger">BELUM BAYAR</span>';}?></td>
+                                                                        <td><a class='btn btn-info btn-sm' href='<?php echo base_url('home/detail_riwayat_event/').$b->id ?>'><span class='fas fa-info-circle'></span></a></td>
+                                                                    </tr>
+                                                                    <?php endforeach; ?>
+                                                                </tbody>
                                                              </table>
                                                          </div>
                                                          <!-- /.card-body -->

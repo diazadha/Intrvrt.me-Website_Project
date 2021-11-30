@@ -1,5 +1,7 @@
 <?php
 
+use GuzzleHttp\Psr7\Request;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Home extends CI_Controller
@@ -284,11 +286,15 @@ class Home extends CI_Controller
 
     public function my_account()
     {
+        if ($this->session->userdata('email') == '') {
+            redirect('home/login');
+        }
         $data['title'] = 'Akun Saya';
         $data['data_user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
         $data['riwayat_pesanan'] = $this->MerchandiseModel->get_pesanan_merch($data['data_user']['id_user'])->result_array();
 
+        $data['riwayat_event'] = $this->PesananModel->get_riwayat_event($this->session->userdata('id_user'))->result();
         $this->load->view('template_introvert/header', $data);
         $this->load->view('my_account', $data);
         $this->load->view('template_introvert/footer', $data);
@@ -304,6 +310,17 @@ class Home extends CI_Controller
 
         $this->load->view('template_introvert/header', $data);
         $this->load->view('detail_riwayat_merchandise', $data);
+        $this->load->view('template_introvert/footer', $data);
+    }
+
+    public function detail_riwayat_event($id_pesanan)
+    {
+        $data['title'] = 'Riwayat Event';
+        $data['data_user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
+        $data['pesanan'] = $this->PesananModel->detailpesanan_e($id_pesanan)->row();
+        $this->load->view('template_introvert/header', $data);
+        $this->load->view('detail_riwayat_event', $data);
         $this->load->view('template_introvert/footer', $data);
     }
 
@@ -701,36 +718,80 @@ class Home extends CI_Controller
         echo json_encode($this->MerchandiseModel->get_keranjang_byid($id_keranjang)->row_array());
     }
 
-    public function email($id_pesanan = 4)
+    public function email()
     {
+        date_default_timezone_set('Asia/Jakarta');
+        $rawRequestInput = file_get_contents("php://input");
+        // Baris ini melakukan format input mentah menjadi array asosiatif
+        $data['pay'] = json_decode($rawRequestInput, true);
         $data['title'] = 'Intrvrt.me';
         $data['profil_perusahaan'] = $this->db->get('profile_perusahaan')->row_array();
-        $data['pesanan'] = $this->PesananModel->emailpesanan_m($id_pesanan)->row_array();
+        $data['pesanan'] = $this->PesananModel->emailpesanan_m($data['pay']['external_id'])->result_array();
+        $data['pesanan2'] = $this->PesananModel->emailpesanan_m2($data['pay']['external_id'])->result_array();
 
-        $config = [
-            'protocol' => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_user' => 'intrvrt.me1@gmail.com',
-            'smtp_pass' => 'Ayamgoreng123',
-            'smtp_port' => 465,
-            'mailtype' => 'html',
-            'charset' => 'utf-8',
-            'newline' => "\r\n"
-        ];
-        $this->load->library('email', $config);
-        $this->email->initialize($config);
-        $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
-        $this->email->to('mahmah992013@gmail.com');
+        if ($data['pesanan'][0]['is_deliver'] == 0 || $data['pesanan'][1]['is_deliver'] == 0) {
+            $config = [
+                'protocol' => 'smtp',
+                'smtp_host' => 'ssl://smtp.googlemail.com',
+                'smtp_user' => 'intrvrt.me1@gmail.com',
+                'smtp_pass' => 'Ayamgoreng123',
+                'smtp_port' => 465,
+                'mailtype' => 'html',
+                'charset' => 'utf-8',
+                'newline' => "\r\n"
+            ];
+            $this->load->library('email', $config);
+            $this->email->initialize($config);
+            $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
+            $this->email->to($data['pesanan'][0]['email_penerima']);
 
-        $this->email->subject('Pesanan ' . $data['pesanan']['nama_merch']);
+            $this->email->subject('Pesanan ', $data['pesanan'][0]['nama_penerima']);
 
-
-        $this->email->message($this->load->view('admin/email_ebook', $data, TRUE));
-        if ($this->email->send()) {
-            return true;
+            $this->email->message($this->load->view('admin/email_ebook', $data, TRUE));
+            if ($this->email->send()) {
+                $dataXendit = array(
+                    "status" => 2,
+                    "tgl_bayar" => date('Y-m-d H:i:s'),
+                    "tgl_kirim" => date('Y-m-d H:i:s'),
+                );
+                $this->db->where('external_id', $data['pesanan'][0]['external_id']);
+                $this->db->update('pesanan_m', $dataXendit);
+                return true;
+            } else {
+                echo $this->email->print_debugger();
+                die;
+            }
         } else {
-            echo $this->email->print_debugger();
-            die;
+            $config = [
+                'protocol' => 'smtp',
+                'smtp_host' => 'ssl://smtp.googlemail.com',
+                'smtp_user' => 'intrvrt.me1@gmail.com',
+                'smtp_pass' => 'Ayamgoreng123',
+                'smtp_port' => 465,
+                'mailtype' => 'html',
+                'charset' => 'utf-8',
+                'newline' => "\r\n"
+            ];
+            $this->load->library('email', $config);
+            $this->email->initialize($config);
+            $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
+            $this->email->to($data['pesanan'][0]['email_penerima']);
+
+            $this->email->subject('Pesanan ', $data['pesanan'][0]['nama_penerima']);
+
+            $this->email->message($this->load->view('admin/email_merch', $data, TRUE));
+            if ($this->email->send()) {
+                $dataXendit = array(
+                    "status" => 1,
+                    "tgl_bayar" => date('Y-m-d H:i:s'),
+                );
+                $this->db->where('external_id', $data['pesanan'][0]['external_id']);
+                $this->db->update('pesanan_m', $dataXendit);
+                return true;
+            } else {
+                echo $this->email->print_debugger();
+                die;
+            }
         }
     }
 }

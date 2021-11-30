@@ -96,56 +96,6 @@ class Checkout extends CI_Controller
         }
         $this->db->insert_batch('keranjang_event_peserta', $value);
 
-        //send email notif;
-        // $config = [
-        //     'protocol' => 'smtp',
-        //     'smtp_host' => 'ssl://smtp.googlemail.com',
-        //     'smtp_user' => 'intrvrt.me1@gmail.com',
-        //     'smtp_pass' => 'Ayamgoreng123',
-        //     'smtp_port' => 465,
-        //     'mailtype' => 'html',
-        //     'charset' => 'utf-8',
-        //     'newline' => "\r\n",
-        //     'validation' => TRUE // bool whether to validate email or not  
-        // ];
-        // $this->load->library('email', $config);
-        // $this->email->initialize($config);
-        // $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
-        // $this->email->to($user->email);
-        // $this->email->subject('Verifikasi Akun');
-
-        // $acara = $this->Tiket_model->get_acara($id_transaksi)->result();
-        // $table="<table>
-        // <tr>
-        //     <th><b>No</b></th>
-        //     <th><b>Nama Event</b></th>
-        //     <th><b>Nama Kategori</b></th>
-        // </tr>
-        // ";
-        // $no=1;
-        // foreach($acara as $a){
-        //     $table.="<tr>
-        //                 <td>".$no."</td>
-        //                 <td>".$a->nama_event."</td>
-        //                 <td>".$a->nama_kategori."</td>
-        //             </tr>";
-        //     $no++;
-        // }
-        // $table.="</table>";
-
-        // $message = "Hi <b>$user->nama_user</b>, <br>
-        // Pembelian Tiket Berhasil !!!<br>
-
-        // $table
-
-        // Terimakasih telah melakukan pembelian tike event. Link acara akan dikirim h-1 acara<br><br>
-        // ";
-        // $this->email->message($message);
-
-        // if (!$this->email->send()) {
-        //     echo $this->email->print_debugger();
-        // }
-
 
         if ($totaltagihan != 0) {
             Xendit::setApiKey($this->token());
@@ -180,6 +130,57 @@ class Checkout extends CI_Controller
 
             $this->db->where('id', $id_transaksi);
             $this->db->update('keranjang_event', $toTable);
+
+            //send email notif;
+            $config = [
+                'protocol' => 'smtp',
+                'smtp_host' => 'ssl://smtp.googlemail.com',
+                'smtp_user' => 'intrvrt.me1@gmail.com',
+                'smtp_pass' => 'Ayamgoreng123',
+                'smtp_port' => 465,
+                'mailtype' => 'html',
+                'charset' => 'utf-8',
+                'newline' => "\r\n",
+                'validation' => TRUE // bool whether to validate email or not  
+            ];
+            $this->load->library('email', $config);
+            $this->email->initialize($config);
+            $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
+            $this->email->to($user->email);
+            $this->email->subject('Verifikasi Akun');
+
+            $acara = $this->Tiket_model->get_acara($id_transaksi)->result();
+            $table="<table>
+            <tr>
+                <th><b>No</b></th>
+                <th><b>Nama Event</b></th>
+                <th><b>Nama Kategori</b></th>
+            </tr>
+            ";
+            $no=1;
+            foreach($acara as $a){
+                $table.="<tr>
+                            <td>".$no."</td>
+                            <td>".$a->nama_event."</td>
+                            <td>".$a->nama_kategori."</td>
+                        </tr>";
+                $no++;
+            }
+            $table.="</table>";
+
+            $message = "Hi <b>$user->nama_user</b>, <br>
+            Pembelian Tiket Berhasil !!!<br>
+
+            $table
+
+            Terimakasih telah melakukan pembelian tike event. Link acara akan dikirim h-1 acara<br><br>
+            ";
+            $this->email->message($message);
+
+            if (!$this->email->send()) {
+                echo $this->email->print_debugger();
+            }
+
             redirect('home/my_account#list-profile');
         }
 
@@ -242,15 +243,25 @@ class Checkout extends CI_Controller
 
         $this->MerchandiseModel->checkout();
         $data['pesanan'] = $this->PesananModel->getidpesanan($this->db->insert_id());
-        $this->MerchandiseModel->detailpesanan();
+        // $data['pesanan'] = $this->PesananModel->getidpesanan($data['pesanan2']['id_pesanan']);
+        
+        // $this->MerchandiseModel->detailpesanan();
+        foreach ($this->MerchandiseModel->getkeranjangdipilih($this->session->userdata('id_user'))->result_array() as $items){
+            $data3 = array(
+            'id_pesanan' => $data['pesanan']['id_pesanan'],
+            'id_merch' => $items['id_merch'],
+            'qty' => $items['qty'],
+            );
+            $this->db->insert('detailpesanan_m', $data3);
+        }
+
         Xendit::setApiKey($this->token());
-        $params = [
-            "external_id" => 'intrvrt.me-merch-' . $data['pesanan']['id_pesanan'],
-            "bank_code" => $this->input->post('metode_bayar'),
-            "name" => $this->input->post('nama_penerima'),
-            "expected_amount" => $this->input->post('total_bayar'),
-            "expiration_date" => date('c', mktime(date('H'), date('i'), date('s'), date('m'), date('d') + 1, date('y'))),
-            "is_single_use" => TRUE,
+        $params = ["external_id" => 'intrvrtme-merch-'.$data['pesanan']['id_pesanan'],
+        "bank_code" => $this->input->post('metode_bayar'),
+        "name" => $this->input->post('nama_penerima'),
+        "expected_amount" => $this->input->post('total_bayar'),
+        "expiration_date" => date('c', mktime(date('H'), date('i'),date('s'),date('m'),date('d') + 1,date('y'))),
+        "is_single_use" => TRUE,
         ];
 
         // var_dump($params);
@@ -258,7 +269,7 @@ class Checkout extends CI_Controller
         $createVA = \Xendit\VirtualAccounts::create($params);
         $id = $createVA['id'];
         $dataXendit = array(
-            "external_id" => 'intrvrt.me-merch-' . $data['pesanan']['id_pesanan'],
+            "external_id" => 'intrvrtme-merch-'.$data['pesanan']['id_pesanan'],
             "id_xendit" => $id,
             "account_number" => $createVA['account_number'],
             "bank_code" => $createVA['bank_code'],
