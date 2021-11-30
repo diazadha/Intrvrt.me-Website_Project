@@ -715,6 +715,7 @@ class Home extends CI_Controller
 
     public function email()
     {
+        date_default_timezone_set('Asia/Jakarta');
         $rawRequestInput = file_get_contents("php://input");
         // Baris ini melakukan format input mentah menjadi array asosiatif
         $data['pay'] = json_decode($rawRequestInput, true);
