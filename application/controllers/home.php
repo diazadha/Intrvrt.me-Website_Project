@@ -775,6 +775,7 @@ class Home extends CI_Controller
             if ($this->email->send()) {
                 $dataXendit = array(
                     "status" => 1,
+                    "tgl_bayar" => date('Y-m-d H:i:s'),
                 );
                 $this->db->where('external_id', $data['pesanan'][0]['external_id']);
                 $this->db->update('pesanan_m', $dataXendit);
