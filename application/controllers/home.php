@@ -718,6 +718,80 @@ class Home extends CI_Controller
         echo json_encode($this->MerchandiseModel->get_keranjang_byid($id_keranjang)->row_array());
     }
 
+    public function callback_event(){
+        date_default_timezone_set('Asia/Jakarta');
+        $rawRequestInput = file_get_contents("php://input");
+        $data['response'] = json_decode($rawRequestInput, true);
+        $external_id = $data['response']['external_id'];
+        
+        $cek = explode("-", $external_id);
+        if ($cek[0] == 'intrvrt.me'){
+            $field = array(
+                "status" => 3, //LUNAS
+                "tgl_bayar" => date('Y-m-d H:i:s'),
+            );
+            $this->db->where('external_id', $external_id);
+            $this->db->update('keranjang_event', $field);
+
+            $id_user = $this->db->get_where('keranjang_event', ['external_id' => $external_id])->row()->id_user;
+            $user = $this->db->get_where('user', ['id_user'=>$id_user])->row();
+            //send email 
+            //send email notif;
+            $config = [
+                'protocol' => 'smtp',
+                'smtp_host' => 'ssl://smtp.googlemail.com',
+                'smtp_user' => 'intrvrt.me1@gmail.com',
+                'smtp_pass' => 'Ayamgoreng123',
+                'smtp_port' => 465,
+                'mailtype' => 'html',
+                'charset' => 'utf-8',
+                'newline' => "\r\n",
+                'validation' => TRUE // bool whether to validate email or not  
+            ];
+            $this->load->library('email', $config);
+            $this->email->initialize($config);
+            $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
+            $this->email->to($user->email);
+            $this->email->subject('Verifikasi Akun');
+
+            $acara = $this->Tiket_model->get_acara($cek[1])->result();
+            $table="<table>
+            <tr>
+                <th><b>No</b></th>
+                <th><b>Nama Event</b></th>
+                <th><b>Nama Kategori</b></th>
+            </tr>
+            ";
+            $no=1;
+            foreach($acara as $a){
+                $table.="<tr>
+                            <td>".$no."</td>
+                            <td>".$a->nama_event."</td>
+                            <td>".$a->nama_kategori."</td>
+                        </tr>";
+                $no++;
+            }
+            $table.="</table>";
+
+            $message = "Hi <b>$user->nama_user</b>, <br>
+            Pembelian Tiket Berhasil !!!<br>
+
+            $table
+
+            Terimakasih telah melakukan pembelian tike event. Link acara akan dikirim h-1 acara<br>
+            <div style='float:right'>
+            <h2 style='margin-bottom: -2px;'>Regards,</h2>
+            Intrvrt.me
+            </div>
+            ";
+            $this->email->message($message);
+
+            if (!$this->email->send()) {
+                echo $this->email->print_debugger();
+            }
+        }
+    }
+
     public function email()
     {
         date_default_timezone_set('Asia/Jakarta');

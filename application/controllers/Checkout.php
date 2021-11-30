@@ -173,7 +173,11 @@ class Checkout extends CI_Controller
 
             $table
 
-            Terimakasih telah melakukan pembelian tike event. Link acara akan dikirim h-1 acara<br><br>
+            Terimakasih telah melakukan pembelian tike event. Link acara akan dikirim h-1 acara<br>
+            <div style='float:right'>
+            <h2 style='margin-bottom: -2px;'>Regards,</h2>
+            Intrvrt.me
+            </div>
             ";
             $this->email->message($message);
 
