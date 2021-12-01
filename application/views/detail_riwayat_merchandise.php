@@ -70,38 +70,73 @@
                                                              </div>
                                                          </div>
                                                          <!-- Jika yang di checkout hanya ebook maka tidak ada alamat pemesanan -->
-                                                         <div class="row ">
-                                                             <div class="col-sm-6">
-                                                                 <b>Alamat Pemesanan</b>
+                                                         <?php if (empty($data_riwayat_biodata['alamat'] || $data_riwayat_biodata['provinsi'] || $data_riwayat_biodata['kodepos'] || $data_riwayat_biodata['kota'])) : ?>
+                                                             <div class="row ">
+                                                                 <div class="col-sm-6">
+                                                                     <b>Alamat Pemesanan</b>
+                                                                 </div>
+                                                                 <div class="col-sm-6">
+                                                                     <b>: -</b>
+                                                                 </div>
                                                              </div>
-                                                             <div class="col-sm-6">
-                                                                 <b>: <?= $data_riwayat_biodata['alamat']; ?></b>
+                                                             <div class="row  ">
+                                                                 <div class="col-sm-6">
+                                                                     <b>Provinsi</b>
+                                                                 </div>
+                                                                 <div class="col-sm-6">
+                                                                     <b>: -</b>
+                                                                 </div>
                                                              </div>
-                                                         </div>
-                                                         <div class="row  ">
-                                                             <div class="col-sm-6">
-                                                                 <b>Provinsi</b>
+                                                             <div class="row  ">
+                                                                 <div class="col-sm-6">
+                                                                     <b>kodepos</b>
+                                                                 </div>
+                                                                 <div class="col-sm-6">
+                                                                     <b>: -</b>
+                                                                 </div>
                                                              </div>
-                                                             <div class="col-sm-6">
-                                                                 <b>: <?= $data_riwayat_biodata['provinsi']; ?></b>
+                                                             <div class="row mb-4">
+                                                                 <div class="col-sm-6">
+                                                                     <b>Kota</b>
+                                                                 </div>
+                                                                 <div class="col-sm-6">
+                                                                     <b>: -</b>
+                                                                 </div>
                                                              </div>
-                                                         </div>
-                                                         <div class="row  ">
-                                                             <div class="col-sm-6">
-                                                                 <b>kodepos</b>
+                                                         <?php else : ?>
+                                                             <div class="row ">
+                                                                 <div class="col-sm-6">
+                                                                     <b>Alamat Pemesanan</b>
+                                                                 </div>
+                                                                 <div class="col-sm-6">
+                                                                     <b>: <?= $data_riwayat_biodata['alamat']; ?></b>
+                                                                 </div>
                                                              </div>
-                                                             <div class="col-sm-6">
-                                                                 <b>: <?= $data_riwayat_biodata['kodepos']; ?></b>
+                                                             <div class="row  ">
+                                                                 <div class="col-sm-6">
+                                                                     <b>Provinsi</b>
+                                                                 </div>
+                                                                 <div class="col-sm-6">
+                                                                     <b>: <?= $data_riwayat_biodata['provinsi']; ?></b>
+                                                                 </div>
                                                              </div>
-                                                         </div>
-                                                         <div class="row mb-4">
-                                                             <div class="col-sm-6">
-                                                                 <b>Kota</b>
+                                                             <div class="row  ">
+                                                                 <div class="col-sm-6">
+                                                                     <b>kodepos</b>
+                                                                 </div>
+                                                                 <div class="col-sm-6">
+                                                                     <b>: <?= $data_riwayat_biodata['kodepos']; ?></b>
+                                                                 </div>
                                                              </div>
-                                                             <div class="col-sm-6">
-                                                                 <b>: <?= $data_riwayat_biodata['kota']; ?></b>
+                                                             <div class="row mb-4">
+                                                                 <div class="col-sm-6">
+                                                                     <b>Kota</b>
+                                                                 </div>
+                                                                 <div class="col-sm-6">
+                                                                     <b>: <?= $data_riwayat_biodata['kota']; ?></b>
+                                                                 </div>
                                                              </div>
-                                                         </div>
+                                                         <?php endif; ?>
                                                      </div>
                                                      <!-- /.col -->
                                                  </div>
@@ -223,19 +258,33 @@
                                                                      <th>Total Bayar</th>
                                                                      <td class="text-right">Rp. <?= number_format($data_riwayat_biodata['total_bayar'], 0, ',', '.'); ?></td>
                                                                  </tr>
-                                                                 <tr>
-                                                                     <th>Ekspedisi</th>
-                                                                     <td class="text-right"><?= $data_riwayat_biodata['expedisi']; ?></td>
-                                                                 </tr>
-                                                                 <tr>
-                                                                     <th>Paket</th>
-                                                                     <td class="text-right"><?= $data_riwayat_biodata['paket']; ?></td>
-                                                                 </tr>
-                                                                 <tr>
-                                                                     <th>Estimasi</th>
-                                                                     <td class="text-right"><?= $data_riwayat_biodata['estimasi']; ?></td>
-                                                                 </tr>
-
+                                                                 <?php if (empty($data_riwayat_biodata['expedisi'] || $data_riwayat_biodata['paket'] || $data_riwayat_biodata['estimasi'])) : ?>
+                                                                     <tr>
+                                                                         <th>Ekspedisi</th>
+                                                                         <td class="text-right">-</td>
+                                                                     </tr>
+                                                                     <tr>
+                                                                         <th>Paket</th>
+                                                                         <td class="text-right">-</td>
+                                                                     </tr>
+                                                                     <tr>
+                                                                         <th>Estimasi</th>
+                                                                         <td class="text-right">-</td>
+                                                                     </tr>
+                                                                 <?php else : ?>
+                                                                     <tr>
+                                                                         <th>Ekspedisi</th>
+                                                                         <td class="text-right"><?= $data_riwayat_biodata['expedisi']; ?></td>
+                                                                     </tr>
+                                                                     <tr>
+                                                                         <th>Paket</th>
+                                                                         <td class="text-right"><?= $data_riwayat_biodata['paket']; ?></td>
+                                                                     </tr>
+                                                                     <tr>
+                                                                         <th>Estimasi</th>
+                                                                         <td class="text-right"><?= $data_riwayat_biodata['estimasi']; ?></td>
+                                                                     </tr>
+                                                                 <?php endif; ?>
                                                              </table>
                                                          </div>
                                                      </div>

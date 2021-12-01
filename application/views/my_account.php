@@ -61,6 +61,8 @@
                                                                                         echo '<span class="text-success">SUDAH BAYAR</span>';
                                                                                     } else if ($r['status'] == 2) {
                                                                                         echo '<span class="text-success">SUDAH DIKIRIM</span>';
+                                                                                    } else if ($r['status'] == 3) {
+                                                                                        echo '<span class="text-info">SEBAGIAN DIKIRIM</span>';
                                                                                     } ?>
                                                                              </td>
                                                                              <td class="text-center"><a class='btn btn-info btn-sm' href='<?php echo base_url('home/detail_riwayat_merchandise/') . $r['id_pesanan'] ?>'><span class='fas fa-info-circle'></span></a></td>
