@@ -7,7 +7,7 @@ class PesananModel extends CI_Model
     }
 
     public function admin_sudah_bayar(){
-        $query = "SELECT * FROM pesanan_m WHERE status = 1";
+        $query = "SELECT * FROM pesanan_m WHERE status = 1 OR status = 3";
         return $this->db->query($query);
     }
 
