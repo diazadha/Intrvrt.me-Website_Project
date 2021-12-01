@@ -16,7 +16,7 @@
     <div class="row mt-4">
         <div class="col-sm-5">
             <p style="font-family:cursive;">
-            Terima kasih telah melakukan pembelian di Intrvt.me
+            Terima kasih telah melakukan pembelian di Intrvt.me, Silakan cek Riwayat Pesanan secara berkala untuk mengetahui status pembelian
             </p>
         </div>
     </div>

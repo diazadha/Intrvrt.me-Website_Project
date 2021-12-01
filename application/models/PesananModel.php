@@ -7,7 +7,7 @@ class PesananModel extends CI_Model
     }
 
     public function admin_sudah_bayar(){
-        $query = "SELECT * FROM pesanan_m WHERE status = 1";
+        $query = "SELECT * FROM pesanan_m WHERE status = 1 OR status = 3";
         return $this->db->query($query);
     }
 
@@ -33,7 +33,15 @@ class PesananModel extends CI_Model
         $query = "SELECT * FROM pesanan_m, detailpesanan_m, merchandise, user
         WHERE pesanan_m.external_id = '$external_id'
         AND pesanan_m.id_pesanan = detailpesanan_m.id_pesanan AND detailpesanan_m.id_merch = merchandise.id_merch
-        AND user.id_user = pesanan_m.id_user AND is_deliver = 0";
+        AND user.id_user = pesanan_m.id_user";
+        return $this->db->query($query);
+    }
+
+    public function deletekeranjangbypesanan($id_user){
+        $query = "SELECT keranjang_merchandise.* FROM keranjang_merchandise, pesanan_m, detailpesanan_m, user
+        WHERE keranjang_merchandise.id_user = $id_user AND keranjang_merchandise.status = 1 AND keranjang_merchandise.id_merchandise = detailpesanan_m.id_merch
+        AND pesanan_m.id_pesanan = detailpesanan_m.id_pesanan AND pesanan_m.id_user = user.id_user
+        GROUP BY id_keranjang";
         return $this->db->query($query);
     }
     

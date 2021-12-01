@@ -90,7 +90,7 @@ class Home extends CI_Controller
             'protocol' => 'smtp',
             'smtp_host' => 'ssl://smtp.googlemail.com',
             'smtp_user' => 'intrvrt.me1@gmail.com',
-            'smtp_pass' => 'Ayamgoreng123',
+            'smtp_pass' => 'Ayamgoreng321',
             'smtp_port' => 465,
             'mailtype' => 'html',
             'charset' => 'utf-8',
@@ -748,7 +748,7 @@ class Home extends CI_Controller
                 'protocol' => 'smtp',
                 'smtp_host' => 'ssl://smtp.googlemail.com',
                 'smtp_user' => 'intrvrt.me1@gmail.com',
-                'smtp_pass' => 'Ayamgoreng123',
+                'smtp_pass' => 'Ayamgoreng321',
                 'smtp_port' => 465,
                 'mailtype' => 'html',
                 'charset' => 'utf-8',
@@ -797,12 +797,52 @@ class Home extends CI_Controller
                 echo $this->email->print_debugger();
             }
         } else {
-            if ($data['pesanan'][0]['is_deliver'] == 0 || $data['pesanan'][1]['is_deliver'] == 0) {
+            foreach($data['pesanan'] as $dp){
+                if($dp['is_deliver'] == 0){
+                    $kirim = true;
+                } else if($dp['is_deliver'] == 1){
+                    $sebagian = true;
+                }
+
+            }
+            if ($kirim == true && $sebagian == true) {
                 $config = [
                     'protocol' => 'smtp',
                     'smtp_host' => 'ssl://smtp.googlemail.com',
                     'smtp_user' => 'intrvrt.me1@gmail.com',
-                    'smtp_pass' => 'Ayamgoreng123',
+                    'smtp_pass' => 'Ayamgoreng321',
+                    'smtp_port' => 465,
+                    'mailtype' => 'html',
+                    'charset' => 'utf-8',
+                    'newline' => "\r\n"
+                ];
+                $this->load->library('email', $config);
+                $this->email->initialize($config);
+                $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
+                $this->email->to($data['pesanan'][0]['email_penerima']);
+
+                $this->email->subject('Pesanan ', $data['pesanan'][0]['nama_penerima']);
+
+                $this->email->message($this->load->view('admin/email_ebook', $data, TRUE));
+                if ($this->email->send()) {
+                    $dataXendit = array(
+                        "status" => 3,
+                        "tgl_bayar" => date('Y-m-d H:i:s'),
+                        "tgl_kirim" => date('Y-m-d H:i:s'),
+                    );
+                    $this->db->where('external_id', $data['pesanan'][0]['external_id']);
+                    $this->db->update('pesanan_m', $dataXendit);
+                    return true;
+                } else {
+                    echo $this->email->print_debugger();
+                    die;
+                }
+            }else if ($kirim == true && $sebagian = false){
+                $config = [
+                    'protocol' => 'smtp',
+                    'smtp_host' => 'ssl://smtp.googlemail.com',
+                    'smtp_user' => 'intrvrt.me1@gmail.com',
+                    'smtp_pass' => 'Ayamgoreng321',
                     'smtp_port' => 465,
                     'mailtype' => 'html',
                     'charset' => 'utf-8',
@@ -834,7 +874,7 @@ class Home extends CI_Controller
                     'protocol' => 'smtp',
                     'smtp_host' => 'ssl://smtp.googlemail.com',
                     'smtp_user' => 'intrvrt.me1@gmail.com',
-                    'smtp_pass' => 'Ayamgoreng123',
+                    'smtp_pass' => 'Ayamgoreng321',
                     'smtp_port' => 465,
                     'mailtype' => 'html',
                     'charset' => 'utf-8',
