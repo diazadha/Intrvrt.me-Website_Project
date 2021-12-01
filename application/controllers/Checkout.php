@@ -247,9 +247,7 @@ class Checkout extends CI_Controller
 
         $this->MerchandiseModel->checkout();
         $data['pesanan'] = $this->PesananModel->getidpesanan($this->db->insert_id());
-        // $data['pesanan'] = $this->PesananModel->getidpesanan($data['pesanan2']['id_pesanan']);
-        
-        // $this->MerchandiseModel->detailpesanan();
+    
         foreach ($this->MerchandiseModel->getkeranjangdipilih($this->session->userdata('id_user'))->result_array() as $items){
             $data3 = array(
             'id_pesanan' => $data['pesanan']['id_pesanan'],
@@ -257,6 +255,12 @@ class Checkout extends CI_Controller
             'qty' => $items['qty'],
             );
             $this->db->insert('detailpesanan_m', $data3);
+        }
+        
+        $delete = $this->PesananModel->deletekeranjangbypesanan($this->session->userdata('id_user'))->result_array();
+        foreach($delete as $del){
+            $this->db->where('id_keranjang', $del['id_keranjang']);
+            $this->db->delete('keranjang_merchandise');
         }
 
         Xendit::setApiKey($this->token());

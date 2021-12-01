@@ -27,7 +27,7 @@
                 <tbody>
                     <?php foreach ($pesanan2 as $p2): ?>
                         <tr>
-                            <td><?= $p2['nama_merch'] ?></td>
+                            <td><?= $p2['nama_merch'] ?></td>   
                             <td><a href="<?= $p2['linkebook']; ?>"><?= $p2['linkebook']; ?></a></td>
                         </tr>
                     <?php endforeach; ?>
