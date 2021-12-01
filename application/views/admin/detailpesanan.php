@@ -127,8 +127,26 @@
                                                 <h5>Virtual Account :</h5>
                                                 <h3><?= $pesanan['account_number']; ?></h3>
                                             </div>
-                                            <div class="col-sm-6" style="margin-top: -60px;">
-                                                <img src="<?= base_url('assets/bank_logo/bca.png') ?>" alt="Responsive image" class="img-fluid">
+                                            <div class="col-sm-6" style="margin-top: -10px;">
+                                                <?php if ($pesanan['bank_code'] == 'BCA') { ?>
+                                                    <img src="<?= base_url('assets/bank_logo/bca2.png') ?>" alt="Responsive image" class="img-fluid">
+                                                <?php } else if ($pesanan['bank_code'] == 'BRI') { ?>
+                                                    <img src="<?= base_url('assets/bank_logo/bri2.png') ?>" alt="Responsive image" class="img-fluid">
+                                                <?php } else if ($pesanan['bank_code'] == 'BNI') { ?>
+                                                    <img src="<?= base_url('assets/bank_logo/bni.png') ?>" alt="Responsive image" class="img-fluid">
+                                                <?php } else if ($pesanan['bank_code'] == 'MANDIRI') { ?>
+                                                    <img src="<?= base_url('assets/bank_logo/mandiri.png') ?>" alt="Responsive image" class="img-fluid">
+                                                <?php } else if ($pesanan['bank_code'] == 'PERMATA') { ?>
+                                                    <img src="<?= base_url('assets/bank_logo/permata.png') ?>" alt="Responsive image" class="img-fluid">
+                                                <?php } else if ($pesanan['bank_code'] == 'CIMB') { ?>
+                                                    <img src="<?= base_url('assets/bank_logo/cimb.png') ?>" alt="Responsive image" class="img-fluid">
+                                                <?php } else if ($pesanan['bank_code'] == 'BSI') { ?>
+                                                    <img src="<?= base_url('assets/bank_logo/bsi.png') ?>" alt="Responsive image" class="img-fluid">
+                                                <?php } else if ($pesanan['bank_code'] == 'SAHABAT_SAMPOERNA') { ?>
+                                                    <img src="<?= base_url('assets/bank_logo/sahabat_sampoerna.png') ?>" alt="Responsive image" class="img-fluid">
+                                                <?php } else { ?>
+                                                    <h5>Logo Tidak Tersedia</h5>
+                                                <?php } ?>
                                             </div>
                                         </div>
                                         <center>

@@ -53,6 +53,13 @@ class PesananModel extends CI_Model
         return $this->db->query($query);
     }
 
+    public function detailpesanan_m($id_pesanan){
+        $query = "SELECT *, pesanan_m.berat AS total_berat FROM pesanan_m, detailpesanan_m, merchandise, user WHERE pesanan_m.id_pesanan = $id_pesanan
+        AND pesanan_m.id_pesanan = detailpesanan_m.id_pesanan AND detailpesanan_m.id_merch = merchandise.id_merch
+        AND user.id_user = pesanan_m.id_user";
+        return $this->db->query($query);
+    }
+
     public function get_event($id_keranjang){
         $query="SELECT keranjang_event_detail.*, `event`.nama_event
         FROM keranjang_event_detail
