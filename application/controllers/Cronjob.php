@@ -20,22 +20,21 @@ class Cronjob extends CI_Controller
             if($tglkirim == date('Y-m-d')){
                 //kirim email link acara
                 //send email notif;
-                $config = [
-                    'protocol' => 'smtp',
-                    'smtp_host' => 'ssl://smtp.googlemail.com',
-                    'smtp_user' => 'intrvrt.me1@gmail.com',
-                    'smtp_pass' => 'Ayamgoreng123',
-                    'smtp_port' => 465,
-                    'mailtype' => 'html',
-                    'charset' => 'utf-8',
-                    'newline' => "\r\n",
-                    'validation' => TRUE // bool whether to validate email or not  
+                   $config = [
+                'protocol' => 'smtp',
+                'smtp_host' => 'ssl://srv99.niagahoster.com',
+                'smtp_user' => 'admin@intrvrtme.id',
+                'smtp_pass' => 'Rahasia123',
+                'smtp_port' => 465,
+                'mailtype' => 'html',
+                'charset' => 'utf-8',
+                'newline' => "\r\n"
                 ];
                 $this->load->library('email', $config);
                 $this->email->initialize($config);
-                $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
+                $this->email->from('admin@intrvrtme.id', 'Intrvrt.me');
                 $this->email->to($r->email);
-                $this->email->subject('Verifikasi Akun');
+                $this->email->subject('Link Acara - INTRVRTME.ID');
 
                 $message = "Hi <b>$r->nama_user</b>, <br>
                 Besok adalah acaranya !!!<br><br>

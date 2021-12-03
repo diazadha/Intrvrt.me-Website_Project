@@ -45,12 +45,12 @@
                 <div class="form-group row">
                   <label for="inputPassword3" class="col-sm-2 col-form-label">Kategori</label>
                   <div class="col-sm-10">
-                    <select class="select2" multiple="multiple" name="kategori[]" data-placeholder="Pilih kategori" style="width: 100%;">
+                      
+                    <select class="select2" id="kategori" multiple="multiple" name="kategori[]" data-placeholder="Pilih kategori" style="width: 100%;">
                       <?php
-                      $id = explode(',', $konten->kategori);
                       foreach ($kategori as $k) : ?>
-                        <option value="<?= $k->id_kategori ?>" <?= (array_search($k->id_kategori, $id) != '') ? 'selected' : '' ?>><?= $k->nama_kategori ?></option>
-                      <?php $no++;
+                        <option value="<?= $k->id_kategori ?>"><?= $k->nama_kategori ?></option>
+                      <?php
                       endforeach; ?>
                     </select>
                   </div>

@@ -14,7 +14,8 @@ class Checkout extends CI_Controller
 
     private function token()
     {
-        return 'xnd_development_E7UdRyMnxY1B18FytIEHESZeclPJ4OcrZvZ0m1Cs3AloopFHBRRRnRotWcBEL';
+        // return 'xnd_development_E7UdRyMnxY1B18FytIEHESZeclPJ4OcrZvZ0m1Cs3AloopFHBRRRnRotWcBEL';
+        return 'xnd_production_hWm55cbyktERPaehMIcPLx0OkJ1Gnj5Ps0mztRY4oojNivoVT2w6oFUEJDfOeQ';
     }
 
 
@@ -63,6 +64,14 @@ class Checkout extends CI_Controller
             );
             $this->db->where('id', $l->id);
             $this->db->update('keranjang_event_detail', $data__);
+            
+            $stoknow = $this->db->get_where('event', ['id_event' => $l->id_event])->row()->stock;
+            
+            $update_qty = array(
+                'stock' => $stoknow - $l->qty
+            );
+            $this->db->where('id_event', $l->id_event);
+            $this->db->update('event', $update_qty);
         }
 
         //create keranjang baru untuk event yang tidak di centang
@@ -134,9 +143,9 @@ class Checkout extends CI_Controller
             //send email notif;
             $config = [
                 'protocol' => 'smtp',
-                'smtp_host' => 'ssl://smtp.googlemail.com',
-                'smtp_user' => 'intrvrt.me1@gmail.com',
-                'smtp_pass' => 'Ayamgoreng123',
+                'smtp_host' => 'ssl://srv35.niagahoster.com',
+                'smtp_user' => 'admin@intvrtme.id',
+                'smtp_pass' => 'Rahasia123',
                 'smtp_port' => 465,
                 'mailtype' => 'html',
                 'charset' => 'utf-8',
@@ -145,7 +154,7 @@ class Checkout extends CI_Controller
             ];
             $this->load->library('email', $config);
             $this->email->initialize($config);
-            $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
+            $this->email->from('admin@intvrtme.id', 'Intrvrt.me');
             $this->email->to($user->email);
             $this->email->subject('Verifikasi Akun');
 

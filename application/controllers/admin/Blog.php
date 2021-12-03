@@ -44,6 +44,7 @@ class Blog extends CI_Controller
             $data['js'] = array("blog_edit.js?r=" . rand());
             $data['konten'] = $this->BlogModel->get_konten($id);
             $data['kategori'] = $this->BlogModel->get_kategori();
+            $data['selected'] = $data['konten']->kategori;
             $this->load->view("template/adminlte", $data);
         } else {
             echo 'Error 404 Not Found';

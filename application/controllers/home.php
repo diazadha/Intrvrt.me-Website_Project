@@ -88,9 +88,9 @@ class Home extends CI_Controller
     {
         $config = [
             'protocol' => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_user' => 'intrvrt.me1@gmail.com',
-            'smtp_pass' => 'Ayamgoreng321',
+            'smtp_host' => 'ssl://srv99.niagahoster.com',
+            'smtp_user' => 'admin@intrvrtme.id',
+            'smtp_pass' => 'Rahasia123',
             'smtp_port' => 465,
             'mailtype' => 'html',
             'charset' => 'utf-8',
@@ -98,7 +98,7 @@ class Home extends CI_Controller
         ];
         $this->load->library('email', $config);
         $this->email->initialize($config);
-        $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
+        $this->email->from('admin@intrvrtme.id', 'Intrvrt.me');
         $this->email->to($this->input->post('email'));
         if ($type == 'verify') {
             $this->email->subject('Verifikasi Akun');
@@ -705,7 +705,7 @@ class Home extends CI_Controller
 
         $query = "UPDATE keranjang_event_detail SET qty = $qty WHERE id = $id_keranjang";
         $this->db->query($query);
-        echo json_encode($this->tiket_model->get_keranjang_byid($id_keranjang)->row_array());
+        echo json_encode($this->Tiket_model->get_keranjang_byid($id_keranjang)->row_array());
     }
 
     public function updatekeranjang_merchandise()
@@ -744,20 +744,19 @@ class Home extends CI_Controller
             $user = $this->db->get_where('user', ['id_user' => $id_user])->row();
             //send email 
             //send email notif;
-            $config = [
-                'protocol' => 'smtp',
-                'smtp_host' => 'ssl://smtp.googlemail.com',
-                'smtp_user' => 'intrvrt.me1@gmail.com',
-                'smtp_pass' => 'Ayamgoreng321',
-                'smtp_port' => 465,
-                'mailtype' => 'html',
-                'charset' => 'utf-8',
-                'newline' => "\r\n",
-                'validation' => TRUE // bool whether to validate email or not  
+           $config = [
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://srv99.niagahoster.com',
+            'smtp_user' => 'admin@intrvrtme.id',
+            'smtp_pass' => 'Rahasia123',
+            'smtp_port' => 465,
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'newline' => "\r\n"
             ];
             $this->load->library('email', $config);
             $this->email->initialize($config);
-            $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
+            $this->email->from('admin@intrvrtme.id', 'Intrvrt.me');
             $this->email->to($user->email);
             $this->email->subject('Pembayaran Berhasil');
 
@@ -807,18 +806,18 @@ class Home extends CI_Controller
             }
             if ($kirim == true && $sebagian == true) {
                 $config = [
-                    'protocol' => 'smtp',
-                    'smtp_host' => 'ssl://smtp.googlemail.com',
-                    'smtp_user' => 'intrvrt.me1@gmail.com',
-                    'smtp_pass' => 'Ayamgoreng321',
-                    'smtp_port' => 465,
-                    'mailtype' => 'html',
-                    'charset' => 'utf-8',
-                    'newline' => "\r\n"
+                 'protocol' => 'smtp',
+                'smtp_host' => 'ssl://srv99.niagahoster.com',
+                'smtp_user' => 'admin@intrvrtme.id',
+                'smtp_pass' => 'Rahasia123',
+                'smtp_port' => 465,
+                'mailtype' => 'html',
+                 'charset' => 'utf-8',
+                'newline' => "\r\n"
                 ];
                 $this->load->library('email', $config);
                 $this->email->initialize($config);
-                $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
+                $this->email->from('admin@intrvrtme.id', 'Intrvrt.me');
                 $this->email->to($data['pesanan'][0]['email_penerima']);
 
                 $this->email->subject('Pesanan ', $data['pesanan'][0]['nama_penerima']);
@@ -837,12 +836,12 @@ class Home extends CI_Controller
                     echo $this->email->print_debugger();
                     die;
                 }
-            }else if ($kirim == true && $sebagian = false){
-                $config = [
+            }else if ($kirim == true){
+                        $config = [
                     'protocol' => 'smtp',
-                    'smtp_host' => 'ssl://smtp.googlemail.com',
-                    'smtp_user' => 'intrvrt.me1@gmail.com',
-                    'smtp_pass' => 'Ayamgoreng321',
+                    'smtp_host' => 'ssl://srv99.niagahoster.com',
+                    'smtp_user' => 'admin@intrvrtme.id',
+                    'smtp_pass' => 'Rahasia123',
                     'smtp_port' => 465,
                     'mailtype' => 'html',
                     'charset' => 'utf-8',
@@ -850,7 +849,7 @@ class Home extends CI_Controller
                 ];
                 $this->load->library('email', $config);
                 $this->email->initialize($config);
-                $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
+                $this->email->from('admin@intrvrtme.id', 'Intrvrt.me');
                 $this->email->to($data['pesanan'][0]['email_penerima']);
 
                 $this->email->subject('Pesanan ', $data['pesanan'][0]['nama_penerima']);
@@ -870,19 +869,19 @@ class Home extends CI_Controller
                     die;
                 }
             } else {
-                $config = [
-                    'protocol' => 'smtp',
-                    'smtp_host' => 'ssl://smtp.googlemail.com',
-                    'smtp_user' => 'intrvrt.me1@gmail.com',
-                    'smtp_pass' => 'Ayamgoreng321',
-                    'smtp_port' => 465,
-                    'mailtype' => 'html',
-                    'charset' => 'utf-8',
-                    'newline' => "\r\n"
-                ];
+               $config = [
+                        'protocol' => 'smtp',
+                        'smtp_host' => 'ssl://srv99.niagahoster.com',
+                        'smtp_user' => 'admin@intrvrtme.id',
+                        'smtp_pass' => 'Rahasia123',
+                        'smtp_port' => 465,
+                        'mailtype' => 'html',
+                        'charset' => 'utf-8',
+                        'newline' => "\r\n"
+                    ];
                 $this->load->library('email', $config);
                 $this->email->initialize($config);
-                $this->email->from('intrvrt.me1@gmail.com', 'Intrvrt.me');
+                $this->email->from('admin@intrvrtme.id', 'Intrvrt.me');
                 $this->email->to($data['pesanan'][0]['email_penerima']);
 
                 $this->email->subject('Pesanan ', $data['pesanan'][0]['nama_penerima']);

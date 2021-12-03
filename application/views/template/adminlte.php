@@ -286,6 +286,8 @@
   <script src="<?= base_url('assets'); ?>/vendor/AdminLTE-3.0.5/dist/js/adminlte.js"></script>
   <script>
     let base_url = '<?php echo base_url(); ?>';
+    
+    $('#kategori').val([<?php if(isset($selected)){echo $selected;};?>]).change();
     $(function() {
       $('.select2').select2();
       var timeout = 3000; // in miliseconds (3*1000)

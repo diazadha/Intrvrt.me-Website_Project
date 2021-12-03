@@ -11,7 +11,7 @@ class Event extends CI_Controller
             } else {
                 $data['profil'] = $this->db->get('profile_perusahaan')->row();
                 $data['content'] = "admin/event";
-                $data['tiket'] = $this->tiket_model->getdataevent()->result_array();
+                $data['tiket'] = $this->Tiket_model->getdataevent()->result_array();
                 $this->load->view("template/adminlte", $data);
             }
         } else {
@@ -25,7 +25,7 @@ class Event extends CI_Controller
         $data['event'] = $this->db->get('event')->row();
         $data['js'] = array("event.js?r=" . rand());
         $data['content'] = "admin/tambah_event";
-        $data['kategori'] = $this->tiket_model->datakategori()->result_array();
+        $data['kategori'] = $this->Tiket_model->datakategori()->result_array();
         $this->load->view("template/adminlte", $data);
     }
 
@@ -46,11 +46,11 @@ class Event extends CI_Controller
     //             $fileupload = $this->upload->data();
     //             $filename = pathinfo($fileupload['full_path']);
     //             $foto = $filename['basename'];
-    //             $result = $this->tiket_model->tambah_event($foto);
+    //             $result = $this->Tiket_model->tambah_event($foto);
     //         }
     //     } else {
     //         $foto = $this->input->post('foto_');
-    //         $result = $this->tiket_model->tambah_event($foto);
+    //         $result = $this->Tiket_model->tambah_event($foto);
     //     }
 
     //     if ($result) {
@@ -82,7 +82,7 @@ class Event extends CI_Controller
                     if ($this->upload->do_upload('foto')) {
                         $data = $this->upload->data();
                         $fotoName = $data['file_name'];
-                        $cek = $this->tiket_model->cekData();
+                        $cek = $this->Tiket_model->cekData();
                         
                         if (!$cek) {
                             $group_foto = 1;
@@ -103,9 +103,9 @@ class Event extends CI_Controller
                 $this->session->set_flashdata('message', '<div class="alert tutup alert-warning" role="alert">Tidak ada data yang disimpan</div>');
                 redirect('admin/event');
             } else {
-                if ($this->tiket_model->upload($insert) > 0) {
-                    $lastid = $this->tiket_model->cekData();
-                    $this->tiket_model->tambah_event($group_foto,$lastid['id']);
+                if ($this->Tiket_model->upload($insert) > 0) {
+                    $lastid = $this->Tiket_model->cekData();
+                    $this->Tiket_model->tambah_event($group_foto,$lastid['id']);
                     $this->session->set_flashdata('message', '<div class="alert tutup alert-success" role="alert">Event Berhasil Di Tambah!</div>');
                     redirect('admin/event');
                 } else {
@@ -125,13 +125,13 @@ class Event extends CI_Controller
             echo 'Error';
             die;
         } else {
-            if ($this->tiket_model->delete_event($id)) {
-                $detail = $this->tiket_model->detailfoto($group);
+            if ($this->Tiket_model->delete_event($id)) {
+                $detail = $this->Tiket_model->detailfoto($group);
                 foreach ($detail as $dt) {
                     $file_name = './assets/uploads/foto_event/' . $dt['foto'];
                     unlink($file_name);
                 }
-                $this->tiket_model->foto_delete($group);
+                $this->Tiket_model->foto_delete($group);
                 $r['title'] = 'Sukses!';
                 $r['icon'] = 'success';
                 $r['status'] = 'Berhasil di Hapus!';
@@ -147,11 +147,11 @@ class Event extends CI_Controller
     public function edit($id,$group)
     {
         $data['profil'] = $this->db->get('profile_perusahaan')->row();
-        $data['event'] = $this->tiket_model->view_join($id)->row();
+        $data['event'] = $this->Tiket_model->view_join($id)->row();
         $data['js'] = array("event.js?r=" . rand());
         $data['content'] = "admin/edit_event";
-        $data['multiple_foto'] =  $this->tiket_model->getFotoGroup($group);
-        $data['kategori'] = $this->tiket_model->datakategori()->result_array();
+        $data['multiple_foto'] =  $this->Tiket_model->getFotoGroup($group);
+        $data['kategori'] = $this->Tiket_model->datakategori()->result_array();
         $this->load->view("template/adminlte", $data);
     }
 
@@ -174,7 +174,7 @@ class Event extends CI_Controller
             $fileupload = $this->upload->data();
             $filename   = pathinfo($fileupload['full_path']);
             $foto       = $filename['basename'];
-            $result     = $this->tiket_model->update_foto($foto, $id);
+            $result     = $this->Tiket_model->update_foto($foto, $id);
         }
         if ($result) {
             $this->session->set_flashdata('message', '<div class="alert tutup alert-success" role="alert">Foto Berhasil Di Update!</div>');
@@ -187,7 +187,7 @@ class Event extends CI_Controller
     public function edit_event()
     {
         $id_event   = $this->input->post('id_event');
-        $result     = $this->tiket_model->update_event();
+        $result     = $this->Tiket_model->update_event();
         $group      = $this->input->post('group');
         if ($result) {
             $this->session->set_flashdata('message', '<div class="alert tutup alert-success" role="alert">Event Berhasil Di Update!</div>');
@@ -201,7 +201,7 @@ class Event extends CI_Controller
     {
         $data['profil'] = $this->db->get('profile_perusahaan')->row();
         $data['content'] = "admin/event_kategori";
-        $data['tiket_kategori'] = $this->tiket_model->getalldata()->result_array();
+        $data['tiket_kategori'] = $this->Tiket_model->getalldata()->result_array();
         $this->load->view("template/adminlte", $data);
     }
 
@@ -222,7 +222,7 @@ class Event extends CI_Controller
     public function getubah()
     {
         $id_kategori = $_POST['id_kategori'];
-        $result = $this->tiket_model->getdatabyid($id_kategori)->row_array();
+        $result = $this->Tiket_model->getdatabyid($id_kategori)->row_array();
 
         echo json_encode($result);
     }
@@ -251,7 +251,7 @@ class Event extends CI_Controller
             echo 'Error';
             die;
         } else {
-            if ($this->tiket_model->delete($id)) {
+            if ($this->Tiket_model->delete($id)) {
                 $r['title'] = 'Sukses!';
                 $r['icon'] = 'success';
                 $r['status'] = 'Berhasil di Hapus!';
