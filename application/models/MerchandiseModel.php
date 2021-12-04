@@ -276,6 +276,18 @@ class MerchandiseModel extends CI_Model
         ";
         return $this->db->query($query);
     }
+    
+    public function getmerchandisenotby($id)
+    {
+        $query = "SELECT foto_merchandise.foto, merchandise_kategori.nama_kategori_merch, merchandise.nama_merch, merchandise.harga, merchandise.diskon, merchandise.deskripsi, merchandise.id_merch, merchandise.kategori, stock
+        FROM foto_merchandise, merchandise, merchandise_kategori
+        where merchandise.foto_utama = foto_merchandise.id and merchandise.kategori = merchandise_kategori.id_kategori_merch
+        AND merchandise.id_merch != $id
+        ORDER BY rand()
+        LIMIT 10
+        ";
+        return $this->db->query($query);
+    }
 
     public function getfotobyid($id, $foto)
     {
@@ -308,7 +320,7 @@ class MerchandiseModel extends CI_Model
 
     public function getallmerchandiselimit()
     {
-        $query = "SELECT foto_merchandise.foto, merchandise_kategori.nama_kategori_merch, merchandise.nama_merch, merchandise.harga, merchandise.diskon, merchandise.deskripsi, merchandise.id_merch, merchandise.kategori
+        $query = "SELECT foto_merchandise.foto, merchandise_kategori.nama_kategori_merch, merchandise.nama_merch, merchandise.harga, merchandise.diskon, merchandise.stock, merchandise.deskripsi, merchandise.id_merch, merchandise.kategori
         FROM foto_merchandise, merchandise, merchandise_kategori
         where merchandise.foto_utama = foto_merchandise.id and merchandise.kategori = merchandise_kategori.id_kategori_merch
         order by merchandise.id_merch DESC

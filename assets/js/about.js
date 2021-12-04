@@ -4,6 +4,45 @@ let editor; // use a global for the submit and return data rendering in the exam
 
 jQuery(document).ready(function() {
 
+    $('#owl-produk').owlCarousel({
+        center: true,
+        items: 1,
+        loop: true,
+        dots: true,
+        margin: 10,
+        responsive: {
+            0: {
+                items: 1,
+            },
+            600: {
+                items: 1
+            },
+            1000: {
+                items: 1
+            }
+        }
+    });
+
+    $('#owl-center').owlCarousel({
+        center: true,
+        items: 2,
+        loop: true,
+        nav: true,
+        dots: true,
+        margin: 10,
+        responsive: {
+            0: {
+                items: 1,
+            },
+            600: {
+                items: 4
+            },
+            1000: {
+                items: 4
+            }
+        }
+    });
+
     $.validator.setDefaults({
         submitHandler: function() {
             var url;

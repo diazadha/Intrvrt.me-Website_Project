@@ -195,6 +195,13 @@ class Tiket_model extends CI_Model
         return $this->db->query($query);
     }
 
+    public function geteventnotby($id){
+        $query = "SELECT tiket_kategori.nama_kategori, nama_event, kategori, harga_tiket, diskon, deskripsi_event, id_event, stock, foto_event.foto, tgl_acara, tgl_berakhir
+        FROM event, tiket_kategori, foto_event
+        where event.kategori = tiket_kategori.id_kategori AND event.foto_utama = foto_event.id AND event.id_event != $id ORDER BY rand() limit 10";
+        return $this->db->query($query);
+    }
+
     public function view_join($id)
     {
         $query = "SELECT * FROM event, tiket_kategori WHERE kategori = id_kategori AND id_event = $id";
@@ -203,7 +210,7 @@ class Tiket_model extends CI_Model
 
     public function perkategori($id)
     {
-        $query = "SELECT tiket_kategori.nama_kategori, nama_event, harga_tiket, diskon, deskripsi_event, id_event, stock, foto_event.foto, tgl_acara, tgl_berakhir
+        $query = "SELECT tiket_kategori.nama_kategori, kategori, nama_event, harga_tiket, diskon, deskripsi_event, id_event, stock, foto_event.foto, tgl_acara, tgl_berakhir
         FROM event, tiket_kategori, foto_event
         WHERE kategori = id_kategori AND event.foto_utama = foto_event.id AND id_kategori = $id";
         return $this->db->query($query);

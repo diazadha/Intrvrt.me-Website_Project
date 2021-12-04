@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/css/widgets.css">
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/css/color.css">
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/css/responsive.css">
+    <!-- Owl Stylesheets -->
+    <link rel="stylesheet" href="<?= base_url('assets'); ?>/owl-carousel/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="<?= base_url('assets'); ?>/owl-carousel/css/owl.theme.default.min.css">
 </head>
 
 <body>
@@ -64,8 +67,8 @@
                             <ul class="main-menu d-none d-lg-inline">
                                 <li>
                                     <a href="<?= base_url(); ?>"><span class="mr-15">
-                                            <ion-icon name="home-outline"></ion-icon>
-                                        </span>Home</a>
+                                        <ion-icon name="home-outline"></ion-icon>
+                                    </span>Home</a>
                                 </li>
                                 <li><a href="<?= base_url('home/merchandise') ?>"><span class="mr-15">
                                             <i class="fas fa-gift"></i>
@@ -82,7 +85,7 @@
                                         <span class="mr-15">
                                         <i class="fas fa-shopping-cart"></i>
                                         </span>
-                                        Keranjang
+                                        Cart
                                     </a>
                                     <ul class="sub-menu text-muted font-small">
                                         <li><a href="<?= base_url('home/cart_merchandise') ?>">Merchandise</a></li>

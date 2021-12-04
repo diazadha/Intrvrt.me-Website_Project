@@ -60,7 +60,6 @@
 <script src="<?= base_url('assets'); ?>/js/vendor/popper.min.js"></script>
 <script src="<?= base_url('assets'); ?>/js/vendor/bootstrap.min.js"></script>
 <script src="<?= base_url('assets'); ?>/js/vendor/jquery.slicknav.js"></script>
-<script src="<?= base_url('assets'); ?>/js/vendor/owl.carousel.min.js"></script>
 <script src="<?= base_url('assets'); ?>/js/vendor/slick.min.js"></script>
 <script src="<?= base_url('assets'); ?>/js/vendor/wow.min.js"></script>
 <script src="<?= base_url('assets'); ?>/js/vendor/animated.headline.js"></script>
@@ -80,6 +79,7 @@
 <script src="<?= base_url('assets'); ?>/vendor/AdminLTE-3.0.5/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="<?= base_url('assets'); ?>/vendor/AdminLTE-3.0.5/plugins/jquery-validation/additional-methods.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js" type="text/javascript"></script>
+<script src="<?=base_url('assets')?>/owl-carousel/js/owl.carousel.min.js"></script>
 <!-- NewsViral JS -->
 <script src="<?= base_url('assets'); ?>/js/main.js"></script>
 <script type="text/javascript">
