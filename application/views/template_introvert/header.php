@@ -51,6 +51,7 @@
                             <li><a href="<?= base_url(); ?>"><b>Home</b></a></li>
                             <li><a href="<?= base_url('home/merchandise') ?>"><b>Merchandise</b></a></li>
                             <li><a href="<?= base_url('home/event') ?>"><b>Event</b></a></li>
+                            <li><a href="<?= base_url('blog') ?>"><b>blog</b></a></li>
                             <li><a href="<?= base_url('about') ?>"><b>About Us</b></a></li>
                             <?php if ($this->session->userdata('nama')) : ?>
                                 <li><a href="<?= base_url('home/cart_event') ?>"><b>Cart Event</b></a></li>
@@ -76,6 +77,9 @@
                                 <li><a href="<?= base_url('home/event') ?>"><span class="mr-15">
                                             <i class="fas fa-ticket-alt"></i>
                                         </span>Event</a></li>
+                                <li><a href="<?= base_url('blog') ?>"><span class="mr-15">
+                                        <i class="fas fa-rss"></i>
+                                        </span>Blog</a></li>
                                 <li><a href="<?= base_url('about') ?>"><span class="mr-15">
                                             <i class="far fa-building"></i>
                                         </span>About Us</a>

@@ -12,10 +12,10 @@
                             <div class="card-header p-0 pt-1 border-bottom-0">
                                 <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="custom-tabs-three-messages-tab" data-toggle="pill" href="#custom-tabs-three-messages" role="tab" aria-controls="custom-tabs-three-messages" aria-selected="false">Riwayat Pemesanan</a>
+                                        <a class="nav-link active" id="custom-tabs-three-messages-tab" data-toggle="pill" href="#custom-tabs-three-messages" role="tab" aria-controls="custom-tabs-three-messages" aria-selected="false"><b>Riwayat Pemesanan</b></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">Profil</a>
+                                        <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false"><b>Profil</b></a>
                                     </li>
                                 </ul>
                             </div>
@@ -23,22 +23,26 @@
                                 <div class="tab-content" id="custom-tabs-three-tabContent">
                                     <div class="tab-pane fade tab-pane fade show active" id="custom-tabs-three-messages" role="tabpanel" aria-labelledby="custom-tabs-three-messages-tab">
                                         <div class="row">
-                                            <div class="col-2">
-                                                <div class="list-group" id="list-tab" role="tablist">
-                                                    <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Merchandise</a>
-                                                    <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Event</a>
-                                                </div>
+                                            <div class="col-md-12">
+                                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                                    <li class="nav-item" role="presentation">
+                                                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#list-home" role="tab" aria-controls="pills-home" aria-selected="true">Merchandise</a>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#list-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Event</a>
+                                                    </li>
+                                                </ul>
                                             </div>
-                                            <div class="col-10">
+                                            <div class="col-md-12">
                                                 <div class="tab-content" id="nav-tabContent">
                                                     <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
                                                         <div class="card">
                                                             <div class="card-header">
-                                                                <h3 class="card-title">Riwayat Pemesanan Merchandise</h3>
+                                                                <h5 class="card-title">Riwayat Pemesanan Merchandise</h5>
                                                             </div>
                                                             <!-- /.card-header -->
                                                             <div class="card-body">
-                                                                <table id="table_merchandise" class="table table-bordered table-striped">
+                                                                <table id="table_merchandise" class="table table-bordered table-striped table-responsive" width="100%">
                                                                     <thead class="text-center">
                                                                         <tr>
                                                                             <th>No</th>
@@ -81,11 +85,11 @@
                                                     <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
                                                         <div class="card">
                                                             <div class="card-header">
-                                                                <h3 class="card-title">Riwayat Pemesanan Event</h3>
+                                                                <h5 class="card-title">Riwayat Pemesanan Event</h5>
                                                             </div>
                                                             <!-- /.card-header -->
                                                             <div class="card-body">
-                                                                <table id="table_event" class="table table-bordered table-striped">
+                                                                <table id="table_event" class="table table-bordered table-striped table-responsive" width="100%">
                                                                     <thead>
                                                                         <tr>
                                                                             <th>ID</th>
@@ -134,15 +138,10 @@
                                     </div>
                                     <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
                                         <div class="container">
-                                            <div class="row mb-50">
-                                                <div class="col-lg-2 d-none d-lg-block"></div>
+                                            <div class="row">
                                                 <div class="col-lg-12 col-md-12">
-                                                    <!--author box-->
-                                                    <br>
-                                                    <br>
-                                                    <h3 class="mb-30">Profil Kamu</h3>
                                                     <form class="form-horizontal" action="<?= base_url('home/update_foto_profile'); ?>" method="POST" enctype="multipart/form-data">
-                                                        <div class="author-bio border-radius-10 bg-white p-30 mb-40 mt-5">
+                                                        <div class="card border-radius-10 bg-white mb-10">
                                                             <div class="card-body">
                                                                 <?php if ($this->session->flashdata('message3')) : ?>
                                                                     <?php $message = $this->session->flashdata('message3'); ?>
@@ -154,101 +153,86 @@
                                                                     <?= '<div class="alert alert-danger">' . $message . '</div>'; ?>
                                                                     <?php $this->session->unset_userdata('message4'); ?>
                                                                 <?php endif; ?>
-                                                                <div class="form-group row">
-                                                                    <label for="inputPassword3" class="col-sm-2 col-form-label" style="font-weight: bold;">Foto Profil</label>
+                                                                <div class="form-group">
+                                                                    <label for="foto-profil">Foto Profil</label><br>
                                                                     <?php if ($data_user['foto_user'] == 'default.jpg') : ?>
-                                                                        <div class="col-md-5 mb-4">
-                                                                            <p>Belum Upload Foto</p>
-                                                                        </div>
+                                                                        <p>Belum Upload Foto</p>
                                                                     <?php else : ?>
-                                                                        <div class="col-md-5 mb-4">
-                                                                            <img src="<?= base_url('assets/uploads/user/') . $data_user['foto_user']; ?>" class="img-thumbnail img-fluid z-depth-2" alt="circular image and responsive" data-holder-rendered="true" style="width: 250px; height:250px">
-                                                                        </div>
+                                                                        <img src="<?= base_url('assets/uploads/user/') . $data_user['foto_user']; ?>" id="foto-profil" class="img-thumbnail img-fluid z-depth-2" alt="circular image and responsive" data-holder-rendered="true" style="width: 250px; height:250px">
                                                                     <?php endif; ?>
                                                                 </div>
-                                                                <div class="form-group row">
-                                                                    <label for="inputPassword3" class="col-sm-2 col-form-label" style="font-weight: bold;">Upload Foto</label>
-                                                                    <div class="col-sm-10">
-                                                                        <input type="file" name="foto">
-                                                                    </div>
+                                                                <div class="form-group">
+                                                                    <label for="foto" class="col-form-label">Upload Foto</label><br>
+                                                                    <input type="file" name="foto" id="foto">
+                                                                    <input type="hidden" name="id_user" value="<?= $data_user['id_user']; ?>">
                                                                 </div>
                                                             </div>
-                                                            <input type="hidden" name="id_user" value="<?= $data_user['id_user']; ?>">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <button type="submit" class="button button-contactForm">Ubah Foto</button>
+                                                            <div class="card-footer">
+                                                                <button type="submit" class="button button-contactForm">Ubah Foto</button>
+                                                            </div>
                                                         </div>
                                                     </form>
                                                     <!--comment form-->
-                                                <div class="comment-form">
-                                                    <?php if ($this->session->flashdata('message1')) : ?>
-                                                        <?php $message = $this->session->flashdata('message1'); ?>
-                                                        <?= '<div class="alert alert-success">' . $message . '</div>'; ?>
-                                                        <?php $this->session->unset_userdata('message1'); ?>
-                                                    <?php endif; ?>
-                                                    <form class="form-horizontal" action="<?= base_url('home/update_profile') ?>" method="POST" enctype="multipart/form-data">
-                                                        <?= form_error('nama', '<small class="text-danger pl-1">', '</small>'); ?>
-                                                        <div class="input-group mb-4">
-
-                                                            <input type="nama" class="form-control" placeholder="Nama Lengkap" name="nama" value="<?= $data_user['nama_user']; ?>">
-                                                            <div class="input-group-append">
-                                                            </div>
-                                                        </div>
-                                                        <?= form_error('email', '<small class="text-danger pl-1">', '</small>'); ?>
-                                                        <div class="input-group mb-4">
-
-                                                            <input type="email" class="form-control" placeholder="Email" name="email" value="<?= $data_user['email']; ?>" readonly>
-                                                            <div class="input-group-append">
-                                                                <div class="input-group-text">
-                                                                    <span class="fas fa-envelope"></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <?= form_error('password', '<small class="text-danger pl-1">', '</small>'); ?>
-                                                        <div class="input-group mb-4">
-                                                            <input type="password" class="form-control" placeholder="Password Baru" name="password">
-                                                            <div class="input-group-append">
-                                                                <div class="input-group-text">
-                                                                    <span class="fas fa-lock"></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <label class="ml-2 mb-3">Jenis Kelamin</label><br>
-                                                        <?php if ($data_user['jenis_kelamin'] == 'L') : ?>
-                                                            <?= form_error('jenis-kelamin', '<small class="text-danger pl-1">', '</small>'); ?>
-                                                            <div class="form-check form-check-inline ml-2 mb-4">
-
-                                                                <input class="form-check-input" type="radio" name="jenis-kelamin" id="inlineRadio1" value="L" checked>
-                                                                <label class="form-check-label" for="inlineRadio1">Laki-laki</label>
-                                                            </div>
-                                                            <?= form_error('jenis-kelamin', '<small class="text-danger pl-1">', '</small>'); ?>
-                                                            <div class="form-check form-check-inline mb-4">
-
-                                                                <input class="form-check-input" type="radio" name="jenis-kelamin" id="inlineRadio2" value="P">
-                                                                <label class="form-check-label" for="inlineRadio2">Perempuan</label>
-                                                            </div>
-                                                        <?php else : ?>
-                                                            <?= form_error('jenis-kelamin', '<small class="text-danger pl-1">', '</small>'); ?>
-                                                            <div class="form-check form-check-inline ml-2 mb-4">
-
-                                                                <input class="form-check-input" type="radio" name="jenis-kelamin" id="inlineRadio1" value="L">
-                                                                <label class="form-check-label" for="inlineRadio1">Laki-laki</label>
-                                                            </div>
-                                                            <?= form_error('jenis-kelamin', '<small class="text-danger pl-1">', '</small>'); ?>
-                                                            <div class="form-check form-check-inline mb-4">
-
-                                                                <input class="form-check-input" type="radio" name="jenis-kelamin" id="inlineRadio2" value="P" checked>
-                                                                <label class="form-check-label" for="inlineRadio2">Perempuan</label>
-                                                            </div>
+                                                <div class="card">
+                                                <form class="form-horizontal" action="<?= base_url('home/update_profile') ?>" method="POST" enctype="multipart/form-data">
+                                                    <div class="card-body">
+                                                        <?php if ($this->session->flashdata('message1')) : ?>
+                                                            <?php $message = $this->session->flashdata('message1'); ?>
+                                                            <?= '<div class="alert alert-success">' . $message . '</div>'; ?>
+                                                            <?php $this->session->unset_userdata('message1'); ?>
                                                         <?php endif; ?>
-                                                        <br>
-                                                        <label class="ml-2 mb-3">Tanggal Lahir</label><br>
-                                                        <?= form_error('tanggal', '<small class="text-danger pl-1">', '</small>'); ?>
-                                                        <div class="input-group mb-4">
-                                                            <input type="date" class="form-control" name="tanggal" value="<?= $data_user['tanggal_lahir']; ?>">
+                                                            <?= form_error('nama', '<small class="text-danger pl-1">', '</small>'); ?>
+                                                            <div class="form-group mb-4">
+                                                                <label for="nama">Nama</label><br>
+                                                                <input type="nama" class="form-control" id="nama" placeholder="Nama Lengkap" name="nama" value="<?= $data_user['nama_user']; ?>">
+                                                            </div>
+                                                            <?= form_error('email', '<small class="text-danger pl-1">', '</small>'); ?>
+                                                            <div class="form-group mb-4">
+                                                                <label for="email">Email</label><br>
+                                                                <input type="email" class="form-control" placeholder="Email" id="email" name="email" value="<?= $data_user['email']; ?>" readonly>
+                                                            </div>
+                                                            <?= form_error('password', '<small class="text-danger pl-1">', '</small>'); ?>
+                                                            <div class="form-group mb-4">
+                                                                <label for="password">Password</label><br>
+                                                                <input type="password" class="form-control" id="password" placeholder="Password Baru" name="password">
+                                                            </div>
+                                                            <label class="ml-2 mb-3">Jenis Kelamin</label><br>
+                                                            <?php if ($data_user['jenis_kelamin'] == 'L') : ?>
+                                                                <?= form_error('jenis-kelamin', '<small class="text-danger pl-1">', '</small>'); ?>
+                                                                <div class="form-check form-check-inline ml-2 mb-4">
+
+                                                                    <input class="form-check-input" type="radio" name="jenis-kelamin" id="inlineRadio1" value="L" checked>
+                                                                    <label class="form-check-label" for="inlineRadio1">Laki-laki</label>
+                                                                </div>
+                                                                <?= form_error('jenis-kelamin', '<small class="text-danger pl-1">', '</small>'); ?>
+                                                                <div class="form-check form-check-inline mb-4">
+
+                                                                    <input class="form-check-input" type="radio" name="jenis-kelamin" id="inlineRadio2" value="P">
+                                                                    <label class="form-check-label" for="inlineRadio2">Perempuan</label>
+                                                                </div>
+                                                            <?php else : ?>
+                                                                <?= form_error('jenis-kelamin', '<small class="text-danger pl-1">', '</small>'); ?>
+                                                                <div class="form-check form-check-inline ml-2 mb-4">
+
+                                                                    <input class="form-check-input" type="radio" name="jenis-kelamin" id="inlineRadio1" value="L">
+                                                                    <label class="form-check-label" for="inlineRadio1">Laki-laki</label>
+                                                                </div>
+                                                                <?= form_error('jenis-kelamin', '<small class="text-danger pl-1">', '</small>'); ?>
+                                                                <div class="form-check form-check-inline mb-4">
+
+                                                                    <input class="form-check-input" type="radio" name="jenis-kelamin" id="inlineRadio2" value="P" checked>
+                                                                    <label class="form-check-label" for="inlineRadio2">Perempuan</label>
+                                                                </div>
+                                                            <?php endif; ?>
+                                                            <br>
+                                                            <label class="ml-2 mb-3">Tanggal Lahir</label><br>
+                                                            <?= form_error('tanggal', '<small class="text-danger pl-1">', '</small>'); ?>
+                                                            <div class="input-group mb-4">
+                                                                <input type="date" class="form-control" name="tanggal" value="<?= $data_user['tanggal_lahir']; ?>">
+                                                            </div>
+                                                            <input type="hidden" name="id_user" value="<?= $data_user['id_user']; ?>">
                                                         </div>
-                                                        <input type="hidden" name="id_user" value="<?= $data_user['id_user']; ?>">
-                                                        <div class="form-group">
+                                                        <div class="card-footer">
                                                             <button type="submit" class="button button-contactForm">Ubah Biodata</button>
                                                         </div>
                                                     </form>

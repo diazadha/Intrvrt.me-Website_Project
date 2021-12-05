@@ -5,9 +5,12 @@
     <main class="position-relative">
         <div class="cart-page">
             <div class="container">
+                <div class="text-center">
+                    <h3>Checkout Event</h3>
+                </div>
                 <!-- main content -->
                 <?= form_open(base_url('checkout/proses_event'));?>   
-                <div class="row">
+                <div class="row mt-3">
                     <div class="col-lg-7 col-md-7 mb-3">
                         <div class="card">
                             <div class="card-header">
@@ -60,20 +63,19 @@
                                     </tr>
                                 </table>
                                 <?php if($subtotal != 0):?>
-                                <div class="row mt-3 mb-3">
-                                    <div class="col-md-12">
-                                        <label for="" class="font-weight-bold">Pilih Metode Bayar</label>
-                                        <select class="form-control" name="vaBank" required>
-                                            <?php foreach($VABank as $va):?>
-                                                <?php if($va['is_activated']):?>
-                                                    <option value="<?= $va['code']?>"><?= $va['name']?></option>
-                                                <?php endif;?>
-                                            <?php endforeach;?>
-                                        </select>
-                                    </div>
+                                <div class="form-group mt-3 mb-3">
+                                    <label for="vaBank" class="font-weight-bold">Pilih Metode Bayar</label><br>
+                                    <select class="form-control" name="vaBank" id="vaBank" required>
+                                        <?php foreach($VABank as $va):?>
+                                            <?php if($va['is_activated']):?>
+                                                <option value="<?= $va['code']?>"><?= $va['name']?></option>
+                                            <?php endif;?>
+                                        <?php endforeach;?>
+                                    </select>
                                 </div>
                                 <?php endif;?>
-                                <hr>
+                            </div>
+                            <div class="card-footer">
                                 <input type="hidden" readonly value="<?=$subtotal?>" name="totaltagihan">
                                 <button type="submit" class="btn btn-primary">Bayar Sekarang</button>
                             </div>

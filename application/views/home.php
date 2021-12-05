@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="pr-10 pl-10">
                                     <div class="entry-meta mb-30">
-                                        <a class="entry-meta meta-0" href="#"><span class="post-in background2 text-primary font-x-small"><?= $this->BlogModel->get_kategori_IN($firstLatePost->kategori, 'html') ?></span></a>
+                                        <?= $this->BlogModel->get_kategori_IN($firstLatePost->kategori, 'html') ?>
                                     </div>
                                     <h4 class="post-title mb-20">
                                         <a href="<?= base_url('blog/p/' . $firstLatePost->slug) ?>"><?= $firstLatePost->judul ?></a>
@@ -63,7 +63,7 @@
                                         </div>
                                         <div class="post-content media-body">
                                             <div class="entry-meta mb-15 mt-10">
-                                                <a class="entry-meta meta-2" href="#"><span class="post-in text-danger font-x-small"><?= $this->BlogModel->get_kategori_IN($konten->kategori, 'html') ?></span></a>
+                                                <?= $this->BlogModel->get_kategori_IN($konten->kategori, 'html') ?>
                                             </div>
                                             <h5 class="post-title mb-15 text-limit-2-row">
                                                 <a href="<?= base_url('blog/p/' . $konten->slug) ?>"><?= $konten->judul ?></a>

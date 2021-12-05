@@ -13,6 +13,28 @@ class BlogModel extends CI_Model
         $query = $this->db->get($this->table_konten);
         return $query->row();
     }
+    
+    public function allpost(){
+        $this->db->where('status', 1);
+        $this->db->order_by('id_blog', 'desc');
+        $query = $this->db->get($this->table_konten);
+        return $query->result_array();
+    }
+
+    public function allpostby($idkategori){
+        $this->db->where('status', 1);
+        $this->db->like('kategori', $idkategori, 'both'); 
+        $this->db->order_by('id_blog', 'desc');
+        $query = $this->db->get($this->table_konten);
+        return $query->result_array();
+    }
+    
+    public function kategori(){
+        $this->db->where('status', 1);
+        $this->db->order_by('nama_kategori', 'asc');
+        $query = $this->db->get('blog_kategori');
+        return $query->result();
+    }
 
     public function firstLatePost(){
         //random
@@ -149,6 +171,8 @@ class BlogModel extends CI_Model
     public function late_post_exclude($id){
         $this->db->where('status', 1);
         $this->db->where_not_in('id_blog', $id);
+        $this->db->limit(3);
+        $this->db->order_by('rand()');
         $result = $this->db->get($this->table_konten);
         return $result->result();
     }
@@ -180,9 +204,9 @@ class BlogModel extends CI_Model
         }else{
             $kategori='';
             foreach($query->result() as $kt){
-                $kategori.='#'.$kt->nama_kategori.', ';
+                $kategori.='<a href="'.base_url('blog/kategori/'.$kt->id_kategori).'" class="entry-meta meta-0"><span class="post-in background2 text-primary font-x-small">'.$kt->nama_kategori.'</span></a>';
             }
-            return rtrim($kategori, ', ');
+            return $kategori;
         }
     }
 

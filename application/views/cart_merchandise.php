@@ -19,44 +19,45 @@
                             <?php if ($m['stock'] == 0) {
                                 redirect('home/hapus_keranjang_merchandise/' . $m['id_keranjang']);
                             } ?>
-                            <div class="bg-white border d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
-                                <div class="d-flex flex-row align-items-center">
-                                    <?php if ($m['status'] == 1) : ?>
-                                        <input type="checkbox" checked onclick="uncheck_status_merchandise(<?= $m['id_keranjang']; ?>)">
-                                        <?php $diskon = $m['harga'] * ($m['diskon'] / 100);
-                                        $harga_diskon = $m['harga'] - $diskon;
-                                        $total_harga =  $harga_diskon * $m['qty'];
-                                        $total_harga_row =  $harga_diskon * $m['qty'];
-                                        ?>
-                                    <?php else : ?>
-                                        <input type="checkbox" onclick="check_status_merchandise(<?= $m['id_keranjang']; ?>)">
-                                        <?php $diskon = $m['harga'] * ($m['diskon'] / 100);
-                                        $harga_diskon = $m['harga'] - $diskon;
-                                        $total_harga_row = $harga_diskon * $m['qty'];
-                                        $total_harga = 0; ?>
-                                    <?php endif; ?>
-                                    <input type="hidden" id="harga_<?= $m['id_keranjang']; ?>" value="<?= $harga_diskon ?>">
-                                    <input type="hidden" id="status_<?= $m['id_keranjang']; ?>" value="<?= $m['status'] ?>">
-                                    <img class="ml-2 rounded" src="<?= base_url('assets/uploads/foto_merchandise/') . $m['foto']; ?>" width="40">
-
-                                    <div class="ml-2">
+                            <div class="bg-white border align-items-center mt-3 p-2 items rounded">
+                                <div class="row align-items-center">
+                                    <div class="col-md-2 col-3 text-center mb-2">
+                                        <?php if ($m['status'] == 1) : ?>
+                                            <input type="checkbox" checked onclick="uncheck_status_merchandise(<?= $m['id_keranjang']; ?>)">
+                                            <?php $diskon = $m['harga'] * ($m['diskon'] / 100);
+                                            $harga_diskon = $m['harga'] - $diskon;
+                                            $total_harga =  $harga_diskon * $m['qty'];
+                                            $total_harga_row =  $harga_diskon * $m['qty'];
+                                            ?>
+                                        <?php else : ?>
+                                            <input type="checkbox" onclick="check_status_merchandise(<?= $m['id_keranjang']; ?>)">
+                                            <?php $diskon = $m['harga'] * ($m['diskon'] / 100);
+                                            $harga_diskon = $m['harga'] - $diskon;
+                                            $total_harga_row = $harga_diskon * $m['qty'];
+                                            $total_harga = 0; ?>
+                                        <?php endif; ?>
+                                        <input type="hidden" id="harga_<?= $m['id_keranjang']; ?>" value="<?= $harga_diskon ?>">
+                                        <input type="hidden" id="status_<?= $m['id_keranjang']; ?>" value="<?= $m['status'] ?>">
+                                        <img class="ml-1 rounded" src="<?= base_url('assets/uploads/foto_merchandise/') . $m['foto']; ?>" width="60">
+                                    </div>
+                                    <div class="col-md-4 col-9 mb-2">
                                         <a href="<?= base_url('home/merchandise_detail/' . $m['id_keranjang']) ?>" class="font-weight-bold d-block">
                                             <?= substr($m['nama_merch'], 0, 28); ?>
                                         </a><span class="spec">Rp. <?= number_format($harga_diskon, 0, ',', '.') ?></span>
                                     </div>
-                                </div>
-                                <div class="d-flex flex-row align-items-center">
-                                    <div class="d-block">
+                                    <div class="col-md-3 col-4 text-center mb-2">
                                         <center>
                                             <button class="btn-sm" onclick="kurang_qty(<?= $m['id_keranjang']; ?>)" style="background-color: #FF656A; color:white; border-color:#FF656A;"><i class="fa fa-minus"></i></button>
                                             <input class="text-center" type="text" readonly id="qty_<?= $m['id_keranjang']; ?>" value="<?= $m['qty']; ?>" min="1" style="width: 20%;  border: 1px solid #FF656A; border-radius: 5px">
                                             <button class="btn-sm" onclick="tambah_qty(<?= $m['id_keranjang']; ?>)" style="background-color: #FF656A; color:white; border-color:#FF656A;"><i class="fa fa-plus"></i></button>
                                         </center>
                                     </div>
-                                    <div class="d-block ml-5 mr-5 font-weight-bold" id="total_harga_<?= $m['id_keranjang']; ?>">Rp. <?= number_format($total_harga_row, 0, ',', '.') ?></div>
-                                    <a href="<?= base_url('home/hapus_keranjang_merchandise/') . $m['id_keranjang']; ?>">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
+                                    <div class="col-md-2 col-4 font-weight-bold text-right mb-2" id="total_harga_<?= $m['id_keranjang']; ?>">Rp. <?= number_format($total_harga_row, 0, ',', '.') ?></div>
+                                    <div class="col-md-1 col-4 text-center mb-2">    
+                                        <a href="<?= base_url('home/hapus_keranjang_merchandise/') . $m['id_keranjang']; ?>">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         <?php $grand_total = $grand_total + $total_harga;

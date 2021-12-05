@@ -19,7 +19,7 @@
                             <?php if ($e['stock'] == 0) {
                                 redirect('home/hapus_keranjang_event/' . $e['id']);
                             } ?>
-                            <div class="bg-white border d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
+                            <div class="bg-white border align-items-center items mt-3 p-2 rounded">
                                 <div class="row align-items-center">
                                     <div class="col-md-2 col-3 text-center mb-2">
                                         <?php if ($e['status'] == 1) : ?>
@@ -38,7 +38,7 @@
                                         <?php endif; ?>
                                             <input type="hidden" id="harga_<?= $e['id']; ?>" value="<?= $harga_diskon ?>">
                                             <input type="hidden" id="status_<?= $e['id']; ?>" value="<?= $e['status'] ?>">
-                                            <img class="ml-2 rounded" src="<?= base_url('assets/uploads/foto_event/') . $e['foto']; ?>" width="60">
+                                            <img class="ml-1 rounded" src="<?= base_url('assets/uploads/foto_event/') . $e['foto']; ?>" width="60">
                                     </div>
                                     <div class="col-md-4 col-9 mb-2">
                                         <a href="<?= base_url('home/event_detail/' . $e['id_event']) ?>" class="font-weight-bold d-block">
